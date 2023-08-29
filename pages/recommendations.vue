@@ -100,7 +100,7 @@
     <template v-slot:expanded-item="{ headers, item }">
       <td :colspan="headers.length">
           <v-col class="py-10">
-            <v-row>More info about {{ item.insight }}</v-row>
+            <v-row>{{ item.insight }}</v-row>
             <v-row class="pt-5 justify-end align-center">
               <v-btn
                 @click="setSelectForInsight(item)"
@@ -219,11 +219,12 @@ export default {
         startedForTracking = JSON.parse(localStorage.getItem("startedForTracking"))
         if (!startedForTracking.filter((itemClone) => itemClone === item).length) {
           startedForTracking.push(item)
+          localStorage.setItem("startedForTracking", JSON.stringify(startedForTracking))
         }
       } else {
         startedForTracking = [item]
+        localStorage.setItem("startedForTracking", JSON.stringify(startedForTracking))
       }
-      localStorage.setItem("startedForTracking", JSON.stringify(startedForTracking))
     },
   },
   mounted() {
