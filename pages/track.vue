@@ -310,10 +310,12 @@ export default {
         if (!startedForTracking.filter((itemClone) => itemClone === this.newTrackCompany).length) {
           startedForTracking.push(this.newTrackCompany)
           localStorage.setItem("startedForTracking", JSON.stringify(startedForTracking))
+          this.companies = startedForTracking
         }
       } else {
         startedForTracking = [this.newTrackCompany]
         localStorage.setItem("startedForTracking", JSON.stringify(startedForTracking))
+        this.companies = startedForTracking
       }
       this.newTrackCompany = {
         companyId: null,
@@ -363,9 +365,10 @@ export default {
   },
   mounted() {
     this.allCompanies = utils.getCompanies()
-    this.companies = this.allCompanies
+    this.companies = JSON.parse(localStorage.getItem("startedForTracking"))
 
     this.searchedItems = JSON.parse(localStorage.getItem('search'))
+    this.searchedItems = this.searchedItems ? this.searchedItems : []
   },
   watch: {
   }
