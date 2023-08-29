@@ -77,9 +77,14 @@ export default {
           to: '/'
         },
         {
-          icon: 'mdi-head-lightbulb',
+          icon: 'mdi-robot-confused',
           title: 'Recommendations',
           to: 'recommendations'
+        },
+        {
+          icon: 'mdi-head-lightbulb',
+          title: 'Insight',
+          to: 'insight'
         },
         {
           icon: 'mdi-text-box-search',
