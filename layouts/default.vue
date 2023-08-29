@@ -92,6 +92,11 @@ export default {
           to: '/deal_sourcing'
         },
         {
+          icon: 'mdi-radar',
+          title: 'Track',
+          to: '/track'
+        },
+        {
           icon: 'mdi-projector-screen-variant-outline',
           title: 'Trained Models',
           to: '/models'
