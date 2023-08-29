@@ -11,21 +11,52 @@
       outlined
     ></v-text-field>
       <v-btn
-        @click="
-          () => {
-            // selectedTemplate = {
-            //   template_id: '1',
-            //   selectedCombination: '1',
-            // };
-            // dialogIsOpen = true;
-          }
-        "
+        @click="saveSearchedText"
         rounded
         color="black"
         style="color: white; height: 40px"
       >
         Save what you searched
       </v-btn>
+      <v-col cols="auto">
+        <v-dialog
+          transition="dialog-top-transition"
+          max-width="600"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              color="white"
+              v-bind="attrs"
+              v-on="on"
+              rounded
+              style="color: black"
+            >Show saved searches</v-btn>
+          </template>
+          <template v-slot:default="dialog">
+            <v-card>
+              <v-toolbar
+                color="black"
+                dark
+                class="mb-8"
+              >Your previous searches</v-toolbar>
+              <v-card-text v-for="(searchedItem, index) in searchedItems"
+                           :key="index">
+                <div class="d-flex flex-row">
+                  <div :style="{ backgroundColor: getRandomColor(['#264653', '#F94144', '#FF6B6B', '#00A9A5', '#343F56']) }" class="circleStyle">{{ searchedItem.label }}</div>
+                  <div class="text-12 align-center">{{ searchedItem.value }}</div>
+                </div>
+              </v-card-text>
+              <v-card-actions class="justify-end">
+                <v-btn
+                  text
+                  @click="dialog.value = false"
+                >Close</v-btn>
+              </v-card-actions>
+            </v-card>
+          </template>
+        </v-dialog>
+      </v-col>
+
     </v-row>
     <v-row class="pt-5 justify-space-between">
       <v-select
@@ -68,7 +99,28 @@
     </template>
     <template v-slot:expanded-item="{ headers, item }">
       <td :colspan="headers.length">
-        More info about {{ item.name }}
+          <v-col class="py-10">
+            <v-row>More info about {{ item.insight }}</v-row>
+            <v-row class="pt-5 justify-end align-center">
+              <v-btn
+                @click="setSelectForInsight(item)"
+                rounded
+                color="black"
+                style="color: white; height: 40px"
+              >
+                Select for Insight
+              </v-btn>
+              <v-btn
+                @click="setStartForTracking(item)"
+                rounded
+                color="white"
+                class="ms-4"
+                style="color: black; height: 40px;"
+              >
+                Start for Tracking
+              </v-btn>
+          </v-row>
+        </v-col>
       </td>
     </template>
   </v-data-table>
@@ -95,251 +147,7 @@ export default {
         { text: 'Industry', value: 'industry' },
         { text: 'Insight', value: 'data-table-expand' },
       ],
-      allCompanies: [
-        {
-          companyId: "1",
-          name: "Apple",
-          score: "94",
-          hqLocation: "Cupertino, USA",
-          revenueSize: "300000000",
-          industry: "Technology",
-          insight: "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-        },
-        {
-          companyId: "2",
-          name: "The Coca-Cola Company",
-          score: "76",
-          hqLocation: "Atlanta, USA",
-          revenueSize: "35000000",
-          industry: "Beverages",
-          insight: "The Coca-Cola Company, a beverage industry leader, is known for its iconic soft drink and a wide portfolio of beverages. Its brand recognition and global reach make it a symbol of refreshment.",
-        },
-        {
-          companyId: "3",
-          name: "Johnson & Johnson",
-          score: "88",
-          hqLocation: "New Brunswick, USA",
-          revenueSize: "180000000",
-          industry: "Healthcare",
-          insight: "Johnson & Johnson, a pharmaceutical and consumer goods conglomerate, is known for its diverse range of products, from medical devices and pharmaceuticals to baby care items. Its commitment to health and wellness spans generations.",
-        },
-        {
-          companyId: "4",
-          name: "Tesla",
-          score: "95",
-          hqLocation: "Palo Alto, USA",
-          revenueSize: "20000000",
-          industry: "Electric Car",
-          insight: "Tesla, founded by Elon Musk, is a pioneer in the electric car industry. Known for its innovative technology and performance, Tesla's vehicles have redefined the perception of electric transportation.",
-        },
-        {
-          companyId: "5",
-          name: "BMW",
-          score: "88",
-          hqLocation: "Munich, Germany",
-          revenueSize: "16000000",
-          industry: "Car",
-          insight: "BMW is a luxury car manufacturer celebrated for its high-performance and elegant vehicles. The brand represents a blend of driving pleasure, luxury, and cutting-edge technology.",
-        },
-        {
-          companyId: "6",
-          name: "Volkswagen",
-          score: "80",
-          hqLocation: "Wolfsburg, Germany",
-          revenueSize: "14000000",
-          industry: "Car",
-          insight: "Volkswagen is a German automaker known for its wide range of vehicles, from compact cars to luxury models. The company has a global presence and has been at the forefront of automotive engineering.",
-        },
-        {
-          companyId: "7",
-          name: "Hyundai",
-          score: "79",
-          hqLocation: "Seoul, South Korea",
-          revenueSize: "9000000",
-          industry: "Car",
-          insight: "Hyundai is a major player in the global car market, known for its value-packed vehicles. The company's diverse lineup appeals to a wide range of consumers, and it has shown a growing focus on sustainability.",
-        },
-        {
-          companyId: "8",
-          name: "Microsoft",
-          score: "90",
-          hqLocation: "Redmond, USA",
-          revenueSize: "270000000",
-          industry: "Technology",
-          insight: "Microsoft, a software and technology behemoth, is known for its Windows operating system, Office suite, and Azure cloud platform. The company's products have had a profound impact on personal and enterprise computing.",
-        },
-        {
-          companyId: "9",
-          name: "Procter & Gamble",
-          score: "82",
-          hqLocation: "Cincinnati, USA",
-          revenueSize: "150000000",
-          industry: "Consumer Goods",
-          insight: "Procter & Gamble is a multinational consumer goods corporation behind popular brands like Tide, Pampers, and Gillette. Its products touch everyday lives around the world, making it a household name.",
-        },
-        {
-          companyId: "10",
-          name: "Nissan",
-          score: "72",
-          hqLocation: "Yokohama, Japan",
-          revenueSize: "11000000",
-          industry: "Car",
-          insight: "Nissan is a global automobile manufacturer recognized for its innovation and stylish designs. The company has contributed to advancements in electric and autonomous vehicle technology.",
-        },
-        {
-          companyId: "11",
-          name: "Walmart",
-          score: "78",
-          hqLocation: "Bentonville, USA",
-          revenueSize: "250000000",
-          industry: "Retail",
-          insight: "Walmart, a retail giant, operates a vast network of stores and e-commerce platforms globally. Its focus on low prices and wide product selection has made it a significant player in the retail landscape.",
-        },
-        {
-          companyId: "12",
-          name: "Amazon",
-          score: "88",
-          hqLocation: "Seattle, USA",
-          revenueSize: "280000000",
-          industry: "E-commerce",
-          insight: "Amazon, the e-commerce giant founded by Jeff Bezos, has transformed online shopping and cloud computing. Its vast marketplace, Prime membership, and Amazon Web Services have redefined consumer behavior and digital infrastructure.",
-        },
-        {
-          companyId: "13",
-          name: "Netflix",
-          score: "89",
-          hqLocation: "Los Gatos, USA",
-          revenueSize: "25000000",
-          industry: "Entertainment",
-          insight: "Netflix, a streaming entertainment powerhouse, has transformed how people consume media. Its original content, user-friendly interface, and global availability have made it a dominant force in the entertainment industry.",
-        },
-        {
-          companyId: "14",
-          name: "Google",
-          score: "96",
-          hqLocation: "Mountain View, USA",
-          revenueSize: "320000000",
-          industry: "Technology",
-          insight: "Google, now a subsidiary of Alphabet Inc., dominates the online search and advertising space. Beyond its core search engine, Google has expanded into areas like Android, YouTube, and cloud services.",
-        },
-        {
-          companyId: "15",
-          name: "Facebook",
-          score: "84",
-          hqLocation: "Menlo Park, USA",
-          revenueSize: "150000000",
-          industry: "Technology",
-          insight: "Facebook, now Meta Platforms, is a social media titan that has redefined online communication. Its platforms, including Facebook, Instagram, and WhatsApp, have transformed the way people connect and share information.",
-        },
-        {
-          companyId: "16",
-          name: "Toyota",
-          score: "82",
-          hqLocation: "Toyota City, Japan",
-          revenueSize: "15000000",
-          industry: "Car",
-          insight: "Toyota is a global car manufacturer with a reputation for reliability and efficiency. It has introduced hybrid technology on a large scale and offers a wide range of vehicles to cater to various market segments.",
-        },
-        {
-          companyId: "17",
-          name: "Mercedes-Benz",
-          score: "86",
-          hqLocation: "Stuttgart, Germany",
-          revenueSize: "17000000",
-          industry: "Car",
-          insight: "Mercedes-Benz is synonymous with luxury and prestige in the automotive world. The brand offers a range of vehicles known for their quality, safety features, and innovative technologies.",
-        },
-        {
-          companyId: "18",
-          name: "Honda",
-          score: "76",
-          hqLocation: "Tokyo, Japan",
-          revenueSize: "12000000",
-          industry: "Car",
-          insight: "Honda is known for its reliable and fuel-efficient vehicles. The company produces a wide range of cars, motorcycles, and power equipment, showcasing a commitment to innovation and sustainability.",
-        },
-        {
-          companyId: "19",
-          name: "General Motors",
-          score: "78",
-          hqLocation: "Detroit, USA",
-          revenueSize: "13000000",
-          industry: "Car",
-          insight: "General Motors is one of the oldest and largest car manufacturers in the world. With iconic brands like Chevrolet, GMC, and Cadillac, GM has played a pivotal role in shaping the automotive landscape.",
-        },
-        {
-          companyId: "20",
-          name: "Nissan",
-          score: "72",
-          hqLocation: "Yokohama, Japan",
-          revenueSize: "11000000",
-          industry: "Car",
-          insight: "Nissan is a global automobile manufacturer recognized for its innovation and stylish designs. The company has contributed to advancements in electric and autonomous vehicle technology.",
-        },
-        {
-          companyId: "21",
-          name: "SpaceX",
-          score: "92",
-          hqLocation: "Hawthorne, USA",
-          revenueSize: "150000000",
-          industry: "Space",
-          insight: "SpaceX, founded by Elon Musk, is a private aerospace manufacturer and space transportation company. It is known for its ambitious goals of reducing space transportation costs and enabling the colonization of Mars.",
-        },
-        {
-          companyId: "22",
-          name: "Nike",
-          score: "87",
-          hqLocation: "Beaverton, USA",
-          revenueSize: "36000000",
-          industry: "Sportswear",
-          insight: "Nike is a global sportswear and athletic footwear brand. With iconic products like Air Jordan and its Just Do It slogan, Nike has a strong presence in sports and fashion.",
-        },
-        {
-          companyId: "23",
-          name: "Starbucks",
-          score: "85",
-          hqLocation: "Seattle, USA",
-          revenueSize: "26000000",
-          industry: "Coffee",
-          insight: "Starbucks is a renowned coffeehouse chain known for its wide variety of coffee drinks and cozy atmosphere. The company has a global reach and is a symbol of premium coffee.",
-        },
-        {
-          companyId: "24",
-          name: "Boeing",
-          score: "80",
-          hqLocation: "Chicago, USA",
-          revenueSize: "95000000",
-          industry: "Aerospace",
-          insight: "Boeing is a major aerospace company that designs, manufactures, and sells airplanes, rotorcraft, rockets, satellites, and more. It has a significant impact on aviation and space exploration.",
-        },
-        {
-          companyId: "25",
-          name: "McDonald's",
-          score: "76",
-          hqLocation: "Chicago, USA",
-          revenueSize: "37000000",
-          industry: "Fast Food",
-          insight: "McDonald's is a global fast-food chain known for its signature burgers and golden arches. The company's affordability and convenience have made it a staple in many communities.",
-        },
-        {
-          companyId: "26",
-          name: "Adobe",
-          score: "88",
-          hqLocation: "San Jose, USA",
-          revenueSize: "13000000",
-          industry: "Software",
-          insight: "Adobe is a software company that offers a wide range of creative and multimedia software solutions. Its products, including Photoshop, Illustrator, and Acrobat, have become industry standards.",
-        },
-        {
-          companyId: "27",
-          name: "Samsung",
-          score: "83",
-          hqLocation: "Seoul, South Korea",
-          revenueSize: "320000000",
-          industry: "Electronics",
-          insight: "Samsung is a multinational conglomerate known for its electronics, including smartphones, TVs, and appliances. The company is a leader in technological innovation and has a global presence.",
-        },
-      ],
+      allCompanies: [],
       companies: null,
       selectedHqLocation: null,
       hqLocations: [],
@@ -351,6 +159,7 @@ export default {
       industries: [],
 
       search: '',
+      searchedItems: [],
     }
   },
   methods: {
@@ -366,9 +175,59 @@ export default {
       }
 
       return uniqueItems.map((location, index) => location);
-    }
+    },
+    saveSearchedText() {
+      let searchedItemsClone
+      if (localStorage.getItem("search")) {
+        searchedItemsClone = JSON.parse(localStorage.getItem("search"))
+        if (!searchedItemsClone.filter((itemClone) => itemClone.value === this.search).length) {
+          searchedItemsClone.push({
+            label: searchedItemsClone.length,
+            value: this.search
+          })
+        }
+      } else {
+        searchedItemsClone = [
+          {
+            label: 0,
+            value: this.search
+          }
+        ]
+      }
+      localStorage.setItem("search", JSON.stringify(searchedItemsClone))
+      this.searchedItems = searchedItemsClone
+    },
+    getRandomColor(colorArray) {
+      const randomIndex = Math.floor(Math.random() * colorArray.length);
+      return colorArray[randomIndex];
+    },
+    setSelectForInsight(item) {
+      let selectedForInsights
+      if (localStorage.getItem("selectedForInsights")) {
+        selectedForInsights = JSON.parse(localStorage.getItem("selectedForInsights"))
+        if (!selectedForInsights.filter((itemClone) => itemClone === item).length) {
+          selectedForInsights.push(item)
+        }
+      } else {
+        selectedForInsights = [item]
+      }
+      localStorage.setItem("selectedForInsights", JSON.stringify(selectedForInsights))
+    },
+    setStartForTracking(item) {
+      let startedForTracking
+      if (localStorage.getItem("startedForTracking")) {
+        startedForTracking = JSON.parse(localStorage.getItem("startedForTracking"))
+        if (!startedForTracking.filter((itemClone) => itemClone === item).length) {
+          startedForTracking.push(item)
+        }
+      } else {
+        startedForTracking = [item]
+      }
+      localStorage.setItem("startedForTracking", JSON.stringify(startedForTracking))
+    },
   },
   mounted() {
+    this.allCompanies = utils.getCompanies()
     this.companies = this.allCompanies
 
     this.hqLocations = this.getUniqueSelectionItems(this.allCompanies, "hqLocation")
@@ -379,6 +238,8 @@ export default {
 
     this.industries = this.getUniqueSelectionItems(this.allCompanies, "industry")
     this.industries.unshift("All Industries")
+
+    this.searchedItems = JSON.parse(localStorage.getItem('search'))
   },
   watch: {
     selectedHqLocation(val) {
@@ -396,3 +257,18 @@ export default {
   }
 }
 </script>
+
+<style>
+.circleStyle {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  margin-right: 10px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+}
+</style>

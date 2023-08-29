@@ -77,6 +77,11 @@ export default {
           to: '/'
         },
         {
+          icon: 'mdi-head-lightbulb',
+          title: 'Recommendations',
+          to: 'recommendations'
+        },
+        {
           icon: 'mdi-text-box-search',
           title: 'Full Due Diligence',
           to: 'dd'
