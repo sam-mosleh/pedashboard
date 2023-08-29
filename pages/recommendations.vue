@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row class="pt-5 px-3 justify-space-between align-center">
+    <v-row class="pt-6 px-3 justify-space-between align-center">
     <v-text-field
       v-model="search"
       append-icon="mdi-magnify"
