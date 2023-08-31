@@ -77,6 +77,11 @@ export default {
           to: '/'
         },
         {
+          icon: 'mdi-monitor-dashboard',
+          title: 'Dashboard',
+          to: '/dashboard'
+        },
+        {
           icon: 'mdi-robot-confused',
           title: 'Recommendations',
           to: 'recommendations'
