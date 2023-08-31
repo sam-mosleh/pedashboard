@@ -758,6 +758,7 @@ export default {
     },
   },
   mounted() {
+    if (!api.getAuth()) window.href.location = "/login";
     this.inti();
   },
   watch: {},

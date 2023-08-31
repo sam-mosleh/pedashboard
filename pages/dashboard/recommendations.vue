@@ -761,6 +761,8 @@ export default {
     },
   },
   mounted() {
+
+    if (!api.getAuth()) window.href.location = "/login";
     const allAvailableAiRobots = api.getAiRobots();
     this.allRecommendedCompanies = api.getStandardCompanyList(
       api.getCompanies(),
