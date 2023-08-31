@@ -75,7 +75,7 @@ export default {
         {
           icon: "mdi-head-lightbulb",
           title: "Insight",
-          to: "insight",
+          to: "/dashboard/deal_insights",
         },
         // {
         //   icon: "mdi-text-box-search",

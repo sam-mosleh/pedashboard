@@ -92,6 +92,7 @@ export default {
         api.saveCompanies(allData.companies);
         api.saveTrackingKPIs(allData.trackingCompaniesKPIs);
         api.saveTrackingKPIKeys(allData.trackingKpiKeys);
+        api.saveInsightCompanies(allData.insights);
         console.log(JSON.stringify(allData));
       }
       if (this.email == "userTest@gmail.com" && this.password == "1234") {

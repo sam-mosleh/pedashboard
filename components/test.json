@@ -1,1519 +1,742 @@
-{
-  "robots": [
-    {
-      "id": "falcon_3424fcw3f",
-      "name": "Falcon 40B",
-      "totalDataGatheredFromAllUsers": 200000,
-      "totalDataLearnedFromAllUsers": 120000,
-      "totalUsed": 2,
-      "totalTrainedAssetsFromAllUsers": 2000,
-      "totalUploadedDocsFromUser": 15,
-      "totalDataLearnedFromUser": 1068,
-      "totalDataGatheredFromUser": 2780,
-      "totalCompleteness": "35.00",
-      "nickName": "Model-1"
+[
+  {
+    "companyId": "Procter_lwkr234h34u8743754q3fg2",
+    "name": "Procter & Gamble",
+    "score": "82",
+    "hqLocation": "Cincinnati, USA",
+    "revenueSize": "$150M",
+    "industry": "Consumer Goods",
+    "insight": {
+      "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
+      "standardDueDiligence": {
+        "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
+        "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
+        "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
+        "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
+      },
+      "alternativeInsights": {
+        "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
+        "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
+        "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
+      }
     },
-    {
-      "id": "gpt4_5_3424fcw3f",
-      "name": "GPT4.5",
-      "totalDataGatheredFromAllUsers": 2000000,
-      "totalDataLearnedFromAllUsers": 147600,
-      "totalUsed": 2,
-      "totalTrainedAssetsFromAllUsers": 8149,
-      "totalUploadedDocsFromUser": 15,
-      "totalDataLearnedFromUser": 58596,
-      "totalDataGatheredFromUser": 64500,
-      "totalCompleteness": "93.78",
-      "nickName": "Model-2"
-    }
-  ],
-  "companies": [
-    {
-      "companyId": "BMW_lwkr234h34u8743754q3fg2",
-      "name": "BMW",
-      "score": "88",
-      "hqLocation": "Munich, Germany",
-      "revenueSize": "$16M",
-      "industry": "Car",
-      "insight": {
-        "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-        "standardDueDiligence": {
-          "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-          "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-          "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-          "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
-        },
-        "alternativeInsights": {
-          "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-          "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-          "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
-        }
-      },
-      "sellChance": "0.3",
-      "recommendation": {
-        "gatheringChannels": [
-          {
-            "id": "twitter_h43u3049857",
-            "name": "Twitter (X)",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-31T09:56:43.064Z",
-            "getteredData": 272,
-            "aiModelsID": "falcon_3424fcw3f",
-            "totalDataToGather": 635,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 0,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": false,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 42.83,
-            "dataLearningProcessingPercentage": 0
-          },
-          {
-            "id": "news_h43u3049857",
-            "name": "Google",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-29",
-            "getteredData": 11500,
-            "aiModelsID": "gpt4_5_3424fcw3f",
-            "totalDataToGather": 11500,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 11268,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 97.98
-          }
-        ],
-        "recomended": true
-      },
-      "objectRefrence": "company",
-      "isSelectedAttr": false,
-      "totalProcessingPercentage": 60.2,
-      "totalAIProcessingPercentage": 48.99,
-      "totalDataGatheringProcessingPercentage": 71.41,
-      "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
-      "totalDataLearned": 11268,
-      "totalDataGathered": 11772,
-      "completeness": 60.2,
-      "chatBot": {
-        "falcon_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ],
-        "gpt4_5_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ]
-      },
-      "userKPIs": [
+    "sellChance": "0.3",
+    "recommendation": {
+      "gatheringChannels": [
         {
-          "name": "A",
-          "data": [
-            { "date": "Jan", "value": 17 },
-            { "date": "Feb", "value": 22 },
-            { "date": "Mar", "value": 67 },
-            { "date": "Apr", "value": 37 },
-            { "date": "May", "value": 99 },
-            { "date": "Jun", "value": 29 },
-            { "date": "Jul", "value": 40 },
-            { "date": "Aug", "value": 47 },
-            { "date": "Sep", "value": 69 },
-            { "date": "Oct", "value": 72 },
-            { "date": "Nov", "value": 26 },
-            { "date": "Dec", "value": 7 }
-          ],
-          "description": ""
+          "id": "twitter_h43u3049857",
+          "name": "Twitter (X)",
+          "imgSRC": "../../twitter.webp",
+          "lastUpdate": "2023-08-31T09:56:43.064Z",
+          "getteredData": 524,
+          "aiModelsID": "falcon_3424fcw3f",
+          "totalDataToGather": 605,
+          "dataGatheringPerMinutes": 1,
+          "aiLearnedDataSize": 0,
+          "aiLearningDataSizePerMinutes": 2,
+          "isDataGatheringFinished": false,
+          "isDataLearningFinished": false,
+          "dataGatheringProcessingPercentage": 86.61,
+          "dataLearningProcessingPercentage": 0
         },
         {
-          "name": "B",
-          "data": [
-            { "date": "Jan", "value": 42 },
-            { "date": "Feb", "value": 58 },
-            { "date": "Mar", "value": 96 },
-            { "date": "Apr", "value": 69 },
-            { "date": "May", "value": 29 },
-            { "date": "Jun", "value": 26 },
-            { "date": "Jul", "value": 88 },
-            { "date": "Aug", "value": 45 },
-            { "date": "Sep", "value": 35 },
-            { "date": "Oct", "value": 11 },
-            { "date": "Nov", "value": 0 },
-            { "date": "Dec", "value": 4 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "C",
-          "data": [
-            { "date": "Jan", "value": 38 },
-            { "date": "Feb", "value": 9 },
-            { "date": "Mar", "value": 41 },
-            { "date": "Apr", "value": 81 },
-            { "date": "May", "value": 32 },
-            { "date": "Jun", "value": 58 },
-            { "date": "Jul", "value": 87 },
-            { "date": "Aug", "value": 0 },
-            { "date": "Sep", "value": 50 },
-            { "date": "Oct", "value": 72 },
-            { "date": "Nov", "value": 12 },
-            { "date": "Dec", "value": 79 }
-          ],
-          "description": ""
+          "id": "news_h43u3049857",
+          "name": "Google",
+          "imgSRC": "../../google.png",
+          "lastUpdate": "2023-08-29",
+          "getteredData": 14500,
+          "aiModelsID": "gpt4_5_3424fcw3f",
+          "totalDataToGather": 14500,
+          "dataGatheringPerMinutes": 1,
+          "aiLearnedDataSize": 9296,
+          "aiLearningDataSizePerMinutes": 2,
+          "isDataGatheringFinished": true,
+          "isDataLearningFinished": false,
+          "dataGatheringProcessingPercentage": 100,
+          "dataLearningProcessingPercentage": 64.11
         }
       ],
-      "readyToBuy": false
+      "recommended": false
     },
-    {
-      "companyId": "Hyundai_lwkr234h34u8743754q3fg2",
-      "name": "Hyundai",
-      "score": "79",
-      "hqLocation": "Seoul, South Korea",
-      "revenueSize": "$9M",
-      "industry": "Car",
-      "insight": {
-        "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-        "standardDueDiligence": {
-          "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-          "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-          "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-          "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
-        },
-        "alternativeInsights": {
-          "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-          "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-          "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
-        }
-      },
-      "sellChance": "0.3",
-      "recommendation": {
-        "gatheringChannels": [
-          {
-            "id": "twitter_h43u3049857",
-            "name": "Twitter (X)",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-31T09:56:43.064Z",
-            "getteredData": 622,
-            "aiModelsID": "falcon_3424fcw3f",
-            "totalDataToGather": 622,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 534,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 85.85
-          },
-          {
-            "id": "news_h43u3049857",
-            "name": "Google",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-29",
-            "getteredData": 10500,
-            "aiModelsID": "gpt4_5_3424fcw3f",
-            "totalDataToGather": 10500,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 10500,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": true,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 100
-          }
-        ],
-        "recomended": false
-      },
-      "objectRefrence": "company",
-      "isSelectedAttr": false,
-      "totalProcessingPercentage": 96.46000000000001,
-      "totalAIProcessingPercentage": 92.92,
-      "totalDataGatheringProcessingPercentage": 100,
-      "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
-      "totalDataLearned": 11034,
-      "totalDataGathered": 11122,
-      "completeness": 96.46,
-      "chatBot": {
-        "falcon_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ],
-        "gpt4_5_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ]
-      },
-      "userKPIs": [
+    "objectRefrence": "company",
+    "isSelectedAttr": false,
+    "totalProcessingPercentage": 62.67,
+    "totalAIProcessingPercentage": 32.05,
+    "totalDataGatheringProcessingPercentage": 93.3,
+    "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
+    "totalDataLearned": 9296,
+    "totalDataGathered": 15024,
+    "completeness": 62.68,
+    "chatBot": {
+      "falcon_3424fcw3f": [
         {
-          "name": "A",
-          "data": [
-            { "date": "Jan", "value": 55 },
-            { "date": "Feb", "value": 61 },
-            { "date": "Mar", "value": 74 },
-            { "date": "Apr", "value": 78 },
-            { "date": "May", "value": 39 },
-            { "date": "Jun", "value": 8 },
-            { "date": "Jul", "value": 13 },
-            { "date": "Aug", "value": 1 },
-            { "date": "Sep", "value": 43 },
-            { "date": "Oct", "value": 38 },
-            { "date": "Nov", "value": 70 },
-            { "date": "Dec", "value": 25 }
-          ],
-          "description": ""
+          "isRobot": false,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
         },
         {
-          "name": "B",
-          "data": [
-            { "date": "Jan", "value": 94 },
-            { "date": "Feb", "value": 34 },
-            { "date": "Mar", "value": 70 },
-            { "date": "Apr", "value": 4 },
-            { "date": "May", "value": 79 },
-            { "date": "Jun", "value": 59 },
-            { "date": "Jul", "value": 62 },
-            { "date": "Aug", "value": 54 },
-            { "date": "Sep", "value": 5 },
-            { "date": "Oct", "value": 10 },
-            { "date": "Nov", "value": 7 },
-            { "date": "Dec", "value": 42 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "C",
-          "data": [
-            { "date": "Jan", "value": 91 },
-            { "date": "Feb", "value": 53 },
-            { "date": "Mar", "value": 83 },
-            { "date": "Apr", "value": 13 },
-            { "date": "May", "value": 58 },
-            { "date": "Jun", "value": 58 },
-            { "date": "Jul", "value": 29 },
-            { "date": "Aug", "value": 75 },
-            { "date": "Sep", "value": 11 },
-            { "date": "Oct", "value": 73 },
-            { "date": "Nov", "value": 36 },
-            { "date": "Dec", "value": 49 }
-          ],
-          "description": ""
+          "isRobot": true,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
         }
       ],
-      "readyToBuy": true
+      "gpt4_5_3424fcw3f": [
+        {
+          "isRobot": false,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        },
+        {
+          "isRobot": true,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        }
+      ]
     },
-    {
-      "companyId": "Netflix_lwkr234h34u8743754q3fg2",
-      "name": "Netflix",
-      "score": "89",
-      "hqLocation": "Los Gatos, USA",
-      "revenueSize": "$25M",
-      "industry": "Entertainment",
-      "insight": {
-        "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-        "standardDueDiligence": {
-          "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-          "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-          "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-          "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
-        },
-        "alternativeInsights": {
-          "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-          "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-          "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
-        }
-      },
-      "sellChance": "0.3",
-      "recommendation": {
-        "gatheringChannels": [
-          {
-            "id": "twitter_h43u3049857",
-            "name": "Twitter (X)",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-31T09:56:43.064Z",
-            "getteredData": 599,
-            "aiModelsID": "falcon_3424fcw3f",
-            "totalDataToGather": 599,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 534,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 89.15
-          },
-          {
-            "id": "news_h43u3049857",
-            "name": "Google",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-29",
-            "getteredData": 14500,
-            "aiModelsID": "gpt4_5_3424fcw3f",
-            "totalDataToGather": 14500,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 14500,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": true,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 100
-          }
+    "userKPIs": [
+      {
+        "name": "A",
+        "data": [
+          { "date": "Jan", "value": 63 },
+          { "date": "Feb", "value": 50 },
+          { "date": "Mar", "value": 55 },
+          { "date": "Apr", "value": 37 },
+          { "date": "May", "value": 44 },
+          { "date": "Jun", "value": 65 },
+          { "date": "Jul", "value": 35 },
+          { "date": "Aug", "value": 25 },
+          { "date": "Sep", "value": 50 },
+          { "date": "Oct", "value": 46 },
+          { "date": "Nov", "value": 51 },
+          { "date": "Dec", "value": 74 }
         ],
-        "recomended": true
+        "description": ""
       },
-      "objectRefrence": "company",
-      "isSelectedAttr": false,
-      "totalProcessingPercentage": 97.28999999999999,
-      "totalAIProcessingPercentage": 94.58,
-      "totalDataGatheringProcessingPercentage": 100,
-      "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
-      "totalDataLearned": 15034,
-      "totalDataGathered": 15099,
-      "completeness": 97.29,
-      "chatBot": {
-        "falcon_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
+      {
+        "name": "B",
+        "data": [
+          { "date": "Jan", "value": 6 },
+          { "date": "Feb", "value": 37 },
+          { "date": "Mar", "value": 35 },
+          { "date": "Apr", "value": 85 },
+          { "date": "May", "value": 98 },
+          { "date": "Jun", "value": 3 },
+          { "date": "Jul", "value": 7 },
+          { "date": "Aug", "value": 84 },
+          { "date": "Sep", "value": 68 },
+          { "date": "Oct", "value": 89 },
+          { "date": "Nov", "value": 99 },
+          { "date": "Dec", "value": 85 }
         ],
-        "gpt4_5_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ]
+        "description": ""
       },
-      "userKPIs": [
-        {
-          "name": "A",
-          "data": [
-            { "date": "Jan", "value": 49 },
-            { "date": "Feb", "value": 59 },
-            { "date": "Mar", "value": 24 },
-            { "date": "Apr", "value": 10 },
-            { "date": "May", "value": 79 },
-            { "date": "Jun", "value": 66 },
-            { "date": "Jul", "value": 51 },
-            { "date": "Aug", "value": 60 },
-            { "date": "Sep", "value": 34 },
-            { "date": "Oct", "value": 0 },
-            { "date": "Nov", "value": 16 },
-            { "date": "Dec", "value": 3 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "B",
-          "data": [
-            { "date": "Jan", "value": 30 },
-            { "date": "Feb", "value": 86 },
-            { "date": "Mar", "value": 54 },
-            { "date": "Apr", "value": 91 },
-            { "date": "May", "value": 84 },
-            { "date": "Jun", "value": 48 },
-            { "date": "Jul", "value": 72 },
-            { "date": "Aug", "value": 11 },
-            { "date": "Sep", "value": 74 },
-            { "date": "Oct", "value": 68 },
-            { "date": "Nov", "value": 97 },
-            { "date": "Dec", "value": 79 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "C",
-          "data": [
-            { "date": "Jan", "value": 70 },
-            { "date": "Feb", "value": 92 },
-            { "date": "Mar", "value": 36 },
-            { "date": "Apr", "value": 71 },
-            { "date": "May", "value": 54 },
-            { "date": "Jun", "value": 47 },
-            { "date": "Jul", "value": 95 },
-            { "date": "Aug", "value": 46 },
-            { "date": "Sep", "value": 31 },
-            { "date": "Oct", "value": 25 },
-            { "date": "Nov", "value": 33 },
-            { "date": "Dec", "value": 13 }
-          ],
-          "description": ""
-        }
-      ],
-      "readyToBuy": false
+      {
+        "name": "C",
+        "data": [
+          { "date": "Jan", "value": 95 },
+          { "date": "Feb", "value": 37 },
+          { "date": "Mar", "value": 78 },
+          { "date": "Apr", "value": 97 },
+          { "date": "May", "value": 79 },
+          { "date": "Jun", "value": 5 },
+          { "date": "Jul", "value": 54 },
+          { "date": "Aug", "value": 88 },
+          { "date": "Sep", "value": 18 },
+          { "date": "Oct", "value": 4 },
+          { "date": "Nov", "value": 19 },
+          { "date": "Dec", "value": 17 }
+        ],
+        "description": ""
+      }
+    ],
+    "readyToBuy": false
+  },
+  {
+    "companyId": "Starbucks_lwkr234h34u8743754q3fg2",
+    "name": "Starbucks",
+    "score": "85",
+    "hqLocation": "Seattle, USA",
+    "revenueSize": "$26M",
+    "industry": "Coffee",
+    "insight": {
+      "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
+      "standardDueDiligence": {
+        "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
+        "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
+        "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
+        "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
+      },
+      "alternativeInsights": {
+        "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
+        "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
+        "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
+      }
     },
-    {
-      "companyId": "Walmart_lwkr234h34u8743754q3fg2",
-      "name": "Walmart",
-      "score": "78",
-      "hqLocation": "Bentonville, USA",
-      "revenueSize": "$250M",
-      "industry": "Retail",
-      "insight": {
-        "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-        "standardDueDiligence": {
-          "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-          "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-          "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-          "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
-        },
-        "alternativeInsights": {
-          "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-          "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-          "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
-        }
-      },
-      "sellChance": "0.3",
-      "recommendation": {
-        "gatheringChannels": [
-          {
-            "id": "twitter_h43u3049857",
-            "name": "Twitter (X)",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-31T09:56:43.064Z",
-            "getteredData": 480,
-            "aiModelsID": "falcon_3424fcw3f",
-            "totalDataToGather": 639,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 0,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": false,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 75.12,
-            "dataLearningProcessingPercentage": 0
-          },
-          {
-            "id": "news_h43u3049857",
-            "name": "Google",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-29",
-            "getteredData": 19500,
-            "aiModelsID": "gpt4_5_3424fcw3f",
-            "totalDataToGather": 19500,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 13828,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 70.91
-          }
-        ],
-        "recomended": false
-      },
-      "objectRefrence": "company",
-      "isSelectedAttr": false,
-      "totalProcessingPercentage": 61.510000000000005,
-      "totalAIProcessingPercentage": 35.45,
-      "totalDataGatheringProcessingPercentage": 87.56,
-      "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
-      "totalDataLearned": 13828,
-      "totalDataGathered": 19980,
-      "completeness": 61.51,
-      "chatBot": {
-        "falcon_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ],
-        "gpt4_5_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ]
-      },
-      "userKPIs": [
+    "sellChance": "0.3",
+    "recommendation": {
+      "gatheringChannels": [
         {
-          "name": "A",
-          "data": [
-            { "date": "Jan", "value": 73 },
-            { "date": "Feb", "value": 89 },
-            { "date": "Mar", "value": 99 },
-            { "date": "Apr", "value": 81 },
-            { "date": "May", "value": 97 },
-            { "date": "Jun", "value": 94 },
-            { "date": "Jul", "value": 57 },
-            { "date": "Aug", "value": 99 },
-            { "date": "Sep", "value": 28 },
-            { "date": "Oct", "value": 85 },
-            { "date": "Nov", "value": 75 },
-            { "date": "Dec", "value": 50 }
-          ],
-          "description": ""
+          "id": "twitter_h43u3049857",
+          "name": "Twitter (X)",
+          "imgSRC": "../../twitter.webp",
+          "lastUpdate": "2023-08-31T09:56:43.064Z",
+          "getteredData": 608,
+          "aiModelsID": "falcon_3424fcw3f",
+          "totalDataToGather": 608,
+          "dataGatheringPerMinutes": 1,
+          "aiLearnedDataSize": 608,
+          "aiLearningDataSizePerMinutes": 2,
+          "isDataGatheringFinished": true,
+          "isDataLearningFinished": true,
+          "dataGatheringProcessingPercentage": 100,
+          "dataLearningProcessingPercentage": 100
         },
         {
-          "name": "B",
-          "data": [
-            { "date": "Jan", "value": 4 },
-            { "date": "Feb", "value": 44 },
-            { "date": "Mar", "value": 2 },
-            { "date": "Apr", "value": 22 },
-            { "date": "May", "value": 36 },
-            { "date": "Jun", "value": 11 },
-            { "date": "Jul", "value": 71 },
-            { "date": "Aug", "value": 58 },
-            { "date": "Sep", "value": 1 },
-            { "date": "Oct", "value": 28 },
-            { "date": "Nov", "value": 2 },
-            { "date": "Dec", "value": 14 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "C",
-          "data": [
-            { "date": "Jan", "value": 7 },
-            { "date": "Feb", "value": 61 },
-            { "date": "Mar", "value": 41 },
-            { "date": "Apr", "value": 77 },
-            { "date": "May", "value": 89 },
-            { "date": "Jun", "value": 77 },
-            { "date": "Jul", "value": 41 },
-            { "date": "Aug", "value": 73 },
-            { "date": "Sep", "value": 5 },
-            { "date": "Oct", "value": 40 },
-            { "date": "Nov", "value": 0 },
-            { "date": "Dec", "value": 49 }
-          ],
-          "description": ""
+          "id": "news_h43u3049857",
+          "name": "Google",
+          "imgSRC": "../../google.png",
+          "lastUpdate": "2023-08-29",
+          "getteredData": 3500,
+          "aiModelsID": "gpt4_5_3424fcw3f",
+          "totalDataToGather": 3500,
+          "dataGatheringPerMinutes": 1,
+          "aiLearnedDataSize": 3500,
+          "aiLearningDataSizePerMinutes": 2,
+          "isDataGatheringFinished": true,
+          "isDataLearningFinished": true,
+          "dataGatheringProcessingPercentage": 100,
+          "dataLearningProcessingPercentage": 100
         }
       ],
-      "readyToBuy": false
+      "recommended": true
     },
-    {
-      "companyId": "Johnson_lwkr234h34u8743754q3fg2",
-      "name": "Johnson & Johnson",
-      "score": "88",
-      "hqLocation": "New Brunswick, USA",
-      "revenueSize": "$180M",
-      "industry": "Healthcare",
-      "insight": {
-        "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-        "standardDueDiligence": {
-          "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-          "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-          "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-          "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
-        },
-        "alternativeInsights": {
-          "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-          "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-          "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
-        }
-      },
-      "sellChance": "0.3",
-      "recommendation": {
-        "gatheringChannels": [
-          {
-            "id": "twitter_h43u3049857",
-            "name": "Twitter (X)",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-31T09:56:43.064Z",
-            "getteredData": 807,
-            "aiModelsID": "falcon_3424fcw3f",
-            "totalDataToGather": 850,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 0,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": false,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 94.94,
-            "dataLearningProcessingPercentage": 0
-          },
-          {
-            "id": "news_h43u3049857",
-            "name": "Google",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-29",
-            "getteredData": 8500,
-            "aiModelsID": "gpt4_5_3424fcw3f",
-            "totalDataToGather": 8500,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 8500,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": true,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 100
-          }
-        ],
-        "recomended": true
-      },
-      "objectRefrence": "company",
-      "isSelectedAttr": false,
-      "totalProcessingPercentage": 73.72999999999999,
-      "totalAIProcessingPercentage": 50,
-      "totalDataGatheringProcessingPercentage": 97.47,
-      "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
-      "totalDataLearned": 8500,
-      "totalDataGathered": 9307,
-      "completeness": 73.73,
-      "chatBot": {
-        "falcon_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ],
-        "gpt4_5_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ]
-      },
-      "userKPIs": [
+    "objectRefrence": "company",
+    "isSelectedAttr": false,
+    "totalProcessingPercentage": 100,
+    "totalAIProcessingPercentage": 100,
+    "totalDataGatheringProcessingPercentage": 100,
+    "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
+    "totalDataLearned": 4108,
+    "totalDataGathered": 4108,
+    "completeness": 100,
+    "chatBot": {
+      "falcon_3424fcw3f": [
         {
-          "name": "A",
-          "data": [
-            { "date": "Jan", "value": 42 },
-            { "date": "Feb", "value": 32 },
-            { "date": "Mar", "value": 43 },
-            { "date": "Apr", "value": 20 },
-            { "date": "May", "value": 73 },
-            { "date": "Jun", "value": 20 },
-            { "date": "Jul", "value": 85 },
-            { "date": "Aug", "value": 96 },
-            { "date": "Sep", "value": 93 },
-            { "date": "Oct", "value": 31 },
-            { "date": "Nov", "value": 15 },
-            { "date": "Dec", "value": 0 }
-          ],
-          "description": ""
+          "isRobot": false,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
         },
         {
-          "name": "B",
-          "data": [
-            { "date": "Jan", "value": 21 },
-            { "date": "Feb", "value": 7 },
-            { "date": "Mar", "value": 55 },
-            { "date": "Apr", "value": 89 },
-            { "date": "May", "value": 57 },
-            { "date": "Jun", "value": 65 },
-            { "date": "Jul", "value": 31 },
-            { "date": "Aug", "value": 17 },
-            { "date": "Sep", "value": 48 },
-            { "date": "Oct", "value": 59 },
-            { "date": "Nov", "value": 64 },
-            { "date": "Dec", "value": 53 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "C",
-          "data": [
-            { "date": "Jan", "value": 86 },
-            { "date": "Feb", "value": 25 },
-            { "date": "Mar", "value": 39 },
-            { "date": "Apr", "value": 94 },
-            { "date": "May", "value": 91 },
-            { "date": "Jun", "value": 86 },
-            { "date": "Jul", "value": 52 },
-            { "date": "Aug", "value": 16 },
-            { "date": "Sep", "value": 23 },
-            { "date": "Oct", "value": 93 },
-            { "date": "Nov", "value": 82 },
-            { "date": "Dec", "value": 88 }
-          ],
-          "description": ""
+          "isRobot": true,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
         }
       ],
-      "readyToBuy": true
-    }
-  ],
-  "trackingCompaniesKPIs": [
-    {
-      "companyId": "apple-lwkr234h34u8743754q3fg1",
-      "name": "Apple",
-      "score": "94",
-      "hqLocation": "Cupertino, USA",
-      "revenueSize": "$300M",
-      "industry": "Technology",
-      "insight": {
-        "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-        "standardDueDiligence": {
-          "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-          "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-          "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-          "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
+      "gpt4_5_3424fcw3f": [
+        {
+          "isRobot": false,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
         },
-        "alternativeInsights": {
-          "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-          "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-          "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
+        {
+          "isRobot": true,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
         }
-      },
-      "sellChance": "0.3",
-      "recommendation": {
-        "gatheringChannels": [
-          {
-            "id": "twitter_h43u3049857",
-            "name": "Twitter (X)",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-31T09:56:43.064Z",
-            "getteredData": 843,
-            "aiModelsID": "falcon_3424fcw3f",
-            "totalDataToGather": 843,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 534,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 63.35
-          },
-          {
-            "id": "news_h43u3049857",
-            "name": "Google",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-29",
-            "getteredData": 2500,
-            "aiModelsID": "gpt4_5_3424fcw3f",
-            "totalDataToGather": 2500,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 2500,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": true,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 100
-          }
-        ],
-        "recomended": true
-      },
-      "objectRefrence": "company",
-      "isSelectedAttr": false,
-      "totalProcessingPercentage": 90.84,
-      "totalAIProcessingPercentage": 81.68,
-      "totalDataGatheringProcessingPercentage": 100,
-      "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
-      "totalDataLearned": 3034,
-      "totalDataGathered": 3343,
-      "completeness": 90.84,
-      "chatBot": {
-        "falcon_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ],
-        "gpt4_5_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ]
-      },
-      "userKPIs": [
-        {
-          "name": "A",
-          "data": [
-            { "date": "Jan", "value": 12 },
-            { "date": "Feb", "value": 96 },
-            { "date": "Mar", "value": 44 },
-            { "date": "Apr", "value": 14 },
-            { "date": "May", "value": 81 },
-            { "date": "Jun", "value": 92 },
-            { "date": "Jul", "value": 50 },
-            { "date": "Aug", "value": 13 },
-            { "date": "Sep", "value": 87 },
-            { "date": "Oct", "value": 68 },
-            { "date": "Nov", "value": 59 },
-            { "date": "Dec", "value": 15 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "B",
-          "data": [
-            { "date": "Jan", "value": 5 },
-            { "date": "Feb", "value": 15 },
-            { "date": "Mar", "value": 73 },
-            { "date": "Apr", "value": 8 },
-            { "date": "May", "value": 84 },
-            { "date": "Jun", "value": 11 },
-            { "date": "Jul", "value": 46 },
-            { "date": "Aug", "value": 38 },
-            { "date": "Sep", "value": 45 },
-            { "date": "Oct", "value": 9 },
-            { "date": "Nov", "value": 1 },
-            { "date": "Dec", "value": 62 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "C",
-          "data": [
-            { "date": "Jan", "value": 45 },
-            { "date": "Feb", "value": 23 },
-            { "date": "Mar", "value": 48 },
-            { "date": "Apr", "value": 91 },
-            { "date": "May", "value": 58 },
-            { "date": "Jun", "value": 69 },
-            { "date": "Jul", "value": 83 },
-            { "date": "Aug", "value": 85 },
-            { "date": "Sep", "value": 47 },
-            { "date": "Oct", "value": 88 },
-            { "date": "Nov", "value": 9 },
-            { "date": "Dec", "value": 92 }
-          ],
-          "description": ""
-        }
-      ],
-      "readyToBuy": true
+      ]
     },
-    {
-      "companyId": "Walmart_lwkr234h34u8743754q3fg2",
-      "name": "Walmart",
-      "score": "78",
-      "hqLocation": "Bentonville, USA",
-      "revenueSize": "$250M",
-      "industry": "Retail",
-      "insight": {
-        "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-        "standardDueDiligence": {
-          "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-          "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-          "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-          "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
-        },
-        "alternativeInsights": {
-          "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-          "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-          "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
-        }
-      },
-      "sellChance": "0.3",
-      "recommendation": {
-        "gatheringChannels": [
-          {
-            "id": "twitter_h43u3049857",
-            "name": "Twitter (X)",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-31T09:56:43.064Z",
-            "getteredData": 480,
-            "aiModelsID": "falcon_3424fcw3f",
-            "totalDataToGather": 639,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 0,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": false,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 75.12,
-            "dataLearningProcessingPercentage": 0
-          },
-          {
-            "id": "news_h43u3049857",
-            "name": "Google",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-29",
-            "getteredData": 19500,
-            "aiModelsID": "gpt4_5_3424fcw3f",
-            "totalDataToGather": 19500,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 13828,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 70.91
-          }
+    "userKPIs": [
+      {
+        "name": "A",
+        "data": [
+          { "date": "Jan", "value": 59 },
+          { "date": "Feb", "value": 64 },
+          { "date": "Mar", "value": 18 },
+          { "date": "Apr", "value": 38 },
+          { "date": "May", "value": 84 },
+          { "date": "Jun", "value": 23 },
+          { "date": "Jul", "value": 99 },
+          { "date": "Aug", "value": 73 },
+          { "date": "Sep", "value": 55 },
+          { "date": "Oct", "value": 37 },
+          { "date": "Nov", "value": 53 },
+          { "date": "Dec", "value": 54 }
         ],
-        "recomended": false
+        "description": ""
       },
-      "objectRefrence": "company",
-      "isSelectedAttr": false,
-      "totalProcessingPercentage": 61.510000000000005,
-      "totalAIProcessingPercentage": 35.45,
-      "totalDataGatheringProcessingPercentage": 87.56,
-      "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
-      "totalDataLearned": 13828,
-      "totalDataGathered": 19980,
-      "completeness": 61.51,
-      "chatBot": {
-        "falcon_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
+      {
+        "name": "B",
+        "data": [
+          { "date": "Jan", "value": 84 },
+          { "date": "Feb", "value": 71 },
+          { "date": "Mar", "value": 95 },
+          { "date": "Apr", "value": 80 },
+          { "date": "May", "value": 47 },
+          { "date": "Jun", "value": 29 },
+          { "date": "Jul", "value": 18 },
+          { "date": "Aug", "value": 12 },
+          { "date": "Sep", "value": 90 },
+          { "date": "Oct", "value": 98 },
+          { "date": "Nov", "value": 8 },
+          { "date": "Dec", "value": 83 }
         ],
-        "gpt4_5_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ]
+        "description": ""
       },
-      "userKPIs": [
-        {
-          "name": "A",
-          "data": [
-            { "date": "Jan", "value": 73 },
-            { "date": "Feb", "value": 89 },
-            { "date": "Mar", "value": 99 },
-            { "date": "Apr", "value": 81 },
-            { "date": "May", "value": 97 },
-            { "date": "Jun", "value": 94 },
-            { "date": "Jul", "value": 57 },
-            { "date": "Aug", "value": 99 },
-            { "date": "Sep", "value": 28 },
-            { "date": "Oct", "value": 85 },
-            { "date": "Nov", "value": 75 },
-            { "date": "Dec", "value": 50 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "B",
-          "data": [
-            { "date": "Jan", "value": 4 },
-            { "date": "Feb", "value": 44 },
-            { "date": "Mar", "value": 2 },
-            { "date": "Apr", "value": 22 },
-            { "date": "May", "value": 36 },
-            { "date": "Jun", "value": 11 },
-            { "date": "Jul", "value": 71 },
-            { "date": "Aug", "value": 58 },
-            { "date": "Sep", "value": 1 },
-            { "date": "Oct", "value": 28 },
-            { "date": "Nov", "value": 2 },
-            { "date": "Dec", "value": 14 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "C",
-          "data": [
-            { "date": "Jan", "value": 7 },
-            { "date": "Feb", "value": 61 },
-            { "date": "Mar", "value": 41 },
-            { "date": "Apr", "value": 77 },
-            { "date": "May", "value": 89 },
-            { "date": "Jun", "value": 77 },
-            { "date": "Jul", "value": 41 },
-            { "date": "Aug", "value": 73 },
-            { "date": "Sep", "value": 5 },
-            { "date": "Oct", "value": 40 },
-            { "date": "Nov", "value": 0 },
-            { "date": "Dec", "value": 49 }
-          ],
-          "description": ""
-        }
-      ],
-      "readyToBuy": false
+      {
+        "name": "C",
+        "data": [
+          { "date": "Jan", "value": 78 },
+          { "date": "Feb", "value": 84 },
+          { "date": "Mar", "value": 87 },
+          { "date": "Apr", "value": 72 },
+          { "date": "May", "value": 31 },
+          { "date": "Jun", "value": 4 },
+          { "date": "Jul", "value": 71 },
+          { "date": "Aug", "value": 20 },
+          { "date": "Sep", "value": 58 },
+          { "date": "Oct", "value": 83 },
+          { "date": "Nov", "value": 71 },
+          { "date": "Dec", "value": 0 }
+        ],
+        "description": ""
+      }
+    ],
+    "readyToBuy": true
+  },
+  {
+    "companyId": "Samsung_lwkr234h34u8743754q3fg2",
+    "name": "Samsung",
+    "score": "83",
+    "hqLocation": "Seoul, South Korea",
+    "revenueSize": "$320M",
+    "industry": "Electronics",
+    "insight": {
+      "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
+      "standardDueDiligence": {
+        "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
+        "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
+        "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
+        "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
+      },
+      "alternativeInsights": {
+        "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
+        "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
+        "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
+      }
     },
-    {
-      "companyId": "Johnson_lwkr234h34u8743754q3fg2",
-      "name": "Johnson & Johnson",
-      "score": "88",
-      "hqLocation": "New Brunswick, USA",
-      "revenueSize": "$180M",
-      "industry": "Healthcare",
-      "insight": {
-        "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-        "standardDueDiligence": {
-          "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-          "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-          "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-          "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
-        },
-        "alternativeInsights": {
-          "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-          "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-          "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
-        }
-      },
-      "sellChance": "0.3",
-      "recommendation": {
-        "gatheringChannels": [
-          {
-            "id": "twitter_h43u3049857",
-            "name": "Twitter (X)",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-31T09:56:43.064Z",
-            "getteredData": 807,
-            "aiModelsID": "falcon_3424fcw3f",
-            "totalDataToGather": 850,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 0,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": false,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 94.94,
-            "dataLearningProcessingPercentage": 0
-          },
-          {
-            "id": "news_h43u3049857",
-            "name": "Google",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-29",
-            "getteredData": 8500,
-            "aiModelsID": "gpt4_5_3424fcw3f",
-            "totalDataToGather": 8500,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 8500,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": true,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 100
-          }
-        ],
-        "recomended": true
-      },
-      "objectRefrence": "company",
-      "isSelectedAttr": false,
-      "totalProcessingPercentage": 73.72999999999999,
-      "totalAIProcessingPercentage": 50,
-      "totalDataGatheringProcessingPercentage": 97.47,
-      "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
-      "totalDataLearned": 8500,
-      "totalDataGathered": 9307,
-      "completeness": 73.73,
-      "chatBot": {
-        "falcon_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ],
-        "gpt4_5_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ]
-      },
-      "userKPIs": [
+    "sellChance": "0.3",
+    "recommendation": {
+      "gatheringChannels": [
         {
-          "name": "A",
-          "data": [
-            { "date": "Jan", "value": 42 },
-            { "date": "Feb", "value": 32 },
-            { "date": "Mar", "value": 43 },
-            { "date": "Apr", "value": 20 },
-            { "date": "May", "value": 73 },
-            { "date": "Jun", "value": 20 },
-            { "date": "Jul", "value": 85 },
-            { "date": "Aug", "value": 96 },
-            { "date": "Sep", "value": 93 },
-            { "date": "Oct", "value": 31 },
-            { "date": "Nov", "value": 15 },
-            { "date": "Dec", "value": 0 }
-          ],
-          "description": ""
+          "id": "twitter_h43u3049857",
+          "name": "Twitter (X)",
+          "imgSRC": "../../twitter.webp",
+          "lastUpdate": "2023-08-31T09:56:43.064Z",
+          "getteredData": 436,
+          "aiModelsID": "falcon_3424fcw3f",
+          "totalDataToGather": 684,
+          "dataGatheringPerMinutes": 1,
+          "aiLearnedDataSize": 0,
+          "aiLearningDataSizePerMinutes": 2,
+          "isDataGatheringFinished": false,
+          "isDataLearningFinished": false,
+          "dataGatheringProcessingPercentage": 63.74,
+          "dataLearningProcessingPercentage": 0
         },
         {
-          "name": "B",
-          "data": [
-            { "date": "Jan", "value": 21 },
-            { "date": "Feb", "value": 7 },
-            { "date": "Mar", "value": 55 },
-            { "date": "Apr", "value": 89 },
-            { "date": "May", "value": 57 },
-            { "date": "Jun", "value": 65 },
-            { "date": "Jul", "value": 31 },
-            { "date": "Aug", "value": 17 },
-            { "date": "Sep", "value": 48 },
-            { "date": "Oct", "value": 59 },
-            { "date": "Nov", "value": 64 },
-            { "date": "Dec", "value": 53 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "C",
-          "data": [
-            { "date": "Jan", "value": 86 },
-            { "date": "Feb", "value": 25 },
-            { "date": "Mar", "value": 39 },
-            { "date": "Apr", "value": 94 },
-            { "date": "May", "value": 91 },
-            { "date": "Jun", "value": 86 },
-            { "date": "Jul", "value": 52 },
-            { "date": "Aug", "value": 16 },
-            { "date": "Sep", "value": 23 },
-            { "date": "Oct", "value": 93 },
-            { "date": "Nov", "value": 82 },
-            { "date": "Dec", "value": 88 }
-          ],
-          "description": ""
+          "id": "news_h43u3049857",
+          "name": "Google",
+          "imgSRC": "../../google.png",
+          "lastUpdate": "2023-08-29",
+          "getteredData": 5500,
+          "aiModelsID": "gpt4_5_3424fcw3f",
+          "totalDataToGather": 5500,
+          "dataGatheringPerMinutes": 1,
+          "aiLearnedDataSize": 5500,
+          "aiLearningDataSizePerMinutes": 2,
+          "isDataGatheringFinished": true,
+          "isDataLearningFinished": true,
+          "dataGatheringProcessingPercentage": 100,
+          "dataLearningProcessingPercentage": 100
         }
       ],
-      "readyToBuy": true
+      "recommended": false
     },
-    {
-      "companyId": "Nissan_lwkr234h34u8743754q3fg2",
-      "name": "Nissan",
-      "score": "72",
-      "hqLocation": "Yokohama, Japan",
-      "revenueSize": "$11M",
-      "industry": "Car",
-      "insight": {
-        "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-        "standardDueDiligence": {
-          "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-          "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-          "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-          "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
-        },
-        "alternativeInsights": {
-          "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-          "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-          "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
-        }
-      },
-      "sellChance": "0.3",
-      "recommendation": {
-        "gatheringChannels": [
-          {
-            "id": "twitter_h43u3049857",
-            "name": "Twitter (X)",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-31T09:56:43.064Z",
-            "getteredData": 487,
-            "aiModelsID": "falcon_3424fcw3f",
-            "totalDataToGather": 594,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 0,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": false,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 81.99,
-            "dataLearningProcessingPercentage": 0
-          },
-          {
-            "id": "news_h43u3049857",
-            "name": "Google",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-29",
-            "getteredData": 14500,
-            "aiModelsID": "gpt4_5_3424fcw3f",
-            "totalDataToGather": 14500,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 8288,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 57.16
-          }
-        ],
-        "recomended": true
-      },
-      "objectRefrence": "company",
-      "isSelectedAttr": false,
-      "totalProcessingPercentage": 59.79,
-      "totalAIProcessingPercentage": 28.58,
-      "totalDataGatheringProcessingPercentage": 90.99000000000001,
-      "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
-      "totalDataLearned": 8288,
-      "totalDataGathered": 14987,
-      "completeness": 59.78,
-      "chatBot": {
-        "falcon_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ],
-        "gpt4_5_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ]
-      },
-      "userKPIs": [
+    "objectRefrence": "company",
+    "isSelectedAttr": false,
+    "totalProcessingPercentage": 65.94,
+    "totalAIProcessingPercentage": 50,
+    "totalDataGatheringProcessingPercentage": 81.87,
+    "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
+    "totalDataLearned": 5500,
+    "totalDataGathered": 5936,
+    "completeness": 65.94,
+    "chatBot": {
+      "falcon_3424fcw3f": [
         {
-          "name": "A",
-          "data": [
-            { "date": "Jan", "value": 5 },
-            { "date": "Feb", "value": 3 },
-            { "date": "Mar", "value": 90 },
-            { "date": "Apr", "value": 2 },
-            { "date": "May", "value": 62 },
-            { "date": "Jun", "value": 82 },
-            { "date": "Jul", "value": 93 },
-            { "date": "Aug", "value": 55 },
-            { "date": "Sep", "value": 50 },
-            { "date": "Oct", "value": 95 },
-            { "date": "Nov", "value": 19 },
-            { "date": "Dec", "value": 21 }
-          ],
-          "description": ""
+          "isRobot": false,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
         },
         {
-          "name": "B",
-          "data": [
-            { "date": "Jan", "value": 96 },
-            { "date": "Feb", "value": 45 },
-            { "date": "Mar", "value": 75 },
-            { "date": "Apr", "value": 48 },
-            { "date": "May", "value": 50 },
-            { "date": "Jun", "value": 32 },
-            { "date": "Jul", "value": 98 },
-            { "date": "Aug", "value": 77 },
-            { "date": "Sep", "value": 61 },
-            { "date": "Oct", "value": 52 },
-            { "date": "Nov", "value": 56 },
-            { "date": "Dec", "value": 7 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "C",
-          "data": [
-            { "date": "Jan", "value": 61 },
-            { "date": "Feb", "value": 96 },
-            { "date": "Mar", "value": 39 },
-            { "date": "Apr", "value": 75 },
-            { "date": "May", "value": 86 },
-            { "date": "Jun", "value": 46 },
-            { "date": "Jul", "value": 46 },
-            { "date": "Aug", "value": 8 },
-            { "date": "Sep", "value": 24 },
-            { "date": "Oct", "value": 26 },
-            { "date": "Nov", "value": 24 },
-            { "date": "Dec", "value": 64 }
-          ],
-          "description": ""
+          "isRobot": true,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
         }
       ],
-      "readyToBuy": true
+      "gpt4_5_3424fcw3f": [
+        {
+          "isRobot": false,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        },
+        {
+          "isRobot": true,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        }
+      ]
     },
-    {
-      "companyId": "McDonald_lwkr234h34u8743754q3fg2",
-      "name": "McDonald's",
-      "score": "76",
-      "hqLocation": "Chicago, USA",
-      "revenueSize": "$37M",
-      "industry": "Fast Food",
-      "insight": {
-        "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-        "standardDueDiligence": {
-          "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-          "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-          "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-          "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
-        },
-        "alternativeInsights": {
-          "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-          "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-          "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
-        }
-      },
-      "sellChance": "0.3",
-      "recommendation": {
-        "gatheringChannels": [
-          {
-            "id": "twitter_h43u3049857",
-            "name": "Twitter (X)",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-31T09:56:43.064Z",
-            "getteredData": 410,
-            "aiModelsID": "falcon_3424fcw3f",
-            "totalDataToGather": 836,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 0,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": false,
-            "isDataLearningFinished": false,
-            "dataGatheringProcessingPercentage": 49.04,
-            "dataLearningProcessingPercentage": 0
-          },
-          {
-            "id": "news_h43u3049857",
-            "name": "Google",
-            "imgSRC": "",
-            "lastUpdate": "2023-08-29",
-            "getteredData": 5500,
-            "aiModelsID": "gpt4_5_3424fcw3f",
-            "totalDataToGather": 5500,
-            "dataGatheringPerMinutes": 1,
-            "aiLearnedDataSize": 5500,
-            "aiLearningDataSizePerMinutes": 2,
-            "isDataGatheringFinished": true,
-            "isDataLearningFinished": true,
-            "dataGatheringProcessingPercentage": 100,
-            "dataLearningProcessingPercentage": 100
-          }
+    "userKPIs": [
+      {
+        "name": "A",
+        "data": [
+          { "date": "Jan", "value": 2 },
+          { "date": "Feb", "value": 81 },
+          { "date": "Mar", "value": 66 },
+          { "date": "Apr", "value": 86 },
+          { "date": "May", "value": 87 },
+          { "date": "Jun", "value": 97 },
+          { "date": "Jul", "value": 49 },
+          { "date": "Aug", "value": 69 },
+          { "date": "Sep", "value": 31 },
+          { "date": "Oct", "value": 13 },
+          { "date": "Nov", "value": 47 },
+          { "date": "Dec", "value": 59 }
         ],
-        "recomended": true
+        "description": ""
       },
-      "objectRefrence": "company",
-      "isSelectedAttr": false,
-      "totalProcessingPercentage": 62.26,
-      "totalAIProcessingPercentage": 50,
-      "totalDataGatheringProcessingPercentage": 74.52,
-      "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
-      "totalDataLearned": 5500,
-      "totalDataGathered": 5910,
-      "completeness": 62.26,
-      "chatBot": {
-        "falcon_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
+      {
+        "name": "B",
+        "data": [
+          { "date": "Jan", "value": 95 },
+          { "date": "Feb", "value": 50 },
+          { "date": "Mar", "value": 39 },
+          { "date": "Apr", "value": 80 },
+          { "date": "May", "value": 59 },
+          { "date": "Jun", "value": 19 },
+          { "date": "Jul", "value": 42 },
+          { "date": "Aug", "value": 52 },
+          { "date": "Sep", "value": 83 },
+          { "date": "Oct", "value": 66 },
+          { "date": "Nov", "value": 48 },
+          { "date": "Dec", "value": 25 }
         ],
-        "gpt4_5_3424fcw3f": [
-          {
-            "isRobot": false,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          },
-          {
-            "isRobot": true,
-            "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
-          }
-        ]
+        "description": ""
       },
-      "userKPIs": [
+      {
+        "name": "C",
+        "data": [
+          { "date": "Jan", "value": 91 },
+          { "date": "Feb", "value": 70 },
+          { "date": "Mar", "value": 70 },
+          { "date": "Apr", "value": 66 },
+          { "date": "May", "value": 47 },
+          { "date": "Jun", "value": 51 },
+          { "date": "Jul", "value": 61 },
+          { "date": "Aug", "value": 10 },
+          { "date": "Sep", "value": 64 },
+          { "date": "Oct", "value": 17 },
+          { "date": "Nov", "value": 25 },
+          { "date": "Dec", "value": 96 }
+        ],
+        "description": ""
+      }
+    ],
+    "readyToBuy": false
+  },
+  {
+    "companyId": "Starbucks_lwkr234h34u8743754q3fg2",
+    "name": "Starbucks",
+    "score": "85",
+    "hqLocation": "Seattle, USA",
+    "revenueSize": "$26M",
+    "industry": "Coffee",
+    "insight": {
+      "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
+      "standardDueDiligence": {
+        "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
+        "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
+        "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
+        "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
+      },
+      "alternativeInsights": {
+        "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
+        "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
+        "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
+      }
+    },
+    "sellChance": "0.3",
+    "recommendation": {
+      "gatheringChannels": [
         {
-          "name": "A",
-          "data": [
-            { "date": "Jan", "value": 43 },
-            { "date": "Feb", "value": 8 },
-            { "date": "Mar", "value": 69 },
-            { "date": "Apr", "value": 15 },
-            { "date": "May", "value": 92 },
-            { "date": "Jun", "value": 56 },
-            { "date": "Jul", "value": 24 },
-            { "date": "Aug", "value": 68 },
-            { "date": "Sep", "value": 69 },
-            { "date": "Oct", "value": 82 },
-            { "date": "Nov", "value": 21 },
-            { "date": "Dec", "value": 54 }
-          ],
-          "description": ""
+          "id": "twitter_h43u3049857",
+          "name": "Twitter (X)",
+          "imgSRC": "../../twitter.webp",
+          "lastUpdate": "2023-08-31T09:56:43.064Z",
+          "getteredData": 608,
+          "aiModelsID": "falcon_3424fcw3f",
+          "totalDataToGather": 608,
+          "dataGatheringPerMinutes": 1,
+          "aiLearnedDataSize": 608,
+          "aiLearningDataSizePerMinutes": 2,
+          "isDataGatheringFinished": true,
+          "isDataLearningFinished": true,
+          "dataGatheringProcessingPercentage": 100,
+          "dataLearningProcessingPercentage": 100
         },
         {
-          "name": "B",
-          "data": [
-            { "date": "Jan", "value": 31 },
-            { "date": "Feb", "value": 3 },
-            { "date": "Mar", "value": 58 },
-            { "date": "Apr", "value": 84 },
-            { "date": "May", "value": 77 },
-            { "date": "Jun", "value": 93 },
-            { "date": "Jul", "value": 44 },
-            { "date": "Aug", "value": 22 },
-            { "date": "Sep", "value": 42 },
-            { "date": "Oct", "value": 63 },
-            { "date": "Nov", "value": 84 },
-            { "date": "Dec", "value": 21 }
-          ],
-          "description": ""
-        },
-        {
-          "name": "C",
-          "data": [
-            { "date": "Jan", "value": 21 },
-            { "date": "Feb", "value": 84 },
-            { "date": "Mar", "value": 83 },
-            { "date": "Apr", "value": 89 },
-            { "date": "May", "value": 67 },
-            { "date": "Jun", "value": 25 },
-            { "date": "Jul", "value": 60 },
-            { "date": "Aug", "value": 22 },
-            { "date": "Sep", "value": 56 },
-            { "date": "Oct", "value": 38 },
-            { "date": "Nov", "value": 99 },
-            { "date": "Dec", "value": 20 }
-          ],
-          "description": ""
+          "id": "news_h43u3049857",
+          "name": "Google",
+          "imgSRC": "../../google.png",
+          "lastUpdate": "2023-08-29",
+          "getteredData": 3500,
+          "aiModelsID": "gpt4_5_3424fcw3f",
+          "totalDataToGather": 3500,
+          "dataGatheringPerMinutes": 1,
+          "aiLearnedDataSize": 3500,
+          "aiLearningDataSizePerMinutes": 2,
+          "isDataGatheringFinished": true,
+          "isDataLearningFinished": true,
+          "dataGatheringProcessingPercentage": 100,
+          "dataLearningProcessingPercentage": 100
         }
       ],
-      "readyToBuy": true
-    }
-  ],
-  "trackingKpiKeys": [
-    { "name": "A", "data": [], "description": "" },
-    { "name": "B", "data": [], "description": "" },
-    { "name": "C", "data": [], "description": "" }
-  ]
-}
+      "recommended": true
+    },
+    "objectRefrence": "company",
+    "isSelectedAttr": false,
+    "totalProcessingPercentage": 100,
+    "totalAIProcessingPercentage": 100,
+    "totalDataGatheringProcessingPercentage": 100,
+    "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
+    "totalDataLearned": 4108,
+    "totalDataGathered": 4108,
+    "completeness": 100,
+    "chatBot": {
+      "falcon_3424fcw3f": [
+        {
+          "isRobot": false,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        },
+        {
+          "isRobot": true,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        }
+      ],
+      "gpt4_5_3424fcw3f": [
+        {
+          "isRobot": false,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        },
+        {
+          "isRobot": true,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        }
+      ]
+    },
+    "userKPIs": [
+      {
+        "name": "A",
+        "data": [
+          { "date": "Jan", "value": 59 },
+          { "date": "Feb", "value": 64 },
+          { "date": "Mar", "value": 18 },
+          { "date": "Apr", "value": 38 },
+          { "date": "May", "value": 84 },
+          { "date": "Jun", "value": 23 },
+          { "date": "Jul", "value": 99 },
+          { "date": "Aug", "value": 73 },
+          { "date": "Sep", "value": 55 },
+          { "date": "Oct", "value": 37 },
+          { "date": "Nov", "value": 53 },
+          { "date": "Dec", "value": 54 }
+        ],
+        "description": ""
+      },
+      {
+        "name": "B",
+        "data": [
+          { "date": "Jan", "value": 84 },
+          { "date": "Feb", "value": 71 },
+          { "date": "Mar", "value": 95 },
+          { "date": "Apr", "value": 80 },
+          { "date": "May", "value": 47 },
+          { "date": "Jun", "value": 29 },
+          { "date": "Jul", "value": 18 },
+          { "date": "Aug", "value": 12 },
+          { "date": "Sep", "value": 90 },
+          { "date": "Oct", "value": 98 },
+          { "date": "Nov", "value": 8 },
+          { "date": "Dec", "value": 83 }
+        ],
+        "description": ""
+      },
+      {
+        "name": "C",
+        "data": [
+          { "date": "Jan", "value": 78 },
+          { "date": "Feb", "value": 84 },
+          { "date": "Mar", "value": 87 },
+          { "date": "Apr", "value": 72 },
+          { "date": "May", "value": 31 },
+          { "date": "Jun", "value": 4 },
+          { "date": "Jul", "value": 71 },
+          { "date": "Aug", "value": 20 },
+          { "date": "Sep", "value": 58 },
+          { "date": "Oct", "value": 83 },
+          { "date": "Nov", "value": 71 },
+          { "date": "Dec", "value": 0 }
+        ],
+        "description": ""
+      }
+    ],
+    "readyToBuy": true
+  },
+  {
+    "companyId": "Adobe_lwkr234h34u8743754q3fg2",
+    "name": "Adobe",
+    "score": "88",
+    "hqLocation": "San Jose, USA",
+    "revenueSize": "$13M",
+    "industry": "Software",
+    "insight": {
+      "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
+      "standardDueDiligence": {
+        "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
+        "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
+        "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
+        "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
+      },
+      "alternativeInsights": {
+        "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
+        "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
+        "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
+      }
+    },
+    "sellChance": "0.3",
+    "recommendation": {
+      "gatheringChannels": [
+        {
+          "id": "twitter_h43u3049857",
+          "name": "Twitter (X)",
+          "imgSRC": "../../twitter.webp",
+          "lastUpdate": "2023-08-31T09:56:43.064Z",
+          "getteredData": 665,
+          "aiModelsID": "falcon_3424fcw3f",
+          "totalDataToGather": 665,
+          "dataGatheringPerMinutes": 1,
+          "aiLearnedDataSize": 665,
+          "aiLearningDataSizePerMinutes": 2,
+          "isDataGatheringFinished": true,
+          "isDataLearningFinished": true,
+          "dataGatheringProcessingPercentage": 100,
+          "dataLearningProcessingPercentage": 100
+        },
+        {
+          "id": "news_h43u3049857",
+          "name": "Google",
+          "imgSRC": "../../google.png",
+          "lastUpdate": "2023-08-29",
+          "getteredData": 8500,
+          "aiModelsID": "gpt4_5_3424fcw3f",
+          "totalDataToGather": 8500,
+          "dataGatheringPerMinutes": 1,
+          "aiLearnedDataSize": 8500,
+          "aiLearningDataSizePerMinutes": 2,
+          "isDataGatheringFinished": true,
+          "isDataLearningFinished": true,
+          "dataGatheringProcessingPercentage": 100,
+          "dataLearningProcessingPercentage": 100
+        }
+      ],
+      "recommended": false
+    },
+    "objectRefrence": "company",
+    "isSelectedAttr": false,
+    "totalProcessingPercentage": 100,
+    "totalAIProcessingPercentage": 100,
+    "totalDataGatheringProcessingPercentage": 100,
+    "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
+    "totalDataLearned": 9165,
+    "totalDataGathered": 9165,
+    "completeness": 100,
+    "chatBot": {
+      "falcon_3424fcw3f": [
+        {
+          "isRobot": false,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        },
+        {
+          "isRobot": true,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        }
+      ],
+      "gpt4_5_3424fcw3f": [
+        {
+          "isRobot": false,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        },
+        {
+          "isRobot": true,
+          "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        }
+      ]
+    },
+    "userKPIs": [
+      {
+        "name": "A",
+        "data": [
+          { "date": "Jan", "value": 36 },
+          { "date": "Feb", "value": 2 },
+          { "date": "Mar", "value": 6 },
+          { "date": "Apr", "value": 89 },
+          { "date": "May", "value": 23 },
+          { "date": "Jun", "value": 72 },
+          { "date": "Jul", "value": 51 },
+          { "date": "Aug", "value": 70 },
+          { "date": "Sep", "value": 93 },
+          { "date": "Oct", "value": 52 },
+          { "date": "Nov", "value": 48 },
+          { "date": "Dec", "value": 64 }
+        ],
+        "description": ""
+      },
+      {
+        "name": "B",
+        "data": [
+          { "date": "Jan", "value": 70 },
+          { "date": "Feb", "value": 6 },
+          { "date": "Mar", "value": 5 },
+          { "date": "Apr", "value": 17 },
+          { "date": "May", "value": 42 },
+          { "date": "Jun", "value": 73 },
+          { "date": "Jul", "value": 6 },
+          { "date": "Aug", "value": 53 },
+          { "date": "Sep", "value": 78 },
+          { "date": "Oct", "value": 81 },
+          { "date": "Nov", "value": 60 },
+          { "date": "Dec", "value": 58 }
+        ],
+        "description": ""
+      },
+      {
+        "name": "C",
+        "data": [
+          { "date": "Jan", "value": 18 },
+          { "date": "Feb", "value": 14 },
+          { "date": "Mar", "value": 34 },
+          { "date": "Apr", "value": 59 },
+          { "date": "May", "value": 75 },
+          { "date": "Jun", "value": 24 },
+          { "date": "Jul", "value": 42 },
+          { "date": "Aug", "value": 81 },
+          { "date": "Sep", "value": 59 },
+          { "date": "Oct", "value": 27 },
+          { "date": "Nov", "value": 45 },
+          { "date": "Dec", "value": 62 }
+        ],
+        "description": ""
+      }
+    ],
+    "readyToBuy": false
+  }
+]

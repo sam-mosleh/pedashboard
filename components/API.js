@@ -1893,6 +1893,7 @@ export default {
     );
     const selectedCompanies = [];
     const trackingCompaniesKPIs = [];
+    const insightsCompanies = [];
     for (let index = 0; index < 5; index++) {
       const rand = Math.floor(Math.random() * allCompanies.length - 1) + 1;
       selectedCompanies.push(allCompanies[rand]);
@@ -1906,10 +1907,15 @@ export default {
       const rand = Math.floor(Math.random() * allCompanies.length - 1) + 1;
       trackingCompaniesKPIs.push(allCompanies[rand]);
     }
+    for (let index = 0; index < 5; index++) {
+      const rand = Math.floor(Math.random() * allCompanies.length - 1) + 1;
+      insightsCompanies.push(allCompanies[rand]);
+    }
     return {
       robots: allAiRobots,
       companies: selectedCompanies,
       trackingCompaniesKPIs: trackingCompaniesKPIs,
+      insights: insightsCompanies,
       trackingKpiKeys: [...this.getDefaultKPIs()],
     };
   },
@@ -1921,6 +1927,14 @@ export default {
   },
   saveTrackingKPIs(allKPIs) {
     localStorage.setItem("PED-KPIs", JSON.stringify(allKPIs));
+  },
+  getAllInsightCompanies() {
+    const data = localStorage.getItem("PED-InsightCompanies");
+    if (data) return JSON.parse(data);
+    return [];
+  },
+  saveInsightCompanies(allKPIKeys) {
+    localStorage.setItem("PED-InsightCompanies", JSON.stringify(allKPIKeys));
   },
   getAllTrackingKPIKeys() {
     const data = localStorage.getItem("PED-KPIKeys");

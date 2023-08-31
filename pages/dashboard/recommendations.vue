@@ -135,6 +135,11 @@
                 <div class="d-flex flex-row ms-auto me-0 my-3">
                   <v-row>
                     <v-btn
+                      v-if="
+                        !allInsightCompanies.filter(
+                          (x) => x.companyId == item.companyId
+                        )
+                      "
                       @click="setSelectForInsight(item)"
                       rounded
                       color="black"
@@ -579,6 +584,7 @@ export default {
   data() {
     return {
       allRecommendedCompanies: [],
+      allInsightCompanies: [],
       summaryRecommendedCompanies: {
         count: 0,
         median: 0,
@@ -738,30 +744,20 @@ export default {
         (x) => x.userKPIs >= precisionVsRecall
       );
     },
-
+    setSelectForInsight(item) {
+      this.allInsightCompanies = api.getAllInsightCompanies();
+      this.allInsightCompanies.allCompanies.map((company) => {
+        if (company.companyId == item.companyId) {
+          this.allInsightCompanies.push(company);
+        }
+      });
+      api.saveInsightCompanies(this.allInsightCompanies);
+      this.fireSnack("Companies added successfully!");
+    },
     //===============================
     getRandomColor(colorArray) {
       const randomIndex = Math.floor(Math.random() * colorArray.length);
       return colorArray[randomIndex];
-    },
-    setSelectForInsight(item) {
-      let selectedForInsights;
-      if (localStorage.getItem("selectedForInsights")) {
-        selectedForInsights = JSON.parse(
-          localStorage.getItem("selectedForInsights")
-        );
-        if (
-          !selectedForInsights.filter((itemClone) => itemClone === item).length
-        ) {
-          selectedForInsights.push(item);
-        }
-      } else {
-        selectedForInsights = [item];
-      }
-      localStorage.setItem(
-        "selectedForInsights",
-        JSON.stringify(selectedForInsights)
-      );
     },
   },
   mounted() {

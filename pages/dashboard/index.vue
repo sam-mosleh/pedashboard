@@ -8,6 +8,18 @@
     <v-row>
       <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
         <v-card class="cart-deals">
+          <v-btn
+            class="d-flex flex-row ms-auto me-2 mt-2"
+            style="
+              background: black;
+              color: white;
+              border-radius: 30px;
+              text-transform: capitalize;
+            "
+            @click="redirect('/dashboard/recommendations')"
+            >View</v-btn
+          >
+
           <v-col class="justify-space-between align-center h-100">
             <p
               class="text-center"
@@ -41,14 +53,16 @@
               border-radius: 30px;
               text-transform: capitalize;
             "
+            @click="redirect('/dashboard/deal_insights')"
             >View</v-btn
           >
+
           <v-col class="justify-space-between align-center h-100">
             <p
               class="text-center"
               style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
             >
-              {{ `5` }}
+              {{ summaryInsights.count }}
             </p>
             <p
               class="text-center"
@@ -59,19 +73,42 @@
             <div style="height: 2px; background: red"></div>
             <div class="candlestick">
               <div class="wick"></div>
-              <div class="body" style="width: 70%; left: 10%"></div>
-              <div class="shadow-left" style="width: 10%"></div>
-              <div class="shadow-right" style="width: 20%"></div>
+              <div
+                class="body"
+                :style="{
+                  width: `${summaryInsights.max - summaryInsights.min}%`,
+                  left: `${summaryInsights.min}%`,
+                }"
+              ></div>
+              <div
+                class="shadow-left"
+                :style="{ width: `${summaryInsights.min}%` }"
+              ></div>
+              <div
+                class="shadow-right"
+                :style="{ width: `${summaryInsights.max}%` }"
+              ></div>
             </div>
             <v-row class="justify-space-between mt-1 px-2">
-              <p style="font-size: 10px">min: 10%</p>
-              <p style="font-size: 10px">max: 70%</p>
+              <p style="font-size: 10px">min: {{ summaryInsights.min }}%</p>
+              <p style="font-size: 10px">max: {{ summaryInsights.max }}%</p>
             </v-row>
           </v-col>
         </v-card>
       </v-col>
       <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
         <v-card class="cart-track">
+          <v-btn
+            class="d-flex flex-row ms-auto me-2 mt-2"
+            style="
+              background: black;
+              color: white;
+              border-radius: 30px;
+              text-transform: capitalize;
+            "
+            @click="redirect('/dashboard/tracking')"
+            >View</v-btn
+          >
           <v-col class="justify-space-between align-center h-100">
             <p
               class="text-center"
@@ -100,6 +137,17 @@
       </v-col>
       <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
         <v-card class="cart-models-trained">
+          <v-btn
+            class="d-flex flex-row ms-auto me-2 mt-2"
+            style="
+              background: black;
+              color: white;
+              border-radius: 30px;
+              text-transform: capitalize;
+            "
+            @click="redirect('/dashboard/modelsTrained')"
+            >View</v-btn
+          >
           <v-col class="justify-space-between align-center h-100">
             <p
               class="text-center"
@@ -171,10 +219,32 @@ export default {
         count: 0,
         median: 0,
       },
+      allInsightCompanies: [],
+      summaryInsights: {
+        count: 0,
+        min: 1990,
+        max: -10,
+      },
     };
   },
   methods: {
+    redirect(address) {
+      window.location.href = address;
+    },
     init() {
+      this.allInsightCompanies = api.getAllInsightCompanies();
+      this.summaryInsights.count = this.allInsightCompanies.length;
+      console.log(this.allInsightCompanies);
+      this.allInsightCompanies.map((company) => {
+        this.summaryInsights.min =
+          company.completeness < this.summaryInsights.min
+            ? company.completeness
+            : this.summaryInsights.min;
+        this.summaryInsights.max =
+          company.completeness > this.summaryInsights.max
+            ? company.completeness
+            : this.summaryInsights.max;
+      });
       this.allTrackingSelectedCompanies = api.getAllTrackingKPIs();
       this.allUserAiRobots = api.getAllAiRobots();
       this.summaryCartModels.modelsTrainedCount = this.allUserAiRobots.length;
