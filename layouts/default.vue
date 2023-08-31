@@ -84,7 +84,7 @@ export default {
         {
           icon: 'mdi-robot-confused',
           title: 'Recommendations',
-          to: 'recommendations'
+          to: '/dashboard/recommendations'
         },
         {
           icon: 'mdi-head-lightbulb',
