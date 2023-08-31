@@ -13,7 +13,7 @@
               class="text-center"
               style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
             >
-              {{ `3` }}
+              {{ summaryRecommendedCompanies.count }}
             </p>
             <p
               class="text-center"
@@ -26,7 +26,7 @@
               class="text-center mt-4"
               style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
             >
-              {{ `Median score: 3` }}
+              Median score: {{ summaryRecommendedCompanies.median }}
             </p>
           </v-col>
         </v-card>
@@ -92,12 +92,15 @@
       <v-data-table
         v-if="companies"
         :headers="headers"
-        :items="companies"
+        :items="allRecommendedCompanies"
         :expanded.sync="expanded"
         item-key="name"
-        show-expand
         class="elevation-1"
+        show-expand
       >
+        <template v-slot:item.recommended="{ item }">
+          {{ `${item.recommendation.recommended ? "Yes" : "No"}` }}
+        </template>
         <template v-slot:top>
           <v-toolbar flat>
             <v-toolbar-title>Recommendations</v-toolbar-title>
@@ -107,16 +110,11 @@
         <template v-slot:expanded-item="{ headers, item }">
           <td :colspan="headers.length">
             <v-col class="py-10">
-              <p style="font-size: 20px; font-weight: 600; margin-bottom: 40px">
-                Insight
-              </p>
-              <p style="font-size: 14px; font-weight: 400">Sample Text ...</p>
-              <v-row class="d-flex justify-space-between mt-10">
-                <p style="font-size: 14px; font-weight: 400" class="mt-4 ps-3">
-                  {{ `There is 2.3 Gb of data gathered for this company` }}
+              <v-row class="px-3">
+                <p style="font-size: 20px; font-weight: 600" class="my-3">
+                  Insight
                 </p>
-
-                <div class="d-flex flex-row ms-auto me-0">
+                <div class="d-flex flex-row ms-auto me-0 my-3">
                   <v-row>
                     <v-btn
                       @click="setSelectForInsight(item)"
@@ -151,7 +149,16 @@
                   </v-row>
                 </div>
               </v-row>
-              <v-card class="mt-10">
+              <p style="font-size: 14px; font-weight: 400" class="mt-10">
+                {{ item.insight.aiDescription }}
+              </p>
+              <v-row class="d-flex justify-space-between mt-10">
+                <p style="font-size: 14px; font-weight: 400" class="mt-4 ps-3">
+                  There is {{ showDataSize(item.totalDataGathered) }} of data
+                  gathered for this company
+                </p>
+              </v-row>
+              <v-card class="mt-10" style="background: #f0f0f0">
                 <v-row style="justify-content: center; align-items: center">
                   <img
                     alt="logo"
@@ -168,51 +175,37 @@
                     >
                       {{ `Status: Gathering Data` }}
                     </v-chip>
-                    <v-row>
-                      <v-col cols="12" sm="12" md="3" lg="3" xl="3" xxl="3">
-                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                          {{ `Last Update: 12.02.2023` }}
-                        </v-chip>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="3" lg="3" xl="3" xxl="3">
-                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                          {{ `Gathered Data: 30 Mb` }}
-                        </v-chip>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="3" lg="3" xl="3" xxl="3">
-                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                          {{ `AI Model: Some Model` }}
-                        </v-chip>
-                      </v-col>
+                    <v-row class="ps-4 pt-3">
+                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
+                        {{ `Last Update: 12.02.2023` }}
+                      </v-chip>
+                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
+                        {{ `Gathered Data: 30 Mb` }}
+                      </v-chip>
+                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
+                        {{ `AI Model: Some Model` }}
+                      </v-chip>
                     </v-row>
-                    <v-row>
-                      <v-col cols="12" sm="12" md="4" lg="4" xl="4" xxl="4">
-                        <v-chip class="ma-2" color="cyan" text-color="white">
-                          {{ `Data Gathering Process: 90%` }}
-                        </v-chip>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="8" lg="8" xl="8" xxl="8">
-                        <v-chip class="ma-2" color="cyan" text-color="white">
-                          {{ `Data Gathering remaining time: 59 minutes` }}
-                        </v-chip>
-                      </v-col>
+                    <v-row class="ps-4 pt-3">
+                      <v-chip class="ma-2" color="cyan" text-color="white">
+                        {{ `Data Gathering Process: 90%` }}
+                      </v-chip>
+                      <v-chip class="ma-2" color="cyan" text-color="white">
+                        {{ `Data Gathering remaining time: 59 minutes` }}
+                      </v-chip>
                     </v-row>
-                    <v-row>
-                      <v-col cols="12" sm="12" md="4" lg="4" xl="4" xxl="4">
-                        <v-chip class="ma-2" color="orange" text-color="white">
-                          {{ `AI Learning Process: 0%` }}
-                        </v-chip>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="8" lg="8" xl="8" xxl="8">
-                        <v-chip class="ma-2" color="orange" text-color="white">
-                          {{ `AI Learning remaining time: 1h:59m:12s` }}
-                        </v-chip>
-                      </v-col>
+                    <v-row class="ps-4 pt-3">
+                      <v-chip class="ma-2" color="orange" text-color="white">
+                        {{ `AI Learning Process: 0%` }}
+                      </v-chip>
+                      <v-chip class="ma-2" color="orange" text-color="white">
+                        {{ `AI Learning remaining time: 1h:59m:12s` }}
+                      </v-chip>
                     </v-row>
                   </v-col>
                 </v-row>
               </v-card>
-              <v-card class="mt-10">
+              <v-card class="mt-10" style="background: #f0f0f0">
                 <v-row style="justify-content: center; align-items: center">
                   <img
                     alt="logo"
@@ -229,46 +222,32 @@
                     >
                       {{ `Status: Gathering Data` }}
                     </v-chip>
-                    <v-row>
-                      <v-col cols="12" sm="12" md="3" lg="3" xl="3" xxl="3">
-                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                          {{ `Last Update: 12.02.2023` }}
-                        </v-chip>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="3" lg="3" xl="3" xxl="3">
-                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                          {{ `Gathered Data: 30 Mb` }}
-                        </v-chip>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="3" lg="3" xl="3" xxl="3">
-                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                          {{ `AI Model: Some Model` }}
-                        </v-chip>
-                      </v-col>
+                    <v-row class="ps-4 pt-3">
+                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
+                        {{ `Last Update: 12.02.2023` }}
+                      </v-chip>
+                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
+                        {{ `Gathered Data: 30 Mb` }}
+                      </v-chip>
+                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
+                        {{ `AI Model: Some Model` }}
+                      </v-chip>
                     </v-row>
-                    <v-row>
-                      <v-col cols="12" sm="12" md="4" lg="4" xl="4" xxl="4">
-                        <v-chip class="ma-2" color="cyan" text-color="white">
-                          {{ `Data Gathering Process: 90%` }}
-                        </v-chip>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="8" lg="8" xl="8" xxl="8">
-                        <v-chip class="ma-2" color="cyan" text-color="white">
-                          {{ `Data Gathering remaining time: 59 minutes` }}
-                        </v-chip>
-                      </v-col>
+                    <v-row class="ps-4 pt-3">
+                      <v-chip class="ma-2" color="cyan" text-color="white">
+                        {{ `Data Gathering Process: 90%` }}
+                      </v-chip>
+                      <v-chip class="ma-2" color="cyan" text-color="white">
+                        {{ `Data Gathering remaining time: 59 minutes` }}
+                      </v-chip>
                     </v-row>
-                    <v-row>
-                      <v-col cols="12" sm="12" md="4" lg="4" xl="4" xxl="4">
-                        <v-chip class="ma-2" color="orange" text-color="white">
-                          {{ `AI Learning Process: 0%` }}
-                        </v-chip>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="8" lg="8" xl="8" xxl="8">
-                        <v-chip class="ma-2" color="orange" text-color="white">
-                          {{ `AI Learning remaining time: 1h:59m:12s` }}
-                        </v-chip>
-                      </v-col>
+                    <v-row class="ps-4 pt-3">
+                      <v-chip class="ma-2" color="orange" text-color="white">
+                        {{ `AI Learning Process: 0%` }}
+                      </v-chip>
+                      <v-chip class="ma-2" color="orange" text-color="white">
+                        {{ `AI Learning remaining time: 1h:59m:12s` }}
+                      </v-chip>
                     </v-row>
                   </v-col>
                 </v-row>
@@ -584,11 +563,18 @@
 
 <script>
 import utils from "@/components/utils";
+import api from "@/components/API";
 
 export default {
   name: "Recommendation Page",
   data() {
     return {
+      allRecommendedCompanies: [],
+      summaryRecommendedCompanies: {
+        count: 0,
+        median: 0,
+      },
+      //===============================
       expanded: [],
       dialogAddReview: false,
       dialogAddFocusSearch: false,
@@ -606,6 +592,7 @@ export default {
         { text: "HQ Location", value: "hqLocation" },
         { text: "Revenue Size", value: "revenueSize" },
         { text: "Industry", value: "industry" },
+        { text: "Recommended", value: "recommended" },
         { text: "Insight", value: "data-table-expand" },
       ],
       allCompanies: [],
@@ -692,6 +679,10 @@ export default {
     };
   },
   methods: {
+    showDataSize(dataSize) {
+      return api.dataSizeSerializer(dataSize);
+    },
+    //===============================
     getRandomColor(colorArray) {
       const randomIndex = Math.floor(Math.random() * colorArray.length);
       return colorArray[randomIndex];
@@ -740,6 +731,27 @@ export default {
     },
   },
   mounted() {
+    const allAvailableAiRobots = api.getAiRobots();
+    this.allRecommendedCompanies = api.getStandardCompanyList(
+      api.getCompanies(),
+      allAvailableAiRobots
+    );
+    const recommendedCompaniesTemp = this.allRecommendedCompanies.filter(
+      (x) => x.recommendation.recommended == true
+    );
+    this.summaryRecommendedCompanies.count = recommendedCompaniesTemp.length;
+    let counter = 0;
+    console.log(this.allRecommendedCompanies, recommendedCompaniesTemp);
+    recommendedCompaniesTemp.map((x) => {
+      this.summaryRecommendedCompanies.median =
+        this.summaryRecommendedCompanies.median + parseInt(x.score);
+      counter++;
+    });
+    this.summaryRecommendedCompanies.median = parseFloat(
+      this.summaryRecommendedCompanies.median / counter
+    ).toFixed(2);
+    console.log(this.summaryRecommendedCompanies.median);
+    //============================
     this.allCompanies = utils.getCompanies();
     this.companies = this.allCompanies;
   },
@@ -760,81 +772,12 @@ export default {
   color: white;
   font-size: 12px;
 }
-.candlestick {
-  width: 90%;
-  height: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  margin-top: 20px;
-}
-
-.body {
-  /*width: 70%;*/
-  height: 14px;
-  background-color: rgba(0, 0, 255, 0.6);
-  border-radius: 3px;
-  position: absolute;
-  /*left: 10%;*/
-  top: 3px;
-}
-
-.shadow-left {
-  /*width: 10%;*/
-  height: 3px;
-  background-color: rgba(255, 0, 0, 0.6);
-  position: absolute;
-  left: 0;
-  top: 8px;
-}
-
-.shadow-right {
-  /*width: 20%;*/
-  height: 3px;
-  background-color: rgba(255, 0, 0, 0.6);
-  position: absolute;
-  right: 0;
-  top: 8px;
-}
-.cart-insights {
-  padding-top: 10px !important;
-  padding-bottom: 2px !important;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-  background: linear-gradient(
-    82.99deg,
-    rgb(92, 105, 226) 5.47%,
-    rgb(8, 207, 234) 94.53%
-  ) !important;
-  color: white !important;
-}
 .cart-deals {
   padding: 10px !important;
   background: linear-gradient(
     78.84deg,
     rgb(85, 61, 239) 8.24%,
     rgb(207, 95, 228) 91.76%
-  ) !important;
-  color: white !important;
-}
-.cart-track {
-  padding: 10px !important;
-  background: linear-gradient(
-    78.84deg,
-    rgb(241, 91, 91) 8.24%,
-    rgb(177, 36, 121) 91.76%
-  ) !important;
-  color: white !important;
-}
-.cart-models-trained {
-  padding-top: 10px !important;
-  padding-bottom: 2px !important;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-  background: linear-gradient(
-    82.99deg,
-    rgb(255, 118, 3) 5.47%,
-    rgb(255, 197, 44) 94.53%
   ) !important;
   color: white !important;
 }

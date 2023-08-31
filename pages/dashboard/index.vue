@@ -6,38 +6,14 @@
       >Dashboard</v-row
     >
     <v-row>
-      <v-col
-        cols="12"
-        sm="6"
-        md="3"
-        lg="3"
-        xl="3"
-        xxl="3"
-        style="
-          background: linear-gradient(
-            78.84deg,
-            rgb(85, 61, 239) 8.24%,
-            rgb(207, 95, 228) 91.76%
-          ) !important;
-        "
-      >
+      <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
         <v-card class="cart-deals">
-          <v-btn
-            class="d-flex flex-row ms-auto me-2 mt-2"
-            style="
-              background: black;
-              color: white;
-              border-radius: 30px;
-              text-transform: capitalize;
-            "
-            >View</v-btn
-          >
           <v-col class="justify-space-between align-center h-100">
             <p
               class="text-center"
               style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
             >
-              {{ `3` }}
+              {{ summaryRecommendedCompanies.count }}
             </p>
             <p
               class="text-center"
@@ -50,7 +26,7 @@
               class="text-center mt-4"
               style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
             >
-              {{ `Median score: 3` }}
+              Median score: {{ summaryRecommendedCompanies.median }}
             </p>
           </v-col>
         </v-card>
@@ -96,22 +72,12 @@
       </v-col>
       <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
         <v-card class="cart-track">
-          <v-btn
-            class="d-flex flex-row ms-auto me-2 mt-2"
-            style="
-              background: black;
-              color: white;
-              border-radius: 30px;
-              text-transform: capitalize;
-            "
-            >View</v-btn
-          >
           <v-col class="justify-space-between align-center h-100">
             <p
               class="text-center"
               style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
             >
-              {{ `8` }}
+              {{ allTrackingSelectedCompanies.length }}
             </p>
             <p
               class="text-center"
@@ -124,29 +90,22 @@
               class="text-center mt-4"
               style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
             >
-              {{ `3 Ready to buy` }}
+              {{
+                allTrackingSelectedCompanies.filter((x) => x.readyToBuy).length
+              }}
+              Ready to buy
             </p>
           </v-col>
         </v-card>
       </v-col>
       <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
         <v-card class="cart-models-trained">
-          <v-btn
-            class="d-flex flex-row ms-auto me-2 mt-2"
-            style="
-              background: black;
-              color: white;
-              border-radius: 30px;
-              text-transform: capitalize;
-            "
-            >View</v-btn
-          >
           <v-col class="justify-space-between align-center h-100">
             <p
               class="text-center"
               style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
             >
-              {{ `10` }}
+              {{ summaryCartModels.modelsTrainedCount }}
             </p>
             <p
               class="text-center"
@@ -157,13 +116,31 @@
             <div style="height: 2px; background: red"></div>
             <div class="candlestick">
               <div class="wick"></div>
-              <div class="body" style="width: 70%; left: 10%"></div>
-              <div class="shadow-left" style="width: 10%"></div>
-              <div class="shadow-right" style="width: 20%"></div>
+              <div
+                class="body"
+                :style="{
+                  width: `${
+                    summaryCartModels.maxProcess - summaryCartModels.minProcess
+                  }%`,
+                  left: `${summaryCartModels.minProcess}%`,
+                }"
+              ></div>
+              <div
+                class="shadow-left"
+                :style="{ width: `${summaryCartModels.minProcess}%` }"
+              ></div>
+              <div
+                class="shadow-right"
+                :style="{ width: `${summaryCartModels.maxProcess}%` }"
+              ></div>
             </div>
             <v-row class="justify-space-between mt-1 px-2">
-              <p style="font-size: 10px">min: 10%</p>
-              <p style="font-size: 10px">max: 70%</p>
+              <p style="font-size: 10px">
+                min: {{ summaryCartModels.minProcess }}%
+              </p>
+              <p style="font-size: 10px">
+                max: {{ summaryCartModels.maxProcess }}%
+              </p>
             </v-row>
           </v-col>
         </v-card>
@@ -173,17 +150,74 @@
 </template>
 
 <script>
-import utils from "@/components/utils";
+import api from "@/components/API";
+
 export default {
   name: "Dashboard",
   data() {
     return {
       start: 50, // Dynamic start value
       end: 70, // Dynamic end value
+
+      allTrackingSelectedCompanies: [],
+      summaryCartModels: {
+        modelsTrainedCount: 0,
+        minProcess: 1000,
+        maxProcess: -1,
+      },
+      allUserAiRobots: [],
+      allRecommendedCompanies: [],
+      summaryRecommendedCompanies: {
+        count: 0,
+        median: 0,
+      },
     };
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    init() {
+      this.allTrackingSelectedCompanies = api.getAllTrackingKPIs();
+      this.allUserAiRobots = api.getAllAiRobots();
+      this.summaryCartModels.modelsTrainedCount = this.allUserAiRobots.length;
+      this.allUserAiRobots.map((robot) => {
+        this.summaryCartModels.minProcess =
+          parseFloat(robot.totalCompleteness) <
+          this.summaryCartModels.minProcess
+            ? parseFloat(robot.totalCompleteness)
+            : this.summaryCartModels.minProcess;
+        this.summaryCartModels.maxProcess =
+          parseFloat(robot.totalCompleteness) >
+          this.summaryCartModels.maxProcess
+            ? parseFloat(robot.totalCompleteness)
+            : this.summaryCartModels.maxProcess;
+      });
+
+      // =====================
+      this.allRecommendedCompanies = api.getStandardCompanyList(
+        api.getCompanies(),
+        api.getAiRobots()
+      );
+      const recommendedCompaniesTemp = this.allRecommendedCompanies.filter(
+        (x) => x.recommendation.recommended == true
+      );
+      this.summaryRecommendedCompanies.count = recommendedCompaniesTemp.length;
+      let counter = 0;
+      console.log(this.allRecommendedCompanies, recommendedCompaniesTemp);
+      recommendedCompaniesTemp.map((x) => {
+        this.summaryRecommendedCompanies.median =
+          this.summaryRecommendedCompanies.median + parseInt(x.score);
+        counter++;
+      });
+      this.summaryRecommendedCompanies.median = parseFloat(
+        this.summaryRecommendedCompanies.median / counter
+      ).toFixed(2);
+      console.log(this.summaryRecommendedCompanies.median);
+    },
+  },
+  mounted() {
+    if (!api.getAuth()) window.href.location = "/login";
+
+    this.init();
+  },
   watch: {},
 };
 </script>

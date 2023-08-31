@@ -57,8 +57,8 @@
               ></div>
             </div>
             <v-row class="justify-space-between mt-1 px-2">
-              <p style="font-size: 10px">min: 10%</p>
-              <p style="font-size: 10px">max: 70%</p>
+              <p style="font-size: 10px">min: {{ summaryCart.minProcess }}%</p>
+              <p style="font-size: 10px">max: {{ summaryCart.maxProcess }}%</p>
             </v-row>
           </v-col>
         </v-card>
@@ -409,7 +409,7 @@ export default {
         this.allUserAiRobotsIds.push(robot.id)
       );
       api.getAiRobots().map((robot) => this.allAiRobotsIds.push(robot.id));
-       this.robotViewDialog = {
+      this.robotViewDialog = {
         isOpen: false,
         data: null,
       };
@@ -459,7 +459,7 @@ export default {
         return;
       }
       const userSavedCompanies = api.getAllCompanies();
-       this.robotAddNewDialog.data.selectedCompanies.map((companyId) => {
+      this.robotAddNewDialog.data.selectedCompanies.map((companyId) => {
         if (!userSavedCompanies.includes((x) => x.companyId == companyId)) {
           const index = this.allCompanies.findIndex(
             (z) => z.companyId == companyId
@@ -467,7 +467,7 @@ export default {
           userSavedCompanies.push(this.allCompanies[index]);
         }
       });
-       api.saveCompanies(userSavedCompanies);
+      api.saveCompanies(userSavedCompanies);
       //===========
       const allAvailableRobots = api.getAiRobots();
       let robotIndex = allAvailableRobots.findIndex(
