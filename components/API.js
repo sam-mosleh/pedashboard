@@ -1818,19 +1818,21 @@ export default {
     return selectedCompanies;
   },
   generateAiRobotsBasedOnUserData(aiRobots, selectedCompanies) {
-    for (let robotIndex = 0; robotIndex < aiRobotIds.length; robotIndex++) {
-      const robot = aiRobotIds[robotIndex];
+    console.log(aiRobots);
+    for (let robotIndex = 0; robotIndex < aiRobots.length; robotIndex++) {
+      const robot = aiRobots[robotIndex];
       let companyCountInRobot = 0;
       robot["totalUploadedDocsFromUser"] = 0;
       robot["totalDataLearnedFromUser"] = 0;
       robot["totalDataGatheredFromUser"] = 0;
       robot["totalCompleteness"] = 0;
+
+      if (!robot["nickName"]) robot["nickName"] = `Model-${robotIndex + 1}`;
       for (
         let companyIndex = 0;
         companyIndex < selectedCompanies.length;
         companyIndex++
       ) {
-        companyCountInRobot = companyCountInRobot + 1;
         const company = selectedCompanies[companyIndex];
         robot["totalUploadedDocsFromUser"] =
           robot["totalUploadedDocsFromUser"] + 3;
@@ -1847,6 +1849,9 @@ export default {
           }
         });
       }
+      robot["totalCompleteness"] = parseFloat(
+        parseFloat(robot["totalCompleteness"]) / companyCountInRobot
+      ).toFixed(2);
       aiRobots[robotIndex] = robot;
     }
     return aiRobots;
@@ -1860,14 +1865,24 @@ export default {
     return this.generateUserTrackingData(selectedCompanies);
   },
   getFullUserData() {
-    const allAiRobots = this.getAiRobots();
+    let allAiRobots = this.getAiRobots();
     const allCompanies = this.getStandardCompanyList(
       this.getCompanies(),
       allAiRobots
     );
+    const selectedCompanies = [];
+    for (let index = 0; index < 5; index++) {
+      const rand = Math.floor(Math.random() * allCompanies.length - 1);
+      selectedCompanies.push(allCompanies[rand]);
+    }
+    allAiRobots = this.generateAiRobotsBasedOnUserData(
+      allAiRobots,
+      selectedCompanies
+    );
+
     return {
       robots: allAiRobots,
-      companies: allCompanies,
+      companies: selectedCompanies,
       trackingKPIs: [],
     };
   },
@@ -1902,5 +1917,11 @@ export default {
     const data = localStorage.getItem("PED-Auth");
     if (data) return true;
     return false;
+  },
+  dataSizeSerializer(dataSize) {
+    if (dataSize > 1000) {
+      return `${parseFloat(dataSize / 1000).toFixed(2)}Tb`;
+    }
+    return `${parseFloat(dataSize).toFixed(2)}Gb`;
   },
 };
