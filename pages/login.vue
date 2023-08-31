@@ -90,6 +90,9 @@ export default {
         const allData = api.getFullUserData();
         api.saveAiRobots(allData.robots);
         api.saveCompanies(allData.companies);
+        api.saveTrackingKPIs(allData.trackingCompaniesKPIs);
+        api.saveTrackingKPIKeys(allData.trackingKpiKeys);
+        console.log(JSON.stringify(allData));
       }
       if (this.email == "userTest@gmail.com" && this.password == "1234") {
         api.saveAuth();

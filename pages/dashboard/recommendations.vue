@@ -7,17 +7,7 @@
     >
     <v-row style="justify-content: space-between">
       <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-        <v-card
-          style="
-            padding: 10px;
-            background: linear-gradient(
-              78.84deg,
-              rgb(85, 61, 239) 8.24%,
-              rgb(207, 95, 228) 91.76%
-            );
-            color: white;
-          "
-        >
+        <v-card class="cart-deals">
           <v-col class="justify-space-between align-center h-100">
             <p
               class="text-center"
@@ -769,5 +759,83 @@ export default {
   align-items: center;
   color: white;
   font-size: 12px;
+}
+.candlestick {
+  width: 90%;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  margin-top: 20px;
+}
+
+.body {
+  /*width: 70%;*/
+  height: 14px;
+  background-color: rgba(0, 0, 255, 0.6);
+  border-radius: 3px;
+  position: absolute;
+  /*left: 10%;*/
+  top: 3px;
+}
+
+.shadow-left {
+  /*width: 10%;*/
+  height: 3px;
+  background-color: rgba(255, 0, 0, 0.6);
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+
+.shadow-right {
+  /*width: 20%;*/
+  height: 3px;
+  background-color: rgba(255, 0, 0, 0.6);
+  position: absolute;
+  right: 0;
+  top: 8px;
+}
+.cart-insights {
+  padding-top: 10px !important;
+  padding-bottom: 2px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  background: linear-gradient(
+    82.99deg,
+    rgb(92, 105, 226) 5.47%,
+    rgb(8, 207, 234) 94.53%
+  ) !important;
+  color: white !important;
+}
+.cart-deals {
+  padding: 10px !important;
+  background: linear-gradient(
+    78.84deg,
+    rgb(85, 61, 239) 8.24%,
+    rgb(207, 95, 228) 91.76%
+  ) !important;
+  color: white !important;
+}
+.cart-track {
+  padding: 10px !important;
+  background: linear-gradient(
+    78.84deg,
+    rgb(241, 91, 91) 8.24%,
+    rgb(177, 36, 121) 91.76%
+  ) !important;
+  color: white !important;
+}
+.cart-models-trained {
+  padding-top: 10px !important;
+  padding-bottom: 2px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  background: linear-gradient(
+    82.99deg,
+    rgb(255, 118, 3) 5.47%,
+    rgb(255, 197, 44) 94.53%
+  ) !important;
+  color: white !important;
 }
 </style>

@@ -21,17 +21,7 @@
           ) !important;
         "
       >
-        <v-card
-          style="
-            padding: 10px;
-            background: linear-gradient(
-              78.84deg,
-              rgb(85, 61, 239) 8.24%,
-              rgb(207, 95, 228) 91.76%
-            ) !important;
-            color: white !important;
-          "
-        >
+        <v-card class="cart-deals">
           <v-btn
             class="d-flex flex-row ms-auto me-2 mt-2"
             style="
@@ -66,20 +56,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-        <v-card
-          style="
-            padding-top: 10px;
-            padding-bottom: 2px;
-            padding-left: 10px;
-            padding-right: 10px;
-            background: linear-gradient(
-              82.99deg,
-              rgb(92, 105, 226) 5.47%,
-              rgb(8, 207, 234) 94.53%
-            );
-            color: white;
-          "
-        >
+        <v-card class="cart-insights" style="">
           <v-btn
             class="d-flex flex-row ms-auto me-2 mt-2"
             style="
@@ -118,17 +95,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-        <v-card
-          style="
-            padding: 10px;
-            background: linear-gradient(
-              78.84deg,
-              rgb(241, 91, 91) 8.24%,
-              rgb(177, 36, 121) 91.76%
-            );
-            color: white;
-          "
-        >
+        <v-card class="cart-track">
           <v-btn
             class="d-flex flex-row ms-auto me-2 mt-2"
             style="
@@ -163,20 +130,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-        <v-card
-          style="
-            padding-top: 10px;
-            padding-bottom: 2px;
-            padding-left: 10px;
-            padding-right: 10px;
-            background: linear-gradient(
-              82.99deg,
-              rgb(255, 118, 3) 5.47%,
-              rgb(255, 197, 44) 94.53%
-            );
-            color: white;
-          "
-        >
+        <v-card class="cart-models-trained">
           <v-btn
             class="d-flex flex-row ms-auto me-2 mt-2"
             style="
@@ -270,5 +224,47 @@ export default {
   position: absolute;
   right: 0;
   top: 8px;
+}
+.cart-insights {
+  padding-top: 10px !important;
+  padding-bottom: 2px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  background: linear-gradient(
+    82.99deg,
+    rgb(92, 105, 226) 5.47%,
+    rgb(8, 207, 234) 94.53%
+  ) !important;
+  color: white !important;
+}
+.cart-deals {
+  padding: 10px !important;
+  background: linear-gradient(
+    78.84deg,
+    rgb(85, 61, 239) 8.24%,
+    rgb(207, 95, 228) 91.76%
+  ) !important;
+  color: white !important;
+}
+.cart-track {
+  padding: 10px !important;
+  background: linear-gradient(
+    78.84deg,
+    rgb(241, 91, 91) 8.24%,
+    rgb(177, 36, 121) 91.76%
+  ) !important;
+  color: white !important;
+}
+.cart-models-trained {
+  padding-top: 10px !important;
+  padding-bottom: 2px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  background: linear-gradient(
+    82.99deg,
+    rgb(255, 118, 3) 5.47%,
+    rgb(255, 197, 44) 94.53%
+  ) !important;
+  color: white !important;
 }
 </style>

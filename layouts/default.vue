@@ -77,11 +77,11 @@ export default {
           title: "Insight",
           to: "insight",
         },
-        {
-          icon: "mdi-text-box-search",
-          title: "Full Due Diligence",
-          to: "dd",
-        },
+        // {
+        //   icon: "mdi-text-box-search",
+        //   title: "Full Due Diligence",
+        //   to: "dd",
+        // },
         {
           icon: "mdi-handshake",
           title: "Deal Sourcing",
@@ -90,7 +90,7 @@ export default {
         {
           icon: "mdi-radar",
           title: "Track",
-          to: "/track",
+          to: "/dashboard/tracking",
         },
         {
           icon: "mdi-projector-screen-variant-outline",

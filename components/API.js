@@ -1626,6 +1626,7 @@ export default {
     const minuteInMs = 1000 * 60;
     for (let index = 0; index < allCompanies.length; index++) {
       const company = allCompanies[index];
+      company["isSelectedAttr"] = false;
       company["totalProcessingPercentage"] = 0;
       company["totalAIProcessingPercentage"] = 0;
       company["totalDataGatheringProcessingPercentage"] = 0;
@@ -1710,13 +1711,17 @@ export default {
         index++
       ) {
         const channel = company.recommendation.gatheringChannels[index];
-        if (!selectedAiRobots.includes((x) => x.id == channel.aiModelsID))
+
+        if (
+          selectedAiRobots.findIndex((x) => x.id == channel.aiModelsID) == -1
+        ) {
           continue;
+        }
         channelCounted = channelCounted + 1;
         company["totalDataLearned"] =
-          company["totalDataLearned"] + channel.aiLearnedDataSize;
+          company["totalDataLearned"] + parseFloat(channel.aiLearnedDataSize);
         company["totalDataGathered"] =
-          company["totalDataGathered"] + channel.getteredData;
+          company["totalDataGathered"] + parseFloat(channel.getteredData);
         company["completeness"] =
           company["completeness"] +
           parseFloat(
@@ -1730,6 +1735,7 @@ export default {
       company["completeness"] = parseFloat(
         (company["completeness"] / channelCounted).toFixed(2)
       );
+
       company["chatBot"] = {};
       for (
         let aiRobotIndex = 0;
@@ -1754,7 +1760,30 @@ export default {
     }
     return selectedCompanies;
   },
-  generateUserTrackingData(selectedCompanies, newKPIs = null) {
+  getDefaultKPIs() {
+    return [
+      {
+        name: "A",
+        data: [],
+        description: "",
+      },
+      {
+        name: "B",
+        data: [],
+        description: "",
+      },
+      {
+        name: "C",
+        data: [],
+        description: "",
+      },
+    ];
+  },
+  generateUserTrackingData(
+    selectedCompanies,
+    newKPIs = null,
+    putDefaultKPi = true
+  ) {
     const months = [
       "Jan",
       "Feb",
@@ -1772,19 +1801,8 @@ export default {
     for (let index = 0; index < selectedCompanies.length; index++) {
       const company = selectedCompanies[index];
       if (!company["userKPIs"]) company["userKPIs"] = [];
-      if (company.userKPIs.length == 0) {
-        company["userKPIs"].push({
-          name: "A",
-          data: [],
-        });
-        company["userKPIs"].push({
-          name: "B",
-          data: [],
-        });
-        company["userKPIs"].push({
-          name: "C",
-          data: [],
-        });
+      if (company.userKPIs.length == 0 && putDefaultKPi) {
+        company["userKPIs"].push(...this.getDefaultKPIs());
       }
       if (newKPIs != null) {
         if (newKPIs.companyId == company.companyId) {
@@ -1797,12 +1815,14 @@ export default {
             company["userKPIs"].push({
               name: newKpiValue.name,
               data: [],
+              description: newKPIs.description,
             });
           }
         }
       }
       for (let kpiIndex = 0; kpiIndex < company.userKPIs.length; kpiIndex++) {
         const kpi = company.userKPIs[kpiIndex];
+        kpi.data = [];
         for (let monthIndex = 0; monthIndex < months.length; monthIndex++) {
           const month = months[monthIndex];
           kpi.data.push({
@@ -1818,8 +1838,7 @@ export default {
     return selectedCompanies;
   },
   generateAiRobotsBasedOnUserData(aiRobots, selectedCompanies) {
-    console.log(aiRobots);
-    for (let robotIndex = 0; robotIndex < aiRobots.length; robotIndex++) {
+     for (let robotIndex = 0; robotIndex < aiRobots.length; robotIndex++) {
       const robot = aiRobots[robotIndex];
       let companyCountInRobot = 0;
       robot["totalUploadedDocsFromUser"] = 0;
@@ -1871,28 +1890,43 @@ export default {
       allAiRobots
     );
     const selectedCompanies = [];
+    const trackingCompaniesKPIs = [];
     for (let index = 0; index < 5; index++) {
-      const rand = Math.floor(Math.random() * allCompanies.length - 1);
+      const rand = Math.floor(Math.random() * allCompanies.length - 1) + 1;
       selectedCompanies.push(allCompanies[rand]);
     }
+
     allAiRobots = this.generateAiRobotsBasedOnUserData(
       allAiRobots,
       selectedCompanies
     );
-
+    for (let index = 0; index < 5; index++) {
+      const rand = Math.floor(Math.random() * allCompanies.length - 1) + 1;
+      trackingCompaniesKPIs.push(allCompanies[rand]);
+    }
     return {
       robots: allAiRobots,
       companies: selectedCompanies,
-      trackingKPIs: [],
+      trackingCompaniesKPIs: trackingCompaniesKPIs,
+      trackingKpiKeys: [...this.getDefaultKPIs()],
     };
   },
   getAllTrackingKPIs() {
     const data = localStorage.getItem("PED-KPIs");
     if (data) return JSON.parse(data);
+
     return [];
   },
   saveTrackingKPIs(allKPIs) {
     localStorage.setItem("PED-KPIs", JSON.stringify(allKPIs));
+  },
+  getAllTrackingKPIKeys() {
+    const data = localStorage.getItem("PED-KPIKeys");
+    if (data) return JSON.parse(data);
+    return [];
+  },
+  saveTrackingKPIKeys(allKPIKeys) {
+    localStorage.setItem("PED-KPIKeys", JSON.stringify(allKPIKeys));
   },
   getAllAiRobots() {
     const data = localStorage.getItem("PED-AiRobots");
