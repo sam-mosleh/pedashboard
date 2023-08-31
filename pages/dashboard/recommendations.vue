@@ -59,26 +59,28 @@
                 :thumb-size="28"
                 color="black"
                 thumb-label="always"
+                @change="precisionVsRecallChange"
               ></v-slider>
-              <v-btn
+              <!-- TODO -->
+              <!-- <v-btn
                 class="ms-3"
                 style="background: black; color: white; border-radius: 20px"
                 @click="dialogAddFocusSearch = true"
               >
                 Focus Search
-              </v-btn>
+              </v-btn> -->
             </v-row>
           </v-col>
         </v-row>
         <v-row class="px-2 mt-10">
-          <v-col cols="12" xs="12" sm="3" md="3" lg="3" xl="3" xxl="3">
-            <p style="font-size: 18px; font-weight: 600">Current Search:</p>
+          <v-col cols="12" xs="12" sm="2" md="2" lg="2" xl="2" xxl="2">
+            <p style="font-size: 18px; font-weight: 600">Search KPIes:</p>
           </v-col>
-          <v-col cols="12" xs="12" sm="9" md="9" lg="9" xl="9" xxl="9">
+          <v-col cols="12" xs="12" sm="10" md="10" lg="10" xl="10" xxl="10">
             <v-sheet class="mx-auto" max-width="65vw">
               <v-slide-group multiple show-arrows>
                 <v-slide-item
-                  v-for="(search, i) in currentSearches"
+                  v-for="(search, i) in allSavedKPIs"
                   :key="i"
                   v-slot="{ active, toggle }"
                 >
@@ -90,9 +92,9 @@
                     active-class="purple white--text"
                     depressed
                     rounded
-                    @click="toggle"
+                    @click="() => {}"
                   >
-                    {{ search.value }}
+                    {{ search.name }}
                   </v-btn>
                 </v-slide-item>
               </v-slide-group>
@@ -587,6 +589,7 @@ export default {
         text: "",
       },
       allTrackingCompanies: [],
+      allSavedKPIs: [],
       //===============================
       expanded: [],
       dialogAddReview: {
@@ -712,6 +715,30 @@ export default {
       this.snackbar.text = text;
       this.snackbar.isOpen = true;
     },
+    precisionVsRecallChange(newVal) {
+      const allAvailableAiRobots = api.getAiRobots();
+      this.allRecommendedCompanies = api.getStandardCompanyList(
+        api.getCompanies(),
+        allAvailableAiRobots
+      );
+      this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
+        (x) => x.score >= newVal
+      );
+    },
+    filterPerKPI(kpi) {
+      const allAvailableAiRobots = api.getAiRobots();
+      this.allRecommendedCompanies = api.getStandardCompanyList(
+        api.getCompanies(),
+        allAvailableAiRobots
+      );
+      this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
+        (x) => x.score >= precisionVsRecall
+      );
+      this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
+        (x) => x.userKPIs >= precisionVsRecall
+      );
+    },
+
     //===============================
     getRandomColor(colorArray) {
       const randomIndex = Math.floor(Math.random() * colorArray.length);
@@ -759,6 +786,8 @@ export default {
     ).toFixed(2);
     console.log(this.summaryRecommendedCompanies.median);
     this.allAiModels = api.getAiRobots();
+    this.allSavedKPIs = api.getAllTrackingKPIKeys();
+
     //============================
     this.allCompanies = utils.getCompanies();
     this.companies = this.allCompanies;
