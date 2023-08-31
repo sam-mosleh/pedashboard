@@ -1,5 +1,21 @@
 <template>
   <div>
+    <!-- Snack -->
+    <v-snackbar v-model="snackbar.isOpen" top>
+      {{ snackbar.text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="pink"
+          text
+          v-bind="attrs"
+          @click="snackbar.isOpen = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+    <!-- Snack -->
     <v-row
       class="ps-3 pt-8 pb-6 mb-3"
       style="font-weight: 600; font-size: 28px; background: black; color: white"
@@ -127,7 +143,12 @@
                       Add to insight
                     </v-btn>
                     <v-btn
-                      @click="setStartForTracking(item)"
+                      v-if="
+                        !allTrackingCompanies.filter(
+                          (x) => x.companyId == item.companyId
+                        )
+                      "
+                      @click="addCompanyToTracking(item)"
                       rounded
                       color="white"
                       class="mt-4"
@@ -137,7 +158,12 @@
                       Add to tracking
                     </v-btn>
                     <v-btn
-                      @click="dialogAddReview = true"
+                      @click="
+                        () => {
+                          dialogAddReview.isOpen = true;
+                          dialogAddReview.review = '';
+                        }
+                      "
                       rounded
                       color="gray"
                       class="mt-4 mx-3"
@@ -158,97 +184,68 @@
                   gathered for this company
                 </p>
               </v-row>
-              <v-card class="mt-10" style="background: #f0f0f0">
+              <v-card
+                v-for="gatheringChannels in item.recommendation
+                  .gatheringChannels"
+                class="mt-10"
+                style="background: #f0f0f0"
+              >
                 <v-row style="justify-content: center; align-items: center">
-                  <img
+                  <v-img
+                    contain
                     alt="logo"
                     class="ps-4"
-                    style="width: 40px; height: 40px"
-                    src="../../static/vuetify-logo.svg"
-                  />
+                    max-width="100"
+                    :src="gatheringChannels.imgSRC"
+                  ></v-img>
                   <v-col>
-                    <v-chip
-                      class="ma-2"
-                      color="green"
-                      text-color="white"
-                      style="justify-content: center; align-items: center"
-                    >
-                      {{ `Status: Gathering Data` }}
-                    </v-chip>
-                    <v-row class="ps-4 pt-3">
-                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                        {{ `Last Update: 12.02.2023` }}
+                    <v-chip-group active-class="primary--text" column>
+                      <v-chip
+                        class="ma-2"
+                        color="green"
+                        text-color="white"
+                        style="justify-content: center; align-items: center"
+                      >
+                        {{
+                          `Status: ${
+                            gatheringChannels.isDataGatheringFinished
+                              ? gatheringChannels.isDataLearningFinished
+                                ? "Finished"
+                                : "Learning Data"
+                              : "Gathering Data"
+                          }`
+                        }}
                       </v-chip>
                       <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                        {{ `Gathered Data: 30 Mb` }}
+                        {{ `Last Update: ${gatheringChannels.lastUpdate}` }}
                       </v-chip>
                       <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                        {{ `AI Model: Some Model` }}
+                        {{
+                          `Gathered Data: ${showDataSize(
+                            gatheringChannels.getteredData
+                          )}`
+                        }}
                       </v-chip>
-                    </v-row>
-                    <v-row class="ps-4 pt-3">
+                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
+                        {{
+                          `AI Model: ${showAIModelByAiId(
+                            gatheringChannels.aiModelsID
+                          )}`
+                        }}
+                      </v-chip>
+
                       <v-chip class="ma-2" color="cyan" text-color="white">
-                        {{ `Data Gathering Process: 90%` }}
+                        {{
+                          `Data Gathering Process: ${gatheringChannels.dataGatheringProcessingPercentage}%`
+                        }}
                       </v-chip>
-                      <v-chip class="ma-2" color="cyan" text-color="white">
-                        {{ `Data Gathering remaining time: 59 minutes` }}
-                      </v-chip>
-                    </v-row>
-                    <v-row class="ps-4 pt-3">
+
                       <v-chip class="ma-2" color="orange" text-color="white">
-                        {{ `AI Learning Process: 0%` }}
+                        {{
+                          `AI Learning Process: ${gatheringChannels.dataLearningProcessingPercentage}%`
+                        }}
                       </v-chip>
-                      <v-chip class="ma-2" color="orange" text-color="white">
-                        {{ `AI Learning remaining time: 1h:59m:12s` }}
-                      </v-chip>
-                    </v-row>
-                  </v-col>
-                </v-row>
-              </v-card>
-              <v-card class="mt-10" style="background: #f0f0f0">
-                <v-row style="justify-content: center; align-items: center">
-                  <img
-                    alt="logo"
-                    class="ps-4"
-                    style="width: 40px; height: 40px"
-                    src="../../static/vuetify-logo.svg"
-                  />
-                  <v-col>
-                    <v-chip
-                      class="ma-2"
-                      color="green"
-                      text-color="white"
-                      style="justify-content: center; align-items: center"
-                    >
-                      {{ `Status: Gathering Data` }}
-                    </v-chip>
-                    <v-row class="ps-4 pt-3">
-                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                        {{ `Last Update: 12.02.2023` }}
-                      </v-chip>
-                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                        {{ `Gathered Data: 30 Mb` }}
-                      </v-chip>
-                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                        {{ `AI Model: Some Model` }}
-                      </v-chip>
-                    </v-row>
-                    <v-row class="ps-4 pt-3">
-                      <v-chip class="ma-2" color="cyan" text-color="white">
-                        {{ `Data Gathering Process: 90%` }}
-                      </v-chip>
-                      <v-chip class="ma-2" color="cyan" text-color="white">
-                        {{ `Data Gathering remaining time: 59 minutes` }}
-                      </v-chip>
-                    </v-row>
-                    <v-row class="ps-4 pt-3">
-                      <v-chip class="ma-2" color="orange" text-color="white">
-                        {{ `AI Learning Process: 0%` }}
-                      </v-chip>
-                      <v-chip class="ma-2" color="orange" text-color="white">
-                        {{ `AI Learning remaining time: 1h:59m:12s` }}
-                      </v-chip>
-                    </v-row>
+                    </v-chip-group>
                   </v-col>
                 </v-row>
               </v-card>
@@ -259,7 +256,7 @@
     </div>
 
     <!-- Add a review Dialog START -->
-    <v-dialog v-model="dialogAddReview" max-width="500px">
+    <v-dialog v-model="dialogAddReview.isOpen" max-width="500px">
       <v-card>
         <v-card-title>
           <span class="px-3" style="font-size: 18px; font-weight: 500"
@@ -279,13 +276,23 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="red darken-1" text @click="dialogAddReview = false">
+          <v-btn
+            color="red darken-1"
+            text
+            @click="dialogAddReview.isOpen = false"
+          >
             Cancel
           </v-btn>
           <v-btn
             color="blue darken-1"
             text
-            @click="() => console.log('save review')"
+            @click="
+              () => {
+                dialogAddReview.isOpen = false;
+                dialogAddReview.review = '';
+                fireSnack('your review submitted successfully!');
+              }
+            "
           >
             Save
           </v-btn>
@@ -574,9 +581,18 @@ export default {
         count: 0,
         median: 0,
       },
+      allAiModels: [],
+      snackbar: {
+        isOpen: false,
+        text: "",
+      },
+      allTrackingCompanies: [],
       //===============================
       expanded: [],
-      dialogAddReview: false,
+      dialogAddReview: {
+        isOpen: false,
+        review: "",
+      },
       dialogAddFocusSearch: false,
       dialogSelectFromSearchHistory: false,
       dialogAddNewAIBasedKPI: false,
@@ -682,6 +698,20 @@ export default {
     showDataSize(dataSize) {
       return api.dataSizeSerializer(dataSize);
     },
+    showAIModelByAiId(aiId) {
+      return this.allAiModels.filter((x) => x.id == aiId)[0].name;
+    },
+    addCompanyToTracking(item) {
+      this.allTrackingCompanies = api.getAllTrackingKPIs();
+      if (!this.allTrackingCompanies.find((x) => x.companyId == item.companyId))
+        this.allTrackingCompanies.push(item);
+      api.saveTrackingKPIs(this.allTrackingCompanies);
+      this.fireSnack("Asset added to tracking list!");
+    },
+    fireSnack(text) {
+      this.snackbar.text = text;
+      this.snackbar.isOpen = true;
+    },
     //===============================
     getRandomColor(colorArray) {
       const randomIndex = Math.floor(Math.random() * colorArray.length);
@@ -706,29 +736,6 @@ export default {
         JSON.stringify(selectedForInsights)
       );
     },
-    setStartForTracking(item) {
-      let startedForTracking;
-      if (localStorage.getItem("startedForTracking")) {
-        startedForTracking = JSON.parse(
-          localStorage.getItem("startedForTracking")
-        );
-        if (
-          !startedForTracking.filter((itemClone) => itemClone === item).length
-        ) {
-          startedForTracking.push(item);
-          localStorage.setItem(
-            "startedForTracking",
-            JSON.stringify(startedForTracking)
-          );
-        }
-      } else {
-        startedForTracking = [item];
-        localStorage.setItem(
-          "startedForTracking",
-          JSON.stringify(startedForTracking)
-        );
-      }
-    },
   },
   mounted() {
     const allAvailableAiRobots = api.getAiRobots();
@@ -751,6 +758,7 @@ export default {
       this.summaryRecommendedCompanies.median / counter
     ).toFixed(2);
     console.log(this.summaryRecommendedCompanies.median);
+    this.allAiModels = api.getAiRobots();
     //============================
     this.allCompanies = utils.getCompanies();
     this.companies = this.allCompanies;

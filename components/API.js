@@ -38,7 +38,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 728,
               aiModelsID: "falcon_3424fcw3f",
@@ -50,7 +50,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 2500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -97,7 +97,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 435,
               aiModelsID: "falcon_3424fcw3f",
@@ -109,7 +109,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -156,7 +156,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 540,
               aiModelsID: "falcon_3424fcw3f",
@@ -168,7 +168,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 8500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -215,7 +215,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 489,
               aiModelsID: "falcon_3424fcw3f",
@@ -227,7 +227,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 12500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -274,7 +274,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 5,
               aiModelsID: "falcon_3424fcw3f",
@@ -286,7 +286,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 11500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -333,7 +333,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 476,
               aiModelsID: "falcon_3424fcw3f",
@@ -345,7 +345,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -392,7 +392,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 579,
               aiModelsID: "falcon_3424fcw3f",
@@ -404,7 +404,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 10500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -451,7 +451,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 204,
               aiModelsID: "falcon_3424fcw3f",
@@ -463,7 +463,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 13500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -510,7 +510,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 174,
               aiModelsID: "falcon_3424fcw3f",
@@ -522,7 +522,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -569,7 +569,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 220,
               aiModelsID: "falcon_3424fcw3f",
@@ -581,7 +581,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -628,7 +628,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 213,
               aiModelsID: "falcon_3424fcw3f",
@@ -640,7 +640,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 19500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -687,7 +687,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 149,
               aiModelsID: "falcon_3424fcw3f",
@@ -699,7 +699,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -746,7 +746,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 397,
               aiModelsID: "falcon_3424fcw3f",
@@ -758,7 +758,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -805,7 +805,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 275,
               aiModelsID: "falcon_3424fcw3f",
@@ -817,7 +817,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 3500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -864,7 +864,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 234,
               aiModelsID: "falcon_3424fcw3f",
@@ -876,7 +876,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 16500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -923,7 +923,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 2,
               aiModelsID: "falcon_3424fcw3f",
@@ -935,7 +935,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 10500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -982,7 +982,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 198,
               aiModelsID: "falcon_3424fcw3f",
@@ -994,7 +994,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 7500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -1041,7 +1041,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 668,
               aiModelsID: "falcon_3424fcw3f",
@@ -1053,7 +1053,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 15500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -1100,7 +1100,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 465,
               aiModelsID: "falcon_3424fcw3f",
@@ -1112,7 +1112,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 13500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -1159,7 +1159,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 218,
               aiModelsID: "falcon_3424fcw3f",
@@ -1171,7 +1171,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 6500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -1218,7 +1218,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 274,
               aiModelsID: "falcon_3424fcw3f",
@@ -1230,7 +1230,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 15500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -1277,7 +1277,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 228,
               aiModelsID: "falcon_3424fcw3f",
@@ -1289,7 +1289,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 12500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -1336,7 +1336,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 381,
               aiModelsID: "falcon_3424fcw3f",
@@ -1348,7 +1348,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 3500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -1395,7 +1395,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 285,
               aiModelsID: "falcon_3424fcw3f",
@@ -1407,7 +1407,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 2500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -1454,7 +1454,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 143,
               aiModelsID: "falcon_3424fcw3f",
@@ -1466,7 +1466,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 5500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -1513,7 +1513,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 584,
               aiModelsID: "falcon_3424fcw3f",
@@ -1525,7 +1525,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 8500,
               aiModelsID: "gpt4_5_3424fcw3f",
@@ -1572,7 +1572,7 @@ export default {
             {
               id: "twitter_h43u3049857",
               name: "Twitter (X)",
-              imgSRC: "",
+              imgSRC: "../../twitter.webp",
               lastUpdate: "2023-08-31T09:56:43.064Z",
               getteredData: 86,
               aiModelsID: "falcon_3424fcw3f",
@@ -1584,7 +1584,7 @@ export default {
             {
               id: "news_h43u3049857",
               name: "Google",
-              imgSRC: "",
+              imgSRC: "../../google.png",
               lastUpdate: "2023-08-29",
               getteredData: 5500,
               aiModelsID: "gpt4_5_3424fcw3f",
