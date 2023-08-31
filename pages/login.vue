@@ -16,19 +16,8 @@
       </template>
     </v-snackbar>
     <!-- Snack -->
-    <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="6">
-        <v-card>
-          <v-card-title class="headline">
-            Welcome
-          </v-card-title>
-          <v-card-text>
-            <p>This tool utilizes AI algorithms to conduct in-depth research on potential investment opportunities.</p>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-<!--    <div class="text-h6 text-center mt-4">{{ $t("login.title") }}</div>-->
+
+    <!--    <div class="text-h6 text-center mt-4">{{ $t("login.title") }}</div>-->
 
     <v-col
       justify="space-between"
@@ -64,7 +53,7 @@
         class="rounded-pill"
         color="black"
         append-icon="mdi-cloud-upload"
-        @click="() => console.log('login')"
+        @click="login"
       >
         Login
       </v-btn>
@@ -73,13 +62,15 @@
 </template>
 
 <script>
+import api from "@/components/API";
+
 export default {
   name: "login",
-  // head() {
-  //   return {
-  //     title: "Login",
-  //   };
-  // },
+  head() {
+    return {
+      title: "Login",
+    };
+  },
   data() {
     return {
       email: "",
@@ -90,28 +81,23 @@ export default {
       },
     };
   },
-  // methods: {
-  //   login() {
-  //     console.log("")
-  //     // this.$auth
-  //     //   .loginWith("local", {
-  //     //     data: {
-  //     //       email: this.email.toLowerCase(),
-  //     //       password: this.password,
-  //     //     },
-  //     //   })
-  //     //   .then((res) => {
-  //     //     if (res.data.status !== 1) {
-  //     //       this.snackbar.text = res.data.error;
-  //     //       this.snackbar.isOpen = true;
-  //     //     } else {
-  //     //       // window.location.href = "/";
-  //     //     }
-  //     //   });
-  //   },
-  // },
+  methods: {
+    login() {
+      // const allTrackingKPIs = api.getAllTrackingKPIs();
+      const allAiRobots = api.getAllAiRobots();
+      const allCompanies = api.getAllCompanies();
+      if (allAiRobots.length == 0 && allCompanies.length == 0) {
+        const allData = api.getFullUserData();
+        api.saveAiRobots(allData.robots);
+        api.saveCompanies(allData.companies);
+      }
+      if (this.email == "userTest@gmail.com" && this.password == "1234") {
+        api.saveAuth();
+        window.location.href = "/dashboard";
+      }
+    },
+  },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -1895,4 +1895,12 @@ export default {
   saveCompanies(selectedCompanies) {
     localStorage.setItem("PED-allCompanies", JSON.stringify(selectedCompanies));
   },
+  saveAuth() {
+    localStorage.setItem("PED-Auth", "43kjh35huy30847g503yg");
+  },
+  getAuth() {
+    const data = localStorage.getItem("PED-Auth");
+    if (data) return true;
+    return false;
+  },
 };
