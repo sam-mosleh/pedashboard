@@ -232,19 +232,19 @@
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            color="red darken-1"
+            color="green darken-1"
             text
             @click="robotViewDialog.isOpen = false"
           >
             close
           </v-btn>
-          <v-btn
+          <!-- <v-btn
             color="green darken-1"
             text
             @click="robotViewDialog.isOpen = false"
           >
             Edit Connected Assets
-          </v-btn>
+          </v-btn> -->
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -353,7 +353,7 @@ export default {
     };
   },
   mounted() {
-    if (!api.getAuth()) window.href.location = "/login";
+    if (!api.getAuth()) window.location.href = "/login";
     // const allData = api.getFullUserData();
     // api.saveAiRobots(allData.robots);
     // api.saveCompanies(allData.companies);

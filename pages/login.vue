@@ -58,6 +58,15 @@
         Login
       </v-btn>
     </v-row>
+    <v-row>
+      <div
+        class="text-body-4"
+        style="margin-top: 30px; text-align: center; width: 100%"
+      >
+        For the test account you can have access with Email:userTest@gmail.com
+        and password:1234
+      </div>
+    </v-row>
   </v-container>
 </template>
 
@@ -71,6 +80,8 @@ export default {
       title: "Login",
     };
   },
+  mounted() {},
+
   data() {
     return {
       email: "",

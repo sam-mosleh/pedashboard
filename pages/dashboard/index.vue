@@ -284,7 +284,7 @@ export default {
     },
   },
   mounted() {
-    if (!api.getAuth()) window.href.location = "/login";
+    if (!api.getAuth()) window.location.href = "/login";
 
     this.init();
   },

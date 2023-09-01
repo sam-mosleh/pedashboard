@@ -89,7 +89,8 @@
                 text-align: center;
               "
             >
-              sdasd
+              +100Tb of gathered data and +4 AI model we are providing the
+              future.
             </p>
           </v-col>
         </v-row>
@@ -758,7 +759,7 @@ export default {
     },
   },
   mounted() {
-    if (!api.getAuth()) window.href.location = "/login";
+    if (!api.getAuth()) window.location.href = "/login";
     this.inti();
   },
   watch: {},

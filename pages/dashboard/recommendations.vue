@@ -136,9 +136,9 @@
                   <v-row>
                     <v-btn
                       v-if="
-                        !allInsightCompanies.filter(
+                        allInsightCompanies.filter(
                           (x) => x.companyId == item.companyId
-                        )
+                        ).length == 0
                       "
                       @click="setSelectForInsight(item)"
                       rounded
@@ -151,9 +151,9 @@
                     </v-btn>
                     <v-btn
                       v-if="
-                        !allTrackingCompanies.filter(
+                        allTrackingCompanies.filter(
                           (x) => x.companyId == item.companyId
-                        )
+                        ).length == 0
                       "
                       @click="addCompanyToTracking(item)"
                       rounded
@@ -746,11 +746,13 @@ export default {
     },
     setSelectForInsight(item) {
       this.allInsightCompanies = api.getAllInsightCompanies();
-      this.allInsightCompanies.allCompanies.map((company) => {
+      this.allRecommendedCompanies.map((company) => {
         if (company.companyId == item.companyId) {
           this.allInsightCompanies.push(company);
         }
       });
+      console.log(this.allInsightCompanies);
+
       api.saveInsightCompanies(this.allInsightCompanies);
       this.fireSnack("Companies added successfully!");
     },
@@ -761,13 +763,14 @@ export default {
     },
   },
   mounted() {
-
-    if (!api.getAuth()) window.href.location = "/login";
+    if (!api.getAuth()) window.location.href = "/login";
     const allAvailableAiRobots = api.getAiRobots();
     this.allRecommendedCompanies = api.getStandardCompanyList(
       api.getCompanies(),
       allAvailableAiRobots
     );
+    this.allInsightCompanies = api.getAllInsightCompanies();
+    this.allTrackingCompanies = api.getAllTrackingKPIs();
     const recommendedCompaniesTemp = this.allRecommendedCompanies.filter(
       (x) => x.recommendation.recommended == true
     );

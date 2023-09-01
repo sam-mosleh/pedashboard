@@ -429,7 +429,7 @@ export default {
     };
   },
   mounted() {
-    if (!api.getAuth()) window.href.location = "/login";
+    if (!api.getAuth()) window.location.href = "/login";
     // const allData = api.getFullUserData();
     // api.saveAiRobots(allData.robots);
     // api.saveCompanies(allData.companies);
