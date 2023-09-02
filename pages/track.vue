@@ -5,7 +5,7 @@
 <script>
 import api from "@/components/API";
 export default {
-  name: "Track Page",
+  name: "TrackPage",
   data() {
     return {};
   },
