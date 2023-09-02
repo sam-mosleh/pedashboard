@@ -581,9 +581,7 @@ import api from "@/components/API";
 
 export default {
   name: "Recommendation Page",
-  beforeCreate() {
-    if (!api.getAuth()) window.location.href = "/login";
-  },
+ 
   data() {
     return {
       allRecommendedCompanies: [],

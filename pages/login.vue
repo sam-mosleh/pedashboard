@@ -65,6 +65,8 @@
       >
         For the test account you can have access with Email:userTest@gmail.com
         and password:1234
+        <br />
+        please note that every login action will reset the account data!
       </div>
     </v-row>
   </v-container>
@@ -106,7 +108,15 @@ export default {
         api.saveInsightCompanies(allData.insights);
         console.log(JSON.stringify(allData));
       }
-      if (this.email == "userTest@gmail.com" && this.password == "1234") {
+      console.log(
+        this.email.toLowerCase() == "userTest@gmail.com".toLowerCase(),
+        this.password == "1234",
+        this.email.toLowerCase()
+      );
+      if (
+        this.email.toLowerCase() == "userTest@gmail.com".toLowerCase() &&
+        this.password == "1234"
+      ) {
         api.saveAuth();
         window.location.href = "/dashboard";
       } else {

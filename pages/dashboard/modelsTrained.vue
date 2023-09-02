@@ -361,10 +361,7 @@ export default {
     //======================
     this.init();
   },
-  beforeCreate() {
-    if (!api.getAuth()) window.location.href = "/login";
-  },
-
+ 
   data() {
     return {
       summaryCart: {

@@ -516,10 +516,7 @@ export default {
       },
     };
   },
-  beforeCreate() {
-    if (!api.getAuth()) window.location.href = "/login";
-  },
-
+ 
   methods: {
     redirect(address) {
       window.location.href = address;
