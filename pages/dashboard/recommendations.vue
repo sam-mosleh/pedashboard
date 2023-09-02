@@ -65,7 +65,7 @@
               <!-- <v-btn
                 class="ms-3"
                 style="background: black; color: white; border-radius: 20px"
-                @click="dialogAddFocusSearch = true"
+                @click="dialogAddFocusSearch.isOpen = true"
               >
                 Focus Search
               </v-btn> -->
@@ -309,7 +309,7 @@
     <!-- Add a review Dialog END -->
 
     <!-- Focus search Dialog START -->
-    <v-dialog v-model="dialogAddFocusSearch" max-width="500px">
+    <v-dialog v-model="dialogAddFocusSearch.isOpen">
       <v-card>
         <v-card-title>
           <span class="px-3" style="font-size: 18px; font-weight: 500"
@@ -378,7 +378,7 @@
           <v-btn
             color="red darken-1"
             text
-            @click="dialogAddFocusSearch = false"
+            @click="dialogAddFocusSearch.isOpen = false"
           >
             Cancel
           </v-btn>
@@ -438,7 +438,7 @@
           <v-btn
             color="red darken-1"
             text
-            @click="dialogAddFocusSearch = false"
+            @click="dialogAddFocusSearch.isOpen = false"
           >
             Cancel
           </v-btn>
@@ -581,6 +581,9 @@ import api from "@/components/API";
 
 export default {
   name: "Recommendation Page",
+  beforeCreate() {
+    if (!api.getAuth()) window.location.href = "/login";
+  },
   data() {
     return {
       allRecommendedCompanies: [],
@@ -602,7 +605,9 @@ export default {
         isOpen: false,
         review: "",
       },
-      dialogAddFocusSearch: false,
+      dialogAddFocusSearch: {
+        isOpen: false,
+      },
       dialogSelectFromSearchHistory: false,
       dialogAddNewAIBasedKPI: false,
       dialogSearchFilterName: false,
@@ -788,7 +793,6 @@ export default {
     console.log(this.summaryRecommendedCompanies.median);
     this.allAiModels = api.getAiRobots();
     this.allSavedKPIs = api.getAllTrackingKPIKeys();
-
     //============================
     this.allCompanies = utils.getCompanies();
     this.companies = this.allCompanies;

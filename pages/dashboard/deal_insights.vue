@@ -758,6 +758,10 @@ export default {
       });
     },
   },
+  beforeCreate() {
+    if (!api.getAuth()) window.location.href = "/login";
+  },
+
   mounted() {
     if (!api.getAuth()) window.location.href = "/login";
     this.inti();

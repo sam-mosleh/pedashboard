@@ -2095,11 +2095,11 @@ export default {
     localStorage.setItem("PED-assetPhazeLastMonth", JSON.stringify(phases));
   },
   saveAuth() {
-    localStorage.setItem("PED-Auth", "43kjh35huy30847g503yg");
+    localStorage.setItem("PED-Auth", "qwertyuio4839u42497f4");
   },
   getAuth() {
     const data = localStorage.getItem("PED-Auth");
-    if (data) return true;
+    if (data) if (data == "qwertyuio4839u42497f4") return true;
     return false;
   },
   dataSizeSerializer(dataSize) {

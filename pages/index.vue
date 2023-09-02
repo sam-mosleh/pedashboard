@@ -21,7 +21,7 @@
           opportunity.
         </v-card-text>
         <v-card-actions>
-          <v-btn to="dd"> AI-Based Due Diligence Service </v-btn>
+          <v-btn to="login"> Log-in to AI-Based Due Diligence Service </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -31,8 +31,6 @@
 <script>
 export default {
   name: "IndexPage",
-  mounted() {
-    window.location.href = "/login";
-  },
+  mounted() {},
 };
 </script>

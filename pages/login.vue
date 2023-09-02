@@ -109,6 +109,9 @@ export default {
       if (this.email == "userTest@gmail.com" && this.password == "1234") {
         api.saveAuth();
         window.location.href = "/dashboard";
+      } else {
+        this.snackbar.text = "invalid username or password!";
+        this.snackbar.isOpen = true;
       }
     },
   },
