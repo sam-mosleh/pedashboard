@@ -194,6 +194,26 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
+        <v-data-table
+          :headers="insightTable.headers"
+          :items="insightTable.items"
+          hide-default-footer
+          disable-sort
+          class="elevation-1"
+        ></v-data-table>
+      </v-col>
+      <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
+        <v-data-table
+          :headers="trainedModelsTable.headers"
+          :items="trainedModelsTable.items"
+          hide-default-footer
+          disable-sort
+          class="elevation-1"
+        ></v-data-table>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -204,9 +224,6 @@ export default {
   name: "Dashboard",
   data() {
     return {
-      start: 50, // Dynamic start value
-      end: 70, // Dynamic end value
-
       allTrackingSelectedCompanies: [],
       summaryCartModels: {
         modelsTrainedCount: 0,
@@ -224,6 +241,31 @@ export default {
         count: 0,
         min: 1990,
         max: -10,
+      },
+      trainedModelsTable: {
+        headers: [
+          {
+            text: "#",
+            align: "start",
+            value: "name",
+          },
+          { text: "Mega Model", value: "megaModel" },
+          { text: "Forked Model", value: "forkedModel" },
+        ],
+        items: [],
+      },
+      insightTable: {
+        headers: [
+          {
+            text: "#",
+            align: "start",
+            value: "name",
+          },
+          { text: "P0", value: "p0" },
+          { text: "P1", value: "p1" },
+          { text: "P2", value: "p2" },
+        ],
+        items: [],
       },
     };
   },
@@ -271,7 +313,6 @@ export default {
       );
       this.summaryRecommendedCompanies.count = recommendedCompaniesTemp.length;
       let counter = 0;
-      console.log(this.allRecommendedCompanies, recommendedCompaniesTemp);
       recommendedCompaniesTemp.map((x) => {
         this.summaryRecommendedCompanies.median =
           this.summaryRecommendedCompanies.median + parseInt(x.score);
@@ -281,6 +322,120 @@ export default {
         this.summaryRecommendedCompanies.median / counter
       ).toFixed(2);
       console.log(this.summaryRecommendedCompanies.median);
+
+      this.fillTrainedModelsTableItems();
+      this.fillInsightTableItems();
+    },
+    fillTrainedModelsTableItems() {
+      const iqLevel = {
+        forkedModel: 0,
+        megaModel: 0,
+        name: "IQ Level",
+      };
+      const iqBenchMarkLevel = {
+        forkedModel: 0,
+        megaModel: 0,
+        name: "IQ Benchmarck",
+      };
+      const iqImprovementLevel = {
+        forkedModel: 0,
+        megaModel: 0,
+        name: "IQ Improvement for last 30 Days",
+      };
+      let megaCount = 0;
+      let forkedCount = 0;
+      for (let index = 0; index < this.allUserAiRobots.length; index++) {
+        const robot = this.allUserAiRobots[index];
+        for (
+          let iqMegaIndex = 0;
+          iqMegaIndex < robot.selectedMegaModels.length;
+          iqMegaIndex++
+        ) {
+          megaCount++;
+          iqLevel.megaModel += robot.selectedMegaModels[iqMegaIndex].iqLevel;
+          iqBenchMarkLevel.megaModel +=
+            robot.selectedMegaModels[iqMegaIndex].benchMark;
+          iqImprovementLevel.megaModel +=
+            robot.selectedMegaModels[iqMegaIndex].lastMonthIqLevel;
+        }
+        for (
+          let iqMegaIndex = 0;
+          iqMegaIndex < robot.selectedForkedModels.length;
+          iqMegaIndex++
+        ) {
+          forkedCount++;
+          iqLevel.forkedModel +=
+            robot.selectedForkedModels[iqMegaIndex].iqLevel;
+          iqBenchMarkLevel.forkedModel +=
+            robot.selectedForkedModels[iqMegaIndex].benchMark;
+          iqImprovementLevel.forkedModel +=
+            robot.selectedForkedModels[iqMegaIndex].lastMonthIqLevel;
+        }
+      }
+      iqLevel.megaModel = parseFloat(iqLevel.megaModel / megaCount).toFixed(2);
+      iqLevel.forkedModel = parseFloat(
+        iqLevel.forkedModel / forkedCount
+      ).toFixed(2);
+
+      iqBenchMarkLevel.megaModel = parseFloat(
+        iqBenchMarkLevel.megaModel / megaCount
+      ).toFixed(2);
+      iqBenchMarkLevel.forkedModel = parseFloat(
+        iqBenchMarkLevel.forkedModel / forkedCount
+      ).toFixed(2);
+
+      iqImprovementLevel.megaModel = parseFloat(
+        iqImprovementLevel.megaModel / megaCount
+      ).toFixed(2);
+      iqImprovementLevel.forkedModel = parseFloat(
+        iqImprovementLevel.forkedModel / forkedCount
+      ).toFixed(2);
+
+      this.trainedModelsTable.items = [
+        iqLevel,
+        iqBenchMarkLevel,
+        iqImprovementLevel,
+      ];
+    },
+    fillInsightTableItems() {
+      const assetPhases = api.getAllAssetPhases();
+      const totalAssets = {
+        name: "Total Assets",
+        p0: this.allInsightCompanies.filter((x) => x.assetPhase == 0).length,
+        p1: this.allInsightCompanies.filter((x) => x.assetPhase == 1).length,
+        p2: this.allInsightCompanies.filter((x) => x.assetPhase == 2).length,
+      };
+      const avgCompleteness = {
+        name: "Avg Insight Completeness",
+        p0: 0,
+        p1: 0,
+        p2: 0,
+      };
+      const avgPast = {
+        name: "Avg Assets Completed in last 30 days",
+        p0: assetPhases[0],
+        p1: assetPhases[1],
+        p2: assetPhases[2],
+      };
+      for (let index = 0; index < this.allInsightCompanies.length; index++) {
+        const company = this.allInsightCompanies[index];
+        if (company.assetPhase == 0)
+          avgCompleteness.p0 += parseFloat(company.totalProcessingPercentage);
+        if (company.assetPhase == 1)
+          avgCompleteness.p1 += parseFloat(company.totalProcessingPercentage);
+        if (company.assetPhase == 2)
+          avgCompleteness.p2 += parseFloat(company.totalProcessingPercentage);
+      }
+      avgCompleteness.p0 = `${parseFloat(
+        avgCompleteness.p0 / totalAssets.p0
+      ).toFixed(2)}%`;
+      avgCompleteness.p1 = `${parseFloat(
+        avgCompleteness.p1 / totalAssets.p1
+      ).toFixed(2)}%`;
+      avgCompleteness.p2 = `${parseFloat(
+        avgCompleteness.p2 / totalAssets.p2
+      ).toFixed(2)}%`;
+      this.insightTable.items = [totalAssets, avgCompleteness, avgPast];
     },
   },
   mounted() {

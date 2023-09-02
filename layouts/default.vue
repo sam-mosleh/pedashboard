@@ -82,11 +82,11 @@ export default {
         //   title: "Full Due Diligence",
         //   to: "dd",
         // },
-        {
-          icon: "mdi-handshake",
-          title: "Deal Sourcing",
-          to: "/deal_sourcing",
-        },
+        // {
+        //   icon: "mdi-handshake",
+        //   title: "Deal Sourcing",
+        //   to: "/deal_sourcing",
+        // },
         {
           icon: "mdi-radar",
           title: "Track",

@@ -51,7 +51,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 2500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 2500,
@@ -110,7 +110,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 14500,
@@ -169,7 +169,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 8500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 8500,
@@ -228,7 +228,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 12500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 12500,
@@ -287,7 +287,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 11500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 11500,
@@ -346,7 +346,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 14500,
@@ -405,7 +405,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 10500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 10500,
@@ -464,7 +464,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 13500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 13500,
@@ -523,7 +523,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 14500,
@@ -582,7 +582,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 14500,
@@ -641,7 +641,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 19500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 19500,
@@ -700,7 +700,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 14500,
@@ -759,7 +759,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 14500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 14500,
@@ -818,7 +818,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 3500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 3500,
@@ -877,7 +877,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 16500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 16500,
@@ -936,7 +936,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 10500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 10500,
@@ -995,7 +995,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 7500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 7500,
@@ -1054,7 +1054,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 15500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 15500,
@@ -1113,7 +1113,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 13500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 13500,
@@ -1172,7 +1172,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 6500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 6500,
@@ -1231,7 +1231,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 15500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 15500,
@@ -1290,7 +1290,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 12500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 12500,
@@ -1349,7 +1349,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 3500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 3500,
@@ -1408,7 +1408,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 2500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 2500,
@@ -1467,7 +1467,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 5500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 5500,
@@ -1526,7 +1526,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 8500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 8500,
@@ -1585,7 +1585,7 @@ export default {
               id: "news_h43u3049857",
               name: "Google",
               imgSRC: "../../google.png",
-              lastUpdate: "2023-08-29",
+              lastUpdate: "2023-08-30",
               getteredData: 5500,
               aiModelsID: "gpt4_5_3424fcw3f",
               totalDataToGather: 5500,
@@ -1606,16 +1606,112 @@ export default {
         name: "Falcon 40B",
         totalDataGatheredFromAllUsers: 200000,
         totalDataLearnedFromAllUsers: 120000,
-        totalUsed: 2,
+        totalUsed: 25,
         totalTrainedAssetsFromAllUsers: 2000,
+        megaModels: [
+          {
+            id: "mega-model-1235",
+            name: "mega model 1",
+            iqLevel: 83,
+            benchMark: 80,
+            lastMonthIqLevel: 20,
+          },
+          {
+            id: "mega-model-12351",
+            name: "mega model 2",
+            iqLevel: 83,
+            benchMark: 80,
+            lastMonthIqLevel: 20,
+          },
+        ],
+        selectedMegaModels: [],
+        forkedModels: [
+          {
+            id: "forked-model-12353f1",
+            name: "forked model 1",
+            iqLevel: 83,
+            benchMark: 82,
+            lastMonthIqLevel: 20,
+          },
+          {
+            id: "forked-model-12354f2",
+            name: "forked model 2",
+            iqLevel: 33,
+            benchMark: 20,
+            lastMonthIqLevel: 30,
+          },
+          {
+            id: "forked-model-12355f3",
+            name: "forked model 3",
+            iqLevel: 73,
+            benchMark: 53,
+            lastMonthIqLevel: 20,
+          },
+          {
+            id: "forked-model-12355f4",
+            name: "forked model 4",
+            iqLevel: 44,
+            benchMark: 43,
+            lastMonthIqLevel: 40,
+          },
+        ],
+        selectedForkedModels: [],
       },
       {
         id: "gpt4_5_3424fcw3f",
         name: "GPT4.5",
         totalDataGatheredFromAllUsers: 2000000,
         totalDataLearnedFromAllUsers: 147600,
-        totalUsed: 2,
+        totalUsed: 107,
         totalTrainedAssetsFromAllUsers: 8149,
+        megaModels: [
+          {
+            id: "mega-model-12353",
+            name: "mega model 3",
+            iqLevel: 83,
+            benchMark: 82,
+            lastMonthIqLevel: 20,
+          },
+          {
+            id: "mega-model-12354",
+            name: "mega model 4",
+            iqLevel: 33,
+            benchMark: 20,
+            lastMonthIqLevel: 20,
+          },
+          {
+            id: "mega-model-12355",
+            name: "mega model 5",
+            iqLevel: 43,
+            benchMark: 53,
+            lastMonthIqLevel: 20,
+          },
+        ],
+        selectedMegaModels: [],
+        forkedModels: [
+          {
+            id: "forked-model-12353f5",
+            name: "forked model 5",
+            iqLevel: 83,
+            benchMark: 82,
+            lastMonthIqLevel: 20,
+          },
+          {
+            id: "forked-model-12354f6",
+            name: "forked model 6",
+            iqLevel: 33,
+            benchMark: 20,
+            lastMonthIqLevel: 20,
+          },
+          {
+            id: "forked-model-12355f7",
+            name: "forked model 7",
+            iqLevel: 43,
+            benchMark: 53,
+            lastMonthIqLevel: 20,
+          },
+        ],
+        selectedForkedModels: [],
       },
     ];
   },
@@ -1626,12 +1722,21 @@ export default {
     const minuteInMs = 1000 * 60;
     for (let index = 0; index < allCompanies.length; index++) {
       const company = allCompanies[index];
-      company["isSelectedAttr"] = false;
-      company["totalProcessingPercentage"] = 0;
-      company["totalAIProcessingPercentage"] = 0;
-      company["totalDataGatheringProcessingPercentage"] = 0;
-      company.recommendation["recommended"] =
-        Math.floor(Math.random() * 2) == 1 ? true : false;
+      if (!("isSelectedAttr" in company)) company["isSelectedAttr"] = false;
+      if (!("totalProcessingPercentage" in company))
+        company["totalProcessingPercentage"] = 0;
+      if (!("totalAIProcessingPercentage" in company))
+        company["totalAIProcessingPercentage"] = 0;
+      if (!("totalDataGatheringProcessingPercentage" in company))
+        company["totalDataGatheringProcessingPercentage"] = 0;
+      if (!("recommended" in company.recommendation))
+        company.recommendation["recommended"] =
+          Math.floor(Math.random() * 2) == 1 ? true : false;
+      //=========================================
+      if (!("assetPhase" in company)) {
+        company["assetPhase"] = Math.floor(Math.random() * 3);
+      }
+      //=========================================
       let gatheringChannelsCount =
         company.recommendation.gatheringChannels.length;
       for (
@@ -1898,11 +2003,26 @@ export default {
       const rand = Math.floor(Math.random() * allCompanies.length - 1) + 1;
       selectedCompanies.push(allCompanies[rand]);
     }
-
     allAiRobots = this.generateAiRobotsBasedOnUserData(
       allAiRobots,
       selectedCompanies
     );
+    for (let index = 0; index < allAiRobots.length; index++) {
+      const robot = allAiRobots[index];
+      const randMegaModelsSelecting = Math.floor(
+        Math.random() * robot.megaModels.length
+      );
+      for (let j = 0; j < randMegaModelsSelecting; j++) {
+        robot.selectedMegaModels.push(robot.megaModels[j]);
+      }
+      const randForkedModelsSelecting = Math.floor(
+        Math.random() * robot.forkedModels.length
+      );
+      for (let k = 0; k < randForkedModelsSelecting; k++) {
+        robot.selectedForkedModels.push(robot.forkedModels[k]);
+      }
+      allAiRobots[index] = robot;
+    }
     for (let index = 0; index < 5; index++) {
       const rand = Math.floor(Math.random() * allCompanies.length - 1) + 1;
       trackingCompaniesKPIs.push(allCompanies[rand]);
@@ -1911,6 +2031,12 @@ export default {
       const rand = Math.floor(Math.random() * allCompanies.length - 1) + 1;
       insightsCompanies.push(allCompanies[rand]);
     }
+    this.saveAssetPhases([
+      Math.floor(Math.random() * 10),
+      Math.floor(Math.random() * 10),
+      Math.floor(Math.random() * 10),
+    ]);
+
     return {
       robots: allAiRobots,
       companies: selectedCompanies,
@@ -1959,6 +2085,14 @@ export default {
   },
   saveCompanies(selectedCompanies) {
     localStorage.setItem("PED-allCompanies", JSON.stringify(selectedCompanies));
+  },
+  getAllAssetPhases() {
+    const data = localStorage.getItem("PED-assetPhazeLastMonth");
+    if (data) return JSON.parse(data);
+    return [];
+  },
+  saveAssetPhases(phases) {
+    localStorage.setItem("PED-assetPhazeLastMonth", JSON.stringify(phases));
   },
   saveAuth() {
     localStorage.setItem("PED-Auth", "43kjh35huy30847g503yg");

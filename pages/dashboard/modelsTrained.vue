@@ -496,8 +496,8 @@ export default {
       );
       this.allUserAiRobots.splice(index, 1);
       api.saveAiRobots(this.allUserAiRobots);
-      this.init();
-      this.fireSnack("Model deleted successfully");
+      this.fireSnack("Model deleted successfully, Reloading Data!");
+      window.location.reload();
     },
   },
 };
