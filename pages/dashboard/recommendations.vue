@@ -1,577 +1,708 @@
 <template>
   <div>
-    <!-- Snack -->
-    <v-snackbar v-model="snackbar.isOpen" top>
-      {{ snackbar.text }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          color="pink"
-          text
-          v-bind="attrs"
-          @click="snackbar.isOpen = false"
-        >
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
-    <!-- Snack -->
     <v-row
       class="ps-3 pt-8 pb-6 mb-3"
       style="font-weight: 600; font-size: 28px; background: black; color: white"
       >Recommendations</v-row
     >
-    <v-row style="justify-content: space-between">
-      <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-        <v-card class="cart-deals">
-          <v-col class="justify-space-between align-center h-100">
-            <p
-              class="text-center"
-              style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
+    <v-container fluid>
+      <!-- Snack -->
+      <v-snackbar v-model="snackbar.isOpen" top>
+        {{ snackbar.text }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            color="pink"
+            text
+            v-bind="attrs"
+            @click="snackbar.isOpen = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
+      <!-- Snack -->
+
+      <v-row style="justify-content: space-between">
+        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
+          <v-card class="cart-deals">
+            <v-col class="justify-space-between align-center h-100">
+              <p
+                class="text-center"
+                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
+              >
+                {{ summaryRecommendedCompanies.count }}
+              </p>
+              <p
+                class="text-center"
+                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
+              >
+                Proprietary deals found!
+              </p>
+              <div style="height: 2px; background: blue"></div>
+              <p
+                class="text-center mt-4"
+                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
+              >
+                Median score: {{ summaryRecommendedCompanies.median }}
+              </p>
+            </v-col>
+          </v-card>
+        </v-col>
+        <v-col class="mt-7">
+          <v-row class="px-4 mb-8" style="font-weight: 500; font-size: 14px">
+            <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12"
+              >Precision vs Recall</v-col
             >
-              {{ summaryRecommendedCompanies.count }}
-            </p>
-            <p
-              class="text-center"
-              style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-            >
-              Property deals found!
-            </p>
-            <div style="height: 2px; background: blue"></div>
-            <p
-              class="text-center mt-4"
-              style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-            >
-              Median score: {{ summaryRecommendedCompanies.median }}
-            </p>
-          </v-col>
-        </v-card>
-      </v-col>
-      <v-col class="mt-7">
-        <v-row class="px-4 mb-8" style="font-weight: 500; font-size: 14px"
-          >Precision vs Recall</v-row
-        >
-        <v-row style="gap: 10px" class="px-2">
-          <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
-            <v-row>
+          </v-row>
+          <v-row style="" class="px-2">
+            <v-col cols="12" sm="12" md="12" lg="6" xl="6" xxl="6">
               <v-slider
                 v-model="precisionVsRecall"
                 :thumb-size="28"
                 color="black"
                 thumb-label="always"
-                @change="precisionVsRecallChange"
+                @change="filterByKPI"
               ></v-slider>
-              <!-- TODO -->
-              <!-- <v-btn
-                class="ms-3"
-                style="background: black; color: white; border-radius: 20px"
-                @click="dialogAddFocusSearch.isOpen = true"
+            </v-col>
+
+            <v-col cols="12" sm="12" md="12" lg="6" xl="6" xxl="6">
+              <v-combobox
+                v-model="allSelectedKpiItems"
+                :items="
+                  allSavedKPIs.map((x) => {
+                    return x.name;
+                  })
+                "
+                @change="filterByKPI"
+                chips
+                clearable
+                label="Select your favorite KPIs"
+                multiple
+                prepend-icon="mdi-filter-variant"
+                solo
               >
-                Focus Search
-              </v-btn> -->
-            </v-row>
-          </v-col>
-        </v-row>
-        <v-row class="px-2 mt-10">
-          <v-col cols="12" xs="12" sm="2" md="2" lg="2" xl="2" xxl="2">
-            <p style="font-size: 18px; font-weight: 600">Search KPIes:</p>
-          </v-col>
-          <v-col cols="12" xs="12" sm="10" md="10" lg="10" xl="10" xxl="10">
-            <v-sheet class="mx-auto" max-width="65vw">
-              <v-slide-group multiple show-arrows>
-                <v-slide-item
-                  v-for="(search, i) in allSavedKPIs"
-                  :key="i"
-                  v-slot="{ active, toggle }"
-                >
-                  <v-btn
-                    class="mx-2"
-                    :input-value="active"
-                    style="margin: 3px"
-                    :color="(i = 0 ? '#989891' : '#e9e9e6')"
-                    active-class="purple white--text"
-                    depressed
-                    rounded
-                    @click="() => {}"
+                <template v-slot:selection="{ attrs, item, select, selected }">
+                  <v-chip
+                    v-bind="attrs"
+                    :input-value="selected"
+                    close
+                    @click="select"
+                    @click:close="removeKPI(item)"
                   >
-                    {{ search.name }}
-                  </v-btn>
-                </v-slide-item>
-              </v-slide-group>
-            </v-sheet>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-    <p class="mt-6" style="font-size: 16px; font-weight: 500">
-      Sample Text for recommendations
-    </p>
-    <div class="mt-6">
-      <v-data-table
-        v-if="companies"
-        :headers="headers"
-        :items="allRecommendedCompanies"
-        :expanded.sync="expanded"
-        item-key="name"
-        class="elevation-1"
-        show-expand
-      >
-        <template v-slot:item.recommended="{ item }">
-          {{ `${item.recommendation.recommended ? "Yes" : "No"}` }}
-        </template>
-        <template v-slot:top>
-          <v-toolbar flat>
-            <v-toolbar-title>Recommendations</v-toolbar-title>
-            <v-spacer></v-spacer>
-          </v-toolbar>
-        </template>
-        <template v-slot:expanded-item="{ headers, item }">
-          <td :colspan="headers.length">
-            <v-col class="py-10">
-              <v-row class="px-3">
-                <p style="font-size: 20px; font-weight: 600" class="my-3">
-                  Insight
-                </p>
-                <div class="d-flex flex-row ms-auto me-0 my-3">
+                    <strong>{{ item }}</strong>
+                  </v-chip>
+                </template>
+              </v-combobox>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-text-field
+          label="Search your target company"
+          :messages="[
+            'this search input uses AI, feel free to talk with it and it will filter the companies based on your search command',
+          ]"
+          v-model="companyTrackSearchInput"
+        ></v-text-field>
+      </v-row>
+      <v-row>
+        <v-container>
+          <v-row>
+            <v-col
+              cols="6"
+              sm="6"
+              md="6"
+              lg="4"
+              xl="3"
+              xxl="3"
+              v-for="company in allRecommendedCompanies.filter(
+                (x) => x.recommendation.recommended == true
+              )"
+              v-bind:key="company.companyId"
+            >
+              <v-card class="mx-auto" style="height: 100%">
+                <v-card-text style="padding: 25px 25px 25px 25px">
                   <v-row>
-                    <v-btn
+                    <p
+                      class="text-h4 text--primary"
+                      style="font-size: 2rem !important"
+                    >
+                      {{ company.name }}
+                    </p>
+                  </v-row>
+                  <v-row>
+                    <div class="text--primary">
+                      <v-chip-group active-class="primary--text" column>
+                        <v-chip>Score: {{ company.score }}</v-chip>
+                        <v-chip>HQ Location: {{ company.hqLocation }}</v-chip>
+                        <v-chip>Revenue Size: {{ company.revenueSize }}</v-chip>
+                        <v-chip>Industry: {{ company.industry }}</v-chip>
+                      </v-chip-group>
+                    </div>
+                  </v-row>
+                </v-card-text>
+                <v-card-actions>
+                  <v-row>
+                    <v-col cols="12" style="padding-bottom: 0px">
+                      <v-btn
+                        @click="
+                          () => {
+                            fireSnack('your review submitted successfully!');
+                          }
+                        "
+                        rounded
+                        color="green"
+                      >
+                        <v-icon>mdi-thumb-up</v-icon>
+                      </v-btn>
+                    </v-col>
+                    <v-col
                       v-if="
                         allInsightCompanies.filter(
-                          (x) => x.companyId == item.companyId
+                          (x) => x.companyId == company.companyId
                         ).length == 0
                       "
-                      @click="setSelectForInsight(item)"
-                      rounded
-                      color="black"
-                      class="mt-4 mx-3"
-                      style="color: white"
+                      style="padding-bottom: 0px; padding-left: 0px"
+                      cols="6"
                     >
-                      <v-icon>mdi-plus</v-icon>
-                      Add to insight
-                    </v-btn>
-                    <v-btn
+                      <v-btn
+                        @click="setSelectForInsight(company)"
+                        rounded
+                        color="black"
+                        class="mt-4 mx-3"
+                        style="
+                          color: white;
+                          padding: 0px 5px 0px 0px !important;
+                          margin: 0px 0px 0px 0px !important;
+                          width: 100%;
+                        "
+                      >
+                        <v-icon>mdi-plus</v-icon>
+                        Add to insight
+                      </v-btn>
+                    </v-col>
+                    <v-col
                       v-if="
                         allTrackingCompanies.filter(
-                          (x) => x.companyId == item.companyId
+                          (x) => x.companyId == company.companyId
                         ).length == 0
                       "
-                      @click="addCompanyToTracking(item)"
-                      rounded
-                      color="white"
-                      class="mt-4"
-                      style="color: black"
+                      cols="6"
                     >
-                      <v-icon>mdi-plus</v-icon>
-                      Add to tracking
-                    </v-btn>
-                    <v-btn
-                      @click="
-                        () => {
-                          dialogAddReview.isOpen = true;
-                          dialogAddReview.review = '';
-                        }
-                      "
-                      rounded
-                      color="gray"
-                      class="mt-4 mx-3"
-                      style="color: black"
-                    >
-                      <v-icon>mdi-plus</v-icon>
-                      Add a review
-                    </v-btn>
-                  </v-row>
-                </div>
-              </v-row>
-              <p style="font-size: 14px; font-weight: 400" class="mt-10">
-                {{ item.insight.aiDescription }}
-              </p>
-              <v-row class="d-flex justify-space-between mt-10">
-                <p style="font-size: 14px; font-weight: 400" class="mt-4 ps-3">
-                  There is {{ showDataSize(item.totalDataGathered) }} of data
-                  gathered for this company
-                </p>
-              </v-row>
-              <v-card
-                v-for="gatheringChannels in item.recommendation
-                  .gatheringChannels"
-                class="mt-10"
-                style="background: #f0f0f0"
-              >
-                <v-row style="justify-content: center; align-items: center">
-                  <v-img
-                    contain
-                    alt="logo"
-                    class="ps-4"
-                    max-width="100"
-                    :src="gatheringChannels.imgSRC"
-                  ></v-img>
-                  <v-col>
-                    <v-chip-group active-class="primary--text" column>
-                      <v-chip
-                        class="ma-2"
-                        color="green"
-                        text-color="white"
-                        style="justify-content: center; align-items: center"
+                      <v-btn
+                        @click="addCompanyToTracking(company)"
+                        rounded
+                        color="gray"
+                        class="mt-4 mx-3"
+                        style="
+                          color: black;
+                          padding: 0px 5px 0px 0px !important;
+
+                          margin: 0px 0px 0px 0px !important;
+                        "
                       >
-                        {{
-                          `Status: ${
-                            gatheringChannels.isDataGatheringFinished
-                              ? gatheringChannels.isDataLearningFinished
-                                ? "Finished"
-                                : "Learning Data"
-                              : "Gathering Data"
-                          }`
-                        }}
-                      </v-chip>
-                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                        {{ `Last Update: ${gatheringChannels.lastUpdate}` }}
-                      </v-chip>
-                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                        {{
-                          `Gathered Data: ${showDataSize(
-                            gatheringChannels.getteredData
-                          )}`
-                        }}
-                      </v-chip>
-                      <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                        {{
-                          `AI Model: ${showAIModelByAiId(
-                            gatheringChannels.aiModelsID
-                          )}`
-                        }}
-                      </v-chip>
-
-                      <v-chip class="ma-2" color="cyan" text-color="white">
-                        {{
-                          `Data Gathering Process: ${gatheringChannels.dataGatheringProcessingPercentage}%`
-                        }}
-                      </v-chip>
-
-                      <v-chip class="ma-2" color="orange" text-color="white">
-                        {{
-                          `AI Learning Process: ${gatheringChannels.dataLearningProcessingPercentage}%`
-                        }}
-                      </v-chip>
-                    </v-chip-group>
-                  </v-col>
-                </v-row>
-              </v-card>
-            </v-col>
-          </td>
-        </template>
-      </v-data-table>
-    </div>
-
-    <!-- Add a review Dialog START -->
-    <v-dialog v-model="dialogAddReview.isOpen" max-width="500px">
-      <v-card>
-        <v-card-title>
-          <span class="px-3" style="font-size: 18px; font-weight: 500"
-            >Please leave your review about the trained data</span
-          >
-        </v-card-title>
-
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12" sm="12" md="12">
-                <v-textarea outlined label="type your review here"></v-textarea>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="red darken-1"
-            text
-            @click="dialogAddReview.isOpen = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="
-              () => {
-                dialogAddReview.isOpen = false;
-                dialogAddReview.review = '';
-                fireSnack('your review submitted successfully!');
-              }
-            "
-          >
-            Save
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- Add a review Dialog END -->
-
-    <!-- Focus search Dialog START -->
-    <v-dialog v-model="dialogAddFocusSearch.isOpen">
-      <v-card>
-        <v-card-title>
-          <span class="px-3" style="font-size: 18px; font-weight: 500"
-            >Please filter the search based on your KPIs. By clicking on '+' you
-            can add an AI based custom KPI</span
-          >
-        </v-card-title>
-
-        <v-card-text>
-          <v-container>
-            <v-col>
-              <v-btn
-                style="border-radius: 20px; background: black; color: white"
-                @click="dialogSelectFromSearchHistory = true"
-              >
-                Select from search history
-              </v-btn>
-              <v-row class="mt-5">
-                <p class="mt-3 me-3">Label name</p>
-                <v-text-field outlined label="Input value"> </v-text-field>
-              </v-row>
-              <v-row class="mt-5">
-                <p class="mt-1 me-3">Label name</p>
-                <v-slider
-                  :thumb-size="28"
-                  color="black"
-                  thumb-label="always"
-                ></v-slider>
-              </v-row>
-
-              <v-row
-                class="mt-5 px-3 py-3"
-                style="background: lightskyblue; border-radius: 7px"
-              >
-                <p class="mt-3 me-3">Custom KPI</p>
-                <v-text-field outlined label="Input value"> </v-text-field>
-                <v-icon
-                  @click="() => console.log('delete custom dialog')"
-                  class="mt-0 mb-auto ms-4 pointer"
-                  style="
-                    font-size: 20px;
-                    color: white;
-                    background: red;
-                    border-radius: 50%;
-                  "
-                  >mdi-close</v-icon
-                >
-              </v-row>
-
-              <v-btn
-                @click="dialogAddNewAIBasedKPI = true"
-                rounded
-                color="gray"
-                class="mt-10 mx-auto"
-                style="color: black"
-              >
-                <v-icon>mdi-plus</v-icon>
-                Add new AI based KPI
-              </v-btn>
-            </v-col>
-          </v-container>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="red darken-1"
-            text
-            @click="dialogAddFocusSearch.isOpen = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="dialogSearchFilterName = true"
-          >
-            Save
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- Focus search Dialog END -->
-
-    <!-- Select From Search History Dialog START -->
-    <v-dialog v-model="dialogSelectFromSearchHistory" max-width="500px">
-      <v-card>
-        <v-card-title>
-          <span class="px-3" style="font-size: 18px; font-weight: 500"
-            >Searches history</span
-          >
-        </v-card-title>
-
-        <v-card-text>
-          <v-container>
-            <v-col>
-              <v-card>
-                <v-col class="p-3">
-                  <v-text-field outlined label="Search name"></v-text-field>
-                  <v-textarea outlined label="Search description"></v-textarea>
-                  <v-spacer></v-spacer>
-                  <v-row justify="between">
-                    <v-btn
-                      color="red darken-1"
-                      text
-                      @click="dialogSelectFromSearchHistory = false"
-                    >
-                      Delete
-                    </v-btn>
-                    <v-btn
-                      color="green darken-1"
-                      text
-                      @click="() => console.log('')"
-                    >
-                      Select
-                    </v-btn>
+                        <v-icon>mdi-plus</v-icon>
+                        Add to tracking
+                      </v-btn>
+                    </v-col>
+                    <!-- <v-col
+                      v-if="
+                        allTrackingCompanies.filter(
+                          (x) => x.companyId == company.companyId
+                        ).length != 0
+                      "
+                      style="height: 20px"
+                    ></v-col> -->
                   </v-row>
-                </v-col>
+                </v-card-actions>
               </v-card>
             </v-col>
-          </v-container>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="red darken-1"
-            text
-            @click="dialogAddFocusSearch.isOpen = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="() => console.log('save focus search')"
-          >
-            Save
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- Select From Search History Dialog END -->
-
-    <!-- Add New AI based KPI Dialog START -->
-    <v-dialog v-model="dialogAddNewAIBasedKPI" max-width="500px">
-      <v-card>
-        <v-card-title>
-          <span
-            class="px-3"
-            style="font-size: 18px; font-weight: 500"
-            @click="dialogAddNewAIBasedKPI = true"
-            >Add new AI based KPI</span
-          >
-        </v-card-title>
-
-        <v-card-text>
-          <v-container>
-            <v-col>
-              <v-card>
-                <v-col class="p-3">
-                  <v-text-field outlined label="KPI label"></v-text-field>
-                  <v-text-field outlined label="KPI Type"></v-text-field>
-
-                  <v-spacer></v-spacer>
-                  <p>
-                    Please write your KPI logic for this input here and AI model
-                    will filters the data based on your topic
+            <v-col cols="12" v-if="allRecommendedCompanies.length == 0">
+              <h2 style="text-align: center">
+                Nothing to show! Please change your search filters
+              </h2>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-row>
+      <div class="mt-6" style="display: none">
+        <v-data-table
+          v-if="companies"
+          :headers="headers"
+          :items="allRecommendedCompanies"
+          :expanded.sync="expanded"
+          item-key="name"
+          class="elevation-1"
+          show-expand
+        >
+          <template v-slot:item.recommended="{ item }">
+            {{ `${item.recommendation.recommended ? "Yes" : "No"}` }}
+          </template>
+          <template v-slot:top>
+            <v-toolbar flat>
+              <v-toolbar-title>Recommendations</v-toolbar-title>
+              <v-spacer></v-spacer>
+            </v-toolbar>
+          </template>
+          <template v-slot:expanded-item="{ headers, item }">
+            <td :colspan="headers.length">
+              <v-col class="py-10">
+                <v-row class="px-3">
+                  <p style="font-size: 20px; font-weight: 600" class="my-3">
+                    Insight
                   </p>
-                  <v-textarea outlined label="KPI logic"></v-textarea>
-                  <v-spacer></v-spacer>
-                  <v-row justify="between">
-                    <v-btn
-                      color="red darken-1"
-                      text
-                      @click="dialogSelectFromSearchHistory = false"
-                    >
-                      Delete
-                    </v-btn>
-                    <v-btn
-                      color="green darken-1"
-                      text
-                      @click="() => console.log('')"
-                    >
-                      Select
-                    </v-btn>
+                  <div class="d-flex flex-row ms-auto me-0 my-3">
+                    <v-row>
+                      <v-btn
+                        v-if="
+                          allInsightCompanies.filter(
+                            (x) => x.companyId == item.companyId
+                          ).length == 0
+                        "
+                        @click="setSelectForInsight(item)"
+                        rounded
+                        color="black"
+                        class="mt-4 mx-3"
+                        style="color: white"
+                      >
+                        <v-icon>mdi-plus</v-icon>
+                        Add to insight
+                      </v-btn>
+                      <v-btn
+                        v-if="
+                          allTrackingCompanies.filter(
+                            (x) => x.companyId == item.companyId
+                          ).length == 0
+                        "
+                        @click="addCompanyToTracking(item)"
+                        rounded
+                        color="white"
+                        class="mt-4"
+                        style="color: black"
+                      >
+                        <v-icon>mdi-plus</v-icon>
+                        Add to tracking
+                      </v-btn>
+                      <v-btn
+                        @click="
+                          () => {
+                            dialogAddReview.isOpen = true;
+                            dialogAddReview.review = '';
+                          }
+                        "
+                        rounded
+                        color="gray"
+                        class="mt-4 mx-3"
+                        style="color: black"
+                      >
+                        <v-icon>mdi-plus</v-icon>
+                        Add a review
+                      </v-btn>
+                    </v-row>
+                  </div>
+                </v-row>
+                <p style="font-size: 14px; font-weight: 400" class="mt-10">
+                  {{ item.insight.aiDescription }}
+                </p>
+                <v-row class="d-flex justify-space-between mt-10">
+                  <p
+                    style="font-size: 14px; font-weight: 400"
+                    class="mt-4 ps-3"
+                  >
+                    There is {{ showDataSize(item.totalDataGathered) }} of data
+                    gathered for this company
+                  </p>
+                </v-row>
+                <v-card
+                  v-for="gatheringChannels in item.recommendation
+                    .gatheringChannels"
+                  class="mt-10"
+                  style="background: #f0f0f0"
+                >
+                  <v-row style="justify-content: center; align-items: center">
+                    <v-img
+                      contain
+                      alt="logo"
+                      class="ps-4"
+                      max-width="100"
+                      :src="gatheringChannels.imgSRC"
+                    ></v-img>
+                    <v-col>
+                      <v-chip-group active-class="primary--text" column>
+                        <v-chip
+                          class="ma-2"
+                          color="green"
+                          text-color="white"
+                          style="justify-content: center; align-items: center"
+                        >
+                          {{
+                            `Status: ${
+                              gatheringChannels.isDataGatheringFinished
+                                ? gatheringChannels.isDataLearningFinished
+                                  ? "Finished"
+                                  : "Learning Data"
+                                : "Gathering Data"
+                            }`
+                          }}
+                        </v-chip>
+                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
+                          {{ `Last Update: ${gatheringChannels.lastUpdate}` }}
+                        </v-chip>
+                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
+                          {{
+                            `Gathered Data: ${showDataSize(
+                              gatheringChannels.getteredData
+                            )}`
+                          }}
+                        </v-chip>
+                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
+                          {{
+                            `AI Model: ${showAIModelByAiId(
+                              gatheringChannels.aiModelsID
+                            )}`
+                          }}
+                        </v-chip>
+
+                        <v-chip class="ma-2" color="cyan" text-color="white">
+                          {{
+                            `Data Gathering Process: ${gatheringChannels.dataGatheringProcessingPercentage}%`
+                          }}
+                        </v-chip>
+
+                        <v-chip class="ma-2" color="orange" text-color="white">
+                          {{
+                            `AI Learning Process: ${gatheringChannels.dataLearningProcessingPercentage}%`
+                          }}
+                        </v-chip>
+                      </v-chip-group>
+                    </v-col>
                   </v-row>
-                </v-col>
-              </v-card>
-            </v-col>
-          </v-container>
-        </v-card-text>
+                </v-card>
+              </v-col>
+            </td>
+          </template>
+        </v-data-table>
+      </div>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="red darken-1"
-            text
-            @click="dialogAddNewAIBasedKPI = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="() => console.log('save focus search')"
-          >
-            Save
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- Add New AI based KPI Dialog END -->
+      <!-- Add a review Dialog START -->
+      <v-dialog v-model="dialogAddReview.isOpen" max-width="500px">
+        <v-card>
+          <v-card-title>
+            <span class="px-3" style="font-size: 18px; font-weight: 500"
+              >Please leave your review about the trained data</span
+            >
+          </v-card-title>
 
-    <!-- Search Filter Name Dialog START -->
-    <v-dialog v-model="dialogSearchFilterName" max-width="500px">
-      <v-card>
-        <v-card-title>
-          <span
-            class="px-3"
-            style="font-size: 18px; font-weight: 500"
-            @click="dialogAddNewAIBasedKPI = true"
-            >Please enter name of your search filter</span
-          >
-        </v-card-title>
-
-        <v-card-text>
-          <v-container>
-            <v-col>
-              <v-card>
-                <v-col class="p-3">
-                  <v-text-field
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="12" md="12">
+                  <v-textarea
                     outlined
-                    label="Search filter name"
-                  ></v-text-field>
-                  <v-spacer></v-spacer>
+                    label="type your review here"
+                  ></v-textarea>
                 </v-col>
-              </v-card>
-            </v-col>
-          </v-container>
-        </v-card-text>
+              </v-row>
+            </v-container>
+          </v-card-text>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="red darken-1"
-            text
-            @click="dialogSearchFilterName = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="() => console.log('name for your search filter')"
-          >
-            Save
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- Search Filter Name Dialog END -->
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="dialogAddReview.isOpen = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="
+                () => {
+                  dialogAddReview.isOpen = false;
+                  dialogAddReview.review = '';
+                  fireSnack('your review submitted successfully!');
+                }
+              "
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- Add a review Dialog END -->
+
+      <!-- Focus search Dialog START -->
+      <v-dialog v-model="dialogAddFocusSearch.isOpen">
+        <v-card>
+          <v-card-title>
+            <span class="px-3" style="font-size: 18px; font-weight: 500"
+              >Please filter the search based on your KPIs. By clicking on '+'
+              you can add an AI based custom KPI</span
+            >
+          </v-card-title>
+
+          <v-card-text>
+            <v-container>
+              <v-col>
+                <v-btn
+                  style="border-radius: 20px; background: black; color: white"
+                  @click="dialogSelectFromSearchHistory = true"
+                >
+                  Select from search history
+                </v-btn>
+                <v-row class="mt-5">
+                  <p class="mt-3 me-3">Label name</p>
+                  <v-text-field outlined label="Input value"> </v-text-field>
+                </v-row>
+                <v-row class="mt-5">
+                  <p class="mt-1 me-3">Label name</p>
+                  <v-slider
+                    :thumb-size="28"
+                    color="black"
+                    thumb-label="always"
+                  ></v-slider>
+                </v-row>
+
+                <v-row
+                  class="mt-5 px-3 py-3"
+                  style="background: lightskyblue; border-radius: 7px"
+                >
+                  <p class="mt-3 me-3">Custom KPI</p>
+                  <v-text-field outlined label="Input value"> </v-text-field>
+                  <v-icon
+                    @click="() => console.log('delete custom dialog')"
+                    class="mt-0 mb-auto ms-4 pointer"
+                    style="
+                      font-size: 20px;
+                      color: white;
+                      background: red;
+                      border-radius: 50%;
+                    "
+                    >mdi-close</v-icon
+                  >
+                </v-row>
+
+                <v-btn
+                  @click="dialogAddNewAIBasedKPI = true"
+                  rounded
+                  color="gray"
+                  class="mt-10 mx-auto"
+                  style="color: black"
+                >
+                  <v-icon>mdi-plus</v-icon>
+                  Add new AI based KPI
+                </v-btn>
+              </v-col>
+            </v-container>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="dialogAddFocusSearch.isOpen = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="dialogSearchFilterName = true"
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- Focus search Dialog END -->
+
+      <!-- Select From Search History Dialog START -->
+      <v-dialog v-model="dialogSelectFromSearchHistory" max-width="500px">
+        <v-card>
+          <v-card-title>
+            <span class="px-3" style="font-size: 18px; font-weight: 500"
+              >Searches history</span
+            >
+          </v-card-title>
+
+          <v-card-text>
+            <v-container>
+              <v-col>
+                <v-card>
+                  <v-col class="p-3">
+                    <v-text-field outlined label="Search name"></v-text-field>
+                    <v-textarea
+                      outlined
+                      label="Search description"
+                    ></v-textarea>
+                    <v-spacer></v-spacer>
+                    <v-row justify="between">
+                      <v-btn
+                        color="red darken-1"
+                        text
+                        @click="dialogSelectFromSearchHistory = false"
+                      >
+                        Delete
+                      </v-btn>
+                      <v-btn
+                        color="green darken-1"
+                        text
+                        @click="() => console.log('')"
+                      >
+                        Select
+                      </v-btn>
+                    </v-row>
+                  </v-col>
+                </v-card>
+              </v-col>
+            </v-container>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="dialogAddFocusSearch.isOpen = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="() => console.log('save focus search')"
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- Select From Search History Dialog END -->
+
+      <!-- Add New AI based KPI Dialog START -->
+      <v-dialog v-model="dialogAddNewAIBasedKPI" max-width="500px">
+        <v-card>
+          <v-card-title>
+            <span
+              class="px-3"
+              style="font-size: 18px; font-weight: 500"
+              @click="dialogAddNewAIBasedKPI = true"
+              >Add new AI based KPI</span
+            >
+          </v-card-title>
+
+          <v-card-text>
+            <v-container>
+              <v-col>
+                <v-card>
+                  <v-col class="p-3">
+                    <v-text-field outlined label="KPI label"></v-text-field>
+                    <v-text-field outlined label="KPI Type"></v-text-field>
+
+                    <v-spacer></v-spacer>
+                    <p>
+                      Please write your KPI logic for this input here and AI
+                      model will filters the data based on your topic
+                    </p>
+                    <v-textarea outlined label="KPI logic"></v-textarea>
+                    <v-spacer></v-spacer>
+                    <v-row justify="between">
+                      <v-btn
+                        color="red darken-1"
+                        text
+                        @click="dialogSelectFromSearchHistory = false"
+                      >
+                        Delete
+                      </v-btn>
+                      <v-btn
+                        color="green darken-1"
+                        text
+                        @click="() => console.log('')"
+                      >
+                        Select
+                      </v-btn>
+                    </v-row>
+                  </v-col>
+                </v-card>
+              </v-col>
+            </v-container>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="dialogAddNewAIBasedKPI = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="() => console.log('save focus search')"
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- Add New AI based KPI Dialog END -->
+
+      <!-- Search Filter Name Dialog START -->
+      <v-dialog v-model="dialogSearchFilterName" max-width="500px">
+        <v-card>
+          <v-card-title>
+            <span
+              class="px-3"
+              style="font-size: 18px; font-weight: 500"
+              @click="dialogAddNewAIBasedKPI = true"
+              >Please enter name of your search filter</span
+            >
+          </v-card-title>
+
+          <v-card-text>
+            <v-container>
+              <v-col>
+                <v-card>
+                  <v-col class="p-3">
+                    <v-text-field
+                      outlined
+                      label="Search filter name"
+                    ></v-text-field>
+                    <v-spacer></v-spacer>
+                  </v-col>
+                </v-card>
+              </v-col>
+            </v-container>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="dialogSearchFilterName = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="() => console.log('name for your search filter')"
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- Search Filter Name Dialog END -->
+    </v-container>
   </div>
 </template>
 
@@ -580,10 +711,15 @@ import utils from "@/components/utils";
 import api from "@/components/API";
 
 export default {
-  name: "Recommendation Page",
- 
+  name: "RecommendationPage",
+  head() {
+    return {
+      title: "Recommendations",
+    };
+  },
   data() {
     return {
+      active: [],
       allRecommendedCompanies: [],
       allInsightCompanies: [],
       summaryRecommendedCompanies: {
@@ -597,6 +733,7 @@ export default {
       },
       allTrackingCompanies: [],
       allSavedKPIs: [],
+      allSelectedKpiItems: [],
       //===============================
       expanded: [],
       dialogAddReview: {
@@ -704,11 +841,41 @@ export default {
           value: "Toronto, Ontario, Canada",
         },
       ],
+      companyTrackSearchInput: "",
     };
   },
   methods: {
     showDataSize(dataSize) {
       return api.dataSizeSerializer(dataSize);
+    },
+    removeKPI(item) {
+      this.allSelectedKpiItems.splice(
+        this.allSelectedKpiItems.indexOf(item),
+        1
+      );
+      this.filterByKPI();
+    },
+    filterByKPI() {
+      console.log(
+        "allSelectedKpiItems",
+        JSON.stringify(this.allSelectedKpiItems)
+      );
+
+      const allAvailableAiRobots = api.getAiRobots();
+      this.allRecommendedCompanies = api.getStandardCompanyList(
+        api.getCompanies(),
+        allAvailableAiRobots
+      );
+      this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
+        (x) => x.score >= this.precisionVsRecall
+      );
+      if (this.allSelectedKpiItems.length > 0)
+        this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
+          (x) =>
+            x.userKPIs.some((kpi) =>
+              this.allSelectedKpiItems.includes(kpi.name)
+            )
+        );
     },
     showAIModelByAiId(aiId) {
       return this.allAiModels.filter((x) => x.id == aiId)[0].name;
@@ -724,28 +891,27 @@ export default {
       this.snackbar.text = text;
       this.snackbar.isOpen = true;
     },
-    precisionVsRecallChange(newVal) {
+    filterPerKPI(searchStr = "") {
       const allAvailableAiRobots = api.getAiRobots();
       this.allRecommendedCompanies = api.getStandardCompanyList(
         api.getCompanies(),
         allAvailableAiRobots
       );
       this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
-        (x) => x.score >= newVal
+        (x) => x.score >= this.precisionVsRecall
       );
-    },
-    filterPerKPI(kpi) {
-      const allAvailableAiRobots = api.getAiRobots();
-      this.allRecommendedCompanies = api.getStandardCompanyList(
-        api.getCompanies(),
-        allAvailableAiRobots
-      );
-      this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
-        (x) => x.score >= precisionVsRecall
-      );
-      this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
-        (x) => x.userKPIs >= precisionVsRecall
-      );
+      if (this.allSelectedKpiItems.length > 0)
+        this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
+          (x) =>
+            x.userKPIs.some((kpi) =>
+              this.allSelectedKpiItems.includes(kpi.name)
+            )
+        );
+      if (searchStr) {
+        this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
+          (x) => x.name.toLowerCase().includes(searchStr)
+        );
+      }
     },
     setSelectForInsight(item) {
       this.allInsightCompanies = api.getAllInsightCompanies();
@@ -791,11 +957,20 @@ export default {
     console.log(this.summaryRecommendedCompanies.median);
     this.allAiModels = api.getAiRobots();
     this.allSavedKPIs = api.getAllTrackingKPIKeys();
+    this.active = new Array(this.allSavedKPIs.length + 1);
+    for (let index = 0; index < this.active.length; index++) {
+      this.active[index] = false;
+    }
+
     //============================
     this.allCompanies = utils.getCompanies();
     this.companies = this.allCompanies;
   },
-  watch: {},
+  watch: {
+    companyTrackSearchInput(newVal) {
+      this.filterPerKPI(newVal);
+    },
+  },
 };
 </script>
 

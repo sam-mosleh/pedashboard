@@ -1,345 +1,465 @@
 <template>
-  <v-container fluid>
-    <!-- Snack -->
-    <v-snackbar v-model="snackbar.isOpen" top>
-      {{ snackbar.text }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          color="pink"
-          text
-          v-bind="attrs"
-          @click="snackbar.isOpen = false"
-        >
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
-    <!-- Snack -->
+  <div>
     <v-row
       class="ps-3 pt-8 pb-6 mb-3"
       style="font-weight: 600; font-size: 28px; background: black; color: white"
       >Models Trained</v-row
     >
-    <v-row style="justify-content: space-between">
-      <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-        <v-card class="cart-models-trained">
-          <v-col class="justify-space-between align-center h-100">
-            <p
-              class="text-center"
-              style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
-            >
-              {{ summaryCart.modelsTrainedCount }}
-            </p>
-            <p
-              class="text-center"
-              style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-            >
-              Models trained
-            </p>
-            <div style="height: 2px; background: red"></div>
-            <div class="candlestick">
-              <div class="wick"></div>
-              <div
-                class="body"
-                :style="{
-                  width: `${summaryCart.maxProcess - summaryCart.minProcess}%`,
-                  left: `${summaryCart.minProcess}%`,
-                }"
-              ></div>
-              <div
-                class="shadow-left"
-                :style="{ width: `${summaryCart.minProcess}%` }"
-              ></div>
-              <div
-                class="shadow-right"
-                :style="{ width: `${summaryCart.maxProcess}%` }"
-              ></div>
-            </div>
-            <v-row class="justify-space-between mt-1 px-2">
-              <p style="font-size: 10px">min: {{ summaryCart.minProcess }}%</p>
-              <p style="font-size: 10px">max: {{ summaryCart.maxProcess }}%</p>
-            </v-row>
-          </v-col>
-        </v-card>
-      </v-col>
-      <v-col class="mt-7">
-        <v-row style="gap: 10px" class="px-2">
-          <v-col cols="12">
+    <v-container fluid>
+      <!-- Snack -->
+      <v-snackbar v-model="snackbar.isOpen" top>
+        {{ snackbar.text }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            color="pink"
+            text
+            v-bind="attrs"
+            @click="snackbar.isOpen = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
+      <!-- Snack -->
+      <v-row
+        class="cart-models-trained"
+        style="margin-top: 10px; margin-bottom: 20px"
+      >
+        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
+          <v-card class="cart-models-trained">
             <v-btn
-              v-if="allUserAiRobotsIds.length != allAiRobotsIds.length"
-              class="ms-3"
-              color="black"
-              style="color: white; border-radius: 20px; width: 100%"
-              @click="
-                () => {
-                  robotAddNewDialog = {
-                    isOpen: true,
-                    data: {
-                      id: '',
-                      nickName: '',
-                      selectedCompanies: [],
-                    },
-                  };
-                }
-              "
-            >
-              + Add new Trained AI Robot
-            </v-btn>
-            <v-btn
-              v-else
-              class="ms-3"
-              color="green dark"
-              style="color: white; border-radius: 20px; width: 100%"
-            >
-              You added all the Trained AI Robots to your account
-            </v-btn>
-          </v-col>
-        </v-row>
-        <v-row style="gap: 10px" class="px-2">
-          <v-col cols="12">
-            <p
-              class="ms-3"
+              class="d-flex flex-row ms-auto me-2 mt-2"
               style="
                 background: black;
                 color: white;
-                width: 100%;
-                padding: 10px 10px 10px 10px;
-                text-align: center;
+                border-radius: 30px;
+                text-transform: capitalize;
+              "
+              @click="redirect('/dashboard/modelsTrained')"
+              >View</v-btn
+            >
+            <v-col class="justify-space-between align-center h-100">
+              <p
+                class="text-center"
+                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
+              >
+                {{ summaryCart.modelsTrainedCount }}
+              </p>
+              <p
+                class="text-center"
+                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
+              >
+                Models trained
+              </p>
+              <div style="height: 2px; background: red"></div>
+              <div class="candlestick" v-if="summaryCart.minProcess < 100">
+                <div class="wick"></div>
+                <div
+                  class="body"
+                  :style="{
+                    width: `${
+                      summaryCart.maxProcess - summaryCart.minProcess
+                    }%`,
+                    left: `${summaryCart.minProcess}%`,
+                  }"
+                ></div>
+                <div
+                  class="shadow-left"
+                  :style="{ width: `${summaryCart.minProcess}%` }"
+                ></div>
+                <div
+                  class="shadow-right"
+                  :style="{ width: `${summaryCart.maxProcess}%` }"
+                ></div>
+              </div>
+              <v-row
+                class="justify-space-between mt-1 px-2"
+                v-if="summaryCart.minProcess < 100"
+              >
+                <p style="font-size: 10px; color: black">
+                  min: {{ summaryCart.minProcess }}%
+                </p>
+                <p style="font-size: 10px; color: black">
+                  max: {{ summaryCart.maxProcess }}%
+                </p>
+              </v-row>
+              <v-row class="justify-space-between mt-1 px-2">
+                <p style="font-size: 10px; color: black">
+                  Mega Models: {{ trainedModelsTable.megaModelCount }}
+                </p>
+                <p style="font-size: 10px; color: black">
+                  Forked Models: {{ trainedModelsTable.forkedModelCount }}
+                </p>
+              </v-row>
+            </v-col>
+          </v-card>
+        </v-col>
+        <v-col cols="12" sm="6" md="9" lg="9" xl="9" xxl="9">
+          <v-data-table
+            :headers="trainedModelsTable.headers"
+            :items="trainedModelsTable.items"
+            hide-default-footer
+            disable-sort
+            class="elevation-1"
+          ></v-data-table>
+        </v-col>
+        <v-col cols="12">
+          <v-btn
+            v-if="allUserAiRobotsIds.length != allAiRobotsIds.length"
+            class="ms-3"
+            color="black"
+            style="color: white; border-radius: 20px; width: 100%"
+            @click="
+              () => {
+                robotAddNewDialog = {
+                  isOpen: true,
+                  data: {
+                    id: '',
+                    nickName: '',
+                    selectedCompanies: [],
+                  },
+                };
+              }
+            "
+          >
+            + Add new Trained AI Robot
+          </v-btn>
+          <v-btn
+            v-else
+            class="ms-3"
+            color="green dark"
+            style="color: white; border-radius: 20px; width: 100%"
+          >
+            You added all the Trained AI Robots to your account
+          </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-row style="margin-top: 20px">
+        <v-tabs v-model="tab" dark grow center>
+          <v-tab
+            v-for="item in [
+              { tab: 'Add KPI manually' },
+              { tab: 'Talk with AI bot' },
+            ]"
+            :key="item.tab"
+          >
+            {{ item.tab }}
+          </v-tab>
+        </v-tabs>
+
+        <v-tabs-items v-model="tab">
+          <v-tab-item
+            v-for="item in [
+              { tab: 'Mega Models', id: 0 },
+              { tab: 'Forked Models', id: 1 },
+            ]"
+            :key="item.id"
+          >
+            <v-container v-if="item.id == 0" style="margin-top: 15px">
+              <v-row>
+                <v-col v-for="robot in allUserAiRobots" cols="4">
+                  <v-card class="mx-auto">
+                    <v-card-text>
+                      <div>{{ robot.nickName }}</div>
+                      <p class="text-h4 text--primary">{{ robot.name }}</p>
+                      <div class="text--primary">
+                        <v-chip-group active-class="primary--text" column>
+                          <v-chip
+                            >Total Uploaded Documents:
+                            {{ robot.totalUploadedDocsFromUser }}
+                          </v-chip>
+                          <v-chip
+                            >Total data learned from assets:
+                            {{ showDataSize(robot.totalDataLearnedFromUser) }}
+                          </v-chip>
+                          <v-chip
+                            >Total data gathered for assets:
+                            {{ showDataSize(robot.totalDataGatheredFromUser) }}
+                          </v-chip>
+                          <v-chip
+                            >Total completeness: {{ robot.totalCompleteness }}%
+                          </v-chip>
+                        </v-chip-group>
+                      </div>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-btn
+                        text
+                        color="green"
+                        @click="
+                          () => {
+                            robotViewDialog.isOpen = true;
+                            robotViewDialog.data = robot;
+                          }
+                        "
+                      >
+                        view
+                      </v-btn>
+                      <v-btn
+                        text
+                        color="red"
+                        @click="
+                          () => {
+                            robotDeleteDialog.isOpen = true;
+                            robotDeleteDialog.robotId = robot.id;
+                          }
+                        "
+                      >
+                        delete
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+            <v-container v-if="item.id == 1" style="margin-top: 15px">
+              <v-row>
+                <v-col
+                  cols="6"
+                  sm="6"
+                  md="6"
+                  lg="4"
+                  xl="3"
+                  xxl="3"
+                  v-for="company in allSavedCompanies"
+                  v-bind:key="company.companyId"
+                >
+                  <v-card class="mx-auto">
+                    <v-card-text>
+                      <v-row>
+                        <p
+                          class="text-h4 text--primary"
+                          style="font-size: 2rem !important"
+                        >
+                          {{ company.name }}
+                        </p>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          text
+                          color="green"
+                          @click="
+                            () => {
+                              fireSnack(
+                                `${company.name.replace(
+                                  ' ',
+                                  ''
+                                )}-${+new Date()}.pdf Sent to your email!`
+                              );
+                            }
+                          "
+                        >
+                          Download Report
+                        </v-btn>
+                      </v-row>
+                      <v-row>
+                        <div class="text--primary">
+                          <v-chip-group active-class="primary--text" column>
+                            <v-chip
+                              :color="`${
+                                company.userKPIs.length == 0 ? 'red' : ''
+                              }`"
+                              >Selected KPIs:
+                              {{ company.userKPIs.length }}</v-chip
+                            >
+                            <v-chip v-if="company.readyToBuy" color="green"
+                              >Ready to Buy</v-chip
+                            >
+                          </v-chip-group>
+                        </div>
+                        <div
+                          class="text--primary"
+                          v-if="company.userKPIs.length == 0"
+                        >
+                          you need to add KPI to this company!
+                        </div>
+                      </v-row>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-row>
+      <!-- -------------------------AI ROBOT DIALOG START---------------- -->
+      <v-dialog v-model="robotViewDialog.isOpen" max-width="500">
+        <v-card>
+          <v-card-title class="text-h5">
+            {{ robotViewDialog.data?.nickName }}
+            <v-chip color="green">{{ robotViewDialog.data?.name }}</v-chip>
+          </v-card-title>
+
+          <v-card-text>
+            <v-chip
+              >Total Data Gathered From All Users:
+              {{
+                showDataSize(
+                  robotViewDialog.data?.totalDataGatheredFromAllUsers
+                )
+              }}</v-chip
+            >
+            <v-chip
+              >Total Data Learned From All Users:
+              {{
+                showDataSize(robotViewDialog.data?.totalDataLearnedFromAllUsers)
+              }}</v-chip
+            >
+            <v-chip>Total Used: {{ robotViewDialog.data?.totalUsed }}</v-chip>
+            <v-chip
+              >Total Trained Assets From All Users:
+              {{
+                showDataSize(
+                  robotViewDialog.data?.totalTrainedAssetsFromAllUsers
+                )
+              }}</v-chip
+            >
+            <v-chip
+              >Total Uploaded Docs From User:
+              {{ robotViewDialog.data?.totalUploadedDocsFromUser }}</v-chip
+            >
+            <v-chip
+              >Total Data Learned From User:
+              {{
+                showDataSize(robotViewDialog.data?.totalDataLearnedFromUser)
+              }}</v-chip
+            >
+            <v-chip
+              >Total Data Gathered From User:
+              {{
+                showDataSize(robotViewDialog.data?.totalDataGatheredFromUser)
+              }}</v-chip
+            >
+            <v-chip
+              >Total Completeness:
+              {{ robotViewDialog.data?.totalCompleteness }}%</v-chip
+            >
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="
+                () => {
+                  robotDeleteDialog.isOpen = true;
+                  robotDeleteDialog.robotId = robotViewDialog.data?.id;
+                }
               "
             >
-              Your AI robots data gathering size increased
-              <v-chip color="green">10%</v-chip> and data learning increased
-              <v-chip color="green">18%</v-chip> than yesterday
-            </p>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-card v-for="robot in allUserAiRobots" class="mx-auto" max-width="344">
-        <v-card-text>
-          <div>{{ robot.nickName }}</div>
-          <p class="text-h4 text--primary">{{ robot.name }}</p>
-          <div class="text--primary">
-            <v-chip-group active-class="primary--text" column>
-              <v-chip
-                >Total Uploaded Documents: {{ robot.totalUploadedDocsFromUser }}
-              </v-chip>
-              <v-chip
-                >Total data learned from assets:
-                {{ showDataSize(robot.totalDataLearnedFromUser) }}
-              </v-chip>
-              <v-chip
-                >Total data gathered for assets:
-                {{ showDataSize(robot.totalDataGatheredFromUser) }}
-              </v-chip>
-              <v-chip
-                >Total completeness: {{ robot.totalCompleteness }}%
-              </v-chip>
-            </v-chip-group>
-          </div>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            text
-            color="green"
-            @click="
-              () => {
-                robotViewDialog.isOpen = true;
-                robotViewDialog.data = robot;
-              }
-            "
-          >
-            view
-          </v-btn>
-          <v-btn
-            text
-            color="red"
-            @click="
-              () => {
-                robotDeleteDialog.isOpen = true;
-                robotDeleteDialog.robotId = robot.id;
-              }
-            "
-          >
-            delete
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-row>
-    <!-- -------------------------AI ROBOT DIALOG START---------------- -->
-    <v-dialog v-model="robotViewDialog.isOpen" max-width="500">
-      <v-card>
-        <v-card-title class="text-h5">
-          {{ robotViewDialog.data?.nickName }}
-          <v-chip color="green">{{ robotViewDialog.data?.name }}</v-chip>
-        </v-card-title>
-
-        <v-card-text>
-          <v-chip
-            >Total Data Gathered From All Users:
-            {{
-              showDataSize(robotViewDialog.data?.totalDataGatheredFromAllUsers)
-            }}</v-chip
-          >
-          <v-chip
-            >Total Data Learned From All Users:
-            {{
-              showDataSize(robotViewDialog.data?.totalDataLearnedFromAllUsers)
-            }}</v-chip
-          >
-          <v-chip>Total Used: {{ robotViewDialog.data?.totalUsed }}</v-chip>
-          <v-chip
-            >Total Trained Assets From All Users:
-            {{
-              showDataSize(robotViewDialog.data?.totalTrainedAssetsFromAllUsers)
-            }}</v-chip
-          >
-          <v-chip
-            >Total Uploaded Docs From User:
-            {{ robotViewDialog.data?.totalUploadedDocsFromUser }}</v-chip
-          >
-          <v-chip
-            >Total Data Learned From User:
-            {{
-              showDataSize(robotViewDialog.data?.totalDataLearnedFromUser)
-            }}</v-chip
-          >
-          <v-chip
-            >Total Data Gathered From User:
-            {{
-              showDataSize(robotViewDialog.data?.totalDataGatheredFromUser)
-            }}</v-chip
-          >
-          <v-chip
-            >Total Completeness:
-            {{ robotViewDialog.data?.totalCompleteness }}%</v-chip
-          >
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            color="red darken-1"
-            text
-            @click="
-              () => {
-                robotDeleteDialog.isOpen = true;
-                robotDeleteDialog.robotId = robotViewDialog.data?.id;
-              }
-            "
-          >
-            delete
-          </v-btn>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="green darken-1"
-            text
-            @click="robotViewDialog.isOpen = false"
-          >
-            close
-          </v-btn>
-          <!-- <v-btn
+              delete
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="green darken-1"
+              text
+              @click="robotViewDialog.isOpen = false"
+            >
+              close
+            </v-btn>
+            <!-- <v-btn
             color="green darken-1"
             text
             @click="robotViewDialog.isOpen = false"
           >
             Edit Connected Assets
           </v-btn> -->
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- -------------------------AI ROBOT DIALOG          END------------------------- -->
-    <!-- -------------------------AI ROBOT DELETE DIALOG START------------------------- -->
-    <v-dialog v-model="robotDeleteDialog.isOpen" max-width="500">
-      <v-card>
-        <v-card-title class="text-h5">
-          are you sure to delete this Model?
-        </v-card-title>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- -------------------------AI ROBOT DIALOG          END------------------------- -->
+      <!-- -------------------------AI ROBOT DELETE DIALOG START------------------------- -->
+      <v-dialog v-model="robotDeleteDialog.isOpen" max-width="500">
+        <v-card>
+          <v-card-title class="text-h5">
+            are you sure to delete this Model?
+          </v-card-title>
 
-        <v-card-actions>
-          <v-btn color="red darken-1" text @click="deleteRobotModelAndSave()">
-            Yes
-          </v-btn>
-          <v-spacer></v-spacer>
+          <v-card-actions>
+            <v-btn color="red darken-1" text @click="deleteRobotModelAndSave()">
+              Yes
+            </v-btn>
+            <v-spacer></v-spacer>
 
-          <v-btn
-            color="green darken-1"
-            text
-            @click="
-              () => {
-                robotDeleteDialog.isOpen = false;
-                robotDeleteDialog.robotId = null;
-              }
-            "
-          >
-            No
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- -------------------------AI ROBOT DELETE DIALOG   END------------------------- -->
-    <!-- -------------------------AI ROBOT DELETE DIALOG START------------------------- -->
-    <v-dialog v-model="robotAddNewDialog.isOpen" max-width="500">
-      <v-card>
-        <v-card-title class="text-h5">
-          Adding new AI Robots Model
-        </v-card-title>
-        <v-card-text>
-          <v-row>
-            <v-text-field
-              label="Your Robot Nick Name"
-              v-model="robotAddNewDialog.data.nickName"
-            ></v-text-field>
-          </v-row>
-          <v-row>
-            <v-select
-              v-model="robotAddNewDialog.data.id"
-              :items="
-                allAiRobotsIds
-                  .filter((x) => !allUserAiRobotsIds.includes(x))
-                  .map((z) => {
-                    return { text: getRobotModelFromId(z), value: z };
+            <v-btn
+              color="green darken-1"
+              text
+              @click="
+                () => {
+                  robotDeleteDialog.isOpen = false;
+                  robotDeleteDialog.robotId = null;
+                }
+              "
+            >
+              No
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- -------------------------AI ROBOT DELETE DIALOG   END------------------------- -->
+      <!-- -------------------------AI ROBOT DELETE DIALOG START------------------------- -->
+      <v-dialog v-model="robotAddNewDialog.isOpen" max-width="500">
+        <v-card>
+          <v-card-title class="text-h5">
+            Adding new AI Robots Model
+          </v-card-title>
+          <v-card-text>
+            <v-row>
+              <v-text-field
+                label="Your Robot Nick Name"
+                v-model="robotAddNewDialog.data.nickName"
+              ></v-text-field>
+            </v-row>
+            <v-row>
+              <v-select
+                v-model="robotAddNewDialog.data.id"
+                :items="
+                  allAiRobotsIds
+                    .filter((x) => !allUserAiRobotsIds.includes(x))
+                    .map((z) => {
+                      return { text: getRobotModelFromId(z), value: z };
+                    })
+                "
+                label="Select Your AI Model"
+                outlined
+              ></v-select>
+            </v-row>
+            <v-row>
+              <v-autocomplete
+                solo
+                multiple
+                v-model="robotAddNewDialog.data.selectedCompanies"
+                :items="
+                  allCompanies.map((company) => {
+                    return {
+                      text: company.name,
+                      value: company.companyId,
+                      raw: company,
+                    };
                   })
-              "
-              label="Select Your AI Model"
-              outlined
-            ></v-select>
-          </v-row>
-          <v-row>
-            <v-autocomplete
-              solo
-              multiple
-              v-model="robotAddNewDialog.data.selectedCompanies"
-              :items="
-                allCompanies.map((company) => {
-                  return {
-                    text: company.name,
-                    value: company.companyId,
-                    raw: company,
-                  };
-                })
-              "
-            ></v-autocomplete>
-          </v-row>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            color="red darken-1"
-            text
-            @click="() => (robotAddNewDialog.isOpen = false)"
-          >
-            close
-          </v-btn>
-          <v-spacer></v-spacer>
+                "
+              ></v-autocomplete>
+            </v-row>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="() => (robotAddNewDialog.isOpen = false)"
+            >
+              close
+            </v-btn>
+            <v-spacer></v-spacer>
 
-          <v-btn color="green darken-1" text @click="addNewAiRobot()">
-            Add
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- -------------------------AI ROBOT DELETE DIALOG   END------------------------- -->
-  </v-container>
+            <v-btn color="green darken-1" text @click="addNewAiRobot()">
+              Add
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- -------------------------AI ROBOT DELETE DIALOG   END------------------------- -->
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -361,9 +481,24 @@ export default {
     //======================
     this.init();
   },
- 
+
   data() {
     return {
+      tab: null,
+      trainedModelsTable: {
+        headers: [
+          {
+            text: "#",
+            align: "start",
+            value: "name",
+          },
+          { text: "Mega Model", value: "megaModel" },
+          { text: "Forked Model", value: "forkedModel" },
+        ],
+        items: [],
+        megaModelCount: 0,
+        forkedModelCount: 0,
+      },
       summaryCart: {
         modelsTrainedCount: 0,
         minProcess: 1000,
@@ -393,12 +528,89 @@ export default {
       allAiRobotsIds: [],
       allUserAiRobotsIds: [],
       allCompanies: [],
+      allSavedCompanies: [],
     };
   },
   methods: {
     fireSnack(text) {
       this.snackbar.text = text;
       this.snackbar.isOpen = true;
+    },
+    fillTrainedModelsTableItems() {
+      const iqLevel = {
+        forkedModel: 0,
+        megaModel: 0,
+        name: "IQ Level",
+      };
+      const iqBenchMarkLevel = {
+        forkedModel: 0,
+        megaModel: 0,
+        name: "IQ Benchmarck",
+      };
+      const iqImprovementLevel = {
+        forkedModel: 0,
+        megaModel: 0,
+        name: "IQ Improvement for last 30 Days",
+      };
+      let megaCount = 0;
+      let forkedCount = 0;
+      for (let index = 0; index < this.allUserAiRobots.length; index++) {
+        const robot = this.allUserAiRobots[index];
+        this.trainedModelsTable.forkedModelCount +=
+          robot.selectedForkedModels.length;
+        this.trainedModelsTable.megaModelCount +=
+          robot.selectedMegaModels.length;
+
+        for (
+          let iqMegaIndex = 0;
+          iqMegaIndex < robot.selectedMegaModels.length;
+          iqMegaIndex++
+        ) {
+          megaCount++;
+          iqLevel.megaModel += robot.selectedMegaModels[iqMegaIndex].iqLevel;
+          iqBenchMarkLevel.megaModel +=
+            robot.selectedMegaModels[iqMegaIndex].benchMark;
+          iqImprovementLevel.megaModel +=
+            robot.selectedMegaModels[iqMegaIndex].lastMonthIqLevel;
+        }
+        for (
+          let iqMegaIndex = 0;
+          iqMegaIndex < robot.selectedForkedModels.length;
+          iqMegaIndex++
+        ) {
+          forkedCount++;
+          iqLevel.forkedModel +=
+            robot.selectedForkedModels[iqMegaIndex].iqLevel;
+          iqBenchMarkLevel.forkedModel +=
+            robot.selectedForkedModels[iqMegaIndex].benchMark;
+          iqImprovementLevel.forkedModel +=
+            robot.selectedForkedModels[iqMegaIndex].lastMonthIqLevel;
+        }
+      }
+      iqLevel.megaModel = parseFloat(iqLevel.megaModel / megaCount).toFixed(2);
+      iqLevel.forkedModel = parseFloat(
+        iqLevel.forkedModel / forkedCount
+      ).toFixed(2);
+
+      iqBenchMarkLevel.megaModel = parseFloat(
+        iqBenchMarkLevel.megaModel / megaCount
+      ).toFixed(2);
+      iqBenchMarkLevel.forkedModel = parseFloat(
+        iqBenchMarkLevel.forkedModel / forkedCount
+      ).toFixed(2);
+
+      iqImprovementLevel.megaModel = parseFloat(
+        iqImprovementLevel.megaModel / megaCount
+      ).toFixed(2);
+      iqImprovementLevel.forkedModel = parseFloat(
+        iqImprovementLevel.forkedModel / forkedCount
+      ).toFixed(2);
+
+      this.trainedModelsTable.items = [
+        iqLevel,
+        iqBenchMarkLevel,
+        iqImprovementLevel,
+      ];
     },
     init() {
       this.allUserAiRobots = api.getAllAiRobots();
@@ -449,6 +661,9 @@ export default {
             ? parseFloat(robot.totalCompleteness)
             : this.summaryCart.maxProcess;
       });
+      this.fillTrainedModelsTableItems();
+      this.allSavedCompanies = api.getAllCompanies();
+      console.log(JSON.stringify(this.allUserAiRobots));
     },
     addNewAiRobot() {
       if (

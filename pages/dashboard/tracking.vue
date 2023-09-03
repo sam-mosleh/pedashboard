@@ -1,418 +1,603 @@
 <template>
-  <v-container fluid>
-    <!-- Snack -->
-    <v-snackbar v-model="snackbar.isOpen" top>
-      {{ snackbar.text }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          color="pink"
-          text
-          v-bind="attrs"
-          @click="snackbar.isOpen = false"
-        >
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
-    <!-- Snack -->
+  <div>
     <v-row
       class="ps-3 pt-8 pb-6 mb-3"
       style="font-weight: 600; font-size: 28px; background: black; color: white"
-      >Models Trained</v-row
+      >Assets Tracking</v-row
     >
-    <v-row style="justify-content: space-between">
-      <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-        <v-card class="cart-track">
-          <v-col class="justify-space-between align-center h-100">
-            <p
-              class="text-center"
-              style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
-            >
-              {{ allTrackingSelectedCompanies.length }}
-            </p>
-            <p
-              class="text-center"
-              style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-            >
-              Assets tracked
-            </p>
-            <div style="height: 2px; background: blue"></div>
-            <p
-              class="text-center mt-4"
-              style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-            >
-              {{
-                allTrackingSelectedCompanies.filter((x) => x.readyToBuy).length
-              }}
-              Ready to buy
-            </p>
-          </v-col>
-        </v-card>
-      </v-col>
-      <v-col class="mt-7">
-        <v-row style="gap: 10px" class="px-2">
-          <v-col cols="12">
+
+    <v-container fluid>
+      <!-- Snack -->
+      <v-snackbar v-model="snackbar.isOpen" top>
+        {{ snackbar.text }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            color="pink"
+            text
+            v-bind="attrs"
+            @click="snackbar.isOpen = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
+      <!-- Snack -->
+
+      <v-row style="justify-content: space-between">
+        <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+          <v-card style="margin: 0 auto" class="cart-track" max-width="400">
             <v-btn
-              class="ms-3"
-              color="black"
-              style="color: white; border-radius: 20px; width: 100%"
-              @click="() => (addNewTrackingCompanyDialog.isOpen = true)"
-            >
-              + Add new company to tracking system.
-            </v-btn>
-          </v-col>
-        </v-row>
-        <v-row style="gap: 10px" class="px-2">
-          <v-col cols="12">
-            <p
-              class="ms-3"
+              class="d-flex flex-row ms-auto me-2 mt-2"
               style="
                 background: black;
                 color: white;
-                width: 100%;
-                padding: 10px 10px 10px 10px;
-                text-align: center;
+                border-radius: 30px;
+                text-transform: capitalize;
               "
+              @click="() => (addNewTrackingCompanyDialog.isOpen = true)"
             >
-              Your AI robots founded
-              <v-chip color="green">{{
-                allTrackingSelectedCompanies.filter((x) => x.readyToBuy).length
-              }}</v-chip>
-              buying opportunities, <v-chip color="green">20%</v-chip> more
-              opportunities than yesterday
-            </p>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-card
-        v-for="company in allTrackingSelectedCompanies"
-        class="mx-auto mt-5"
-        max-width="344"
-      >
-        <v-card-text>
-          <p class="text-h4 text--primary">{{ company.name }}</p>
-          <div class="text--primary">
-            <v-chip-group active-class="primary--text" column>
-              <v-chip :color="`${company.userKPIs.length == 0 ? 'red' : ''}`"
-                >Selected KPIs: {{ company.userKPIs.length }}</v-chip
-              >
-              <v-chip v-if="company.readyToBuy" color="green"
-                >Ready to Buy</v-chip
-              >
-            </v-chip-group>
-          </div>
-          <div class="text--primary" v-if="company.userKPIs.length == 0">
-            you need to add KPI to this company!
-          </div>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            text
-            color="green"
-            @click="
-              () => {
-                viewTrackingCompanyDialog.isOpen = true;
-                viewTrackingCompanyDialog.company = company;
-                changeKPIChart(0);
-              }
-            "
-          >
-            view
-          </v-btn>
-          <v-btn
-            text
-            color="red"
-            @click="
-              () => {
-                deleteTrackingDialog.isOpen = true;
-                deleteTrackingDialog.companyId = company.companyId;
-              }
-            "
-          >
-            delete
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-row>
-    <!-- -------------------------Tracking View DIALOG START------------------------- -->
-    <v-dialog v-model="viewTrackingCompanyDialog.isOpen" max-width="600">
-      <v-card>
-        <v-card-title> Tracking overview </v-card-title>
-        <v-card-text>
-          <v-row style="padding: 10px 10px 10px 10px">
-            <p class="text-h4 text--primary">
-              {{ viewTrackingCompanyDialog.company?.name }}
-            </p>
-            <div class="text--primary">
-              <v-chip-group active-class="primary--text" column>
-                <v-chip
-                  >totalDataGathered:
-                  {{
-                    showDataSize(
-                      viewTrackingCompanyDialog.company?.totalDataGathered
-                    )
-                  }}
-                </v-chip>
-                <v-chip
-                  >totalDataLearned:
-                  {{
-                    showDataSize(
-                      viewTrackingCompanyDialog.company?.totalDataLearned
-                    )
-                  }}
-                </v-chip>
-              </v-chip-group>
-            </div>
-          </v-row>
-          <v-row>
-            <v-chip-group mandatory active-class="primary--text">
-              <v-chip
-                v-for="(tag, i) in viewTrackingCompanyDialog.company?.userKPIs"
-                :key="tag.name"
-                @click="changeKPIChart(i)"
-              >
-                {{ tag.name }}
-              </v-chip>
-            </v-chip-group>
-            <v-spacer></v-spacer>
-
-            <v-btn
-              text
-              color="green darken-1"
-              @click="
-                openNewKpiDialog(viewTrackingCompanyDialog.company.companyId)
-              "
-              >+ Add New KPI</v-btn
+              + Add</v-btn
             >
+            <v-col class="justify-space-between align-center h-100">
+              <p
+                class="text-center"
+                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
+              >
+                {{ allTrackingSelectedCompanies.length }}
+              </p>
+              <p
+                class="text-center"
+                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
+              >
+                Assets tracked
+              </p>
+              <div style="height: 2px; background: blue"></div>
+              <p
+                class="text-center mt-4"
+                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
+              >
+                {{
+                  allTrackingSelectedCompanies.filter((x) => x.readyToBuy)
+                    .length
+                }}
+                Ready to buy
+              </p>
+            </v-col>
+          </v-card>
+        </v-col>
+        <!-- <v-col class="mt-7">
+          <v-row style="gap: 10px; display: none" class="px-2">
+            <v-col cols="12">
+              <p
+                class="ms-3"
+                style="
+                  background: black;
+                  color: white;
+                  width: 100%;
+                  padding: 10px 10px 10px 10px;
+                  text-align: center;
+                "
+              >
+                Your AI robots founded
+                <v-chip color="green">{{
+                  allTrackingSelectedCompanies.filter((x) => x.readyToBuy)
+                    .length
+                }}</v-chip>
+                buying opportunities, <v-chip color="green">20%</v-chip> more
+                opportunities than yesterday
+              </p>
+            </v-col>
           </v-row>
-          <v-row>
-            <apexchart
-              :options="chartOptions"
-              :series="chartSeries"
-              type="line"
-              style="width: 100% !important"
-              height="300"
-            ></apexchart>
-          </v-row>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            color="red darken-1"
-            text
-            @click="
-              () => {
-                deleteTrackingDialog.isOpen = true;
-                deleteTrackingDialog.companyId =
-                  viewTrackingCompanyDialog.company.companyId;
-              }
-            "
-          >
-            Delete
-          </v-btn>
-          <v-spacer></v-spacer>
-
-          <v-btn
-            color="green darken-1"
-            text
-            @click="
-              () => {
-                viewTrackingCompanyDialog.isOpen = false;
-                viewTrackingCompanyDialog.company = null;
-              }
-            "
-          >
-            close
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- -------------------------Add View DIALOG        END------------------------- -->
-    <!-- -------------------------Tracking Add new DIALOG START------------------------- -->
-    <v-dialog v-model="addNewTrackingCompanyDialog.isOpen">
-      <v-card>
-        <v-card-title class="text-h5">
-          Select Your Favorite Companies to Track!
-        </v-card-title>
-        <v-card-text>
-          <v-row>
-            <v-card
-              v-for="company in addNewTrackingCompanyDialog.allCompanies"
-              class="mx-auto mt-5"
-              max-width="300"
-            >
-              <v-card-text>
-                <p class="text-h4 text--primary">{{ company.name }}</p>
-                <div class="text--primary">
-                  <v-chip-group active-class="primary--text" column>
-                    <v-chip
-                      >totalDataGathered:
-                      {{ showDataSize(company.totalDataGathered) }}
-                    </v-chip>
-                    <v-chip
-                      >totalDataLearned:
-                      {{ showDataSize(company.totalDataLearned) }}
-                    </v-chip>
-                  </v-chip-group>
-                </div>
-              </v-card-text>
-              <v-card-actions>
+        </v-col> -->
+      </v-row>
+      <v-row>
+        <v-col
+          cols="6"
+          sm="6"
+          md="6"
+          lg="4"
+          xl="3"
+          xxl="3"
+          v-for="company in allTrackingSelectedCompanies"
+          v-bind:key="company.companyId"
+        >
+          <v-card class="mx-auto">
+            <v-card-text>
+              <v-row>
+                <p
+                  class="text-h4 text--primary"
+                  style="font-size: 2rem !important"
+                >
+                  {{ company.name }}
+                </p>
+                <v-spacer></v-spacer>
                 <v-btn
-                  v-if="!company.isSelectedAttr"
                   text
                   color="green"
                   @click="
                     () => {
-                      company.isSelectedAttr = true;
+                      fireSnack(
+                        `${company.name.replace(
+                          ' ',
+                          ''
+                        )}-${+new Date()}.pdf Sent to your email!`
+                      );
                     }
                   "
                 >
-                  Select To Track
+                  Download Report
                 </v-btn>
-                <v-btn
-                  v-else
-                  text
-                  color="red"
-                  @click="
-                    () => {
-                      company.isSelectedAttr = false;
-                    }
-                  "
+              </v-row>
+              <v-row>
+                <div class="text--primary">
+                  <v-chip-group active-class="primary--text" column>
+                    <v-chip
+                      :color="`${company.userKPIs.length == 0 ? 'red' : ''}`"
+                      >Selected KPIs: {{ company.userKPIs.length }}</v-chip
+                    >
+                    <v-chip v-if="company.readyToBuy" color="green"
+                      >Ready to Buy</v-chip
+                    >
+                  </v-chip-group>
+                </div>
+                <div class="text--primary" v-if="company.userKPIs.length == 0">
+                  you need to add KPI to this company!
+                </div>
+              </v-row>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn
+                text
+                color="red"
+                @click="
+                  () => {
+                    deleteTrackingDialog.isOpen = true;
+                    deleteTrackingDialog.companyId = company.companyId;
+                  }
+                "
+              >
+                delete
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn
+                text
+                color="green"
+                @click="
+                  () => {
+                    viewTrackingCompanyDialog.isOpen = true;
+                    viewTrackingCompanyDialog.company = company;
+                    changeKPIChart(0);
+                  }
+                "
+              >
+                view
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+      <!-- -------------------------Tracking View DIALOG START------------------------- -->
+      <v-dialog v-model="viewTrackingCompanyDialog.isOpen" max-width="600">
+        <v-card>
+          <v-card-title> Tracking overview </v-card-title>
+          <v-card-text>
+            <v-row style="padding: 10px 10px 10px 10px">
+              <p class="text-h4 text--primary">
+                {{ viewTrackingCompanyDialog.company?.name }}
+              </p>
+              <div class="text--primary">
+                <v-chip-group active-class="primary--text" column>
+                  <v-chip
+                    >totalDataGathered:
+                    {{
+                      showDataSize(
+                        viewTrackingCompanyDialog.company?.totalDataGathered
+                      )
+                    }}
+                  </v-chip>
+                  <v-chip
+                    >totalDataLearned:
+                    {{
+                      showDataSize(
+                        viewTrackingCompanyDialog.company?.totalDataLearned
+                      )
+                    }}
+                  </v-chip>
+                </v-chip-group>
+              </div>
+            </v-row>
+            <v-row>
+              <v-chip-group mandatory active-class="primary--text">
+                <v-chip
+                  v-for="(tag, i) in viewTrackingCompanyDialog.company
+                    ?.userKPIs"
+                  :key="tag.name"
+                  @click="changeKPIChart(i)"
                 >
-                  De-Select this company
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-row>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            color="red darken-1"
-            text
-            @click="
-              () => {
-                addNewTrackingCompanyDialog.isOpen = false;
-              }
-            "
-          >
-            close
-          </v-btn>
-          <v-spacer></v-spacer>
+                  {{ tag.name }}
+                </v-chip>
+              </v-chip-group>
+              <v-spacer></v-spacer>
 
-          <v-btn
-            color="green darken-1"
-            text
-            @click="addCompanyToTrackingSystem"
-          >
-            Add Selected Companies
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- -------------------------Add New DIALOG   END------------------------- -->
-    <!-- -------------------------    DELETE DIALOG   Start------------------------- -->
-    <v-dialog v-model="deleteTrackingDialog.isOpen" max-width="500">
-      <v-card>
-        <v-card-title class="text-h5">
-          are you sure to delete this Tracked Company?
-        </v-card-title>
-
-        <v-card-actions>
-          <v-btn
-            color="red darken-1"
-            text
-            @click="deleteTrackingCompany(deleteTrackingDialog.companyId)"
-          >
-            Yes
-          </v-btn>
-          <v-spacer></v-spacer>
-
-          <v-btn
-            color="green darken-1"
-            text
-            @click="
-              () => {
-                deleteTrackingDialog.isOpen = false;
-                deleteTrackingDialog.companyId = '';
-              }
-            "
-          >
-            No
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- -------------------------    DELETE DIALOG   END------------------------- -->
-    <!-- -------------------------    Add NEW KPI Key DIALOG   Start------------------------- -->
-    <v-dialog v-model="addNewKpiKeyDialog.isOpen" max-width="550">
-      <v-card>
-        <v-card-title class="text-h5">
-          Adding new KPI key filters to the company.
-        </v-card-title>
-        <v-card-text>
-          <v-row>
-            <v-text-field
-              label="Enter KPI Name"
-              v-model="addNewKpiKeyDialog.name"
-              hide-details="auto"
-            ></v-text-field>
-          </v-row>
-          <v-row>
-            <v-text-field
-              v-model="addNewKpiKeyDialog.description"
-              label="Enter KPI Logic Commands"
-              hide-details="auto"
-            ></v-text-field>
-          </v-row>
-
-          <v-row>
-            <v-spacer></v-spacer>
+              <v-btn
+                text
+                color="green darken-1"
+                @click="
+                  openNewKpiDialog(viewTrackingCompanyDialog.company.companyId)
+                "
+                >+ Add New KPI</v-btn
+              >
+            </v-row>
+            <v-row>
+              <apexchart
+                :options="chartOptions"
+                :series="chartSeries"
+                type="line"
+                style="width: 100% !important"
+                height="300"
+              ></apexchart>
+            </v-row>
+          </v-card-text>
+          <v-card-actions>
             <v-btn
-              style="float: right"
+              color="red darken-1"
+              text
+              @click="
+                () => {
+                  deleteTrackingDialog.isOpen = true;
+                  deleteTrackingDialog.companyId =
+                    viewTrackingCompanyDialog.company.companyId;
+                }
+              "
+            >
+              Delete
+            </v-btn>
+            <v-spacer></v-spacer>
+
+            <v-btn
               color="green darken-1"
               text
-              @click="addNewKpiToUserKpiList(key)"
+              @click="
+                () => {
+                  viewTrackingCompanyDialog.isOpen = false;
+                  viewTrackingCompanyDialog.company = null;
+                }
+              "
             >
-              Add new KPI
+              close
             </v-btn>
-          </v-row>
-          <v-row>KPI Keys:</v-row>
-          <v-row v-for="key in addNewKpiKeyDialog.newSelectedKpiKeys">
-            <p>
-              {{ key.name }}:
-              {{ key.description ? key.description : "Default" }}
-            </p>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- -------------------------Add View DIALOG        END------------------------- -->
+      <!-- -------------------------Tracking Add new DIALOG START------------------------- -->
+      <v-dialog v-model="addNewTrackingCompanyDialog.isOpen">
+        <v-card>
+          <v-card-title class="text-h5">
+            Select Your Favorite Companies to Track
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-text-field
+                  label="Search your target company"
+                  :messages="[
+                    'this search input uses AI, feel free to talk with it and it will filter the companies based on your search command',
+                  ]"
+                  v-model="companyTrackSearchInput"
+                ></v-text-field>
+              </v-row>
+              <v-row>
+                <v-card
+                  v-for="company in addNewTrackingCompanyDialog.allCompanies"
+                  v-bind:key="company.companyId"
+                  class="mx-auto mt-5"
+                  max-width="300"
+                >
+                  <v-card-text>
+                    <p class="text-h4 text--primary">{{ company.name }}</p>
+                    <div class="text--primary">
+                      <v-chip-group active-class="primary--text" column>
+                        <v-chip
+                          >totalDataGathered:
+                          {{ showDataSize(company.totalDataGathered) }}
+                        </v-chip>
+                        <v-chip
+                          >totalDataLearned:
+                          {{ showDataSize(company.totalDataLearned) }}
+                        </v-chip>
+                      </v-chip-group>
+                    </div>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-btn
+                      v-if="!company.isSelectedAttr"
+                      text
+                      color="green"
+                      @click="
+                        () => {
+                          company.isSelectedAttr = true;
+                          viewTrackingCompanyDialog.company =
+                            addCompanyToTrackingSystem();
+                          viewTrackingCompanyDialog.isOpen = true;
+                          changeKPIChart(0);
+                        }
+                      "
+                    >
+                      Add for tracking company
+                    </v-btn>
+                    <v-btn
+                      v-else
+                      text
+                      color="red"
+                      @click="
+                        () => {
+                          company.isSelectedAttr = false;
+                        }
+                      "
+                    >
+                      De-Select this company
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-row></v-container
+            >
+          </v-card-text>
+          <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn v-if="hasKpiKey(key)" @click="addNewKpiToUserKpiList(key)"
-              >Add To KPI List</v-btn
+            <v-btn
+              color="red darken-1"
+              text
+              @click="
+                () => {
+                  addNewTrackingCompanyDialog.isOpen = false;
+                }
+              "
             >
-            <v-btn v-else @click="removeKpiToUserKpiList(key)"
-              >Remove From KPI list</v-btn
+              close
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- -------------------------Add New DIALOG   END------------------------- -->
+      <!-- -------------------------    DELETE DIALOG   Start------------------------- -->
+      <v-dialog v-model="deleteTrackingDialog.isOpen" max-width="500">
+        <v-card>
+          <v-card-title class="text-h5">
+            are you sure to delete this Tracked Company?
+          </v-card-title>
+
+          <v-card-actions>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="deleteTrackingCompany(deleteTrackingDialog.companyId)"
             >
-          </v-row>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            color="red darken-1"
-            text
-            @click="
-              () => {
-                addNewKpiKeyDialog.isOpen = false;
-                addNewKpiKeyDialog.description = '';
-                addNewKpiKeyDialog.name = '';
-                addNewKpiKeyDialog.kpiKeysList = [];
-              }
-            "
-          >
-            close
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- -------------------------    Add NEW KPI key DIALOG   END------------------------- -->
-  </v-container>
+              Yes
+            </v-btn>
+            <v-spacer></v-spacer>
+
+            <v-btn
+              color="green darken-1"
+              text
+              @click="
+                () => {
+                  deleteTrackingDialog.isOpen = false;
+                  deleteTrackingDialog.companyId = '';
+                }
+              "
+            >
+              No
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- -------------------------    DELETE DIALOG   END------------------------- -->
+      <!-- -------------------------    Add NEW KPI Key DIALOG   Start------------------------- -->
+      <v-dialog v-model="addNewKpiKeyDialog.isOpen" max-width="550">
+        <v-card>
+          <v-card-title class="text-h5">
+            Adding new KPI key filters to the company.
+          </v-card-title>
+          <v-card-text>
+            <v-tabs v-model="tab" dark grow center>
+              <v-tab
+                v-for="item in [
+                  { tab: 'Add KPI manually' },
+                  { tab: 'Talk with AI bot' },
+                ]"
+                :key="item.tab"
+              >
+                {{ item.tab }}
+              </v-tab>
+            </v-tabs>
+
+            <v-tabs-items v-model="tab">
+              <v-tab-item
+                v-for="item in [
+                  { tab: 'Add KPI manually', id: 0 },
+                  { tab: 'Talk with AI bot', id: 1 },
+                ]"
+                :key="item.id"
+              >
+                <v-container v-if="item.id == 0" style="margin-top: 15px">
+                  <v-row>
+                    <v-text-field
+                      label="Enter KPI Name"
+                      v-model="addNewKpiKeyDialog.name"
+                      hide-details="auto"
+                    ></v-text-field>
+                  </v-row>
+                  <v-row>
+                    <v-text-field
+                      v-model="addNewKpiKeyDialog.description"
+                      label="Enter KPI Logic Commands"
+                      hide-details="auto"
+                    ></v-text-field>
+                  </v-row>
+                  <v-row>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      style="float: right"
+                      color="green darken-1"
+                      text
+                      @click="addNewKpiToUserKpiList(key)"
+                    >
+                      Add new KPI
+                    </v-btn>
+                  </v-row>
+                </v-container>
+                <v-container v-if="item.id == 1">
+                  <v-row justify="space-around d-flex flex-column">
+                    <v-card
+                      v-for="message in chatModal.messages"
+                      :key="message.time"
+                      flat
+                    >
+                      <v-list-item
+                        :key="message.time"
+                        v-if="message.from != 'You'"
+                        class=""
+                      >
+                        <v-list-item-avatar class="align-self-start mr-2">
+                          <v-avatar size="40">
+                            <v-img src="https://via.placeholder.com/50"></v-img>
+                          </v-avatar>
+                        </v-list-item-avatar>
+                        <v-list-item-content class="received-message">
+                          <v-card color="primary darken-1" class="flex-none">
+                            <v-card-text
+                              class="white--text pa-2 d-flex flex-column"
+                            >
+                              <span class="text-caption"
+                                >{{ message.from }}
+                              </span>
+                              <span class="align-self-start text-subtitle-1">{{
+                                message.message
+                              }}</span>
+                              <span
+                                class="text-caption font-italic align-self-end"
+                                >{{ message.time }}</span
+                              >
+
+                              <span
+                                v-if="message.hasBTN"
+                                style="width: 100%; margin-top: 20px"
+                                class="align-self-start text-subtitle-1"
+                                ><hr />
+                                Did you satisfied out of this answer?</span
+                              >
+                            </v-card-text>
+                            <v-card-actions v-if="message.hasBTN">
+                              <v-spacer></v-spacer>
+                              <v-btn
+                                color="red"
+                                @click="
+                                  () => {
+                                    chatModal.situation = -1;
+                                    chatWithAIBtnSubmitted();
+                                  }
+                                "
+                              >
+                                No
+                              </v-btn>
+                              <v-btn
+                                color="green"
+                                @click="
+                                  () => {
+                                    chatModal.situation = 1;
+                                    chatWithAIBtnSubmitted();
+                                  }
+                                "
+                              >
+                                Yes
+                              </v-btn>
+                            </v-card-actions>
+                          </v-card>
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-list-item v-else :key="message.time + '1'">
+                        <v-list-item-content class="sent-message justify-end">
+                          <v-card color="primary" class="flex-none">
+                            <v-card-text
+                              class="white--text pa-2 d-flex flex-column"
+                            >
+                              <span class="text-subtitle-1 chat-message">{{
+                                message.message
+                              }}</span>
+                              <span
+                                class="text-caption font-italic align-self-start"
+                                >{{ message.time.toUTCString() }}</span
+                              >
+                            </v-card-text>
+                          </v-card>
+                        </v-list-item-content>
+                        <v-list-item-avatar class="align-self-start ml-2">
+                          <v-img src="https://via.placeholder.com/50"></v-img>
+                        </v-list-item-avatar>
+                      </v-list-item>
+                    </v-card>
+                  </v-row>
+                  <v-row>
+                    <v-text-field
+                      v-model="chatModal.userCommand"
+                      :disabled="chatModal.isCommandInputDisabled"
+                      :messages="[
+                        'write your command for your KPI and AI machine will have a conversation with you.',
+                      ]"
+                    >
+                      <v-btn
+                        slot="append"
+                        text
+                        @click="chatWithAIBtnSubmitted"
+                        :disabled="chatModal.isCommandInputDisabled"
+                      >
+                        <v-icon color="primary"> mdi-send </v-icon>
+                      </v-btn>
+                    </v-text-field>
+                  </v-row>
+                </v-container>
+              </v-tab-item>
+            </v-tabs-items>
+
+            <v-row style="margin-top: 15px"> </v-row>
+            <v-row>KPI Keys:</v-row>
+            <v-row v-for="key in addNewKpiKeyDialog.newSelectedKpiKeys">
+              <p>
+                {{ key.name }}:
+                {{ key.description ? key.description : "Default" }}
+              </p>
+              <v-spacer></v-spacer>
+              <v-btn v-if="hasKpiKey(key)" @click="addNewKpiToUserKpiList(key)"
+                >Add To KPI List</v-btn
+              >
+              <v-btn v-else @click="removeKpiToUserKpiList(key)"
+                >Remove From KPI list</v-btn
+              >
+            </v-row>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="
+                () => {
+                  addNewKpiKeyDialog.isOpen = false;
+                  addNewKpiKeyDialog.description = '';
+                  addNewKpiKeyDialog.name = '';
+                  addNewKpiKeyDialog.kpiKeysList = [];
+                }
+              "
+            >
+              close
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- -------------------------    Add NEW KPI key DIALOG   END------------------------- -->
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -428,6 +613,25 @@ export default {
       title: "Tracking",
     };
   },
+  watch: {
+    companyTrackSearchInput(newVal) {
+      if (newVal) {
+        this.addNewTrackingCompanyDialog.allCompanies =
+          this.addNewTrackingCompanyDialog.allCompanies.filter((x) =>
+            x.name.toLowerCase().includes(newVal)
+          );
+      } else {
+        this.addNewTrackingCompanyDialog.allCompanies = api
+          .getStandardCompanyList(api.getCompanies(), api.getAiRobots())
+          .filter(
+            (z) =>
+              this.allTrackingSelectedCompanies.findIndex(
+                (k) => k.companyId == z.companyId
+              ) == -1
+          );
+      }
+    },
+  },
   mounted() {
     if (!api.getAuth()) window.location.href = "/login";
     // const allData = api.getFullUserData();
@@ -442,6 +646,7 @@ export default {
 
   data() {
     return {
+      tab: null,
       snackbar: {
         isOpen: false,
         text: "",
@@ -468,12 +673,98 @@ export default {
         company: null,
         selectedKpiIndex: 0,
       },
+      chatModal: {
+        isOpen: false,
+        messages: [
+          {
+            time: new Date(),
+            from: "robot",
+            message:
+              "Hello im your AI assistant, please describe me what kind of KPI do you want to add.",
+            hasBTN: false,
+          },
+        ],
+        userCommand: "",
+        situation: 0,
+        isCommandInputDisabled: false,
+      },
       allTrackingSelectedCompanies: [],
       chartSeries: [],
       chartOptions: {},
+      companyTrackSearchInput: "",
     };
   },
   methods: {
+    chatWithAIBtnSubmitted() {
+      if (this.chatModal.situation == 0) {
+        if (!this.chatModal.userCommand) {
+          this.fireSnack("please write your command first.");
+          return;
+        }
+        this.chatModal.messages.push({
+          time: new Date(),
+          from: "You",
+          message: this.chatModal.userCommand,
+          hasBTN: false,
+        });
+        this.chatModal.messages.push({
+          time: new Date(),
+          from: "robot",
+          message:
+            "Here is my information based on the data i learned: `Mauris luctus eleifend libero at finibus. Morbi et justo varius, convallis risus ut, rutrum nulla. Morbi suscipit facilisis egestas. Nunc sollicitudin accumsan massa et rutrum. Sed bibendum elit vel vulputate lacinia. Phasellus vel fringilla urna. Morbi rhoncus quis mauris quis sodales. do you satisfied out of my answer?`",
+          hasBTN: true,
+        });
+        this.chatModal.isCommandInputDisabled = true;
+        this.addNewKpiKeyDialog.description = this.chatModal.userCommand;
+        this.chatModal.userCommand = "";
+        return;
+      }
+      if (this.chatModal.situation == -1) {
+        this.chatModal.messages.map((x) => (x.hasBTN = false));
+        this.chatModal.messages.push({
+          time: new Date(),
+          from: "robot",
+          message:
+            "sorry my bad!, please give me more information so, i can help you better!",
+          hasBTN: false,
+        });
+        this.chatModal.isCommandInputDisabled = false;
+        this.chatModal.userCommand = "";
+        this.chatModal.situation = 0;
+        return;
+      }
+      if (this.chatModal.situation == 1) {
+        this.chatModal.messages.map((x) => (x.hasBTN = false));
+        this.chatModal.messages.push({
+          time: new Date(),
+          from: "robot",
+          message: "Yay, now please give me a name as tag for this KPI",
+          hasBTN: false,
+        });
+        this.chatModal.isCommandInputDisabled = false;
+        this.chatModal.userCommand = "";
+        this.chatModal.situation = 2;
+        return;
+      }
+      if (this.chatModal.situation == 2) {
+        this.chatModal.isCommandInputDisabled = true;
+        this.fireSnack("your new KPI added to the KPIs list for this Asset.");
+        this.addNewKpiKeyDialog.name = this.chatModal.userCommand;
+        this.chatModal.isOpen = false;
+        this.chatModal.situation = 0;
+        this.chatModal.userCommand = "";
+        this.chatModal.messages = [
+          {
+            time: new Date(),
+            from: "robot",
+            message:
+              "Hello im your AI assistant, please describe me what kind of KPI do you want to add.",
+            hasBTN: false,
+          },
+        ];
+        this.addNewKpiToUserKpiList(null);
+      }
+    },
     hasKpiKey(tag) {
       const foundedKpi = this.addNewKpiKeyDialog.kpiKeysList.find(
         (x) => x.name == tag.name
@@ -561,14 +852,19 @@ export default {
     },
     viewTrackingCompany(company) {},
     addCompanyToTrackingSystem() {
+      let IndexOfSelectedCompany = -1;
       this.addNewTrackingCompanyDialog.allCompanies.map((company) => {
         if (company.isSelectedAttr) {
           this.allTrackingSelectedCompanies.push(company);
+          IndexOfSelectedCompany = this.allTrackingSelectedCompanies.length - 1;
         }
       });
       api.saveTrackingKPIs(this.allTrackingSelectedCompanies);
-      this.fireSnack("Companies added successfully!");
+      this.fireSnack(
+        "Company added successfully, now please configure your KPIs for this asset"
+      );
       this.init();
+      return this.allTrackingSelectedCompanies[IndexOfSelectedCompany];
     },
     changeKPIChart(kpiIndex) {
       this.chartSeries = [

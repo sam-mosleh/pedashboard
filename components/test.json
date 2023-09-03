@@ -1,149 +1,169 @@
-{
-  "companyId": "Google_lwkr234h34u8743754q3fg2",
-  "name": "Google",
-  "score": "96",
-  "hqLocation": "Mountain View, USA",
-  "revenueSize": "$320M",
-  "industry": "Technology",
-  "insight": {
-    "aiDescription": "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-    "standardDueDiligence": {
-      "commercial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-      "financial": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-      "legal": "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-      "it": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. "
-    },
-    "alternativeInsights": {
-      "keyFeaters": "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-      "keyRisks": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-      "keyUpsides": "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. "
-    }
-  },
-  "sellChance": "0.3",
-  "recommendation": {
-    "gatheringChannels": [
+[
+  {
+    "id": "falcon_3424fcw3f",
+    "name": "Falcon 40B",
+    "totalDataGatheredFromAllUsers": 200000,
+    "totalDataLearnedFromAllUsers": 120000,
+    "totalUsed": 25,
+    "totalTrainedAssetsFromAllUsers": 2000,
+    "megaModels": [
       {
-        "id": "twitter_h43u3049857",
-        "name": "Twitter (X)",
-        "imgSRC": "../../twitter.webp",
-        "lastUpdate": "2023-08-31T09:56:43.064Z",
-        "getteredData": 594,
-        "aiModelsID": "falcon_3424fcw3f",
-        "totalDataToGather": 594,
-        "dataGatheringPerMinutes": 1,
-        "aiLearnedDataSize": 594,
-        "aiLearningDataSizePerMinutes": 2,
-        "isDataGatheringFinished": true,
-        "isDataLearningFinished": true,
-        "dataGatheringProcessingPercentage": 100,
-        "dataLearningProcessingPercentage": 100
+        "id": "mega-model-1235",
+        "name": "mega model 1",
+        "iqLevel": 83,
+        "benchMark": 80,
+        "lastMonthIqLevel": 20
       },
       {
-        "id": "news_h43u3049857",
-        "name": "Google",
-        "imgSRC": "../../google.png",
-        "lastUpdate": "2023-08-30",
-        "getteredData": 3500,
-        "aiModelsID": "gpt4_5_3424fcw3f",
-        "totalDataToGather": 3500,
-        "dataGatheringPerMinutes": 1,
-        "aiLearnedDataSize": 3500,
-        "aiLearningDataSizePerMinutes": 2,
-        "isDataGatheringFinished": true,
-        "isDataLearningFinished": true,
-        "dataGatheringProcessingPercentage": 100,
-        "dataLearningProcessingPercentage": 100
+        "id": "mega-model-12351",
+        "name": "mega model 2",
+        "iqLevel": 83,
+        "benchMark": 80,
+        "lastMonthIqLevel": 20
       }
     ],
-    "recommended": false
-  },
-  "objectRefrence": "company",
-  "isSelectedAttr": false,
-  "totalProcessingPercentage": 100,
-  "totalAIProcessingPercentage": 100,
-  "totalDataGatheringProcessingPercentage": 100,
-  "assetPhase": 2,
-  "uploadedFiles": ["file1.pdf", "file2.docx", "file3.xls"],
-  "totalDataLearned": 4094,
-  "totalDataGathered": 4094,
-  "completeness": 100,
-  "chatBot": {
-    "falcon_3424fcw3f": [
+    "selectedMegaModels": [],
+    "forkedModels": [
       {
-        "isRobot": false,
-        "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        "id": "forked-model-12353f1",
+        "name": "forked model 1",
+        "iqLevel": 83,
+        "benchMark": 82,
+        "lastMonthIqLevel": 20
       },
       {
-        "isRobot": true,
-        "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        "id": "forked-model-12354f2",
+        "name": "forked model 2",
+        "iqLevel": 33,
+        "benchMark": 20,
+        "lastMonthIqLevel": 30
+      },
+      {
+        "id": "forked-model-12355f3",
+        "name": "forked model 3",
+        "iqLevel": 73,
+        "benchMark": 53,
+        "lastMonthIqLevel": 20
+      },
+      {
+        "id": "forked-model-12355f4",
+        "name": "forked model 4",
+        "iqLevel": 44,
+        "benchMark": 43,
+        "lastMonthIqLevel": 40
       }
     ],
-    "gpt4_5_3424fcw3f": [
+    "selectedForkedModels": [
       {
-        "isRobot": false,
-        "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        "id": "forked-model-12353f1",
+        "name": "forked model 1",
+        "iqLevel": 83,
+        "benchMark": 82,
+        "lastMonthIqLevel": 20
       },
       {
-        "isRobot": true,
-        "message": "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. "
+        "id": "forked-model-12354f2",
+        "name": "forked model 2",
+        "iqLevel": 33,
+        "benchMark": 20,
+        "lastMonthIqLevel": 30
+      },
+      {
+        "id": "forked-model-12355f3",
+        "name": "forked model 3",
+        "iqLevel": 73,
+        "benchMark": 53,
+        "lastMonthIqLevel": 20
       }
-    ]
+    ],
+    "totalUploadedDocsFromUser": 15,
+    "totalDataLearnedFromUser": 3383,
+    "totalDataGatheredFromUser": 3383,
+    "totalCompleteness": "100.00",
+    "nickName": "Model-1"
   },
-  "userKPIs": [
-    {
-      "name": "A",
-      "data": [
-        { "date": "Jan", "value": 77 },
-        { "date": "Feb", "value": 77 },
-        { "date": "Mar", "value": 63 },
-        { "date": "Apr", "value": 73 },
-        { "date": "May", "value": 57 },
-        { "date": "Jun", "value": 38 },
-        { "date": "Jul", "value": 54 },
-        { "date": "Aug", "value": 27 },
-        { "date": "Sep", "value": 29 },
-        { "date": "Oct", "value": 14 },
-        { "date": "Nov", "value": 93 },
-        { "date": "Dec", "value": 93 }
-      ],
-      "description": ""
-    },
-    {
-      "name": "B",
-      "data": [
-        { "date": "Jan", "value": 43 },
-        { "date": "Feb", "value": 89 },
-        { "date": "Mar", "value": 83 },
-        { "date": "Apr", "value": 44 },
-        { "date": "May", "value": 66 },
-        { "date": "Jun", "value": 95 },
-        { "date": "Jul", "value": 96 },
-        { "date": "Aug", "value": 57 },
-        { "date": "Sep", "value": 81 },
-        { "date": "Oct", "value": 41 },
-        { "date": "Nov", "value": 8 },
-        { "date": "Dec", "value": 43 }
-      ],
-      "description": ""
-    },
-    {
-      "name": "C",
-      "data": [
-        { "date": "Jan", "value": 99 },
-        { "date": "Feb", "value": 55 },
-        { "date": "Mar", "value": 48 },
-        { "date": "Apr", "value": 43 },
-        { "date": "May", "value": 33 },
-        { "date": "Jun", "value": 23 },
-        { "date": "Jul", "value": 86 },
-        { "date": "Aug", "value": 10 },
-        { "date": "Sep", "value": 67 },
-        { "date": "Oct", "value": 55 },
-        { "date": "Nov", "value": 41 },
-        { "date": "Dec", "value": 99 }
-      ],
-      "description": ""
-    }
-  ],
-  "readyToBuy": false
-}
+  {
+    "id": "gpt4_5_3424fcw3f",
+    "name": "GPT4.5",
+    "totalDataGatheredFromAllUsers": 2000000,
+    "totalDataLearnedFromAllUsers": 147600,
+    "totalUsed": 107,
+    "totalTrainedAssetsFromAllUsers": 8149,
+    "megaModels": [
+      {
+        "id": "mega-model-12353",
+        "name": "mega model 3",
+        "iqLevel": 83,
+        "benchMark": 82,
+        "lastMonthIqLevel": 20
+      },
+      {
+        "id": "mega-model-12354",
+        "name": "mega model 4",
+        "iqLevel": 33,
+        "benchMark": 20,
+        "lastMonthIqLevel": 20
+      },
+      {
+        "id": "mega-model-12355",
+        "name": "mega model 5",
+        "iqLevel": 43,
+        "benchMark": 53,
+        "lastMonthIqLevel": 20
+      }
+    ],
+    "selectedMegaModels": [
+      {
+        "id": "mega-model-12353",
+        "name": "mega model 3",
+        "iqLevel": 83,
+        "benchMark": 82,
+        "lastMonthIqLevel": 20
+      },
+      {
+        "id": "mega-model-12354",
+        "name": "mega model 4",
+        "iqLevel": 33,
+        "benchMark": 20,
+        "lastMonthIqLevel": 20
+      }
+    ],
+    "forkedModels": [
+      {
+        "id": "forked-model-12353f5",
+        "name": "forked model 5",
+        "iqLevel": 83,
+        "benchMark": 82,
+        "lastMonthIqLevel": 20
+      },
+      {
+        "id": "forked-model-12354f6",
+        "name": "forked model 6",
+        "iqLevel": 33,
+        "benchMark": 20,
+        "lastMonthIqLevel": 20
+      },
+      {
+        "id": "forked-model-12355f7",
+        "name": "forked model 7",
+        "iqLevel": 43,
+        "benchMark": 53,
+        "lastMonthIqLevel": 20
+      }
+    ],
+    "selectedForkedModels": [
+      {
+        "id": "forked-model-12353f5",
+        "name": "forked model 5",
+        "iqLevel": 83,
+        "benchMark": 82,
+        "lastMonthIqLevel": 20
+      }
+    ],
+    "totalUploadedDocsFromUser": 15,
+    "totalDataLearnedFromUser": 46500,
+    "totalDataGatheredFromUser": 46500,
+    "totalCompleteness": "100.00",
+    "nickName": "Model-2"
+  }
+]

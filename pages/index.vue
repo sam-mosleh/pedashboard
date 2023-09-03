@@ -2,10 +2,13 @@
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
       <v-card>
-        <v-card-title class="headline">
+        <v-card-title class="headline" v-if="isLoggedOut">
           Welcome to AI investment dashboard
         </v-card-title>
-        <v-card-text>
+        <v-card-title class=" " style="text-align: center" v-else>
+          Redirecting ...
+        </v-card-title>
+        <v-card-text v-if="isLoggedOut">
           AI investment is a cutting-edge service powered by artificial
           intelligence (AI) that revolutionizes the way investors make informed
           decisions. It is designed to support investors by providing a
@@ -20,8 +23,11 @@
           weaknesses, risks, and growth potential of a particular investment
           opportunity.
         </v-card-text>
+
         <v-card-actions>
-          <v-btn to="login"> Log-in to AI-Based Due Diligence Service </v-btn>
+          <v-btn v-if="isLoggedOut" to="login">
+            Log-in to AI-Based Due Diligence Service
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -29,8 +35,17 @@
 </template>
 
 <script>
+import api from "@/components/API";
 export default {
   name: "IndexPage",
-  mounted() {},
+  mounted() {
+    this.isLoggedOut = !api.getAuth();
+    if (!this.isLoggedOut) window.location.href = "/dashboard";
+  },
+  data() {
+    return {
+      isLoggedIn: false,
+    };
+  },
 };
 </script>

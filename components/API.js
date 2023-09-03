@@ -535,65 +535,7 @@ export default {
         },
         objectRefrence: "company",
       },
-      {
-        companyId: "Nissan_lwkr234h34u8743754q3fg2",
-        name: "Nissan",
-        score: "72",
-        hqLocation: "Yokohama, Japan",
-        revenueSize: "$11M",
-        industry: "Car",
-        insight: {
-          aiDescription:
-            "Apple, known for its innovative products like the iPhone, iPad, and Mac, has played a pivotal role in shaping the tech industry. Its design-driven approach and ecosystem of devices and services have garnered a massive global following.",
-          standardDueDiligence: {
-            commercial:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum, nunc nec euismod iaculis, magna magna mollis dui, in euismod ipsum libero ornare mauris. Aliquam vestibulum est at ipsum eleifend, nec auctor ante sagittis. Ut ultricies consectetur ipsum, et dapibus velit. Phasellus sapien risus, venenatis eget leo ut, aliquet tempus lectus. Integer luctus placerat porta. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin nec purus lobortis neque ornare cursus vitae bibendum nisi. Vestibulum commodo, purus bibendum volutpat sollicitudin, mi eros placerat odio, vel molestie augue tellus id tellus. Mauris vel semper arcu, id imperdiet libero. Phasellus euismod arcu nec ex consequat, ultrices aliquet purus gravida. Donec porta vestibulum euismod. In eu tellus facilisis, iaculis diam ultricies, malesuada tellus. Nulla faucibus mi tortor, pharetra auctor nulla tempor sit amet. Maecenas mattis ut erat eget rhoncus. Mauris ante felis, semper quis tellus at, convallis rhoncus lorem. ",
-            financial:
-              "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-            legal:
-              "Praesent tincidunt ipsum dui, et posuere dolor pretium finibus. Vivamus in tristique sapien, sed dictum sem. Ut lacinia ullamcorper elit volutpat faucibus. Duis at metus quis magna tempor porta quis quis quam. Cras finibus facilisis est, sit amet eleifend libero vulputate ac. Pellentesque sagittis tempor dui sed placerat. Pellentesque viverra molestie fringilla. Donec iaculis dictum eleifend. Donec nec est fermentum, posuere justo eget, suscipit nibh. ",
-            it: "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-          },
-          alternativeInsights: {
-            keyFeaters:
-              "Duis metus odio, lacinia a fermentum vitae, dignissim auctor urna. Aliquam malesuada congue sapien, vel condimentum orci tempor sed. Ut sit amet accumsan purus, et laoreet sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in velit a ex iaculis malesuada. Praesent porttitor, ex et convallis pharetra, est lectus dapibus felis, maximus pellentesque orci nulla mollis quam. Vestibulum condimentum, est et aliquam pulvinar, turpis lectus commodo sapien, ac interdum eros est ac quam. Nunc fermentum mauris a blandit sollicitudin. ",
-            keyRisks:
-              "Nullam in tellus aliquam, semper risus ac, pharetra est. Sed blandit elit varius ipsum porttitor molestie. Curabitur sollicitudin luctus mauris, ac commodo dolor molestie at. Curabitur rutrum massa nisi, eget auctor turpis semper vitae. Nullam in justo non nisl viverra auctor. Nam posuere consequat ante at vestibulum. In hac habitasse platea dictumst. Mauris tristique dui eget est pharetra mollis. Proin sodales ipsum quis vestibulum tincidunt. Nunc sem eros, vestibulum vitae interdum nec, bibendum vel mauris. ",
-            keyUpsides:
-              "Sed ac efficitur sem. Aenean aliquet odio vitae tempor suscipit. Etiam ut sapien elementum, sollicitudin dui ut, euismod lectus. Cras dictum dui eu mi gravida fringilla. Nullam vitae magna et tortor tempus laoreet. Praesent imperdiet velit in cursus cursus. Nulla tristique imperdiet ligula quis malesuada. Curabitur laoreet sapien massa, a pharetra magna egestas a. Integer convallis vulputate sodales. Suspendisse ut interdum ante. Vivamus mattis a mi sit amet consequat. Vivamus imperdiet molestie consequat. Sed vel sapien felis. Vestibulum tempus viverra ipsum faucibus commodo. Phasellus nec ante vitae nunc aliquam eleifend. ",
-          },
-        },
-        sellChance: "0.3",
-        recommendation: {
-          gatheringChannels: [
-            {
-              id: "twitter_h43u3049857",
-              name: "Twitter (X)",
-              imgSRC: "../../twitter.webp",
-              lastUpdate: "2023-08-31T09:56:43.064Z",
-              getteredData: 220,
-              aiModelsID: "falcon_3424fcw3f",
-              totalDataToGather: 594,
-              dataGatheringPerMinutes: 1,
-              aiLearnedDataSize: 0,
-              aiLearningDataSizePerMinutes: 2,
-            },
-            {
-              id: "news_h43u3049857",
-              name: "Google",
-              imgSRC: "../../google.png",
-              lastUpdate: "2023-08-30",
-              getteredData: 14500,
-              aiModelsID: "gpt4_5_3424fcw3f",
-              totalDataToGather: 14500,
-              dataGatheringPerMinutes: 1,
-              aiLearnedDataSize: 802,
-              aiLearningDataSizePerMinutes: 2,
-            },
-          ],
-        },
-        objectRefrence: "company",
-      },
+
       {
         companyId: "Walmart_lwkr234h34u8743754q3fg2",
         name: "Walmart",
@@ -1872,17 +1814,20 @@ export default {
       {
         name: "A",
         data: [],
-        description: "",
+        description:
+          "This KPI is suggested by current AI machine for your company",
       },
       {
         name: "B",
         data: [],
-        description: "",
+        description:
+          "This KPI is suggested by current AI machine for your company",
       },
       {
         name: "C",
         data: [],
-        description: "",
+        description:
+          "This KPI is suggested by current AI machine for your company",
       },
     ];
   },

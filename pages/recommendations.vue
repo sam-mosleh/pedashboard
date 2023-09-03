@@ -130,7 +130,7 @@
 <script>
 import utils from "@/components/utils";
 export default {
-  name: 'Recommendation Page',
+  name: 'RecommendationPage',
   data () {
     return {
       expanded: [],
