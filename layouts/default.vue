@@ -73,25 +73,25 @@ export default {
           to: "/dashboard/recommendations",
         },
         {
+          icon: "mdi-radar",
+          title: "Track",
+          to: "/dashboard/tracking",
+        },
+        {
           icon: "mdi-head-lightbulb",
           title: "Insight",
           to: "/dashboard/deal_insights",
         },
-        // {
-        //   icon: "mdi-text-box-search",
-        //   title: "Full Due Diligence",
-        //   to: "dd",
-        // },
+        {
+          icon: "mdi-text-box-search",
+          title: "Data",
+          to: "/dashboard/dataCollector",
+        },
         // {
         //   icon: "mdi-handshake",
         //   title: "Deal Sourcing",
         //   to: "/deal_sourcing",
         // },
-        {
-          icon: "mdi-radar",
-          title: "Track",
-          to: "/dashboard/tracking",
-        },
         {
           icon: "mdi-projector-screen-variant-outline",
           title: "Trained Models",

@@ -382,6 +382,73 @@
           ></v-data-table>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+          <v-card class="cart-data" min-width="100%">
+            <v-card-text class="text--primary">
+              <v-btn
+                class="d-flex flex-row ms-auto me-2 mt-2"
+                style="
+                  background: black;
+                  color: white;
+                  border-radius: 30px;
+                  text-transform: capitalize;
+                "
+                @click="redirect('/dashboard/dataCollector')"
+                >View</v-btn
+              >
+              <v-row>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 2rem;
+                    line-height: 2.75rem;
+                    font-weight: 700;
+                    color: white;
+                    text-align: center;
+                    width: 100%;
+                    display: block;
+                  "
+                >
+                  100Tb of Data
+                </p>
+              </v-row>
+              <v-row>
+                <v-col cols="4" class="item-border">
+                  <v-row>
+                    <p class="item-text-show-position">75Tb of Public Data</p>
+                  </v-row>
+                  <v-row>
+                    <p class="item-text-show-position">95% Trained</p>
+                  </v-row>
+                </v-col>
+                <v-col cols="4" class="item-border">
+                  <v-row>
+                    <p class="item-text-show-position">
+                      25Tb of Proprietary Data
+                    </p>
+                  </v-row>
+                  <v-row>
+                    <p class="item-text-show-position">75% Trained</p>
+                  </v-row>
+                </v-col>
+                <v-col
+                  cols="4"
+                  class="item-border"
+                  style="border-right: 0px!important; border-right-style: none:  !important;"
+                >
+                  <v-row>
+                    <p class="item-text-show-position">5Tb of Target Data</p>
+                  </v-row>
+                  <v-row>
+                    <p class="item-text-show-position">97% Trained</p>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
       <v-row class="cart-models-trained" style="margin-top: 10px">
         <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
           <v-card class="cart-models-trained">
@@ -797,5 +864,30 @@ export default {
     rgb(255, 197, 44) 94.53%
   );
   color: white !important;
+}
+.cart-data {
+  background: linear-gradient(
+    78.84deg,
+    rgb(60, 192, 0) 8.24%,
+    rgb(35, 131, 141) 91.76%
+  ) !important;
+  padding-top: 10px !important;
+  padding-bottom: 2px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  color: white !important;
+}
+.item-text-show-position {
+  font-size: 1.9rem;
+  line-height: 1.85rem;
+  font-weight: 300;
+  color: white;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+.item-border {
+  border-right: 2px;
+  border-right-style: dashed;
 }
 </style>
