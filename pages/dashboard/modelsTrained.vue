@@ -140,8 +140,8 @@
         <v-tabs v-model="tab" dark grow center>
           <v-tab
             v-for="item in [
-              { tab: 'Add KPI manually' },
-              { tab: 'Talk with AI bot' },
+              { tab: 'Mega Models' },
+              { tab: 'Connected Forked Models Assets' },
             ]"
             :key="item.tab"
           >
@@ -153,7 +153,7 @@
           <v-tab-item
             v-for="item in [
               { tab: 'Mega Models', id: 0 },
-              { tab: 'Forked Models', id: 1 },
+              { tab: 'Connected Forked Models Assets', id: 1 },
             ]"
             :key="item.id"
           >
@@ -236,46 +236,51 @@
                           {{ company.name }}
                         </p>
                         <v-spacer></v-spacer>
-                        <v-btn
-                          text
-                          color="green"
-                          @click="
-                            () => {
-                              fireSnack(
-                                `${company.name.replace(
-                                  ' ',
-                                  ''
-                                )}-${+new Date()}.pdf Sent to your email!`
-                              );
-                            }
-                          "
-                        >
-                          Download Report
-                        </v-btn>
                       </v-row>
                       <v-row>
                         <div class="text--primary">
                           <v-chip-group active-class="primary--text" column>
                             <v-chip
-                              :color="`${
-                                company.userKPIs.length == 0 ? 'red' : ''
-                              }`"
-                              >Selected KPIs:
-                              {{ company.userKPIs.length }}</v-chip
+                              v-for="i in company.recommendation
+                                .gatheringChannels"
+                              color="green"
+                              >Forked from:
+                              {{ generateForkedModelsRelation(i) }}</v-chip
                             >
-                            <v-chip v-if="company.readyToBuy" color="green"
-                              >Ready to Buy</v-chip
+                            <v-chip
+                              >Data Size:
+                              {{
+                                showDataSize(company.totalDataGathered)
+                              }}</v-chip
+                            >
+                            <v-chip
+                              >Trained Data Size:
+                              {{
+                                showDataSize(company.totalDataLearned)
+                              }}</v-chip
                             >
                           </v-chip-group>
                         </div>
-                        <div
-                          class="text--primary"
-                          v-if="company.userKPIs.length == 0"
-                        >
-                          you need to add KPI to this company!
-                        </div>
                       </v-row>
                     </v-card-text>
+                    <v-card-actions>
+                      <v-btn
+                        text
+                        color="green"
+                        @click="
+                          () => {
+                            fireSnack(
+                              `${company.name.replace(
+                                ' ',
+                                ''
+                              )}-${+new Date()}.pdf Sent to your email!`
+                            );
+                          }
+                        "
+                      >
+                        Download Report
+                      </v-btn>
+                    </v-card-actions>
                   </v-card>
                 </v-col>
               </v-row>
@@ -536,6 +541,9 @@ export default {
       this.snackbar.text = text;
       this.snackbar.isOpen = true;
     },
+    showDataSize(dataSize) {
+      return api.dataSizeSerializer(dataSize);
+    },
     fillTrainedModelsTableItems() {
       const iqLevel = {
         forkedModel: 0,
@@ -663,7 +671,13 @@ export default {
       });
       this.fillTrainedModelsTableItems();
       this.allSavedCompanies = api.getAllCompanies();
-      console.log(JSON.stringify(this.allUserAiRobots));
+
+      console.log("kir", JSON.stringify(this.allSavedCompanies));
+    },
+    generateForkedModelsRelation(company) {
+      return this.allUserAiRobots[
+        this.allUserAiRobotsIds.findIndex((z) => z == company.aiModelsID)
+      ].name;
     },
     addNewAiRobot() {
       if (
@@ -703,9 +717,7 @@ export default {
     getRobotModelFromId(robotId) {
       return api.getAiRobots().find((x) => x.id == robotId).name;
     },
-    showDataSize(dataSize) {
-      return api.dataSizeSerializer(dataSize);
-    },
+
     deleteRobotModelAndSave() {
       const index = this.allUserAiRobots.findIndex(
         (x) => x.id == this.robotDeleteDialog.robotId

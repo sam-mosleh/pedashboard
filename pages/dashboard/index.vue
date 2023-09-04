@@ -383,68 +383,110 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+        <v-col
+          cols="12"
+          sm="12"
+          md="12"
+          lg="12"
+          xl="12"
+          xxl="12"
+          style="padding: 1px 0px 1px 0px"
+        >
           <v-card class="cart-data" min-width="100%">
             <v-card-text class="text--primary">
-              <v-btn
-                class="d-flex flex-row ms-auto me-2 mt-2"
-                style="
-                  background: black;
-                  color: white;
-                  border-radius: 30px;
-                  text-transform: capitalize;
-                "
-                @click="redirect('/dashboard/dataCollector')"
-                >View</v-btn
-              >
               <v-row>
-                <p
-                  class="text-center"
-                  style="
-                    font-size: 2rem;
-                    line-height: 2.75rem;
-                    font-weight: 700;
-                    color: white;
-                    text-align: center;
-                    width: 100%;
-                    display: block;
-                  "
-                >
-                  100Tb of Data
-                </p>
+                <v-col cols="12" sm="12" md="4" lg="3" xl="3" xxl="3">
+                  <v-card class="cart-data">
+                    <v-btn
+                      class="d-flex flex-row ms-auto me-2 mt-2"
+                      style="
+                        background: black;
+                        color: white;
+                        border-radius: 30px;
+                        text-transform: capitalize;
+                      "
+                      @click="redirect('/dashboard/dataCollector')"
+                      >View</v-btn
+                    >
+
+                    <v-col class="justify-space-between align-center h-100">
+                      <p
+                        class="text-center"
+                        style="
+                          font-size: 2rem;
+                          line-height: 2.75rem;
+                          font-weight: 700;
+                        "
+                      >
+                        100Tb
+                      </p>
+                      <p
+                        class="text-center"
+                        style="
+                          font-size: 1.2rem;
+                          line-height: 1.5rem;
+                          font-weight: 700;
+                        "
+                      >
+                        Gathered Data
+                      </p>
+                    </v-col>
+                  </v-card>
+                </v-col>
+                <v-col cols="12" sm="12" md="8" lg="9" xl="9" xxl="9">
+                  <v-row class="item-border">
+                    <v-col>
+                      <p class="item-text-show-position">75Tb of Public Data</p>
+                    </v-col>
+                    <v-col>
+                      <p class="item-text-show-position-2">95% Trained</p>
+                    </v-col>
+                  </v-row>
+                  <v-row
+                    ><div
+                      style="
+                        height: 2px;
+                        width: 65%;
+                        margin: 0px auto 10px;
+                        border-style: dashed;
+                        border-color: rgb(94, 47, 164);
+                        border-width: 2px;
+                      "
+                    ></div
+                  ></v-row>
+                  <v-row class="item-border">
+                    <v-col>
+                      <p class="item-text-show-position">
+                        25Tb of Proprietary Data
+                      </p>
+                    </v-col>
+                    <v-col>
+                      <p class="item-text-show-position-2">75% Trained</p>
+                    </v-col>
+                  </v-row>
+                  <v-row
+                    ><div
+                      style="
+                        height: 2px;
+                        width: 65%;
+                        margin: 0px auto 10px;
+                        border-style: dashed;
+                        border-color: rgb(94, 47, 164);
+                        border-width: 2px;
+                      "
+                    ></div
+                  ></v-row>
+                  <v-row class="item-border">
+                    <v-col>
+                      <p class="item-text-show-position">5Tb of Target Data</p>
+                    </v-col>
+                    <v-col>
+                      <p class="item-text-show-position-2">97% Trained</p>
+                    </v-col>
+                  </v-row>
+                </v-col>
               </v-row>
-              <v-row>
-                <v-col cols="4" class="item-border">
-                  <v-row>
-                    <p class="item-text-show-position">75Tb of Public Data</p>
-                  </v-row>
-                  <v-row>
-                    <p class="item-text-show-position">95% Trained</p>
-                  </v-row>
-                </v-col>
-                <v-col cols="4" class="item-border">
-                  <v-row>
-                    <p class="item-text-show-position">
-                      25Tb of Proprietary Data
-                    </p>
-                  </v-row>
-                  <v-row>
-                    <p class="item-text-show-position">75% Trained</p>
-                  </v-row>
-                </v-col>
-                <v-col
-                  cols="4"
-                  class="item-border"
-                  style="border-right: 0px!important; border-right-style: none:  !important;"
-                >
-                  <v-row>
-                    <p class="item-text-show-position">5Tb of Target Data</p>
-                  </v-row>
-                  <v-row>
-                    <p class="item-text-show-position">97% Trained</p>
-                  </v-row>
-                </v-col>
-              </v-row>
+              <!-- ============================ -->
             </v-card-text>
           </v-card>
         </v-col>
@@ -882,12 +924,19 @@ export default {
   line-height: 1.85rem;
   font-weight: 300;
   color: white;
-  text-align: center;
+  text-align: left;
+  display: block;
+  width: 100%;
+}
+.item-text-show-position-2 {
+  font-size: 1.9rem;
+  line-height: 1.85rem;
+  font-weight: 300;
+  color: white;
+  text-align: right;
   display: block;
   width: 100%;
 }
 .item-border {
-  border-right: 2px;
-  border-right-style: dashed;
 }
 </style>

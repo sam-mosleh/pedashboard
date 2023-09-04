@@ -902,6 +902,7 @@ export default {
           description: this.addNewKpiKeyDialog.description,
         };
       }
+
       this.addNewKpiKeyDialog.newSelectedKpiKeys.push({
         name: kpiKey.name,
         data: [],

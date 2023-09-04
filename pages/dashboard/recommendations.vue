@@ -56,17 +56,17 @@
             >
           </v-row>
           <v-row style="" class="px-2">
-            <v-col cols="12" sm="12" md="12" lg="6" xl="6" xxl="6">
+            <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
               <v-slider
                 v-model="precisionVsRecall"
                 :thumb-size="28"
                 color="black"
                 thumb-label="always"
                 @change="filterByKPI"
-              ></v-slider>
-            </v-col>
-
-            <v-col cols="12" sm="12" md="12" lg="6" xl="6" xxl="6">
+              ></v-slider> </v-col
+          ></v-row>
+          <v-row>
+            <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
               <v-combobox
                 v-model="allSelectedKpiItems"
                 :items="
@@ -77,7 +77,7 @@
                 @change="filterByKPI"
                 chips
                 clearable
-                label="Select your favorite KPIs"
+                label="Select your Standard KPIs"
                 multiple
                 prepend-icon="mdi-filter-variant"
                 solo
@@ -93,6 +93,37 @@
                     <strong>{{ item }}</strong>
                   </v-chip>
                 </template>
+                <v-btn slot="append" @click="openNewKpiDialog(0)">+</v-btn>
+              </v-combobox>
+            </v-col>
+            <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
+              <v-combobox
+                v-model="allSelectedKpiItems"
+                :items="
+                  allSavedAlternativesKPIs.map((x) => {
+                    return x.name;
+                  })
+                "
+                @change="filterByKPI"
+                chips
+                clearable
+                label="Select your Alternatives KPIs"
+                multiple
+                prepend-icon="mdi-filter-variant"
+                solo
+              >
+                <template v-slot:selection="{ attrs, item, select, selected }">
+                  <v-chip
+                    v-bind="attrs"
+                    :input-value="selected"
+                    close
+                    @click="select"
+                    @click:close="removeKPI(item)"
+                  >
+                    <strong>{{ item }}</strong>
+                  </v-chip>
+                </template>
+                <v-btn slot="append" @click="openNewKpiDialog(1)">+</v-btn>
               </v-combobox>
             </v-col>
           </v-row>
@@ -702,6 +733,226 @@
         </v-card>
       </v-dialog>
       <!-- Search Filter Name Dialog END -->
+
+      <!-- -------------------------    Add NEW KPI Key DIALOG   Start------------------------- -->
+      <v-dialog v-model="addNewKpiKeyDialog.isOpen">
+        <v-card>
+          <v-card-title class="text-h5">
+            Adding new
+            {{ addNewKpiKeyDialog.type === 0 ? "Standard" : "Alternative" }} KPI
+            key filters to the company.
+          </v-card-title>
+          <v-card-text>
+            <v-tabs v-model="tab" dark grow center>
+              <v-tab
+                v-for="item in [
+                  { tab: 'Add KPI manually' },
+                  { tab: 'Talk with AI bot' },
+                ]"
+                :key="item.tab"
+              >
+                {{ item.tab }}
+              </v-tab>
+            </v-tabs>
+
+            <v-tabs-items v-model="tab">
+              <v-tab-item
+                v-for="item in [
+                  { tab: 'Add KPI manually', id: 0 },
+                  { tab: 'Talk with AI bot', id: 1 },
+                ]"
+                :key="item.id"
+              >
+                <v-container v-if="item.id == 0" style="margin-top: 15px">
+                  <v-row>
+                    <v-text-field
+                      label="Enter KPI Name"
+                      v-model="addNewKpiKeyDialog.name"
+                      hide-details="auto"
+                    ></v-text-field>
+                  </v-row>
+                  <v-row>
+                    <v-text-field
+                      v-model="addNewKpiKeyDialog.description"
+                      label="Enter KPI Logic Commands"
+                      hide-details="auto"
+                    ></v-text-field>
+                  </v-row>
+                  <v-row>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      style="float: right"
+                      color="green darken-1"
+                      text
+                      @click="addNewKpiToUserKpiList(key)"
+                    >
+                      Add new KPI
+                    </v-btn>
+                  </v-row>
+                </v-container>
+                <v-container v-if="item.id == 1">
+                  <v-row justify="space-around d-flex flex-column">
+                    <v-card
+                      v-for="message in chatModal.messages"
+                      :key="message.time"
+                      flat
+                    >
+                      <v-list-item
+                        :key="message.time"
+                        v-if="message.from != 'You'"
+                        class=""
+                      >
+                        <v-list-item-avatar class="align-self-start mr-2">
+                          <v-avatar size="40">
+                            <v-img src="https://via.placeholder.com/50"></v-img>
+                          </v-avatar>
+                        </v-list-item-avatar>
+                        <v-list-item-content class="received-message">
+                          <v-card color="primary darken-1" class="flex-none">
+                            <v-card-text
+                              class="white--text pa-2 d-flex flex-column"
+                            >
+                              <span class="text-caption"
+                                >{{ message.from }}
+                              </span>
+                              <span class="align-self-start text-subtitle-1">{{
+                                message.message
+                              }}</span>
+                              <span
+                                class="text-caption font-italic align-self-end"
+                                >{{ message.time }}</span
+                              >
+
+                              <span
+                                v-if="message.hasBTN"
+                                style="width: 100%; margin-top: 20px"
+                                class="align-self-start text-subtitle-1"
+                                ><hr />
+                                Did you satisfied out of this answer?</span
+                              >
+                            </v-card-text>
+                            <v-card-actions v-if="message.hasBTN">
+                              <v-spacer></v-spacer>
+                              <v-btn
+                                color="red"
+                                @click="
+                                  () => {
+                                    chatModal.situation = -1;
+                                    chatWithAIBtnSubmitted();
+                                  }
+                                "
+                              >
+                                No
+                              </v-btn>
+                              <v-btn
+                                color="green"
+                                @click="
+                                  () => {
+                                    chatModal.situation = 1;
+                                    chatWithAIBtnSubmitted();
+                                  }
+                                "
+                              >
+                                Yes
+                              </v-btn>
+                            </v-card-actions>
+                          </v-card>
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-list-item v-else :key="message.time + '1'">
+                        <v-list-item-content class="sent-message justify-end">
+                          <v-card color="primary" class="flex-none">
+                            <v-card-text
+                              class="white--text pa-2 d-flex flex-column"
+                            >
+                              <span class="text-subtitle-1 chat-message">{{
+                                message.message
+                              }}</span>
+                              <span
+                                class="text-caption font-italic align-self-start"
+                                >{{ message.time.toUTCString() }}</span
+                              >
+                            </v-card-text>
+                          </v-card>
+                        </v-list-item-content>
+                        <v-list-item-avatar class="align-self-start ml-2">
+                          <v-img src="https://via.placeholder.com/50"></v-img>
+                        </v-list-item-avatar>
+                      </v-list-item>
+                    </v-card>
+                  </v-row>
+                  <v-row>
+                    <v-text-field
+                      v-model="chatModal.userCommand"
+                      :disabled="chatModal.isCommandInputDisabled"
+                      :messages="[
+                        'write your command for your KPI and AI machine will have a conversation with you.',
+                      ]"
+                    >
+                      <v-btn
+                        slot="append"
+                        text
+                        @click="chatWithAIBtnSubmitted"
+                        :disabled="chatModal.isCommandInputDisabled"
+                      >
+                        <v-icon color="primary"> mdi-send </v-icon>
+                      </v-btn>
+                    </v-text-field>
+                  </v-row>
+                </v-container>
+              </v-tab-item>
+            </v-tabs-items>
+
+            <v-row style="margin-top: 15px"> </v-row>
+            <v-row>KPI Keys:</v-row>
+            <v-row
+              v-for="key in addNewKpiKeyDialog.type === 0
+                ? allSavedKPIs
+                : allSavedAlternativesKPIs"
+            >
+              <p>
+                {{ key.name }}:
+                {{ key.description ? key.description : "Default" }}
+              </p>
+              <v-spacer></v-spacer>
+
+              <v-btn
+                @click="
+                  () => {
+                    (addNewKpiKeyDialog.type === 0
+                      ? allSavedKPIs
+                      : allSavedAlternativesKPIs
+                    ).splice(
+                      (addNewKpiKeyDialog.type === 0
+                        ? allSavedKPIs
+                        : allSavedAlternativesKPIs
+                      ).findIndex((x) => x.name == key.name),
+                      1
+                    );
+                  }
+                "
+                >Remove From KPI list</v-btn
+              >
+            </v-row>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="
+                () => {
+                  addNewKpiKeyDialog.isOpen = false;
+                  addNewKpiKeyDialog.description = '';
+                  addNewKpiKeyDialog.name = '';
+                }
+              "
+            >
+              close
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- -------------------------    Add NEW KPI key DIALOG   END------------------------- -->
     </v-container>
   </div>
 </template>
@@ -733,7 +984,34 @@ export default {
       },
       allTrackingCompanies: [],
       allSavedKPIs: [],
+      allSavedAlternativesKPIs: [],
       allSelectedKpiItems: [],
+      //===============================
+      addNewKpiKeyDialog: {
+        type: 0,
+        isOpen: false,
+        name: "",
+        description: "",
+        companyId: "",
+        kpiKeysList: [],
+
+        newSelectedKpiKeys: [],
+      },
+      chatModal: {
+        isOpen: false,
+        messages: [
+          {
+            time: new Date(),
+            from: "robot",
+            message:
+              "Hello im your AI assistant, please describe me what kind of KPI do you want to add.",
+            hasBTN: false,
+          },
+        ],
+        userCommand: "",
+        situation: 0,
+        isCommandInputDisabled: false,
+      },
       //===============================
       expanded: [],
       dialogAddReview: {
@@ -763,6 +1041,7 @@ export default {
       allCompanies: [],
       companies: null,
       precisionVsRecall: 45,
+      tab: null,
       currentSearches: [
         {
           label: "0",
@@ -848,12 +1127,107 @@ export default {
     showDataSize(dataSize) {
       return api.dataSizeSerializer(dataSize);
     },
+    openNewKpiDialog(kpiType) {
+      this.addNewKpiKeyDialog.type = kpiType;
+      this.addNewKpiKeyDialog.isOpen = true;
+    },
     removeKPI(item) {
       this.allSelectedKpiItems.splice(
         this.allSelectedKpiItems.indexOf(item),
         1
       );
       this.filterByKPI();
+    },
+    addNewKpiToUserKpiList(kpiKey) {
+      if (
+        !this.addNewKpiKeyDialog.name ||
+        !this.addNewKpiKeyDialog.description
+      ) {
+        this.fireSnack("all the fields are required!");
+        return;
+      }
+      if (!kpiKey) {
+        kpiKey = {
+          name: this.addNewKpiKeyDialog.name,
+          data: [],
+          description: this.addNewKpiKeyDialog.description,
+        };
+      }
+
+      (this.addNewKpiKeyDialog.type === 0
+        ? this.allSavedKPIs
+        : this.allSavedAlternativesKPIs
+      ).push(kpiKey);
+    },
+    chatWithAIBtnSubmitted() {
+      if (this.chatModal.situation == 0) {
+        if (!this.chatModal.userCommand) {
+          this.fireSnack("please write your command first.");
+          return;
+        }
+        this.chatModal.messages.push({
+          time: new Date(),
+          from: "You",
+          message: this.chatModal.userCommand,
+          hasBTN: false,
+        });
+        this.chatModal.messages.push({
+          time: new Date(),
+          from: "robot",
+          message:
+            "Here is my information based on the data i learned: `Mauris luctus eleifend libero at finibus. Morbi et justo varius, convallis risus ut, rutrum nulla. Morbi suscipit facilisis egestas. Nunc sollicitudin accumsan massa et rutrum. Sed bibendum elit vel vulputate lacinia. Phasellus vel fringilla urna. Morbi rhoncus quis mauris quis sodales. do you satisfied out of my answer?`",
+          hasBTN: true,
+        });
+        this.chatModal.isCommandInputDisabled = true;
+        this.addNewKpiKeyDialog.description = this.chatModal.userCommand;
+        this.chatModal.userCommand = "";
+        return;
+      }
+      if (this.chatModal.situation == -1) {
+        this.chatModal.messages.map((x) => (x.hasBTN = false));
+        this.chatModal.messages.push({
+          time: new Date(),
+          from: "robot",
+          message:
+            "sorry my bad!, please give me more information so, i can help you better!",
+          hasBTN: false,
+        });
+        this.chatModal.isCommandInputDisabled = false;
+        this.chatModal.userCommand = "";
+        this.chatModal.situation = 0;
+        return;
+      }
+      if (this.chatModal.situation == 1) {
+        this.chatModal.messages.map((x) => (x.hasBTN = false));
+        this.chatModal.messages.push({
+          time: new Date(),
+          from: "robot",
+          message: "Yay, now please give me a name as tag for this KPI",
+          hasBTN: false,
+        });
+        this.chatModal.isCommandInputDisabled = false;
+        this.chatModal.userCommand = "";
+        this.chatModal.situation = 2;
+        return;
+      }
+      if (this.chatModal.situation == 2) {
+        this.chatModal.isCommandInputDisabled = true;
+        this.fireSnack("your new KPI added to the KPIs list for this Asset.");
+        this.addNewKpiKeyDialog.name = this.chatModal.userCommand;
+        this.chatModal.isOpen = false;
+        this.chatModal.situation = 0;
+        this.chatModal.userCommand = "";
+        this.chatModal.messages = [
+          {
+            time: new Date(),
+            from: "robot",
+            message:
+              "Hello im your AI assistant, please describe me what kind of KPI do you want to add.",
+            hasBTN: false,
+          },
+        ];
+        this.addNewKpiToUserKpiList(null);
+      }
     },
     filterByKPI() {
       console.log(
@@ -957,6 +1331,7 @@ export default {
     console.log(this.summaryRecommendedCompanies.median);
     this.allAiModels = api.getAiRobots();
     this.allSavedKPIs = api.getAllTrackingKPIKeys();
+    this.allSavedAlternativesKPIs = api.getAllTrackingKPIKeys();
     this.active = new Array(this.allSavedKPIs.length + 1);
     for (let index = 0; index < this.active.length; index++) {
       this.active[index] = false;
