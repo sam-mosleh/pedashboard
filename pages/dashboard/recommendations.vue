@@ -145,9 +145,9 @@
               cols="6"
               sm="6"
               md="6"
-              lg="4"
-              xl="3"
-              xxl="3"
+              lg="6"
+              xl="4"
+              xxl="4"
               v-for="company in allRecommendedCompanies.filter(
                 (x) => x.recommendation.recommended == true
               )"
@@ -176,68 +176,80 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-row>
-                    <v-col cols="12" style="padding-bottom: 0px">
-                      <v-btn
-                        @click="
-                          () => {
-                            fireSnack('your review submitted successfully!');
-                          }
-                        "
-                        rounded
-                        color="green"
-                      >
-                        <v-icon>mdi-thumb-up</v-icon>
-                      </v-btn>
+                    <v-col cols="12">
+                      <v-slide-group multiple show-arrows>
+                        <v-slide-item>
+                          <v-col>
+                            <v-btn
+                              @click="
+                                () => {
+                                  fireSnack(
+                                    'your review submitted successfully!'
+                                  );
+                                }
+                              "
+                              rounded
+                              color="green"
+                              style="margin: 0 auto; display: block"
+                            >
+                              <v-icon>mdi-thumb-up</v-icon>
+                            </v-btn>
+                          </v-col>
+                        </v-slide-item>
+                        <v-slide-item
+                          v-if="
+                            allInsightCompanies.filter(
+                              (x) => x.companyId == company.companyId
+                            ).length == 0
+                          "
+                        >
+                          <v-col>
+                            <v-btn
+                              @click="setSelectForInsight(company)"
+                              rounded
+                              color="black"
+                              class="mt-4 mx-3"
+                              style="
+                                color: white;
+                                display: block;
+                                margin: 0px auto 0px auto !important;
+                                width: 100%;
+                              "
+                            >
+                              <v-icon>mdi-plus</v-icon>
+                              Add to insight
+                            </v-btn>
+                          </v-col>
+                        </v-slide-item>
+                        <v-slide-item
+                          v-if="
+                            allTrackingCompanies.filter(
+                              (x) => x.companyId == company.companyId
+                            ).length == 0
+                          "
+                        >
+                          <v-col>
+                            <v-btn
+                              @click="addCompanyToTracking(company)"
+                              rounded
+                              color="gray"
+                              class="mt-4 mx-3"
+                              style="
+                                color: black;
+                                padding: 0px 5px 0px 0px !important;
+                                display: block;
+                                margin: 0 auto;
+                                margin: 0px 0px 0px 0px !important;
+                              "
+                            >
+                              <v-icon>mdi-plus</v-icon>
+                              Add to tracking
+                            </v-btn>
+                          </v-col>
+                        </v-slide-item>
+                      </v-slide-group>
                     </v-col>
-                    <v-col
-                      v-if="
-                        allInsightCompanies.filter(
-                          (x) => x.companyId == company.companyId
-                        ).length == 0
-                      "
-                      style="padding-bottom: 0px; padding-left: 0px"
-                      cols="6"
-                    >
-                      <v-btn
-                        @click="setSelectForInsight(company)"
-                        rounded
-                        color="black"
-                        class="mt-4 mx-3"
-                        style="
-                          color: white;
-                          padding: 0px 5px 0px 0px !important;
-                          margin: 0px 0px 0px 0px !important;
-                          width: 100%;
-                        "
-                      >
-                        <v-icon>mdi-plus</v-icon>
-                        Add to insight
-                      </v-btn>
-                    </v-col>
-                    <v-col
-                      v-if="
-                        allTrackingCompanies.filter(
-                          (x) => x.companyId == company.companyId
-                        ).length == 0
-                      "
-                      cols="6"
-                    >
-                      <v-btn
-                        @click="addCompanyToTracking(company)"
-                        rounded
-                        color="gray"
-                        class="mt-4 mx-3"
-                        style="
-                          color: black;
-                          padding: 0px 5px 0px 0px !important;
 
-                          margin: 0px 0px 0px 0px !important;
-                        "
-                      >
-                        <v-icon>mdi-plus</v-icon>
-                        Add to tracking
-                      </v-btn>
-                    </v-col>
                     <!-- <v-col
                       v-if="
                         allTrackingCompanies.filter(
