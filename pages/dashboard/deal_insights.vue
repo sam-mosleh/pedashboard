@@ -1024,7 +1024,7 @@ export default {
       insightTable: {
         headers: [
           {
-            text: "#",
+            text: "",
             align: "start",
             value: "name",
           },

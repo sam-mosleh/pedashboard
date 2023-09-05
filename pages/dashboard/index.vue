@@ -254,7 +254,7 @@
                 class="text-center"
                 style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
               >
-                Property deals found!
+                Proprietary deals found
               </p>
               <div style="height: 2px; background: blue"></div>
               <p
@@ -539,6 +539,11 @@ export default {
             value: "name",
           },
           {
+            text: "Number Of Sources",
+            align: "start",
+            value: "numberOfSources",
+          },
+          {
             text: "Data Volume",
             align: "start",
             value: "dataVolume",
@@ -548,16 +553,19 @@ export default {
         items: [
           {
             name: "Public Data",
+            numberOfSources: 40,
             dataVolume: "75Tb",
             trainedPercentage: "95%",
           },
           {
             name: "Proprietary Data",
+            numberOfSources: 45,
             dataVolume: "25Tb",
             trainedPercentage: "75%",
           },
           {
             name: "Target Data",
+            numberOfSources: 7,
             dataVolume: "5Tb",
             trainedPercentage: "97%",
           },
@@ -576,7 +584,7 @@ export default {
       trainedModelsTable: {
         headers: [
           {
-            text: "#",
+            text: "",
             align: "start",
             value: "name",
           },
@@ -590,7 +598,7 @@ export default {
       insightTable: {
         headers: [
           {
-            text: "#",
+            text: "",
             align: "start",
             value: "name",
           },
@@ -723,12 +731,12 @@ export default {
         iqBenchMarkLevel.forkedModel / forkedCount
       ).toFixed(2);
 
-      iqImprovementLevel.megaModel = parseFloat(
+      iqImprovementLevel.megaModel = `+${parseFloat(
         iqImprovementLevel.megaModel / megaCount
-      ).toFixed(2);
-      iqImprovementLevel.forkedModel = parseFloat(
+      ).toFixed(2)}%`;
+      iqImprovementLevel.forkedModel = `+${parseFloat(
         iqImprovementLevel.forkedModel / forkedCount
-      ).toFixed(2);
+      ).toFixed(2)}%`;
 
       this.trainedModelsTable.items = [
         iqLevel,
@@ -900,7 +908,5 @@ export default {
   text-align: right;
   display: block;
   width: 100%;
-}
-.item-border {
 }
 </style>

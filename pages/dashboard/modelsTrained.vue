@@ -197,9 +197,9 @@
                   cols="6"
                   sm="6"
                   md="6"
-                  lg="4"
-                  xl="3"
-                  xxl="3"
+                  lg="46"
+                  xl="6"
+                  xxl="6"
                   v-for="company in allSavedCompanies"
                   v-bind:key="company.companyId"
                 >
@@ -215,29 +215,103 @@
                         <v-spacer></v-spacer>
                       </v-row>
                       <v-row>
-                        <div class="text--primary">
-                          <v-chip-group active-class="primary--text" column>
-                            <v-chip
-                              v-for="i in company.recommendation
-                                .gatheringChannels"
-                              color="green"
-                              >Forked from:
-                              {{ generateForkedModelsRelation(i) }}</v-chip
+                        <v-col
+                          cols="6"
+                          sm="12"
+                          md="6"
+                          lg="6"
+                          xl="6"
+                          xxl="6"
+                          style="padding: 0px 0px 0px 0px; height: 100%"
+                        >
+                          <v-timeline align-top dense>
+                            <v-timeline-item
+                              v-for="message in [
+                                {
+                                  id: 's1112',
+                                  color: 'deep-purple lighten-1',
+                                  text: `${parseFloat(
+                                    trainedModelsTable.items[0].megaModel /
+                                      allSavedCompanies.length
+                                  ).toFixed(2)}`,
+                                  title: 'IQ Level',
+                                },
+                                {
+                                  id: 's11122',
+                                  color: 'deep-purple lighten-1',
+                                  text: `${parseFloat(
+                                    trainedModelsTable.items[0].megaModel /
+                                      allSavedCompanies.length
+                                  ).toFixed(2)}`,
+                                  title: 'IQ Benchmark',
+                                },
+                                {
+                                  id: 's11123',
+                                  color: 'deep-purple lighten-1',
+                                  text: `+${parseFloat(
+                                    trainedModelsTable.items[0].megaModel /
+                                      allSavedCompanies.length
+                                  ).toFixed(2)}%`,
+                                  title: 'IQ Improvement for last 30 Days',
+                                },
+                              ]"
+                              :key="message.id"
+                              :color="message.color"
+                              small
                             >
-                            <v-chip
-                              >Data Size:
-                              {{
-                                showDataSize(company.totalDataGathered)
-                              }}</v-chip
+                              <div>
+                                <div class="font-weight-normal">
+                                  <strong>{{ message.title }}</strong>
+                                </div>
+                                <div>{{ message.text }}</div>
+                              </div>
+                            </v-timeline-item>
+                          </v-timeline>
+                        </v-col>
+                        <v-col
+                          cols="6"
+                          sm="12"
+                          md="6"
+                          lg="6"
+                          xl="6"
+                          xxl="6"
+                          style="padding: 0px 0px 0px 0px; height: 100%"
+                        >
+                          <v-timeline align-top dense>
+                            <v-timeline-item
+                              v-for="message in [
+                                {
+                                  id: 's1112',
+                                  color: 'deep-purple lighten-1',
+                                  text: showDataSize(company.totalDataGathered),
+                                  title: 'Target Data Volume',
+                                },
+                                {
+                                  id: 's11122',
+                                  color: 'deep-purple lighten-1',
+                                  text: showDataSize(company.totalDataLearned),
+                                  title: 'Target Data Trained Volume',
+                                },
+                                {
+                                  id: 's11123',
+                                  color: 'deep-purple lighten-1',
+                                  text: `${company.totalProcessingPercentage}%`,
+                                  title: 'Target Data Training Progress',
+                                },
+                              ]"
+                              :key="message.id"
+                              :color="message.color"
+                              small
                             >
-                            <v-chip
-                              >Trained Data Size:
-                              {{
-                                showDataSize(company.totalDataLearned)
-                              }}</v-chip
-                            >
-                          </v-chip-group>
-                        </div>
+                              <div>
+                                <div class="font-weight-normal">
+                                  <strong>{{ message.title }}</strong>
+                                </div>
+                                <div>{{ message.text }}</div>
+                              </div>
+                            </v-timeline-item>
+                          </v-timeline>
+                        </v-col>
                       </v-row>
                     </v-card-text>
                     <v-card-actions>
@@ -470,7 +544,7 @@ export default {
       trainedModelsTable: {
         headers: [
           {
-            text: "#",
+            text: "",
             align: "start",
             value: "name",
           },
@@ -605,12 +679,12 @@ export default {
         iqBenchMarkLevel.forkedModel / forkedCount
       ).toFixed(2);
 
-      iqImprovementLevel.megaModel = parseFloat(
+      iqImprovementLevel.megaModel = `+${parseFloat(
         iqImprovementLevel.megaModel / megaCount
-      ).toFixed(2);
-      iqImprovementLevel.forkedModel = parseFloat(
+      ).toFixed(2)}%`;
+      iqImprovementLevel.forkedModel = `+${parseFloat(
         iqImprovementLevel.forkedModel / forkedCount
-      ).toFixed(2);
+      ).toFixed(2)}%`;
 
       this.trainedModelsTable.items = [
         iqLevel,

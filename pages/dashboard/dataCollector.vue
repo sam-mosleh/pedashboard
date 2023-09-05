@@ -96,18 +96,6 @@
       <v-row class="cart-data">
         <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
           <v-card class="cart-data" style="">
-            <v-btn
-              class="d-flex flex-row ms-auto me-2 mt-2"
-              style="
-                background: black;
-                color: white;
-                border-radius: 30px;
-                text-transform: capitalize;
-              "
-              @click="redirect('/dashboard/dataCollector')"
-              >View</v-btn
-            >
-
             <v-col class="justify-space-between align-center h-100">
               <p
                 class="text-center"
@@ -559,6 +547,11 @@ export default {
             value: "name",
           },
           {
+            text: "Number Of Sources",
+            align: "start",
+            value: "numberOfSources",
+          },
+          {
             text: "Data Volume",
             align: "start",
             value: "dataVolume",
@@ -568,16 +561,19 @@ export default {
         items: [
           {
             name: "Public Data",
+            numberOfSources: 40,
             dataVolume: "75Tb",
             trainedPercentage: "95%",
           },
           {
             name: "Proprietary Data",
+            numberOfSources: 45,
             dataVolume: "25Tb",
             trainedPercentage: "75%",
           },
           {
             name: "Target Data",
+            numberOfSources: 7,
             dataVolume: "5Tb",
             trainedPercentage: "97%",
           },
@@ -588,7 +584,6 @@ export default {
 
   methods: {
     init() {},
-  
   },
   mounted() {
     if (!api.getAuth()) window.location.href = "/login";
@@ -720,7 +715,5 @@ export default {
   text-align: right;
   display: block;
   width: 100%;
-}
-.item-border {
 }
 </style>
