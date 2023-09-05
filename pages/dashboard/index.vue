@@ -382,113 +382,45 @@
           ></v-data-table>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col
-          cols="12"
-          sm="12"
-          md="12"
-          lg="12"
-          xl="12"
-          xxl="12"
-          style="padding: 1px 0px 1px 0px"
-        >
-          <v-card class="cart-data" min-width="100%">
-            <v-card-text class="text--primary">
-              <v-row>
-                <v-col cols="12" sm="12" md="4" lg="3" xl="3" xxl="3">
-                  <v-card class="cart-data">
-                    <v-btn
-                      class="d-flex flex-row ms-auto me-2 mt-2"
-                      style="
-                        background: black;
-                        color: white;
-                        border-radius: 30px;
-                        text-transform: capitalize;
-                      "
-                      @click="redirect('/dashboard/dataCollector')"
-                      >View</v-btn
-                    >
+      <v-row class="cart-data">
+        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
+          <v-card class="cart-data" style="">
+            <v-btn
+              class="d-flex flex-row ms-auto me-2 mt-2"
+              style="
+                background: black;
+                color: white;
+                border-radius: 30px;
+                text-transform: capitalize;
+              "
+              @click="redirect('/dashboard/dataCollector')"
+              >View</v-btn
+            >
 
-                    <v-col class="justify-space-between align-center h-100">
-                      <p
-                        class="text-center"
-                        style="
-                          font-size: 2rem;
-                          line-height: 2.75rem;
-                          font-weight: 700;
-                        "
-                      >
-                        100Tb
-                      </p>
-                      <p
-                        class="text-center"
-                        style="
-                          font-size: 1.2rem;
-                          line-height: 1.5rem;
-                          font-weight: 700;
-                        "
-                      >
-                        Gathered Data
-                      </p>
-                    </v-col>
-                  </v-card>
-                </v-col>
-                <v-col cols="12" sm="12" md="8" lg="9" xl="9" xxl="9">
-                  <v-row class="item-border">
-                    <v-col>
-                      <p class="item-text-show-position">75Tb of Public Data</p>
-                    </v-col>
-                    <v-col>
-                      <p class="item-text-show-position-2">95% Trained</p>
-                    </v-col>
-                  </v-row>
-                  <v-row
-                    ><div
-                      style="
-                        height: 2px;
-                        width: 65%;
-                        margin: 0px auto 10px;
-                        border-style: dashed;
-                        border-color: rgb(94, 47, 164);
-                        border-width: 2px;
-                      "
-                    ></div
-                  ></v-row>
-                  <v-row class="item-border">
-                    <v-col>
-                      <p class="item-text-show-position">
-                        25Tb of Proprietary Data
-                      </p>
-                    </v-col>
-                    <v-col>
-                      <p class="item-text-show-position-2">75% Trained</p>
-                    </v-col>
-                  </v-row>
-                  <v-row
-                    ><div
-                      style="
-                        height: 2px;
-                        width: 65%;
-                        margin: 0px auto 10px;
-                        border-style: dashed;
-                        border-color: rgb(94, 47, 164);
-                        border-width: 2px;
-                      "
-                    ></div
-                  ></v-row>
-                  <v-row class="item-border">
-                    <v-col>
-                      <p class="item-text-show-position">5Tb of Target Data</p>
-                    </v-col>
-                    <v-col>
-                      <p class="item-text-show-position-2">97% Trained</p>
-                    </v-col>
-                  </v-row>
-                </v-col>
-              </v-row>
-              <!-- ============================ -->
-            </v-card-text>
+            <v-col class="justify-space-between align-center h-100">
+              <p
+                class="text-center"
+                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
+              >
+                100Tb
+              </p>
+              <p
+                class="text-center"
+                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
+              >
+                Gathered Data
+              </p>
+            </v-col>
           </v-card>
+        </v-col>
+        <v-col cols="12" sm="6" md="9" lg="9" xl="9" xxl="9">
+          <v-data-table
+            :headers="dataPageTable.headers"
+            :items="dataPageTable.items"
+            hide-default-footer
+            disable-sort
+            class="elevation-1"
+          ></v-data-table>
         </v-col>
       </v-row>
       <v-row class="cart-models-trained" style="margin-top: 10px">
@@ -516,7 +448,7 @@
                 class="text-center"
                 style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
               >
-                Models trained
+                Trained Models
               </p>
               <div style="height: 2px; background: red"></div>
               <div
@@ -555,10 +487,10 @@
                 </p>
               </v-row>
               <v-row class="justify-space-between mt-1 px-2">
-                <p style="font-size: 10px; color: black">
+                <p style="font-size: 13px; font-weight: bolder; color: black">
                   Mega Models: {{ trainedModelsTable.megaModelCount }}
                 </p>
-                <p style="font-size: 10px; color: black">
+                <p style="font-size: 13px; font-weight: bolder; color: black">
                   Forked Models: {{ trainedModelsTable.forkedModelCount }}
                 </p>
               </v-row>
@@ -599,6 +531,38 @@ export default {
       },
       allUserAiRobots: [],
       allRecommendedCompanies: [],
+      dataPageTable: {
+        headers: [
+          {
+            text: "",
+            align: "start",
+            value: "name",
+          },
+          {
+            text: "Data Volume",
+            align: "start",
+            value: "dataVolume",
+          },
+          { text: "Trained Percentage", value: "trainedPercentage" },
+        ],
+        items: [
+          {
+            name: "Public Data",
+            dataVolume: "75Tb",
+            trainedPercentage: "95%",
+          },
+          {
+            name: "Proprietary Data",
+            dataVolume: "25Tb",
+            trainedPercentage: "75%",
+          },
+          {
+            name: "Target Data",
+            dataVolume: "5Tb",
+            trainedPercentage: "97%",
+          },
+        ],
+      },
       summaryRecommendedCompanies: {
         count: 0,
         median: 0,

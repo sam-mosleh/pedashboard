@@ -13,150 +13,125 @@
         </v-card-title>
 
         <v-card-text>
-          <v-file-input
-            v-model="data"
-            color="deep-purple accent-4"
-            counter
-            label="File input"
-            multiple
-            placeholder="Select your files"
-            prepend-icon="mdi-paperclip"
-            outlined
-            :show-size="1000"
-          >
-            <template v-slot:selection="{ index, text }">
-              <v-chip
-                v-if="index < 2"
-                color="deep-purple accent-4"
-                dark
-                label
-                small
-              >
-                {{ text }}
-              </v-chip>
+          <v-tabs v-model="tab" dark grow center>
+            <v-tab v-for="item in tabs.headers" :key="`M1_${item.tab}`">
+              {{ item.tab }}
+            </v-tab>
+          </v-tabs>
 
-              <span
-                v-else-if="index === 2"
-                class="text-overline grey--text text--darken-3 mx-2"
+          <v-tabs-items v-model="tab">
+            <v-tab-item v-for="item in tabs.headers" :key="`M1_${item.tab}`">
+              <v-row>
+                <v-col cols="12">
+                  <v-file-input
+                    v-model="item.uploads"
+                    color="deep-purple accent-4"
+                    counter
+                    label="File input"
+                    multiple
+                    placeholder="Select your files"
+                    prepend-icon="mdi-paperclip"
+                    outlined
+                    :show-size="1000"
+                  >
+                    <template v-slot:selection="{ index, text }">
+                      <v-chip
+                        v-if="index < 2"
+                        color="deep-purple accent-4"
+                        dark
+                        label
+                        small
+                      >
+                        {{ text }}
+                      </v-chip>
+
+                      <span
+                        v-else-if="index === 2"
+                        class="text-overline grey--text text--darken-3 mx-2"
+                      >
+                        +{{ files.length - 2 }} File(s)
+                      </span>
+                    </template>
+                  </v-file-input>
+                </v-col>
+              </v-row>
+              <v-row
+                cols="12"
+                class="w-100 px-3 pt-3 mt-8 justify-space-between"
+                style="background: lightgray; border-radius: 5px"
+                v-for="fileIndex in item.uploads"
               >
-                +{{ files.length - 2 }} File(s)
-              </span>
-            </template>
-          </v-file-input>
+                <p>{{ fileIndex.name }}</p>
+                <p>
+                  Size:
+                  {{ parseFloat(fileIndex.size / 1000000).toFixed(2) }}Mb
+                </p>
+              </v-row>
+              <v-row
+                cols="12"
+                class="w-100 px-3 pt-3 mt-8 justify-space-between"
+                style="background: lightgray; border-radius: 5px"
+                v-for="fileIndex in item.sourceCount"
+              >
+                <p>file-{{ fileIndex }}.pdf</p>
+                <p>
+                  Size:
+                  {{ parseFloat(item.size / item.sourceCount).toFixed(2) }}Tb
+                </p>
+              </v-row>
+            </v-tab-item>
+          </v-tabs-items>
         </v-card-text>
 
         <v-divider></v-divider>
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="dialog = false">
-            Upload all
-          </v-btn>
+          <v-btn color="primary" text @click="dialog = false"> close </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <!-- =================Uploader================== -->
     <v-container fluid>
-      <v-row>
-        <v-col cols="12">
-          <v-card class="cart-data" min-width="100%">
-            <v-card-text class="text--primary">
-              <v-row>
-                <v-col cols="12" sm="12" md="4" lg="3" xl="3" xxl="3">
-                  <v-card class="cart-data">
-                    <v-btn
-                      class="d-flex flex-row ms-auto me-2 mt-2"
-                      style="
-                        display: none;
-                        background: black;
-                        color: white;
-                        border-radius: 30px;
-                        text-transform: capitalize;
-                      "
-                      @click="redirect('/dashboard/dataCollector')"
-                      >View</v-btn
-                    >
+      <v-row class="cart-data">
+        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
+          <v-card class="cart-data" style="">
+            <v-btn
+              class="d-flex flex-row ms-auto me-2 mt-2"
+              style="
+                background: black;
+                color: white;
+                border-radius: 30px;
+                text-transform: capitalize;
+              "
+              @click="redirect('/dashboard/dataCollector')"
+              >View</v-btn
+            >
 
-                    <v-col class="justify-space-between align-center h-100">
-                      <p
-                        class="text-center"
-                        style="
-                          font-size: 2rem;
-                          line-height: 2.75rem;
-                          font-weight: 700;
-                        "
-                      >
-                        100Tb
-                      </p>
-                      <p
-                        class="text-center"
-                        style="
-                          font-size: 1.2rem;
-                          line-height: 1.5rem;
-                          font-weight: 700;
-                        "
-                      >
-                        Gathered Data
-                      </p>
-                    </v-col>
-                  </v-card>
-                </v-col>
-                <v-col cols="12" sm="12" md="8" lg="9" xl="9" xxl="9">
-                  <v-row class="item-border">
-                    <v-col>
-                      <p class="item-text-show-position">75Tb of Public Data</p>
-                    </v-col>
-                    <v-col>
-                      <p class="item-text-show-position-2">95% Trained</p>
-                    </v-col>
-                  </v-row>
-                  <v-row
-                    ><div
-                      style="
-                        height: 2px;
-                        width: 65%;
-                        margin: 0px auto 10px;
-                        border-style: dashed;
-                        border-color: rgb(94, 47, 164);
-                        border-width: 2px;
-                      "
-                    ></div
-                  ></v-row>
-                  <v-row class="item-border">
-                    <v-col>
-                      <p class="item-text-show-position">
-                        25Tb of Proprietary Data
-                      </p>
-                    </v-col>
-                    <v-col>
-                      <p class="item-text-show-position-2">75% Trained</p>
-                    </v-col>
-                  </v-row>
-                  <v-row
-                    ><div
-                      style="
-                        height: 2px;
-                        width: 65%;
-                        margin: 0px auto 10px;
-                        border-style: dashed;
-                        border-color: rgb(94, 47, 164);
-                        border-width: 2px;
-                      "
-                    ></div
-                  ></v-row>
-                  <v-row class="item-border">
-                    <v-col>
-                      <p class="item-text-show-position">5Tb of Target Data</p>
-                    </v-col>
-                    <v-col>
-                      <p class="item-text-show-position-2">97% Trained</p>
-                    </v-col>
-                  </v-row>
-                </v-col>
-              </v-row>
-              <!-- ============================ -->
-            </v-card-text>
+            <v-col class="justify-space-between align-center h-100">
+              <p
+                class="text-center"
+                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
+              >
+                100Tb
+              </p>
+              <p
+                class="text-center"
+                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
+              >
+                Gathered Data
+              </p>
+            </v-col>
           </v-card>
+        </v-col>
+        <v-col cols="12" sm="6" md="9" lg="9" xl="9" xxl="9">
+          <v-data-table
+            :headers="dataPageTable.headers"
+            :items="dataPageTable.items"
+            hide-default-footer
+            disable-sort
+            class="elevation-1"
+          ></v-data-table>
         </v-col>
       </v-row>
       <v-row>
@@ -177,6 +152,22 @@
                   () => {
                     data = [];
                     title = 'Upload Public Data';
+                    tabs.headers = [
+                      {
+                        tab: 'Standard Data',
+                        id: 1,
+                        sourceCount: 10,
+                        size: 50,
+                        uploads: [],
+                      },
+                      {
+                        tab: 'Alternative Data',
+                        id: 2,
+                        sourceCount: 30,
+                        size: 25,
+                        uploads: [],
+                      },
+                    ];
                     dialog = true;
                   }
                 "
@@ -206,13 +197,19 @@
                     <v-timeline-item
                       v-for="message in [
                         {
-                          id: 's1',
+                          id: 's1567567567',
                           color: 'deep-purple lighten-1',
-                          text: '10 (50Tb)',
-                          title: 'Data Sources',
+                          text: '10',
+                          title: 'Number of Sources',
                         },
                         {
-                          id: 's1',
+                          id: 's134534',
+                          color: 'deep-purple lighten-1',
+                          text: '50Tb',
+                          title: 'Data Volume',
+                        },
+                        {
+                          id: 's1234324',
                           color: 'deep-purple lighten-1',
                           text: '90%',
                           title: 'Training Progress',
@@ -251,13 +248,20 @@
                     <v-timeline-item
                       v-for="message in [
                         {
-                          id: 's1',
+                          id: 's111',
                           color: 'deep-purple lighten-1',
-                          text: '30 (25Tb)',
-                          title: 'Data Sources',
+                          text: '30',
+                          title: 'Number of Sources',
                         },
                         {
-                          id: 's1',
+                          id: 's1112',
+                          color: 'deep-purple lighten-1',
+                          text: '25Tb',
+                          title: 'Data Volume',
+                        },
+
+                        {
+                          id: 's1113',
                           color: 'deep-purple lighten-1',
                           text: '90%',
                           title: 'Training Progress',
@@ -297,6 +301,22 @@
                   () => {
                     data = [];
                     title = 'Upload Proprietary Data';
+                    tabs.headers = [
+                      {
+                        tab: 'Internal Sources',
+                        id: 1,
+                        sourceCount: 15,
+                        size: 8,
+                        uploads: [],
+                      },
+                      {
+                        tab: 'PortCo Sources',
+                        id: 2,
+                        sourceCount: 30,
+                        size: 12,
+                        uploads: [],
+                      },
+                    ];
                     dialog = true;
                   }
                 "
@@ -315,17 +335,29 @@
                   xxl="6"
                   style="padding: 0px 0px 0px 0px; height: 100%"
                 >
+                  <div
+                    class="font-weight-bold ml-8 mb-2"
+                    style="text-align: left"
+                  >
+                    Internal Sources
+                  </div>
                   <v-timeline align-top dense>
                     <v-timeline-item
                       v-for="message in [
                         {
-                          id: 's1',
+                          id: 's1112',
                           color: 'deep-purple lighten-1',
-                          text: '15 (8Tb)',
-                          title: 'Internal Sources',
+                          text: '15',
+                          title: 'Number of Sources',
                         },
                         {
-                          id: 's1',
+                          id: 's11122',
+                          color: 'deep-purple lighten-1',
+                          text: '8Tb',
+                          title: 'Data Volume',
+                        },
+                        {
+                          id: 's11123',
                           color: 'deep-purple lighten-1',
                           text: '60%',
                           title: 'Training Progress',
@@ -353,14 +385,26 @@
                   xxl="6"
                   style="padding: 0px 0px 0px 0px"
                 >
+                  <div
+                    class="font-weight-bold ml-8 mb-2"
+                    style="text-align: left"
+                  >
+                    PortCo Sources
+                  </div>
                   <v-timeline align-top dense>
                     <v-timeline-item
                       v-for="message in [
                         {
-                          id: 's1',
+                          id: 's1112',
                           color: 'deep-purple lighten-1',
-                          text: '30 (12Tb)',
-                          title: 'PortCo Sources',
+                          text: '30',
+                          title: 'Number of Sources',
+                        },
+                        {
+                          id: 's11122',
+                          color: 'deep-purple lighten-1',
+                          text: '12Tb',
+                          title: 'Data Volume',
                         },
                         {
                           id: 's1',
@@ -403,6 +447,15 @@
                   () => {
                     data = [];
                     title = 'Upload Target Assets Data';
+                    tabs.headers = [
+                      {
+                        tab: 'Target Assets',
+                        id: 1,
+                        sourceCount: 7,
+                        size: 5,
+                        uploads: [],
+                      },
+                    ];
                     dialog = true;
                   }
                 "
@@ -424,10 +477,16 @@
                     <v-timeline-item
                       v-for="message in [
                         {
-                          id: 's1',
+                          id: 's1112',
                           color: 'deep-purple lighten-1',
-                          text: '7 (5Tb)',
-                          title: 'Companies Number',
+                          text: '7',
+                          title: 'Number of Companies',
+                        },
+                        {
+                          id: 's11122',
+                          color: 'deep-purple lighten-1',
+                          text: '5Tb',
+                          title: 'Data Volume',
                         },
                         {
                           id: 's1',
@@ -471,21 +530,76 @@ export default {
   data() {
     return {
       dialog: false,
+      tab: null,
       data: [],
+      tabs: {
+        headers: [
+          { tab: "One", id: 0 },
+          { tab: "Two", id: 1 },
+          { tab: "Three", id: 2 },
+        ],
+        files: [
+          { name: "file1.pdf", size: "1Tb" },
+          { name: "file2.pdf", size: "1Tb" },
+          { name: "file3.pdf", size: "1Tb" },
+          { name: "file4.pdf", size: "1Tb" },
+          { name: "file5.pdf", size: "1Tb" },
+          { name: "file6.pdf", size: "1Tb" },
+          { name: "file7.pdf", size: "1Tb" },
+          { name: "file8.pdf", size: "1Tb" },
+        ],
+      },
       files: [],
       title: "",
+      dataPageTable: {
+        headers: [
+          {
+            text: "",
+            align: "start",
+            value: "name",
+          },
+          {
+            text: "Data Volume",
+            align: "start",
+            value: "dataVolume",
+          },
+          { text: "Trained Percentage", value: "trainedPercentage" },
+        ],
+        items: [
+          {
+            name: "Public Data",
+            dataVolume: "75Tb",
+            trainedPercentage: "95%",
+          },
+          {
+            name: "Proprietary Data",
+            dataVolume: "25Tb",
+            trainedPercentage: "75%",
+          },
+          {
+            name: "Target Data",
+            dataVolume: "5Tb",
+            trainedPercentage: "97%",
+          },
+        ],
+      },
     };
   },
 
   methods: {
     init() {},
+  
   },
   mounted() {
     if (!api.getAuth()) window.location.href = "/login";
 
     this.init();
   },
-  watch: {},
+  watch: {
+    tab(newVal) {
+      console.log(newVal);
+    },
+  },
 };
 </script>
 

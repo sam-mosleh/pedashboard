@@ -1954,15 +1954,13 @@ export default {
     );
     for (let index = 0; index < allAiRobots.length; index++) {
       const robot = allAiRobots[index];
-      const randMegaModelsSelecting = Math.floor(
-        Math.random() * robot.megaModels.length
-      );
+      const randMegaModelsSelecting =
+        Math.floor(Math.random() * robot.megaModels.length) + 1;
       for (let j = 0; j < randMegaModelsSelecting; j++) {
         robot.selectedMegaModels.push(robot.megaModels[j]);
       }
-      const randForkedModelsSelecting = Math.floor(
-        Math.random() * robot.forkedModels.length
-      );
+      const randForkedModelsSelecting =
+        Math.floor(Math.random() * robot.forkedModels.length) + 1;
       for (let k = 0; k < randForkedModelsSelecting; k++) {
         robot.selectedForkedModels.push(robot.forkedModels[k]);
       }

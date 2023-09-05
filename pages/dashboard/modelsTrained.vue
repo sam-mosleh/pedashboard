@@ -3,7 +3,7 @@
     <v-row
       class="ps-3 pt-8 pb-6 mb-3"
       style="font-weight: 600; font-size: 28px; background: black; color: white"
-      >Models Trained</v-row
+      >Trained Models</v-row
     >
     <v-container fluid>
       <!-- Snack -->
@@ -62,7 +62,7 @@
                 class="text-center"
                 style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
               >
-                Models trained
+                Trained Models
               </p>
               <div style="height: 2px; background: red"></div>
               <div class="candlestick" v-if="summaryCart.minProcess < 100">
@@ -97,10 +97,10 @@
                 </p>
               </v-row>
               <v-row class="justify-space-between mt-1 px-2">
-                <p style="font-size: 10px; color: black">
+                <p style="font-size: 13px; font-weight: bolder; color: black">
                   Mega Models: {{ trainedModelsTable.megaModelCount }}
                 </p>
-                <p style="font-size: 10px; color: black">
+                <p style="font-size: 13px; font-weight: bolder; color: black">
                   Forked Models: {{ trainedModelsTable.forkedModelCount }}
                 </p>
               </v-row>
@@ -131,10 +131,7 @@
       <v-row style="margin-top: 20px">
         <v-tabs v-model="tab" dark grow center>
           <v-tab
-            v-for="item in [
-              { tab: 'Mega Models' },
-              { tab: 'Connected Forked Models Assets' },
-            ]"
+            v-for="item in [{ tab: 'Mega Models' }, { tab: 'Forked Models' }]"
             :key="item.tab"
           >
             {{ item.tab }}
@@ -159,36 +156,24 @@
                       <div class="text--primary">
                         <v-chip-group active-class="primary--text" column>
                           <v-chip
-                            >Total Uploaded Documents:
-                            {{ robot.totalUploadedDocsFromUser }}
-                          </v-chip>
-                          <v-chip
-                            >Total data learned from assets:
+                            >Total Data learned from assets:
                             {{ showDataSize(robot.totalDataLearnedFromUser) }}
                           </v-chip>
                           <v-chip
-                            >Total data gathered for assets:
-                            {{ showDataSize(robot.totalDataGatheredFromUser) }}
+                            >Total completeness: {{ robot.totalCompleteness }}%
+                          </v-chip>
+                          <v-chip>IQ Level: {{ robot.totalIQ }}% </v-chip>
+                          <v-chip
+                            >IQ Benchmark: {{ robot.totalIqBenchmark }}%
                           </v-chip>
                           <v-chip
-                            >Total completeness: {{ robot.totalCompleteness }}%
+                            >IQ Improvement for last 30 Days:
+                            {{ robot.totalIqBenchmarkLast30 }}%
                           </v-chip>
                         </v-chip-group>
                       </div>
                     </v-card-text>
                     <v-card-actions>
-                      <v-btn
-                        text
-                        color="green"
-                        @click="
-                          () => {
-                            robotViewDialog.isOpen = true;
-                            robotViewDialog.data = robot;
-                          }
-                        "
-                      >
-                        view
-                      </v-btn>
                       <v-btn
                         text
                         color="red"
@@ -545,7 +530,7 @@ export default {
       const iqBenchMarkLevel = {
         forkedModel: 0,
         megaModel: 0,
-        name: "IQ Benchmarck",
+        name: "IQ Benchmark",
       };
       const iqImprovementLevel = {
         forkedModel: 0,
@@ -560,17 +545,27 @@ export default {
           robot.selectedForkedModels.length;
         this.trainedModelsTable.megaModelCount +=
           robot.selectedMegaModels.length;
+        robot["totalIQ"] = 0;
+        robot["totalIqBenchmark"] = 0;
+        robot["totalIqBenchmarkLast30"] = 0;
 
+        let megaSpecificCount = 0;
         for (
           let iqMegaIndex = 0;
           iqMegaIndex < robot.selectedMegaModels.length;
           iqMegaIndex++
         ) {
           megaCount++;
+          megaSpecificCount++;
           iqLevel.megaModel += robot.selectedMegaModels[iqMegaIndex].iqLevel;
+          robot["totalIQ"] += robot.selectedMegaModels[iqMegaIndex].iqLevel;
           iqBenchMarkLevel.megaModel +=
             robot.selectedMegaModels[iqMegaIndex].benchMark;
+          robot["totalIqBenchmark"] +=
+            robot.selectedMegaModels[iqMegaIndex].benchMark;
           iqImprovementLevel.megaModel +=
+            robot.selectedMegaModels[iqMegaIndex].lastMonthIqLevel;
+          robot["totalIqBenchmarkLast30"] +=
             robot.selectedMegaModels[iqMegaIndex].lastMonthIqLevel;
         }
         for (
@@ -586,6 +581,17 @@ export default {
           iqImprovementLevel.forkedModel +=
             robot.selectedForkedModels[iqMegaIndex].lastMonthIqLevel;
         }
+
+        robot["totalIQ"] = parseFloat(
+          robot["totalIQ"] / megaSpecificCount
+        ).toFixed(2);
+        robot["totalIqBenchmark"] = parseFloat(
+          robot["totalIqBenchmark"] / megaSpecificCount
+        ).toFixed(2);
+        robot["totalIqBenchmarkLast30"] = parseFloat(
+          robot["totalIqBenchmarkLast30"] / megaSpecificCount
+        ).toFixed(2);
+        this.allUserAiRobots[index] = robot;
       }
       iqLevel.megaModel = parseFloat(iqLevel.megaModel / megaCount).toFixed(2);
       iqLevel.forkedModel = parseFloat(
