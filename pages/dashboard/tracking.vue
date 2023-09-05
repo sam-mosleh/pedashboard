@@ -25,8 +25,8 @@
       <!-- Snack -->
 
       <v-row style="justify-content: space-between">
-        <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
-          <v-card style="margin: 0 auto" class="cart-track" max-width="400">
+        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
+          <v-card class="cart-track" max-width="400">
             <v-btn
               class="d-flex flex-row ms-auto me-2 mt-2"
               style="
@@ -66,30 +66,97 @@
             </v-col>
           </v-card>
         </v-col>
-        <!-- <v-col class="mt-7">
-          <v-row style="gap: 10px; display: none" class="px-2">
-            <v-col cols="12">
-              <p
-                class="ms-3"
-                style="
-                  background: black;
-                  color: white;
-                  width: 100%;
-                  padding: 10px 10px 10px 10px;
-                  text-align: center;
+        <!-- ======================================11111111111================ -->
+        <v-col class="mt-7">
+          <v-row class="px-4 mb-8" style="font-weight: 500; font-size: 14px">
+            <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12"
+              >Precision vs Recall</v-col
+            >
+          </v-row>
+          <v-row style="" class="px-2">
+            <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+              <v-slider
+                v-model="precisionVsRecall"
+                :thumb-size="28"
+                color="black"
+                thumb-label="always"
+                @change="filterByKPI"
+              ></v-slider> </v-col
+          ></v-row>
+          <v-row>
+            <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
+              <v-combobox
+                v-model="allSelectedKpiItems"
+                :items="
+                  allSavedKPIs.map((x) => {
+                    return {
+                      text: `${x.name}: ${x.description}`,
+                      value: x.name,
+                    };
+                  })
                 "
+                @change="filterByKPI"
+                chips
+                clearable
+                label="Select your Standard KPIs"
+                multiple
+                prepend-icon="mdi-filter-variant"
+                solo
               >
-                Your AI robots founded
-                <v-chip color="green">{{
-                  allTrackingSelectedCompanies.filter((x) => x.readyToBuy)
-                    .length
-                }}</v-chip>
-                buying opportunities, <v-chip color="green">20%</v-chip> more
-                opportunities than yesterday
-              </p>
+                <template v-slot:selection="{ attrs, item, select, selected }">
+                  <v-chip
+                    v-bind="attrs"
+                    :input-value="selected"
+                    close
+                    @click="select"
+                    @click:close="removeKPI(item, 'STANDARD')"
+                  >
+                    <strong>{{ item.text }}</strong>
+                  </v-chip>
+                </template>
+                <v-btn slot="append" @click="openNewKpiDialogForSearch(0)"
+                  >+</v-btn
+                >
+              </v-combobox>
+            </v-col>
+            <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
+              <v-combobox
+                v-model="allSelectedAlternativeKpiItems"
+                :items="
+                  allSavedAlternativesKPIs.map((x) => {
+                    return {
+                      text: `${x.name}: ${x.description}`,
+                      value: x.name,
+                    };
+                  })
+                "
+                @change="filterByKPI"
+                chips
+                clearable
+                label="Select your Alternatives KPIs"
+                multiple
+                prepend-icon="mdi-filter-variant"
+                solo
+              >
+                <template v-slot:selection="{ attrs, item, select, selected }">
+                  <v-chip
+                    v-bind="attrs"
+                    :input-value="selected"
+                    close
+                    @click="select"
+                    @click:close="removeKPI(item, 'ALTERNATIVE')"
+                  >
+                    <strong>{{ item.text }}</strong>
+                  </v-chip>
+                </template>
+                <v-btn slot="append" @click="openNewKpiDialogForSearch(1)"
+                  >+</v-btn
+                >
+              </v-combobox>
             </v-col>
           </v-row>
-        </v-col> -->
+        </v-col>
+        <!-- ======================================11111111111================ -->
       </v-row>
       <v-row>
         <v-col
@@ -362,7 +429,7 @@
       </v-dialog>
       <!-- -------------------------Add New DIALOG   END------------------------- -->
       <!-- -------------------------    DELETE DIALOG   Start------------------------- -->
-      <v-dialog v-model="deleteTrackingDialog.isOpen" max-width="500">
+      <v-dialog v-model="deleteTrackingDialog.isOpen" max-width="600">
         <v-card>
           <v-card-title class="text-h5">
             are you sure to delete this Tracked Company?
@@ -394,6 +461,7 @@
         </v-card>
       </v-dialog>
       <!-- -------------------------    DELETE DIALOG   END------------------------- -->
+
       <!-- -------------------------    Add NEW KPI Key DIALOG   Start------------------------- -->
       <v-dialog v-model="addNewKpiKeyDialog.isOpen" max-width="550">
         <v-card>
@@ -596,6 +664,229 @@
         </v-card>
       </v-dialog>
       <!-- -------------------------    Add NEW KPI key DIALOG   END------------------------- -->
+      <!-- -------------------------    Add NEW KPI Key DIALOG   Start------------------------- -->
+      <v-dialog v-model="addNewKpiKeyDialogForSearch.isOpen">
+        <v-card>
+          <v-card-title class="text-h5">
+            Adding new
+            {{
+              addNewKpiKeyDialogForSearch.type === 0
+                ? "Standard"
+                : "Alternative"
+            }}
+            KPI key filters to the company.
+          </v-card-title>
+          <v-card-text>
+            <v-tabs v-model="searchTab" dark grow center>
+              <v-tab
+                v-for="item in [
+                  { tab: 'Add KPI manually' },
+                  { tab: 'Talk with AI bot' },
+                ]"
+                :key="item.tab"
+              >
+                {{ item.tab }}
+              </v-tab>
+            </v-tabs>
+
+            <v-tabs-items v-model="searchTab">
+              <v-tab-item
+                v-for="item in [
+                  { tab: 'Add KPI manually', id: 0 },
+                  { tab: 'Talk with AI bot', id: 1 },
+                ]"
+                :key="item.id"
+              >
+                <v-container v-if="item.id == 0" style="margin-top: 15px">
+                  <v-row>
+                    <v-text-field
+                      label="Enter KPI Name"
+                      v-model="addNewKpiKeyDialogForSearch.name"
+                      hide-details="auto"
+                    ></v-text-field>
+                  </v-row>
+                  <v-row>
+                    <v-text-field
+                      v-model="addNewKpiKeyDialogForSearch.description"
+                      label="Enter KPI Logic Commands"
+                      hide-details="auto"
+                    ></v-text-field>
+                  </v-row>
+                  <v-row>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      style="float: right"
+                      color="green darken-1"
+                      text
+                      @click="addNewKpiToUserKpiListForSearch(key)"
+                    >
+                      Add new KPI
+                    </v-btn>
+                  </v-row>
+                </v-container>
+                <v-container v-if="item.id == 1">
+                  <v-row justify="space-around d-flex flex-column">
+                    <v-card
+                      v-for="message in chatModalForSearch.messages"
+                      :key="message.time"
+                      flat
+                    >
+                      <v-list-item
+                        :key="message.time"
+                        v-if="message.from != 'You'"
+                        class=""
+                      >
+                        <v-list-item-avatar class="align-self-start mr-2">
+                          <v-avatar size="40">
+                            <v-img src="https://via.placeholder.com/50"></v-img>
+                          </v-avatar>
+                        </v-list-item-avatar>
+                        <v-list-item-content class="received-message">
+                          <v-card color="primary darken-1" class="flex-none">
+                            <v-card-text
+                              class="white--text pa-2 d-flex flex-column"
+                            >
+                              <span class="text-caption"
+                                >{{ message.from }}
+                              </span>
+                              <span class="align-self-start text-subtitle-1">{{
+                                message.message
+                              }}</span>
+                              <span
+                                class="text-caption font-italic align-self-end"
+                                >{{ message.time }}</span
+                              >
+
+                              <span
+                                v-if="message.hasBTN"
+                                style="width: 100%; margin-top: 20px"
+                                class="align-self-start text-subtitle-1"
+                                ><hr />
+                                Did you satisfied out of this answer?</span
+                              >
+                            </v-card-text>
+                            <v-card-actions v-if="message.hasBTN">
+                              <v-spacer></v-spacer>
+                              <v-btn
+                                color="red"
+                                @click="
+                                  () => {
+                                    chatModalForSearch.situation = -1;
+                                    chatWithAIBtnSubmittedForSearch();
+                                  }
+                                "
+                              >
+                                No
+                              </v-btn>
+                              <v-btn
+                                color="green"
+                                @click="
+                                  () => {
+                                    chatModalForSearch.situation = 1;
+                                    chatWithAIBtnSubmittedForSearch();
+                                  }
+                                "
+                              >
+                                Yes
+                              </v-btn>
+                            </v-card-actions>
+                          </v-card>
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-list-item v-else :key="message.time + '1'">
+                        <v-list-item-content class="sent-message justify-end">
+                          <v-card color="primary" class="flex-none">
+                            <v-card-text
+                              class="white--text pa-2 d-flex flex-column"
+                            >
+                              <span class="text-subtitle-1 chat-message">{{
+                                message.message
+                              }}</span>
+                              <span
+                                class="text-caption font-italic align-self-start"
+                                >{{ message.time.toUTCString() }}</span
+                              >
+                            </v-card-text>
+                          </v-card>
+                        </v-list-item-content>
+                        <v-list-item-avatar class="align-self-start ml-2">
+                          <v-img src="https://via.placeholder.com/50"></v-img>
+                        </v-list-item-avatar>
+                      </v-list-item>
+                    </v-card>
+                  </v-row>
+                  <v-row>
+                    <v-text-field
+                      v-model="chatModalForSearch.userCommand"
+                      :disabled="chatModalForSearch.isCommandInputDisabled"
+                      :messages="[
+                        'write your command for your KPI and AI machine will have a conversation with you.',
+                      ]"
+                    >
+                      <v-btn
+                        slot="append"
+                        text
+                        @click="chatWithAIBtnSubmittedForSearch"
+                        :disabled="chatModalForSearch.isCommandInputDisabled"
+                      >
+                        <v-icon color="primary"> mdi-send </v-icon>
+                      </v-btn>
+                    </v-text-field>
+                  </v-row>
+                </v-container>
+              </v-tab-item>
+            </v-tabs-items>
+
+            <v-row style="margin-top: 15px"> </v-row>
+            <v-row>KPI Keys:</v-row>
+            <v-row
+              v-for="key in addNewKpiKeyDialogForSearch.type === 0
+                ? allSavedKPIs
+                : allSavedAlternativesKPIs"
+            >
+              <p>
+                {{ key.name }}:
+                {{ key.description ? key.description : "Default" }}
+              </p>
+              <v-spacer></v-spacer>
+
+              <v-btn
+                @click="
+                  () => {
+                    (addNewKpiKeyDialogForSearch.type === 0
+                      ? allSavedKPIs
+                      : allSavedAlternativesKPIs
+                    ).splice(
+                      (addNewKpiKeyDialogForSearch.type === 0
+                        ? allSavedKPIs
+                        : allSavedAlternativesKPIs
+                      ).findIndex((x) => x.name == key.name),
+                      1
+                    );
+                  }
+                "
+                >Remove From KPI list</v-btn
+              >
+            </v-row>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="
+                () => {
+                  addNewKpiKeyDialogForSearch.isOpen = false;
+                  addNewKpiKeyDialogForSearch.description = '';
+                  addNewKpiKeyDialogForSearch.name = '';
+                }
+              "
+            >
+              close
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- -------------------------    Add NEW KPI key DIALOG   END------------------------- -->
     </v-container>
   </div>
 </template>
@@ -647,6 +938,7 @@ export default {
   data() {
     return {
       tab: null,
+      searchTab: null,
       snackbar: {
         isOpen: false,
         text: "",
@@ -692,9 +984,175 @@ export default {
       chartSeries: [],
       chartOptions: {},
       companyTrackSearchInput: "",
+      //===============================
+      precisionVsRecall: 0,
+      allSelectedKpiItems: [],
+      allSavedKPIs: [],
+      allSelectedAlternativeKpiItems: [],
+      allSavedAlternativesKPIs: [],
+      addNewKpiKeyDialogForSearch: {
+        type: 0,
+        isOpen: false,
+        name: "",
+        description: "",
+        companyId: "",
+        kpiKeysList: [],
+
+        newSelectedKpiKeys: [],
+      },
+      chatModalForSearch: {
+        isOpen: false,
+        messages: [
+          {
+            time: new Date(),
+            from: "robot",
+            message:
+              "Hello im your AI assistant, please describe me what kind of KPI do you want to add.",
+            hasBTN: false,
+          },
+        ],
+        userCommand: "",
+        situation: 0,
+        isCommandInputDisabled: false,
+      },
+      //===============================
     };
   },
   methods: {
+    chatWithAIBtnSubmittedForSearch() {
+      if (this.chatModalForSearch.situation == 0) {
+        if (!this.chatModalForSearch.userCommand) {
+          this.fireSnack("please write your command first.");
+          return;
+        }
+        this.chatModalForSearch.messages.push({
+          time: new Date(),
+          from: "You",
+          message: this.chatModalForSearch.userCommand,
+          hasBTN: false,
+        });
+        this.chatModalForSearch.messages.push({
+          time: new Date(),
+          from: "robot",
+          message:
+            "Here is my information based on the data i learned: `Mauris luctus eleifend libero at finibus. Morbi et justo varius, convallis risus ut, rutrum nulla. Morbi suscipit facilisis egestas. Nunc sollicitudin accumsan massa et rutrum. Sed bibendum elit vel vulputate lacinia. Phasellus vel fringilla urna. Morbi rhoncus quis mauris quis sodales. do you satisfied out of my answer?`",
+          hasBTN: true,
+        });
+        this.chatModalForSearch.isCommandInputDisabled = true;
+        this.addNewKpiKeyDialogForSearch.description =
+          this.chatModalForSearch.userCommand;
+        this.chatModalForSearch.userCommand = "";
+        return;
+      }
+      if (this.chatModalForSearch.situation == -1) {
+        this.chatModalForSearch.messages.map((x) => (x.hasBTN = false));
+        this.chatModalForSearch.messages.push({
+          time: new Date(),
+          from: "robot",
+          message:
+            "sorry my bad!, please give me more information so, i can help you better!",
+          hasBTN: false,
+        });
+        this.chatModalForSearch.isCommandInputDisabled = false;
+        this.chatModalForSearch.userCommand = "";
+        this.chatModalForSearch.situation = 0;
+        return;
+      }
+      if (this.chatModalForSearch.situation == 1) {
+        this.chatModalForSearch.messages.map((x) => (x.hasBTN = false));
+        this.chatModalForSearch.messages.push({
+          time: new Date(),
+          from: "robot",
+          message: "Yay, now please give me a name as tag for this KPI",
+          hasBTN: false,
+        });
+        this.chatModalForSearch.isCommandInputDisabled = false;
+        this.chatModalForSearch.userCommand = "";
+        this.chatModalForSearch.situation = 2;
+        return;
+      }
+      if (this.chatModalForSearch.situation == 2) {
+        this.chatModalForSearch.isCommandInputDisabled = true;
+        this.fireSnack("your new KPI added to the KPIs list for this Asset.");
+        this.addNewKpiKeyDialogForSearch.name =
+          this.chatModalForSearch.userCommand;
+        this.chatModalForSearch.isOpen = false;
+        this.chatModalForSearch.situation = 0;
+        this.chatModalForSearch.userCommand = "";
+        this.chatModalForSearch.messages = [
+          {
+            time: new Date(),
+            from: "robot",
+            message:
+              "Hello im your AI assistant, please describe me what kind of KPI do you want to add.",
+            hasBTN: false,
+          },
+        ];
+        this.addNewKpiToUserKpiListForSearch(null);
+      }
+    },
+    addNewKpiToUserKpiListForSearch(kpiKey) {
+      if (
+        !this.addNewKpiKeyDialogForSearch.name ||
+        !this.addNewKpiKeyDialogForSearch.description
+      ) {
+        this.fireSnack("all the fields are required!");
+        return;
+      }
+      if (!kpiKey) {
+        kpiKey = {
+          name: this.addNewKpiKeyDialogForSearch.name,
+          data: [],
+          description: this.addNewKpiKeyDialogForSearch.description,
+        };
+      }
+
+      (this.addNewKpiKeyDialogForSearch.type === 0
+        ? this.allSavedKPIs
+        : this.allSavedAlternativesKPIs
+      ).push(kpiKey);
+    },
+    filterByKPI(isInit = true) {
+      if (isInit) this.init();
+      this.allTrackingSelectedCompanies =
+        this.allTrackingSelectedCompanies.filter(
+          (x) => x.score >= this.precisionVsRecall
+        );
+      if (this.allSelectedKpiItems.length > 0) {
+        this.allTrackingSelectedCompanies =
+          this.allTrackingSelectedCompanies.filter((x) =>
+            x.userKPIs.some((kpi) =>
+              this.allSelectedKpiItems.some((z) => z.value === kpi.name)
+            )
+          );
+      }
+      if (this.allSelectedAlternativeKpiItems.length > 0)
+        this.allTrackingSelectedCompanies =
+          this.allTrackingSelectedCompanies.filter((x) =>
+            x.userKPIs.some((kpi) =>
+              this.allSelectedAlternativeKpiItems.some(
+                (z) => z.value === kpi.name
+              )
+            )
+          );
+    },
+    removeKPI(item, type) {
+      if (type == "STANDARD")
+        this.allSelectedKpiItems.splice(
+          this.allSelectedKpiItems.indexOf(item),
+          1
+        );
+      if (type == "ALTERNATIVE")
+        this.allSelectedAlternativeKpiItems.splice(
+          this.allSelectedAlternativeKpiItems.indexOf(item),
+          1
+        );
+      this.filterByKPI();
+    },
+    openNewKpiDialogForSearch(kpiType) {
+      this.addNewKpiKeyDialogForSearch.type = kpiType;
+      this.addNewKpiKeyDialogForSearch.isOpen = true;
+    },
     chatWithAIBtnSubmitted() {
       if (this.chatModal.situation == 0) {
         if (!this.chatModal.userCommand) {
@@ -793,6 +1251,8 @@ export default {
     },
     init() {
       this.allTrackingSelectedCompanies = api.getAllTrackingKPIs();
+      this.allSavedKPIs = api.getAllTrackingKPIKeys();
+      this.allSavedAlternativesKPIs = api.getAllTrackingKPIKeys();
       this.deleteTrackingDialog = {
         isOpen: false,
         companyId: "",
@@ -817,6 +1277,7 @@ export default {
               (k) => k.companyId == z.companyId
             ) == -1
         );
+      this.filterByKPI(false);
     },
     openNewKpiDialog(companyId) {
       this.addNewKpiKeyDialog.companyId = companyId;

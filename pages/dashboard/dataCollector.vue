@@ -67,6 +67,7 @@
                     <v-btn
                       class="d-flex flex-row ms-auto me-2 mt-2"
                       style="
+                        display: none;
                         background: black;
                         color: white;
                         border-radius: 30px;
@@ -208,7 +209,7 @@
                           id: 's1',
                           color: 'deep-purple lighten-1',
                           text: '10 (50Tb)',
-                          title: 'Data Servers',
+                          title: 'Data Sources',
                         },
                         {
                           id: 's1',
@@ -253,7 +254,7 @@
                           id: 's1',
                           color: 'deep-purple lighten-1',
                           text: '30 (25Tb)',
-                          title: 'Data Servers',
+                          title: 'Data Sources',
                         },
                         {
                           id: 's1',

@@ -71,7 +71,10 @@
                 v-model="allSelectedKpiItems"
                 :items="
                   allSavedKPIs.map((x) => {
-                    return x.name;
+                    return {
+                      text: `${x.name}: ${x.description}`,
+                      value: x.name,
+                    };
                   })
                 "
                 @change="filterByKPI"
@@ -88,9 +91,9 @@
                     :input-value="selected"
                     close
                     @click="select"
-                    @click:close="removeKPI(item)"
+                    @click:close="removeKPI(item, 'STANDARD')"
                   >
-                    <strong>{{ item }}</strong>
+                    <strong>{{ item.text }}</strong>
                   </v-chip>
                 </template>
                 <v-btn slot="append" @click="openNewKpiDialog(0)">+</v-btn>
@@ -98,10 +101,13 @@
             </v-col>
             <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
               <v-combobox
-                v-model="allSelectedKpiItems"
+                v-model="allSelectedAlternativeKpiItems"
                 :items="
                   allSavedAlternativesKPIs.map((x) => {
-                    return x.name;
+                    return {
+                      text: `${x.name}: ${x.description}`,
+                      value: x.name,
+                    };
                   })
                 "
                 @change="filterByKPI"
@@ -118,9 +124,9 @@
                     :input-value="selected"
                     close
                     @click="select"
-                    @click:close="removeKPI(item)"
+                    @click:close="removeKPI(item, 'ALTERNATIVE')"
                   >
-                    <strong>{{ item }}</strong>
+                    <strong>{{ item.text }}</strong>
                   </v-chip>
                 </template>
                 <v-btn slot="append" @click="openNewKpiDialog(1)">+</v-btn>
@@ -136,7 +142,11 @@
             'this search input uses AI, feel free to talk with it and it will filter the companies based on your search command',
           ]"
           v-model="companyTrackSearchInput"
-        ></v-text-field>
+        >
+          <v-btn slot="append" color="black" text @click="init">
+            Find new Deals</v-btn
+          >
+        </v-text-field>
       </v-row>
       <v-row>
         <v-container>
@@ -998,6 +1008,7 @@ export default {
       allSavedKPIs: [],
       allSavedAlternativesKPIs: [],
       allSelectedKpiItems: [],
+      allSelectedAlternativeKpiItems: [],
       //===============================
       addNewKpiKeyDialog: {
         type: 0,
@@ -1052,7 +1063,7 @@ export default {
       ],
       allCompanies: [],
       companies: null,
-      precisionVsRecall: 45,
+      precisionVsRecall: 0,
       tab: null,
       currentSearches: [
         {
@@ -1143,11 +1154,17 @@ export default {
       this.addNewKpiKeyDialog.type = kpiType;
       this.addNewKpiKeyDialog.isOpen = true;
     },
-    removeKPI(item) {
-      this.allSelectedKpiItems.splice(
-        this.allSelectedKpiItems.indexOf(item),
-        1
-      );
+    removeKPI(item, type) {
+      if (type == "STANDARD")
+        this.allSelectedKpiItems.splice(
+          this.allSelectedKpiItems.indexOf(item),
+          1
+        );
+      if (type == "ALTERNATIVE")
+        this.allSelectedAlternativeKpiItems.splice(
+          this.allSelectedAlternativeKpiItems.indexOf(item),
+          1
+        );
       this.filterByKPI();
     },
     addNewKpiToUserKpiList(kpiKey) {
@@ -1242,11 +1259,6 @@ export default {
       }
     },
     filterByKPI() {
-      console.log(
-        "allSelectedKpiItems",
-        JSON.stringify(this.allSelectedKpiItems)
-      );
-
       const allAvailableAiRobots = api.getAiRobots();
       this.allRecommendedCompanies = api.getStandardCompanyList(
         api.getCompanies(),
@@ -1255,11 +1267,21 @@ export default {
       this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
         (x) => x.score >= this.precisionVsRecall
       );
-      if (this.allSelectedKpiItems.length > 0)
+      if (this.allSelectedKpiItems.length > 0) {
         this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
           (x) =>
             x.userKPIs.some((kpi) =>
-              this.allSelectedKpiItems.includes(kpi.name)
+              this.allSelectedKpiItems.some((z) => z.value === kpi.name)
+            )
+        );
+      }
+      if (this.allSelectedAlternativeKpiItems.length > 0)
+        this.allRecommendedCompanies = this.allRecommendedCompanies.filter(
+          (x) =>
+            x.userKPIs.some((kpi) =>
+              this.allSelectedAlternativeKpiItems.some(
+                (z) => z.value === kpi.name
+              )
             )
         );
     },
@@ -1316,42 +1338,50 @@ export default {
       const randomIndex = Math.floor(Math.random() * colorArray.length);
       return colorArray[randomIndex];
     },
+    init() {
+      this.summaryRecommendedCompanies = {
+        count: 0,
+        median: 0,
+      };
+      const allAvailableAiRobots = api.getAiRobots();
+      this.allRecommendedCompanies = api.getStandardCompanyList(
+        api.getCompanies(),
+        allAvailableAiRobots
+      );
+      this.allInsightCompanies = api.getAllInsightCompanies();
+      this.allTrackingCompanies = api.getAllTrackingKPIs();
+      const recommendedCompaniesTemp = this.allRecommendedCompanies.filter(
+        (x) => x.recommendation.recommended == true
+      );
+      this.summaryRecommendedCompanies.count = recommendedCompaniesTemp.length;
+      let counter = 0;
+      console.log(this.allRecommendedCompanies, recommendedCompaniesTemp);
+      recommendedCompaniesTemp.map((x) => {
+        this.summaryRecommendedCompanies.median =
+          this.summaryRecommendedCompanies.median + parseInt(x.score);
+        counter++;
+      });
+      this.summaryRecommendedCompanies.median = parseFloat(
+        this.summaryRecommendedCompanies.median / counter
+      ).toFixed(2);
+      console.log(this.summaryRecommendedCompanies.median);
+      this.allAiModels = api.getAiRobots();
+      this.allSavedKPIs = api.getAllTrackingKPIKeys();
+      this.allSavedAlternativesKPIs = api.getAllTrackingKPIKeys();
+      this.active = new Array(this.allSavedKPIs.length + 1);
+      for (let index = 0; index < this.active.length; index++) {
+        this.active[index] = false;
+      }
+      this.filterByKPI();
+
+      //============================
+      this.allCompanies = utils.getCompanies();
+      this.companies = this.allCompanies;
+    },
   },
   mounted() {
     if (!api.getAuth()) window.location.href = "/login";
-    const allAvailableAiRobots = api.getAiRobots();
-    this.allRecommendedCompanies = api.getStandardCompanyList(
-      api.getCompanies(),
-      allAvailableAiRobots
-    );
-    this.allInsightCompanies = api.getAllInsightCompanies();
-    this.allTrackingCompanies = api.getAllTrackingKPIs();
-    const recommendedCompaniesTemp = this.allRecommendedCompanies.filter(
-      (x) => x.recommendation.recommended == true
-    );
-    this.summaryRecommendedCompanies.count = recommendedCompaniesTemp.length;
-    let counter = 0;
-    console.log(this.allRecommendedCompanies, recommendedCompaniesTemp);
-    recommendedCompaniesTemp.map((x) => {
-      this.summaryRecommendedCompanies.median =
-        this.summaryRecommendedCompanies.median + parseInt(x.score);
-      counter++;
-    });
-    this.summaryRecommendedCompanies.median = parseFloat(
-      this.summaryRecommendedCompanies.median / counter
-    ).toFixed(2);
-    console.log(this.summaryRecommendedCompanies.median);
-    this.allAiModels = api.getAiRobots();
-    this.allSavedKPIs = api.getAllTrackingKPIKeys();
-    this.allSavedAlternativesKPIs = api.getAllTrackingKPIKeys();
-    this.active = new Array(this.allSavedKPIs.length + 1);
-    for (let index = 0; index < this.active.length; index++) {
-      this.active[index] = false;
-    }
-
-    //============================
-    this.allCompanies = utils.getCompanies();
-    this.companies = this.allCompanies;
+    this.init();
   },
   watch: {
     companyTrackSearchInput(newVal) {

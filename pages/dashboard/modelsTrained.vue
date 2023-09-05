@@ -36,9 +36,21 @@
                 border-radius: 30px;
                 text-transform: capitalize;
               "
-              @click="redirect('/dashboard/modelsTrained')"
-              >View</v-btn
+              @click="
+                () => {
+                  robotAddNewDialog = {
+                    isOpen: true,
+                    data: {
+                      id: '',
+                      nickName: '',
+                      selectedCompanies: [],
+                    },
+                  };
+                }
+              "
             >
+              + Add
+            </v-btn>
             <v-col class="justify-space-between align-center h-100">
               <p
                 class="text-center"
@@ -106,27 +118,7 @@
         </v-col>
         <v-col cols="12">
           <v-btn
-            v-if="allUserAiRobotsIds.length != allAiRobotsIds.length"
-            class="ms-3"
-            color="black"
-            style="color: white; border-radius: 20px; width: 100%"
-            @click="
-              () => {
-                robotAddNewDialog = {
-                  isOpen: true,
-                  data: {
-                    id: '',
-                    nickName: '',
-                    selectedCompanies: [],
-                  },
-                };
-              }
-            "
-          >
-            + Add new Trained AI Robot
-          </v-btn>
-          <v-btn
-            v-else
+            v-if="allUserAiRobotsIds.length == allAiRobotsIds.length"
             class="ms-3"
             color="green dark"
             style="color: white; border-radius: 20px; width: 100%"
@@ -671,8 +663,6 @@ export default {
       });
       this.fillTrainedModelsTableItems();
       this.allSavedCompanies = api.getAllCompanies();
-
-      console.log("kir", JSON.stringify(this.allSavedCompanies));
     },
     generateForkedModelsRelation(company) {
       return this.allUserAiRobots[

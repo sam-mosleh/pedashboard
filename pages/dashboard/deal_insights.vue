@@ -28,6 +28,18 @@
       <v-row class="cart-insights">
         <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
           <v-card class="cart-insights" style="">
+            <v-btn
+              class="d-flex flex-row ms-auto me-2 mt-2"
+              style="
+                background: black;
+                color: white;
+                border-radius: 30px;
+                text-transform: capitalize;
+              "
+              @click="() => (addNewInsightCompanyDialog.isOpen = true)"
+            >
+              + Add
+            </v-btn>
             <v-col class="justify-space-between align-center h-100">
               <p
                 class="text-center"
@@ -87,16 +99,6 @@
             class="elevation-1"
           ></v-data-table>
         </v-col>
-        <v-col cols="12">
-          <v-btn
-            class="ms-3"
-            color="black"
-            style="color: white; border-radius: 20px; width: 100%"
-            @click="() => (addNewTrackingCompanyDialog.isOpen = true)"
-          >
-            + Add asset for insight
-          </v-btn>
-        </v-col>
       </v-row>
       <!-- ==================================NEW Header End================================== -->
 
@@ -150,6 +152,7 @@
                         <div class="text--primary">
                           <v-chip-group active-class="primary--text" column>
                             <v-chip>score: {{ company.score }}</v-chip>
+
                             <v-chip
                               >Sell Chance: {{ company.sellChance }}</v-chip
                             >
@@ -157,6 +160,10 @@
                             <v-chip
                               >Documents:
                               {{ company.uploadedFiles.length }}</v-chip
+                            >
+                            <v-chip
+                              >Insight Completeness:
+                              {{ company.completeness }}%</v-chip
                             >
                           </v-chip-group>
                         </div>
@@ -169,11 +176,26 @@
                             () => {
                               dialogViewAssetDetail.isOpen = true;
                               dialogViewAssetDetail.company = company;
+                              dialogViewAssetDetail.selectedPhase =
+                                company.assetPhase;
                             }
                           "
                         >
                           view
                         </v-btn>
+                        <v-btn
+                          text
+                          color="red"
+                          @click="
+                            () => {
+                              deleteInsightDialog.isOpen = true;
+                              deleteInsightDialog.companyId = company.companyId;
+                            }
+                          "
+                        >
+                          delete
+                        </v-btn>
+                        <v-spacer></v-spacer>
                         <v-spacer></v-spacer>
                         <v-btn
                           text
@@ -296,32 +318,6 @@
         <!-- ==================================OLD END================================== -->
       </v-row>
 
-      <!-- Delete asset Dialog START -->
-      <v-dialog v-model="dialogDeleteAsset" max-width="500px">
-        <v-card>
-          <v-card-title>
-            <span class="px-3" style="font-size: 18px; font-weight: 500"
-              >Are you sure want to delete this asset</span
-            >
-          </v-card-title>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="red darken-1" text @click="dialogDeleteAsset = false">
-              Cancel
-            </v-btn>
-            <v-btn
-              color="blue darken-1"
-              text
-              @click="() => console.log('delete asset')"
-            >
-              Yes
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <!-- Delete asset Dialog END -->
-
       <!-- View Asset Detail Dialog START -->
       <v-dialog v-model="dialogViewAssetDetail.isOpen" max-width="90vw">
         <v-card class="mt-5">
@@ -344,7 +340,24 @@
                         >
                           {{ dialogViewAssetDetail.company?.name }}
                         </p>
-                        <v-chip-group active-class="primary--text mt-3" column>
+                        <v-chip-group column>
+                          <v-chip
+                            >Phase
+                            {{
+                              dialogViewAssetDetail.company?.assetPhase == 0
+                                ? "Zero"
+                                : dialogViewAssetDetail.company?.assetPhase == 1
+                                ? "One"
+                                : "Two"
+                            }}</v-chip
+                          >
+                          <v-chip
+                            >Insight Completeness:
+                            {{
+                              dialogViewAssetDetail.company?.completeness
+                            }}%</v-chip
+                          >
+
                           <v-chip
                             >score:
                             {{ dialogViewAssetDetail.company?.score }}</v-chip
@@ -367,15 +380,27 @@
                       </v-col>
                     </v-card>
                     <v-row class="justify-space-between mt-3">
-                      <v-chip
-                        class="ma-2"
-                        color="#F0F0F0"
-                        label
-                        text-color="black"
-                      >
-                        <v-icon left> mdi-puzzle </v-icon>
-                        {{ dialogViewAssetDetail.company?.industry }}
-                      </v-chip>
+                      <v-col cols="6">
+                        <v-combobox
+                          v-model="dialogViewAssetDetail.selectedPhase"
+                          :items="[0, 1, 2]"
+                          @change="changePhaseOfCompany"
+                          label="Change Company Phase"
+                          prepend-icon="mdi-filter-variant"
+                          solo
+                        ></v-combobox>
+                      </v-col>
+                      <v-col cols="6">
+                        <v-chip
+                          class="ma-2"
+                          color="#F0F0F0"
+                          label
+                          text-color="black"
+                        >
+                          <v-icon left> mdi-puzzle </v-icon>
+                          {{ dialogViewAssetDetail.company?.industry }}
+                        </v-chip>
+                      </v-col>
                     </v-row>
                   </v-col>
                   <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
@@ -537,7 +562,12 @@
             <v-btn
               color="red darken-1"
               text
-              @click="dialogViewAssetDetail.isOpen = false"
+              @click="
+                () => {
+                  dialogViewAssetDetail.isOpen = false;
+                  init();
+                }
+              "
             >
               Close
             </v-btn>
@@ -860,7 +890,7 @@
       </v-dialog>
       <!-- Add a review Dialog END -->
       <!-- -------------------------Tracking Add new DIALOG START------------------------- -->
-      <v-dialog v-model="addNewTrackingCompanyDialog.isOpen">
+      <v-dialog v-model="addNewInsightCompanyDialog.isOpen">
         <v-card>
           <v-card-title class="text-h5">
             Select Your Favorite Companies to Place in Insights
@@ -878,7 +908,7 @@
               </v-row>
               <v-row>
                 <v-card
-                  v-for="company in addNewTrackingCompanyDialog.allCompanies"
+                  v-for="company in addNewInsightCompanyDialog.allCompanies"
                   class="mx-auto mt-5"
                   max-width="300"
                 >
@@ -905,7 +935,7 @@
                       @click="
                         () => {
                           company.isSelectedAttr = true;
-                          addCompanyToTrackingSystem();
+                          addCompanyToInsightSystem();
                         }
                       "
                     >
@@ -935,7 +965,7 @@
               text
               @click="
                 () => {
-                  addNewTrackingCompanyDialog.isOpen = false;
+                  addNewInsightCompanyDialog.isOpen = false;
                 }
               "
             >
@@ -945,6 +975,39 @@
         </v-card>
       </v-dialog>
       <!-- -------------------------Add New DIALOG   END------------------------- -->
+      <!-- -------------------------    DELETE DIALOG   Start------------------------- -->
+      <v-dialog v-model="deleteInsightDialog.isOpen" max-width="600">
+        <v-card>
+          <v-card-title class="text-h5">
+            are you sure to delete this Company from insight's list?
+          </v-card-title>
+
+          <v-card-actions>
+            <v-btn
+              color="red darken-1"
+              text
+              @click="deleteInsightCompany(deleteInsightDialog.companyId)"
+            >
+              Yes
+            </v-btn>
+            <v-spacer></v-spacer>
+
+            <v-btn
+              color="green darken-1"
+              text
+              @click="
+                () => {
+                  deleteInsightDialog.isOpen = false;
+                  deleteInsightDialog.companyId = '';
+                }
+              "
+            >
+              No
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- -------------------------    DELETE DIALOG   END------------------------- -->
     </v-container>
   </div>
 </template>
@@ -981,17 +1044,22 @@ export default {
         isOpen: false,
         text: "",
       },
-      addNewTrackingCompanyDialog: {
+      addNewInsightCompanyDialog: {
         isOpen: false,
         allCompanies: [],
       },
       allAiModels: [],
+      deleteInsightDialog: {
+        isOpen: false,
+        companyId: "",
+      },
       //===================
       expanded: [],
-      dialogDeleteAsset: false,
+
       dialogViewAssetDetail: {
         isOpen: false,
         company: null,
+        selectedPhase: 0,
       },
       dialogMonitoring: {
         isOpen: false,
@@ -1099,21 +1167,50 @@ export default {
     showDataSize(dataSize) {
       return api.dataSizeSerializer(dataSize);
     },
-    addCompanyToTrackingSystem() {
-      this.addNewTrackingCompanyDialog.allCompanies.map((company) => {
+    deleteInsightCompany(companyId) {
+      const index = this.allInsightCompanies.findIndex(
+        (x) => x.companyId == companyId
+      );
+      this.allInsightCompanies.splice(index, 1);
+      api.saveInsightCompanies(this.allInsightCompanies);
+      this.fireSnack("Company removed from insight system!");
+      this.init();
+    },
+    addCompanyToInsightSystem() {
+      this.addNewInsightCompanyDialog.allCompanies.map((company) => {
         if (company.isSelectedAttr) {
           this.allInsightCompanies.push(company);
         }
       });
       api.saveInsightCompanies(this.allInsightCompanies);
       this.fireSnack("Companies added successfully!");
-      this.inti();
+      this.init();
     },
-    inti() {
+    changePhaseOfCompany() {
+      //dialogViewAssetDetail.company
+      const newVal = this.dialogViewAssetDetail.selectedPhase;
+      const index = this.allInsightCompanies.findIndex(
+        (x) => x.companyId == this.dialogViewAssetDetail.company.companyId
+      );
+      this.allInsightCompanies[index].assetPhase = newVal;
+      this.allInsightCompanies[index].completeness = 0;
+      api.saveInsightCompanies(this.allInsightCompanies);
+
+      this.fireSnack(
+        `Company insight phase changed to ${
+          newVal == 0 ? "Zero" : newVal == 1 ? "One" : "Two"
+        }`
+      );
+    },
+    init() {
+      this.deleteInsightDialog = {
+        isOpen: false,
+        companyId: "",
+      };
       this.allAiModels = api.getAiRobots();
-      this.addNewTrackingCompanyDialog.isOpen = false;
+      this.addNewInsightCompanyDialog.isOpen = false;
       let allAiRobots = api.getAiRobots();
-      this.addNewTrackingCompanyDialog.allCompanies = api
+      this.addNewInsightCompanyDialog.allCompanies = api
         .getStandardCompanyList(api.getCompanies(), allAiRobots)
         .filter(
           (z) =>
@@ -1146,17 +1243,17 @@ export default {
   },
   mounted() {
     if (!api.getAuth()) window.location.href = "/login";
-    this.inti();
+    this.init();
   },
   watch: {
     companyInsightSearchInput(newVal) {
       if (newVal) {
-        this.addNewTrackingCompanyDialog.allCompanies =
-          this.addNewTrackingCompanyDialog.allCompanies.filter((x) =>
+        this.addNewInsightCompanyDialog.allCompanies =
+          this.addNewInsightCompanyDialog.allCompanies.filter((x) =>
             x.name.toLowerCase().includes(newVal)
           );
       } else {
-        this.addNewTrackingCompanyDialog.allCompanies = api
+        this.addNewInsightCompanyDialog.allCompanies = api
           .getStandardCompanyList(api.getCompanies(), api.getAiRobots())
           .filter(
             (z) =>

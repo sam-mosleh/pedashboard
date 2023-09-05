@@ -97,9 +97,8 @@ export default {
   methods: {
     login() {
       // const allTrackingKPIs = api.getAllTrackingKPIs();
-      const allAiRobots = api.getAllAiRobots();
-      const allCompanies = api.getAllCompanies();
-      if (allAiRobots.length == 0 && allCompanies.length == 0) {
+
+      if (!api.getAuth()) {
         const allData = api.getFullUserData();
         api.saveAiRobots(allData.robots);
         api.saveCompanies(allData.companies);
