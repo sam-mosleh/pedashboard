@@ -356,11 +356,16 @@
                   <v-chip-group active-class="primary--text" column>
                     <v-chip
                       :color="`${company.userKPIs.length == 0 ? 'red' : ''}`"
-                      >Selected KPIs: {{ company.userKPIs.length }}</v-chip
+                      >Selected Tracking KPIs:
+                      {{ company.userKPIs.length }}</v-chip
                     >
                     <v-chip v-if="company.readyToBuy" color="green"
                       >Ready to Buy</v-chip
                     >
+                    <v-chip>Score: {{ company.score }}</v-chip>
+                    <v-chip>HQ Location: {{ company.hqLocation }}</v-chip>
+                    <v-chip>Revenue Size: {{ company.revenueSize }}</v-chip>
+                    <v-chip>Industry: {{ company.industry }}</v-chip>
                   </v-chip-group>
                 </div>
                 <div class="text--primary" v-if="company.userKPIs.length == 0">
@@ -369,19 +374,6 @@
               </v-row>
             </v-card-text>
             <v-card-actions>
-              <v-btn
-                text
-                color="red"
-                @click="
-                  () => {
-                    deleteTrackingDialog.isOpen = true;
-                    deleteTrackingDialog.companyId = company.companyId;
-                  }
-                "
-              >
-                delete
-              </v-btn>
-              <v-spacer></v-spacer>
               <v-btn
                 text
                 color="green"
@@ -394,6 +386,19 @@
                 "
               >
                 view
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn
+                text
+                color="red"
+                @click="
+                  () => {
+                    deleteTrackingDialog.isOpen = true;
+                    deleteTrackingDialog.companyId = company.companyId;
+                  }
+                "
+              >
+                delete
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -408,26 +413,6 @@
               <p class="text-h4 text--primary">
                 {{ viewTrackingCompanyDialog.company?.name }}
               </p>
-              <div class="text--primary">
-                <v-chip-group active-class="primary--text" column>
-                  <v-chip
-                    >totalDataGathered:
-                    {{
-                      showDataSize(
-                        viewTrackingCompanyDialog.company?.totalDataGathered
-                      )
-                    }}
-                  </v-chip>
-                  <v-chip
-                    >totalDataLearned:
-                    {{
-                      showDataSize(
-                        viewTrackingCompanyDialog.company?.totalDataLearned
-                      )
-                    }}
-                  </v-chip>
-                </v-chip-group>
-              </div>
             </v-row>
             <v-row>
               <v-chip-group mandatory active-class="primary--text">
@@ -448,7 +433,7 @@
                 @click="
                   openNewKpiDialog(viewTrackingCompanyDialog.company.companyId)
                 "
-                >+ Add New KPI</v-btn
+                >Manage KPIs</v-btn
               >
             </v-row>
             <v-row>
