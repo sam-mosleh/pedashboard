@@ -225,10 +225,41 @@
                               delete
                             </v-btn></v-slide-item
                           >
+                          <v-slide-item>
+                            <v-btn
+                              small
+                              @click="
+                                () => {
+                                  fireSnack(
+                                    'your review submitted successfully!'
+                                  );
+                                }
+                              "
+                              rounded
+                              color="green"
+                              style="margin: 0 auto; display: block"
+                            >
+                              <v-icon>mdi-thumb-up</v-icon>
+                            </v-btn>
+                          </v-slide-item>
+                          <v-slide-item>
+                            <v-btn
+                              small
+                              @click="
+                                () => {
+                                  fireSnack(
+                                    'your review submitted successfully!'
+                                  );
+                                }
+                              "
+                              rounded
+                              color="red"
+                              style="margin: 0 auto; display: block"
+                            >
+                              <v-icon>mdi-thumb-down</v-icon>
+                            </v-btn>
+                          </v-slide-item>
                         </v-slide-group>
-
-                        <v-spacer></v-spacer>
-                        <v-spacer></v-spacer>
 
                         <!-- TODO: must be added -->
                       </v-card-actions>

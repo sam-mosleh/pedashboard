@@ -333,23 +333,6 @@
                 >
                   {{ company.name }}
                 </p>
-                <v-spacer></v-spacer>
-                <v-btn
-                  text
-                  color="green"
-                  @click="
-                    () => {
-                      fireSnack(
-                        `${company.name.replace(
-                          ' ',
-                          ''
-                        )}-${+new Date()}.pdf Sent to your email!`
-                      );
-                    }
-                  "
-                >
-                  Download Report
-                </v-btn>
               </v-row>
               <v-row>
                 <div class="text--primary">
@@ -374,32 +357,85 @@
               </v-row>
             </v-card-text>
             <v-card-actions>
-              <v-btn
-                text
-                color="green"
-                @click="
-                  () => {
-                    viewTrackingCompanyDialog.isOpen = true;
-                    viewTrackingCompanyDialog.company = company;
-                    changeKPIChart(0);
-                  }
-                "
+              <v-slide-group multiple show-arrows>
+                <v-slide-item>
+                  <v-btn
+                    text
+                    color="green"
+                    @click="
+                      () => {
+                        viewTrackingCompanyDialog.isOpen = true;
+                        viewTrackingCompanyDialog.company = company;
+                        changeKPIChart(0);
+                      }
+                    "
+                  >
+                    view
+                  </v-btn></v-slide-item
+                >
+                <v-slide-item>
+                  <v-btn
+                    text
+                    color="green"
+                    @click="
+                      () => {
+                        fireSnack(
+                          `${company.name.replace(
+                            ' ',
+                            ''
+                          )}-${+new Date()}.pdf Sent to your email!`
+                        );
+                      }
+                    "
+                  >
+                    Download Report
+                  </v-btn></v-slide-item
+                >
+                <v-slide-item>
+                  <v-btn
+                    text
+                    color="red"
+                    @click="
+                      () => {
+                        deleteTrackingDialog.isOpen = true;
+                        deleteTrackingDialog.companyId = company.companyId;
+                      }
+                    "
+                  >
+                    delete
+                  </v-btn></v-slide-item
+                >
+                <v-slide-item>
+                  <v-btn
+                    small
+                    @click="
+                      () => {
+                        fireSnack('your review submitted successfully!');
+                      }
+                    "
+                    rounded
+                    color="green"
+                    style="margin: 0 auto; display: block"
+                  >
+                    <v-icon>mdi-thumb-up</v-icon>
+                  </v-btn>
+                </v-slide-item>
+                <v-slide-item>
+                  <v-btn
+                    small
+                    @click="
+                      () => {
+                        fireSnack('your review submitted successfully!');
+                      }
+                    "
+                    rounded
+                    color="red"
+                    style="margin: 0 auto; display: block"
+                  >
+                    <v-icon>mdi-thumb-down</v-icon>
+                  </v-btn>
+                </v-slide-item></v-slide-group
               >
-                view
-              </v-btn>
-              <v-spacer></v-spacer>
-              <v-btn
-                text
-                color="red"
-                @click="
-                  () => {
-                    deleteTrackingDialog.isOpen = true;
-                    deleteTrackingDialog.companyId = company.companyId;
-                  }
-                "
-              >
-                delete
-              </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
