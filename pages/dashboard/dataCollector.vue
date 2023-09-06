@@ -577,6 +577,12 @@ export default {
             dataVolume: "75%",
             trainedPercentage: "97%",
           },
+          {
+            name: "Volume of new data in past 30 days",
+            numberOfSources: "70Tb",
+            dataVolume: "30Tb",
+            trainedPercentage: "22Tb",
+          },
         ],
       },
     };
