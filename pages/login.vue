@@ -98,15 +98,6 @@ export default {
     login() {
       // const allTrackingKPIs = api.getAllTrackingKPIs();
 
-      if (!api.getAuth()) {
-        const allData = api.getFullUserData();
-        api.saveAiRobots(allData.robots);
-        api.saveCompanies(allData.companies);
-        api.saveTrackingKPIs(allData.trackingCompaniesKPIs);
-        api.saveTrackingKPIKeys(allData.trackingKpiKeys);
-        api.saveInsightCompanies(allData.insights);
-        console.log(JSON.stringify(allData));
-      }
       console.log(
         this.email.toLowerCase() == "userTest@gmail.com".toLowerCase(),
         this.password == "1234",
@@ -117,6 +108,14 @@ export default {
         this.password == "1234"
       ) {
         api.saveAuth();
+        const allData = api.getFullUserData();
+        api.saveAiRobots(allData.robots);
+        api.saveCompanies(allData.companies);
+        api.saveTrackingKPIs(allData.trackingCompaniesKPIs);
+        api.saveTrackingKPIKeys(allData.trackingKpiKeys);
+        api.saveTrackingAlternativeKPIKeys(allData.trackingAlternativeKpiKeys);
+        api.saveInsightCompanies(allData.insights);
+        console.log(JSON.stringify(allData));
         window.location.href = "/dashboard";
       } else {
         this.snackbar.text = "invalid username or password!";

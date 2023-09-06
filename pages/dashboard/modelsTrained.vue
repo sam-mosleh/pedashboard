@@ -146,11 +146,11 @@
                       <div class="text--primary">
                         <v-chip-group active-class="primary--text" column>
                           <v-chip
-                            >Total Data learned from assets:
+                            >Data Volume:
                             {{ showDataSize(robot.totalDataLearnedFromUser) }}
                           </v-chip>
                           <v-chip
-                            >Total completeness: {{ robot.totalCompleteness }}%
+                            >Percentage Trained: {{ robot.totalCompleteness }}%
                           </v-chip>
                           <v-chip>IQ Level: {{ robot.totalIQ }}% </v-chip>
                           <v-chip

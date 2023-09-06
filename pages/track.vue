@@ -16,6 +16,7 @@ export default {
     api.saveCompanies(allData.companies);
     api.saveTrackingKPIs(allData.trackingCompaniesKPIs);
     api.saveTrackingKPIKeys(allData.trackingKpiKeys);
+    api.saveTrackingAlternativeKPIKeys(allData.trackingAlternativeKpiKeys);
     api.saveInsightCompanies(allData.insights);
     console.log(JSON.stringify(allData));
   },

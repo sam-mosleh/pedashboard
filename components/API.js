@@ -1924,8 +1924,14 @@ export default {
     for (let index = 0; index < selectedCompanies.length; index++) {
       const company = selectedCompanies[index];
       if (!company["userKPIs"]) company["userKPIs"] = [];
+      if (!company["userAlternativeKPIs"]) company["userAlternativeKPIs"] = [];
       if (company.userKPIs.length == 0 && putDefaultKPi) {
         company["userKPIs"].push(...this.getDefaultKPIs());
+      }
+      if (company.userAlternativeKPIs.length == 0 && putDefaultKPi) {
+        company["userAlternativeKPIs"].push(
+          ...this.getDefaultKPIs().splice(0, 1)
+        );
       }
       if (newKPIs != null) {
         if (newKPIs.companyId == company.companyId) {
@@ -1936,6 +1942,11 @@ export default {
           ) {
             const newKpiValue = newKPIs.values[newKpiValueIndex];
             company["userKPIs"].push({
+              name: newKpiValue.name,
+              data: [],
+              description: newKPIs.description,
+            });
+            company["userAlternativeKPIs"].push({
               name: newKpiValue.name,
               data: [],
               description: newKPIs.description,
@@ -1954,6 +1965,22 @@ export default {
           });
         }
         company.userKPIs[kpiIndex] = kpi;
+      }
+      for (
+        let kpiIndex = 0;
+        kpiIndex < company.userAlternativeKPIs.length;
+        kpiIndex++
+      ) {
+        const kpi = company.userAlternativeKPIs[kpiIndex];
+        kpi.data = [];
+        for (let monthIndex = 0; monthIndex < months.length; monthIndex++) {
+          const month = months[monthIndex];
+          kpi.data.push({
+            date: month,
+            value: Math.floor(Math.random() * 100),
+          });
+        }
+        company.userAlternativeKPIs[kpiIndex] = kpi;
       }
       company["readyToBuy"] = Math.floor(Math.random() * 2) == 1 ? true : false;
       selectedCompanies[index] = company;
@@ -2057,6 +2084,7 @@ export default {
       trackingCompaniesKPIs: trackingCompaniesKPIs,
       insights: insightsCompanies,
       trackingKpiKeys: [...this.getDefaultKPIs()],
+      trackingAlternativeKpiKeys: [...this.getDefaultKPIs().splice(0, 1)],
     };
   },
   getAllTrackingKPIs() {
@@ -2084,6 +2112,14 @@ export default {
   saveTrackingKPIKeys(allKPIKeys) {
     localStorage.setItem("PED-KPIKeys", JSON.stringify(allKPIKeys));
   },
+  getAllTrackingAlternativeKPIKeys() {
+    const data = localStorage.getItem("PED-KPIAlternativeKeys");
+    if (data) return JSON.parse(data);
+    return [];
+  },
+  saveTrackingAlternativeKPIKeys(allKPIKeys) {
+    localStorage.setItem("PED-KPIAlternativeKeys", JSON.stringify(allKPIKeys));
+  },
   getAllAiRobots() {
     const data = localStorage.getItem("PED-AiRobots");
     if (data) return JSON.parse(data);
@@ -2109,11 +2145,18 @@ export default {
     localStorage.setItem("PED-assetPhazeLastMonth", JSON.stringify(phases));
   },
   saveAuth() {
-    localStorage.setItem("PED-Auth", "qwertyuio4839u42497f4d1");
+    localStorage.setItem("PED-Auth", "qwertyuio4839u42497f4d111111");
+    localStorage.removeItem("PED-assetPhazeLastMonth");
+    localStorage.removeItem("PED-allCompanies");
+    localStorage.removeItem("PED-AiRobots");
+    localStorage.removeItem("PED-KPIAlternativeKeys");
+    localStorage.removeItem("PED-KPIKeys");
+    localStorage.removeItem("PED-InsightCompanies");
+    localStorage.removeItem("PED-KPIs");
   },
   getAuth() {
     const data = localStorage.getItem("PED-Auth");
-    if (data) if (data == "qwertyuio4839u42497f4d1") return true;
+    if (data) if (data == "qwertyuio4839u42497f4d111111") return true;
     return false;
   },
   dataSizeSerializer(dataSize) {

@@ -56,7 +56,7 @@
             <v-tab
               v-for="item in [
                 { tab: 'Search With AI' },
-                { tab: 'Search Manually' },
+                // { tab: 'Search Manually' },
               ]"
               :key="item.tab"
             >
@@ -68,7 +68,7 @@
             <v-tab-item
               v-for="item in [
                 { tab: 'Search With AI', id: 0 },
-                { tab: 'Search Manually', id: 1 },
+                // { tab: 'Search Manually', id: 1 },
               ]"
               :key="item.id"
             >
@@ -351,6 +351,24 @@
                               style="margin: 0 auto; display: block"
                             >
                               <v-icon>mdi-thumb-up</v-icon>
+                            </v-btn>
+                          </v-col>
+                        </v-slide-item>
+                        <v-slide-item>
+                          <v-col>
+                            <v-btn
+                              @click="
+                                () => {
+                                  fireSnack(
+                                    'your review submitted successfully!'
+                                  );
+                                }
+                              "
+                              rounded
+                              color="red"
+                              style="margin: 0 auto; display: block"
+                            >
+                              <v-icon>mdi-thumb-down</v-icon>
                             </v-btn>
                           </v-col>
                         </v-slide-item>
@@ -1517,6 +1535,7 @@ export default {
         );
         this.allRecommendedCompanies.splice(randIndex, 1);
       }
+      this.fullFillSummary();
     },
 
     setSelectForInsight(item) {
@@ -1536,18 +1555,11 @@ export default {
       const randomIndex = Math.floor(Math.random() * colorArray.length);
       return colorArray[randomIndex];
     },
-    init() {
+    fullFillSummary() {
       this.summaryRecommendedCompanies = {
         count: 0,
         median: 0,
       };
-      const allAvailableAiRobots = api.getAiRobots();
-      this.allRecommendedCompanies = api.getStandardCompanyList(
-        api.getCompanies(),
-        allAvailableAiRobots
-      );
-      this.allInsightCompanies = api.getAllInsightCompanies();
-      this.allTrackingCompanies = api.getAllTrackingKPIs();
       const recommendedCompaniesTemp = this.allRecommendedCompanies.filter(
         (x) => x.recommendation.recommended == true
       );
@@ -1562,7 +1574,17 @@ export default {
       this.summaryRecommendedCompanies.median = parseFloat(
         this.summaryRecommendedCompanies.median / counter
       ).toFixed(2);
-      console.log(this.summaryRecommendedCompanies.median);
+    },
+    init() {
+      const allAvailableAiRobots = api.getAiRobots();
+      this.allRecommendedCompanies = api.getStandardCompanyList(
+        api.getCompanies(),
+        allAvailableAiRobots
+      );
+      this.allInsightCompanies = api.getAllInsightCompanies();
+      this.allTrackingCompanies = api.getAllTrackingKPIs();
+
+      this.fullFillSummary();
       this.allAiModels = api.getAiRobots();
       this.allSavedKPIs = api.getAllTrackingKPIKeys();
       this.allSavedAlternativesKPIs = api.getAllTrackingKPIKeys();

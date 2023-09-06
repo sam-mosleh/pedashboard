@@ -67,13 +67,13 @@
           </v-card>
         </v-col>
         <!-- ======================================11111111111================ -->
-        <v-col class="mt-7">
+        <v-col class="mt-7" style="margin-top: 0px !important; height: 390px">
           <!-- ===============---------------------------===================           -->
           <v-tabs v-model="searchTab1" dark grow center>
             <v-tab
               v-for="item in [
                 { tab: 'Search With AI' },
-                { tab: 'Search Manually' },
+                // { tab: 'Search Manually' },
               ]"
               :key="item.tab"
             >
@@ -85,7 +85,7 @@
             <v-tab-item
               v-for="item in [
                 { tab: 'Search With AI', id: 0 },
-                { tab: 'Search Manually', id: 1 },
+                // { tab: 'Search Manually', id: 1 },
               ]"
               :key="item.id"
             >
@@ -230,7 +230,7 @@
                       @change="filterByKPI"
                     ></v-slider> </v-col
                 ></v-row>
-                <v-row>
+                <v-row style="display: none">
                   <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
                     <v-combobox
                       v-model="allSelectedKpiItems"
@@ -433,7 +433,32 @@
                 @click="
                   openNewKpiDialog(viewTrackingCompanyDialog.company.companyId)
                 "
-                >Manage KPIs</v-btn
+                >Manage Standard KPIs</v-btn
+              >
+            </v-row>
+            <v-row>
+              <v-chip-group mandatory active-class="primary--text">
+                <v-chip
+                  v-for="(tag, i) in viewTrackingCompanyDialog.company
+                    ?.userAlternativeKPIs"
+                  :key="tag.name"
+                  @click="changeKPIChart(i, 'userAlternativeKPIs')"
+                >
+                  {{ tag.name }}
+                </v-chip>
+              </v-chip-group>
+              <v-spacer></v-spacer>
+
+              <v-btn
+                text
+                color="green darken-1"
+                @click="
+                  openNewKpiDialog(
+                    viewTrackingCompanyDialog.company.companyId,
+                    'userAlternativeKPIs'
+                  )
+                "
+                >Manage Alternative KPIs</v-btn
               >
             </v-row>
             <v-row>
@@ -506,6 +531,11 @@
                     <p class="text-h4 text--primary">{{ company.name }}</p>
                     <div class="text--primary">
                       <v-chip-group active-class="primary--text" column>
+                        <v-chip
+                          v-if="company.recommendation.recommended"
+                          color="green"
+                          >This Company is recommended!
+                        </v-chip>
                         <v-chip
                           >totalDataGathered:
                           {{ showDataSize(company.totalDataGathered) }}
@@ -1112,7 +1142,7 @@ export default {
         description: "",
         companyId: "",
         kpiKeysList: [],
-
+        kpiType: "",
         newSelectedKpiKeys: [],
       },
       viewTrackingCompanyDialog: {
@@ -1435,24 +1465,42 @@ export default {
         );
       this.filterByKPI(false);
     },
-    openNewKpiDialog(companyId) {
+    openNewKpiDialog(companyId, kpiType = "userKPIs") {
       this.addNewKpiKeyDialog.companyId = companyId;
       this.addNewKpiKeyDialog.newSelectedKpiKeys = [];
-      const companyIndex = this.allTrackingSelectedCompanies.findIndex(
-        (x) => x.companyId == companyId
+      console.log(
+        "api.getAllTrackingAlternativeKPIKeys()",
+        api.getAllTrackingAlternativeKPIKeys()
       );
-
-      api.getAllTrackingKPIKeys().map((kpi) => {
-        this.addNewKpiKeyDialog.newSelectedKpiKeys.push({
-          name: kpi.name,
-          data: [],
-          description: kpi.description,
+      console.log("api.getAllTrackingKPIKeys()", api.getAllTrackingKPIKeys());
+      if (kpiType == "userKPIs") {
+        api.getAllTrackingKPIKeys().map((kpi) => {
+          this.addNewKpiKeyDialog.newSelectedKpiKeys.push({
+            name: kpi.name,
+            data: [],
+            description: kpi.description,
+          });
         });
-      });
-
-      let kpiKeys = api.getAllTrackingKPIKeys();
-      if (kpiKeys.length == 0) kpiKeys = api.getAllTrackingKPIKeys();
+      } else {
+        api.getAllTrackingAlternativeKPIKeys().map((kpi) => {
+          this.addNewKpiKeyDialog.newSelectedKpiKeys.push({
+            name: kpi.name,
+            data: [],
+            description: kpi.description,
+          });
+        });
+      }
+      let kpiKeys =
+        kpiType == "userKPIs"
+          ? api.getAllTrackingKPIKeys()
+          : api.getAllTrackingAlternativeKPIKeys();
+      if (kpiKeys.length == 0)
+        kpiKeys =
+          kpiType == "userKPIs"
+            ? api.getAllTrackingKPIKeys()
+            : api.getAllTrackingAlternativeKPIKeys();
       this.addNewKpiKeyDialog.kpiKeysList = kpiKeys;
+      this.addNewKpiKeyDialog.kpiType = kpiType;
       this.addNewKpiKeyDialog.isOpen = true;
     },
     showDataSize(dataSize) {
@@ -1516,25 +1564,51 @@ export default {
       this.init();
       return this.allTrackingSelectedCompanies[IndexOfSelectedCompany];
     },
-    changeKPIChart(kpiIndex) {
-      this.chartSeries = [
-        {
-          name: this.viewTrackingCompanyDialog.company?.userKPIs[kpiIndex].name,
-          data: this.viewTrackingCompanyDialog.company?.userKPIs[
-            kpiIndex
-          ].data.map((x) => x.value),
-        },
-      ];
-      this.chartOptions = {
-        chart: {
-          id: "line-chart",
-        },
-        xaxis: {
-          categories: this.viewTrackingCompanyDialog.company?.userKPIs[
-            kpiIndex
-          ].data.map((x) => x.date), // assuming item.time is an array of time labels
-        },
-      };
+    changeKPIChart(kpiIndex, kpiType = "userKPIs") {
+      if (kpiType == "userKPIs") {
+        this.chartSeries = [
+          {
+            name: this.viewTrackingCompanyDialog.company?.userKPIs[kpiIndex]
+              .name,
+            data: this.viewTrackingCompanyDialog.company?.userKPIs[
+              kpiIndex
+            ].data.map((x) => x.value),
+          },
+        ];
+        this.chartOptions = {
+          chart: {
+            id: "line-chart",
+          },
+          xaxis: {
+            categories: this.viewTrackingCompanyDialog.company?.userKPIs[
+              kpiIndex
+            ].data.map((x) => x.date), // assuming item.time is an array of time labels
+          },
+        };
+      }
+      if (kpiType == "userAlternativeKPIs") {
+        this.chartSeries = [
+          {
+            name: this.viewTrackingCompanyDialog.company?.userAlternativeKPIs[
+              kpiIndex
+            ].name,
+            data: this.viewTrackingCompanyDialog.company?.userAlternativeKPIs[
+              kpiIndex
+            ].data.map((x) => x.value),
+          },
+        ];
+        this.chartOptions = {
+          chart: {
+            id: "line-chart",
+          },
+          xaxis: {
+            categories:
+              this.viewTrackingCompanyDialog.company?.userAlternativeKPIs[
+                kpiIndex
+              ].data.map((x) => x.date), // assuming item.time is an array of time labels
+          },
+        };
+      }
     },
     addNewKpiKeyToUserKpiKeyList() {},
     addNewKpiToUserKpiList(kpiKey) {
@@ -1545,6 +1619,7 @@ export default {
         this.fireSnack("all the fields are required!");
         return;
       }
+
       if (!kpiKey) {
         kpiKey = {
           name: this.addNewKpiKeyDialog.name,
@@ -1552,36 +1627,72 @@ export default {
           description: this.addNewKpiKeyDialog.description,
         };
       }
+      if (this.addNewKpiKeyDialog.kpiType == "userAlternativeKPIs") {
+        this.addNewKpiKeyDialog.newSelectedKpiKeys.push({
+          name: kpiKey.name,
+          data: [],
+          description: kpiKey.description,
+        });
+        api.saveTrackingAlternativeKPIKeys(
+          this.addNewKpiKeyDialog.newSelectedKpiKeys
+        );
+        this.addNewKpiKeyDialog.kpiKeysList.push({
+          name: kpiKey.name,
+          data: [],
+          description: kpiKey.description,
+        });
 
-      this.addNewKpiKeyDialog.newSelectedKpiKeys.push({
-        name: kpiKey.name,
-        data: [],
-        description: kpiKey.description,
-      });
-      api.saveTrackingKPIKeys(this.addNewKpiKeyDialog.newSelectedKpiKeys);
-      this.addNewKpiKeyDialog.kpiKeysList.push({
-        name: kpiKey.name,
-        data: [],
-        description: kpiKey.description,
-      });
+        const allAiRobots = api.getAllAiRobots();
+        const companyIndex = this.allTrackingSelectedCompanies.findIndex(
+          (x) => x.companyId == this.addNewKpiKeyDialog.companyId
+        );
+        this.allTrackingSelectedCompanies[
+          companyIndex
+        ].userAlternativeKPIs.push({
+          name: kpiKey.name,
+          data: [],
+          description: kpiKey.description,
+        });
+        this.allTrackingSelectedCompanies = api.getStandardCompanyList(
+          this.allTrackingSelectedCompanies,
+          allAiRobots
+        );
+        api.saveTrackingKPIs(this.allTrackingSelectedCompanies);
+        this.addNewKpiKeyDialog.name = "";
+        this.addNewKpiKeyDialog.description = "";
+        this.addNewKpiKeyDialog.kpiType = "userAlternativeKPIs";
+        this.fireSnack("Alternative KPI Key added successfully!");
+      } else {
+        this.addNewKpiKeyDialog.newSelectedKpiKeys.push({
+          name: kpiKey.name,
+          data: [],
+          description: kpiKey.description,
+        });
+        api.saveTrackingKPIKeys(this.addNewKpiKeyDialog.newSelectedKpiKeys);
+        this.addNewKpiKeyDialog.kpiKeysList.push({
+          name: kpiKey.name,
+          data: [],
+          description: kpiKey.description,
+        });
 
-      const allAiRobots = api.getAllAiRobots();
-      const companyIndex = this.allTrackingSelectedCompanies.findIndex(
-        (x) => x.companyId == this.addNewKpiKeyDialog.companyId
-      );
-      this.allTrackingSelectedCompanies[companyIndex].userKPIs.push({
-        name: kpiKey.name,
-        data: [],
-        description: kpiKey.description,
-      });
-      this.allTrackingSelectedCompanies = api.getStandardCompanyList(
-        this.allTrackingSelectedCompanies,
-        allAiRobots
-      );
-      api.saveTrackingKPIs(this.allTrackingSelectedCompanies);
-      this.addNewKpiKeyDialog.name = "";
-      this.addNewKpiKeyDialog.description = "";
-      this.fireSnack("KPI Key added successfully!");
+        const allAiRobots = api.getAllAiRobots();
+        const companyIndex = this.allTrackingSelectedCompanies.findIndex(
+          (x) => x.companyId == this.addNewKpiKeyDialog.companyId
+        );
+        this.allTrackingSelectedCompanies[companyIndex].userKPIs.push({
+          name: kpiKey.name,
+          data: [],
+          description: kpiKey.description,
+        });
+        this.allTrackingSelectedCompanies = api.getStandardCompanyList(
+          this.allTrackingSelectedCompanies,
+          allAiRobots
+        );
+        api.saveTrackingKPIs(this.allTrackingSelectedCompanies);
+        this.addNewKpiKeyDialog.name = "";
+        this.addNewKpiKeyDialog.description = "";
+        this.fireSnack("KPI Key added successfully!");
+      }
     },
   },
 };
