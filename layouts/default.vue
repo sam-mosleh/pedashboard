@@ -94,7 +94,7 @@ export default {
         // },
         {
           icon: "mdi-projector-screen-variant-outline",
-          title: "Trained Models",
+          title: "Models Trained",
           to: "/dashboard/modelsTrained",
         },
       ],

@@ -1749,7 +1749,78 @@ export default {
     ) {
       const company = selectedCompanies[companyIndex];
       if (!company["uploadedFiles"])
-        company["uploadedFiles"] = ["file1.pdf", "file2.docx", "file3.xls"];
+        company["uploadedFiles"] = [
+          {
+            name: "Formation documents",
+            title: "legal due diligence",
+            size: "50Gb",
+          },
+          {
+            name: "operating agreements",
+            title: "legal due diligence",
+            size: "52Gb",
+          },
+          {
+            name: "ownership information and member register",
+            title: "legal due diligence",
+            size: "61Gb",
+          },
+          {
+            name: "Detailed list of property owned, leased or used",
+            title: "legal due diligence",
+            size: "74Gb",
+          },
+          {
+            name: "litigation and claims",
+            title: "legal due diligence",
+            size: "89Gb",
+          },
+          {
+            name: "financial statements",
+            title: "financial due diligence",
+            size: "91Gb",
+          },
+          {
+            name: "accounting methods and treatments",
+            title: "financial due diligence",
+            size: "34Gb",
+          },
+          {
+            name: "Monthly income statements",
+            title: "financial due diligence",
+            size: "86Gb",
+          },
+          {
+            name: "balance sheets",
+            title: "financial due diligence",
+            size: "2Gb",
+          },
+          {
+            name: "Government inspection reports",
+            title: "operational due diligence",
+            size: "13Gb",
+          },
+          {
+            name: "Current sales materials",
+            title: "operational due diligence",
+            size: "45Gb",
+          },
+          {
+            name: "sourcing and supply chain",
+            title: "operational due diligence",
+            size: "139Gb",
+          },
+          {
+            name: "IT systems, current vendors/providers",
+            title: "IT due diligence",
+            size: "74Gb",
+          },
+          {
+            name: "compliance with data protection legislation",
+            title: "IT due diligence",
+            size: "14Gb",
+          },
+        ];
       company["totalDataLearned"] = 0;
       company["totalDataGathered"] = 0;
       company["completeness"] = 0;
@@ -2038,11 +2109,11 @@ export default {
     localStorage.setItem("PED-assetPhazeLastMonth", JSON.stringify(phases));
   },
   saveAuth() {
-    localStorage.setItem("PED-Auth", "qwertyuio4839u42497f41");
+    localStorage.setItem("PED-Auth", "qwertyuio4839u42497f4d1");
   },
   getAuth() {
     const data = localStorage.getItem("PED-Auth");
-    if (data) if (data == "qwertyuio4839u42497f41") return true;
+    if (data) if (data == "qwertyuio4839u42497f4d1") return true;
     return false;
   },
   dataSizeSerializer(dataSize) {

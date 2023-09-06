@@ -3,7 +3,7 @@
     <v-row
       class="ps-3 pt-8 pb-6 mb-3"
       style="font-weight: 600; font-size: 28px; background: black; color: white"
-      >Trained Models</v-row
+      >Models Trained</v-row
     >
     <v-container fluid>
       <!-- Snack -->
@@ -62,7 +62,7 @@
                 class="text-center"
                 style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
               >
-                Trained Models
+                Models Trained
               </p>
               <div style="height: 2px; background: red"></div>
               <div class="candlestick" v-if="summaryCart.minProcess < 100">
@@ -115,16 +115,6 @@
             disable-sort
             class="elevation-1"
           ></v-data-table>
-        </v-col>
-        <v-col cols="12">
-          <v-btn
-            v-if="allUserAiRobotsIds.length == allAiRobotsIds.length"
-            class="ms-3"
-            color="green dark"
-            style="color: white; border-radius: 20px; width: 100%"
-          >
-            You added all the Trained AI Robots to your account
-          </v-btn>
         </v-col>
       </v-row>
 

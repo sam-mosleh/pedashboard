@@ -169,69 +169,68 @@
                         </div>
                       </v-card-text>
                       <v-card-actions>
-                        <v-btn
-                          text
-                          color="green"
-                          @click="
-                            () => {
-                              dialogViewAssetDetail.isOpen = true;
-                              dialogViewAssetDetail.company = company;
-                              dialogViewAssetDetail.selectedPhase =
-                                company.assetPhase;
-                            }
-                          "
-                        >
-                          view
-                        </v-btn>
-                        <v-btn
-                          text
-                          color="red"
-                          @click="
-                            () => {
-                              deleteInsightDialog.isOpen = true;
-                              deleteInsightDialog.companyId = company.companyId;
-                            }
-                          "
-                        >
-                          delete
-                        </v-btn>
+                        <v-slide-group multiple show-arrows>
+                          <v-slide-item>
+                            <v-btn
+                              text
+                              color="green"
+                              @click="
+                                () => {
+                                  dialogViewAssetDetail.isOpen = true;
+                                  dialogViewAssetDetail.company = company;
+                                  dialogViewAssetDetail.selectedPhase =
+                                    company.assetPhase;
+                                }
+                              "
+                            >
+                              view
+                            </v-btn>
+                          </v-slide-item>
+                          <v-slide-item>
+                            <v-btn
+                              text
+                              color="green"
+                              @click="
+                                () => {
+                                  chatModal.isOpen = true;
+                                  chatModal.situation = 0;
+                                  chatModal.userCommand = '';
+                                  chatModal.messages = [
+                                    {
+                                      time: new Date(),
+                                      from: 'robot',
+                                      message:
+                                        'Hello im your AI assistant, please describe me what kind of information do you want about this company',
+                                      hasBTN: false,
+                                    },
+                                  ];
+                                }
+                              "
+                            >
+                              <v-icon color="green">mdi-robot-excited</v-icon>
+                            </v-btn>
+                          </v-slide-item>
+                          <v-slide-item>
+                            <v-btn
+                              text
+                              color="red"
+                              @click="
+                                () => {
+                                  deleteInsightDialog.isOpen = true;
+                                  deleteInsightDialog.companyId =
+                                    company.companyId;
+                                }
+                              "
+                            >
+                              delete
+                            </v-btn></v-slide-item
+                          >
+                        </v-slide-group>
+
                         <v-spacer></v-spacer>
                         <v-spacer></v-spacer>
-                        <v-btn
-                          text
-                          color="green"
-                          @click="
-                            () => {
-                              chatModal.isOpen = true;
-                              chatModal.situation = 0;
-                              chatModal.userCommand = '';
-                              chatModal.messages = [
-                                {
-                                  time: new Date(),
-                                  from: 'robot',
-                                  message:
-                                    'Hello im your AI assistant, please describe me what kind of information do you want about this company',
-                                  hasBTN: false,
-                                },
-                              ];
-                            }
-                          "
-                        >
-                          Chat with AI
-                        </v-btn>
+
                         <!-- TODO: must be added -->
-                        <!-- <v-btn
-            text
-            color="red"
-            @click="
-              () => {
-                deleteTrackingDialog.isOpen = true;
-                deleteTrackingDialog.companyId = company.companyId;
-              }
-            "
-          >
-            delete
-          </v-btn> -->
                       </v-card-actions>
                     </v-card>
                   </v-col>
@@ -255,68 +254,7 @@
         </v-col>
         <!-- ==================================NEW END================================== -->
       </v-row>
-      <v-row>
-        <!-- ==================================OLD START================================== -->
-        <!-- <v-card
-          style="display: none"
-          v-for="company in allInsightCompanies"
-          class="mx-auto mt-5"
-          max-width="344"
-        >
-          <v-card-text>
-            <p class="text-h4 text--primary">{{ company.name }}</p>
-            <div class="text--primary">
-              <v-chip-group active-class="primary--text" column>
-                <v-chip>score: {{ company.score }}</v-chip>
-                <v-chip>sellChance: {{ company.sellChance }}</v-chip>
-                <v-chip
-                  >Total Processing Percentage:
-                  {{ company.totalProcessingPercentage }}%</v-chip
-                >
-                <v-chip>Completeness: {{ company.completeness }}%</v-chip>
-                <v-chip
-                  >Total AI Processing:
-                  {{ company.totalAIProcessingPercentage }}%</v-chip
-                >
-                <v-chip
-                  >Total Data Gathering Processed:
-                  {{ company.totalDataGatheringProcessingPercentage }}%</v-chip
-                >
-                <v-chip>Documents: {{ company.uploadedFiles.length }}</v-chip>
-              </v-chip-group>
-            </div>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn
-              text
-              color="green"
-              @click="
-                () => {
-                  dialogViewAssetDetail.isOpen = true;
-                  dialogViewAssetDetail.company = company;
-                }
-              "
-            >
-              view
-            </v-btn>
-             TODO: must be added  START
-            <v-btn
-            text
-            color="red"
-            @click="
-              () => {
-                deleteTrackingDialog.isOpen = true;
-                deleteTrackingDialog.companyId = company.companyId;
-              }
-            "
-          >
-            delete
-          </v-btn> 
-          TODO: must be added  END
-          </v-card-actions>
-        </v-card> -->
-        <!-- ==================================OLD END================================== -->
-      </v-row>
+      <v-row> </v-row>
 
       <!-- View Asset Detail Dialog START -->
       <v-dialog v-model="dialogViewAssetDetail.isOpen" max-width="90vw">
@@ -324,7 +262,7 @@
           <v-card-text>
             <v-container>
               <v-col>
-                <v-row style="border-bottom: 1px solid gray">
+                <v-row style="border-bottom: 1px solid gray; display: flex">
                   <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
                     <v-card
                       style="padding: 10px; background: #f0f0f0; color: black"
@@ -351,15 +289,13 @@
                                 : "Two"
                             }}</v-chip
                           >
-                          <v-chip
-                            >Insight Completeness:
-                            {{
-                              dialogViewAssetDetail.company?.completeness
-                            }}%</v-chip
-                          >
+                          <v-chip>
+                            Insight Completeness:
+                            {{ dialogViewAssetDetail.company?.completeness }}%
+                          </v-chip>
 
-                          <v-chip
-                            >score:
+                          <v-chip>
+                            score:
                             {{ dialogViewAssetDetail.company?.score }}</v-chip
                           >
                           <v-chip
@@ -376,79 +312,185 @@
                                 .length
                             }}</v-chip
                           >
+                          <v-chip
+                            class="ma-2"
+                            color="#F0F0F0"
+                            label
+                            text-color="black"
+                          >
+                            <v-icon left> mdi-puzzle </v-icon>
+                            {{ dialogViewAssetDetail.company?.industry }}
+                          </v-chip>
                         </v-chip-group>
                       </v-col>
                     </v-card>
                     <v-row class="justify-space-between mt-3">
-                      <v-col cols="6">
+                      <v-col cols="12">
+                        <v-btn
+                          v-if="!dialogViewAssetDetail.isEditPhase"
+                          @click="
+                            () => (dialogViewAssetDetail.isEditPhase = true)
+                          "
+                        >
+                          Current Phase:{{
+                            dialogViewAssetDetail.selectedPhase == 0
+                              ? "One"
+                              : dialogViewAssetDetail.selectedPhase == 1
+                              ? "One"
+                              : "Two"
+                          }}
+                          (Edit Company Phase)</v-btn
+                        >
                         <v-combobox
+                          v-if="dialogViewAssetDetail.isEditPhase"
                           v-model="dialogViewAssetDetail.selectedPhase"
-                          :items="[0, 1, 2]"
+                          :items="[
+                            { text: 'Phase Zero', value: 0 },
+                            { text: 'Phase One', value: 1 },
+                            { text: 'Phase Two', value: 2 },
+                          ]"
                           @change="changePhaseOfCompany"
                           label="Change Company Phase"
                           prepend-icon="mdi-filter-variant"
                           solo
                         ></v-combobox>
                       </v-col>
-                      <v-col cols="6">
-                        <v-chip
-                          class="ma-2"
-                          color="#F0F0F0"
-                          label
-                          text-color="black"
-                        >
-                          <v-icon left> mdi-puzzle </v-icon>
-                          {{ dialogViewAssetDetail.company?.industry }}
-                        </v-chip>
-                      </v-col>
                     </v-row>
                   </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
-                    <v-row class="mt-1 justify-end">
-                      <!-- TODO: must be added -->
-                      <!-- <v-btn
-                      class="me-2"
-                      color="black"
-                      style="color: white; border-radius: 20px"
-                      >Chat with AI</v-btn
-                    > -->
-                      <v-btn
-                        color="white"
-                        style="color: black; border-radius: 20px"
-                        @click="
-                          () => {
-                            dialogMonitoring.isOpen = true;
-                            dialogMonitoring.company =
-                              dialogViewAssetDetail.company;
-                          }
-                        "
-                        >Monitoring</v-btn
-                      >
-                    </v-row>
-                    <v-row class="w-100 mt-3 justify-center">
-                      <!-- <v-btn
-                      class="w-100 mt-5 me-2"
-                      color="gray"
-                      style="color: black; border-radius: 20px"
-                      @click="()=>{
-                        fireSnack('')
-                      }"
+                  <v-col
+                    cols="12"
+                    sm="12"
+                    md="6"
+                    lg="6"
+                    xl="6"
+                    xxl="6"
+                    style="height: 300px; overflow: scroll; margin-bottom: 15px"
+                  >
+                    <!-- ==============++++UPLOADFILE+++=============== -->
+                    <v-dialog v-model="uploadFileDialog.isOpen" width="500">
+                      <v-card>
+                        <v-card-title class="text-h5 grey lighten-2">
+                          Upload document for
+                          {{ dialogViewAssetDetail.company?.name }}
+                        </v-card-title>
+
+                        <v-card-text style="margin-top: 25px">
+                          <v-row>
+                            <v-select
+                              v-model="uploadFileDialog.selectedFileCat"
+                              :items="uploadFileDialog.allFilesCat"
+                              label="Outlined style"
+                              outlined
+                            ></v-select>
+                          </v-row>
+                          <v-row>
+                            <v-file-input
+                              v-model="uploadFileDialog.uploadedFiles"
+                              color="deep-purple accent-4"
+                              counter
+                              label="File input"
+                              multiple
+                              placeholder="Select your files"
+                              prepend-icon="mdi-paperclip"
+                              outlined
+                              :show-size="1000"
+                            >
+                              <template v-slot:selection="{ index, text }">
+                                <v-chip
+                                  color="deep-purple accent-4"
+                                  dark
+                                  label
+                                  small
+                                >
+                                  {{ text }}
+                                </v-chip>
+
+                                <!-- <span
+                                  v-else-if="index === 2"
+                                  class="text-overline grey--text text--darken-3 mx-2"
+                                >
+                                  +{{
+                                    uploadFileDialog.uploadedFiles.length - 2
+                                  }}
+                                  File(s)
+                                </span> -->
+                              </template>
+                            </v-file-input>
+                          </v-row>
+                        </v-card-text>
+
+                        <v-divider></v-divider>
+
+                        <v-card-actions>
+                          <v-btn
+                            color="primary"
+                            text
+                            @click="
+                              () => {
+                                uploadFileDialog.isOpen = false;
+                                (uploadFileDialog.selectedFileCat = ''),
+                                  (uploadFileDialog.uploadedFiles = []);
+                              }
+                            "
+                          >
+                            close
+                          </v-btn>
+                          <v-spacer></v-spacer>
+                          <v-btn
+                            v-if="uploadFileDialog.uploadedFiles.length > 0"
+                            color="primary"
+                            text
+                            @click="saveUploadedFiles"
+                          >
+                            save
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                    <!-- ==============++++UPLOADFILE+++=============== -->
+                    <v-btn
+                      block
+                      color="primary"
+                      elevation="8"
+                      outlined
+                      plain
+                      rounded
+                      text
+                      @click="
+                        () => {
+                          uploadFileDialog.isOpen = true;
+                        }
+                      "
                     >
-                      <v-icon>mdi-plus</v-icon>
-                      Upload more documents
-                    </v-btn> -->
-                    </v-row>
+                      Upload File
+                    </v-btn>
                     <v-row
-                      v-for="file in dialogViewAssetDetail.company
+                      max-height="400"
+                      v-for="(file, i) in dialogViewAssetDetail.company
                         ?.uploadedFiles"
                       class="w-100 px-3 pt-3 mt-8 justify-space-between"
                       style="background: lightgray; border-radius: 5px"
                     >
-                      <p>{{ file }}</p>
-                      <p>Size: {{ Math.floor(Math.random() * 2048) }}Kb</p>
-                      <!-- <v-icon class="mt-0 mb-auto" style="color: red"
-                      >mdi-delete</v-icon
-                    > -->
+                      <v-col cols="4">
+                        {{ file.name }}
+                      </v-col>
+                      <v-col cols="2">
+                        {{ file.size }}
+                      </v-col>
+                      <v-col cols="4">
+                        {{ file.title }}
+                      </v-col>
+                      <v-col cols="2">
+                        <v-btn
+                          text
+                          color="red"
+                          @click="deleteFileFromCompany(i)"
+                        >
+                          <v-icon class="mt-0 mb-auto" style="color: red">
+                            mdi-delete
+                          </v-icon>
+                        </v-btn>
+                      </v-col>
                     </v-row>
                   </v-col>
                 </v-row>
@@ -481,6 +523,24 @@
                                     .standardDueDiligence.commercial
                                 }}
                               </p>
+                              <v-expansion-panels>
+                                <v-expansion-panel
+                                  v-for="(item, i) in 5"
+                                  :key="i"
+                                >
+                                  <v-expansion-panel-header>
+                                    Question No.{{ i }}
+                                  </v-expansion-panel-header>
+                                  <v-expansion-panel-content>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                    Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip
+                                    ex ea commodo consequat.
+                                  </v-expansion-panel-content>
+                                </v-expansion-panel>
+                              </v-expansion-panels>
                             </v-container>
                             <v-container fluid v-if="n === 4">
                               <p>
@@ -489,6 +549,24 @@
                                     .standardDueDiligence.financial
                                 }}
                               </p>
+                              <v-expansion-panels>
+                                <v-expansion-panel
+                                  v-for="(item, i) in 5"
+                                  :key="i"
+                                >
+                                  <v-expansion-panel-header>
+                                    Question No.{{ i }}
+                                  </v-expansion-panel-header>
+                                  <v-expansion-panel-content>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                    Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip
+                                    ex ea commodo consequat.
+                                  </v-expansion-panel-content>
+                                </v-expansion-panel>
+                              </v-expansion-panels>
                             </v-container>
                             <v-container fluid v-if="n === 5">
                               <p>
@@ -497,6 +575,24 @@
                                     .standardDueDiligence.legal
                                 }}
                               </p>
+                              <v-expansion-panels>
+                                <v-expansion-panel
+                                  v-for="(item, i) in 5"
+                                  :key="i"
+                                >
+                                  <v-expansion-panel-header>
+                                    Question No.{{ i }}
+                                  </v-expansion-panel-header>
+                                  <v-expansion-panel-content>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                    Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip
+                                    ex ea commodo consequat.
+                                  </v-expansion-panel-content>
+                                </v-expansion-panel>
+                              </v-expansion-panels>
                             </v-container>
                             <v-container fluid v-if="n === 6">
                               <p>
@@ -505,6 +601,24 @@
                                     .standardDueDiligence.it
                                 }}
                               </p>
+                              <v-expansion-panels>
+                                <v-expansion-panel
+                                  v-for="(item, i) in 5"
+                                  :key="i"
+                                >
+                                  <v-expansion-panel-header>
+                                    Question No.{{ i }}
+                                  </v-expansion-panel-header>
+                                  <v-expansion-panel-content>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                    Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip
+                                    ex ea commodo consequat.
+                                  </v-expansion-panel-content>
+                                </v-expansion-panel>
+                              </v-expansion-panels>
                             </v-container>
                           </v-tab-item>
                         </v-tabs>
@@ -530,6 +644,24 @@
                                     .alternativeInsights.keyFeaters
                                 }}
                               </p>
+                              <v-expansion-panels>
+                                <v-expansion-panel
+                                  v-for="(item, i) in 5"
+                                  :key="i"
+                                >
+                                  <v-expansion-panel-header>
+                                    Question No.{{ i }}
+                                  </v-expansion-panel-header>
+                                  <v-expansion-panel-content>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                    Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip
+                                    ex ea commodo consequat.
+                                  </v-expansion-panel-content>
+                                </v-expansion-panel>
+                              </v-expansion-panels>
                             </v-container>
                             <v-container fluid v-if="n === 8">
                               <p>
@@ -538,6 +670,24 @@
                                     .alternativeInsights.keyRisks
                                 }}
                               </p>
+                              <v-expansion-panels>
+                                <v-expansion-panel
+                                  v-for="(item, i) in 5"
+                                  :key="i"
+                                >
+                                  <v-expansion-panel-header>
+                                    Question No.{{ i }}
+                                  </v-expansion-panel-header>
+                                  <v-expansion-panel-content>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                    Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip
+                                    ex ea commodo consequat.
+                                  </v-expansion-panel-content>
+                                </v-expansion-panel>
+                              </v-expansion-panels>
                             </v-container>
                             <v-container fluid v-if="n === 9">
                               <p>
@@ -546,6 +696,24 @@
                                     .alternativeInsights.keyUpsides
                                 }}
                               </p>
+                              <v-expansion-panels>
+                                <v-expansion-panel
+                                  v-for="(item, i) in 5"
+                                  :key="i"
+                                >
+                                  <v-expansion-panel-header>
+                                    Question No.{{ i }}
+                                  </v-expansion-panel-header>
+                                  <v-expansion-panel-content>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                    Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip
+                                    ex ea commodo consequat.
+                                  </v-expansion-panel-content>
+                                </v-expansion-panel>
+                              </v-expansion-panels>
                             </v-container>
                           </v-tab-item>
                         </v-tabs>
@@ -1021,6 +1189,18 @@ export default {
     return {
       tab: null,
       companyInsightSearchInput: "",
+
+      uploadFileDialog: {
+        isOpen: false,
+        selectedFileCat: "",
+        uploadedFiles: "",
+        allFilesCat: [
+          "Legal due diligence",
+          "Financial due diligence",
+          "Operational due diligence",
+          "IT due diligence",
+        ],
+      },
       insightTable: {
         headers: [
           {
@@ -1055,11 +1235,11 @@ export default {
       },
       //===================
       expanded: [],
-
       dialogViewAssetDetail: {
+        isEditPhase: false,
         isOpen: false,
         company: null,
-        selectedPhase: 0,
+        selectedPhase: null,
       },
       dialogMonitoring: {
         isOpen: false,
@@ -1089,6 +1269,50 @@ export default {
     },
     getAllAvailableCompaniesInItem(companies, i) {
       return companies.filter((x) => x.assetPhase == i);
+    },
+    deleteFileFromCompany(fileIndex) {
+      const index = this.allInsightCompanies.findIndex(
+        (x) => x.companyId == this.dialogViewAssetDetail.company.companyId
+      );
+      this.allInsightCompanies[index].uploadedFiles.splice(fileIndex, 1);
+      this.dialogViewAssetDetail.company.uploadedFiles.splice(fileIndex, 1);
+      api.saveInsightCompanies(this.allInsightCompanies);
+      this.fireSnack("file removed successfully");
+    },
+    saveUploadedFiles() {
+      //allInsightCompanies
+      if (!this.uploadFileDialog.selectedFileCat) {
+        this.fireSnack(
+          "please make sure that you selected the right file category"
+        );
+        return;
+      }
+      const index = this.allInsightCompanies.findIndex(
+        (x) => x.companyId == this.dialogViewAssetDetail.company.companyId
+      );
+      for (let i = 0; i < this.uploadFileDialog.uploadedFiles.length; i++) {
+        const file = this.uploadFileDialog.uploadedFiles[i];
+        const fileObject = {
+          name: file.name,
+          title: this.uploadFileDialog.selectedFileCat,
+          size: `${parseFloat(file.size / 1000000).toFixed(2)}Mb`,
+        };
+        this.allInsightCompanies[index].uploadedFiles.push(fileObject);
+        this.dialogViewAssetDetail.company.uploadedFiles.push(fileObject);
+      }
+      api.saveInsightCompanies(this.allInsightCompanies);
+      this.fireSnack("all files saved successfully");
+      this.uploadFileDialog = {
+        isOpen: false,
+        selectedFileCat: "",
+        uploadedFiles: "",
+        allFilesCat: [
+          "Legal due diligence",
+          "Financial due diligence",
+          "Operational due diligence",
+          "IT due diligence",
+        ],
+      };
     },
     chatWithAIBtnSubmitted() {
       if (!this.chatModal.userCommand) {
@@ -1188,7 +1412,9 @@ export default {
     },
     changePhaseOfCompany() {
       //dialogViewAssetDetail.company
-      const newVal = this.dialogViewAssetDetail.selectedPhase;
+      if (!this.dialogViewAssetDetail.selectedPhase) return;
+      const newVal = this.dialogViewAssetDetail.selectedPhase.value;
+      console.log(newVal);
       const index = this.allInsightCompanies.findIndex(
         (x) => x.companyId == this.dialogViewAssetDetail.company.companyId
       );
