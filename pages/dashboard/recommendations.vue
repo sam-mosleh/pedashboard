@@ -56,7 +56,7 @@
             <v-tab
               v-for="item in [
                 { tab: 'Search With AI' },
-                // { tab: 'Search Manually' },
+                { tab: 'Search Manually' },
               ]"
               :key="item.tab"
             >
@@ -68,7 +68,7 @@
             <v-tab-item
               v-for="item in [
                 { tab: 'Search With AI', id: 0 },
-                // { tab: 'Search Manually', id: 1 },
+                { tab: 'Search Manually', id: 1 },
               ]"
               :key="item.id"
             >
@@ -336,42 +336,6 @@
                   <v-row>
                     <v-col cols="12">
                       <v-slide-group multiple show-arrows>
-                        <v-slide-item>
-                          <v-col>
-                            <v-btn
-                              @click="
-                                () => {
-                                  fireSnack(
-                                    'your review submitted successfully!'
-                                  );
-                                }
-                              "
-                              rounded
-                              color="green"
-                              style="margin: 0 auto; display: block"
-                            >
-                              <v-icon>mdi-thumb-up</v-icon>
-                            </v-btn>
-                          </v-col>
-                        </v-slide-item>
-                        <v-slide-item>
-                          <v-col>
-                            <v-btn
-                              @click="
-                                () => {
-                                  fireSnack(
-                                    'your review submitted successfully!'
-                                  );
-                                }
-                              "
-                              rounded
-                              color="red"
-                              style="margin: 0 auto; display: block"
-                            >
-                              <v-icon>mdi-thumb-down</v-icon>
-                            </v-btn>
-                          </v-col>
-                        </v-slide-item>
                         <v-slide-item
                           v-if="
                             allInsightCompanies.filter(
@@ -379,23 +343,20 @@
                             ).length == 0
                           "
                         >
-                          <v-col>
-                            <v-btn
-                              @click="setSelectForInsight(company)"
-                              rounded
-                              color="black"
-                              class="mt-4 mx-3"
-                              style="
-                                color: white;
-                                display: block;
-                                margin: 0px auto 0px auto !important;
-                                width: 100%;
-                              "
-                            >
-                              <v-icon>mdi-plus</v-icon>
-                              Add to insight
-                            </v-btn>
-                          </v-col>
+                          <v-btn
+                            @click="setSelectForInsight(company)"
+                            rounded
+                            color="black"
+                            class="mt-4 mx-3"
+                            style="
+                              color: white;
+                              display: block;
+                              margin: 0px auto 0px auto !important;
+                            "
+                          >
+                            <v-icon>mdi-plus</v-icon>
+                            Add to insight
+                          </v-btn>
                         </v-slide-item>
                         <v-slide-item
                           v-if="
@@ -404,24 +365,54 @@
                             ).length == 0
                           "
                         >
-                          <v-col>
-                            <v-btn
-                              @click="addCompanyToTracking(company)"
-                              rounded
-                              color="gray"
-                              class="mt-4 mx-3"
-                              style="
-                                color: black;
-                                padding: 0px 5px 0px 0px !important;
-                                display: block;
-                                margin: 0 auto;
-                                margin: 0px 0px 0px 0px !important;
-                              "
-                            >
-                              <v-icon>mdi-plus</v-icon>
-                              Add to tracking
-                            </v-btn>
-                          </v-col>
+                          <v-btn
+                            @click="addCompanyToTracking(company)"
+                            rounded
+                            color="gray"
+                            class="mt-4 mx-3"
+                            style="
+                              color: black;
+                              padding: 0px 5px 0px 0px !important;
+                              display: block;
+                              margin: 0 auto;
+                              margin: 0px 0px 0px 0px !important;
+                            "
+                          >
+                            <v-icon>mdi-plus</v-icon>
+                            Add to tracking
+                          </v-btn>
+                        </v-slide-item>
+                        <v-slide-item>
+                          <v-btn
+                            @click="
+                              () => {
+                                fireSnack(
+                                  'your review submitted successfully!'
+                                );
+                              }
+                            "
+                            rounded
+                            color="green"
+                            style="margin: 0 auto; display: block"
+                          >
+                            <v-icon>mdi-thumb-up</v-icon>
+                          </v-btn>
+                        </v-slide-item>
+                        <v-slide-item>
+                          <v-btn
+                            @click="
+                              () => {
+                                fireSnack(
+                                  'your review submitted successfully!'
+                                );
+                              }
+                            "
+                            rounded
+                            color="red"
+                            style="margin: 0 auto; display: block"
+                          >
+                            <v-icon>mdi-thumb-down</v-icon>
+                          </v-btn>
                         </v-slide-item>
                       </v-slide-group>
                     </v-col>
@@ -954,10 +945,48 @@
                 <v-container v-if="item.id == 0" style="margin-top: 15px">
                   <v-row>
                     <v-text-field
+                      style="display: none"
                       label="Enter KPI Name"
                       v-model="addNewKpiKeyDialog.name"
                       hide-details="auto"
                     ></v-text-field>
+                  </v-row>
+                  <v-row>
+                    <v-select
+                      v-model="addNewKpiKeyDialog.name"
+                      :items="[
+                        {
+                          text: 'E',
+                          isRecommended: true,
+                        },
+                        {
+                          text: 'F',
+                          isRecommended: true,
+                        },
+                        {
+                          text: 'G',
+                          isRecommended: false,
+                        },
+                      ]"
+                      label="Select KPI"
+                    >
+                      <template v-slot:item="{ item }">
+                        <v-chip v-if="item.isRecommended" color="green">
+                          <span>{{ item.text }}</span> (Recommended)
+                        </v-chip>
+                        <v-chip v-else>
+                          <span>{{ item.text }}</span>
+                        </v-chip>
+                      </template>
+                      <template v-slot:selection="{ item, index }">
+                        <v-chip v-if="item.isRecommended" color="green">
+                          <span>{{ item.text }}</span>
+                        </v-chip>
+                        <v-chip v-else>
+                          <span>{{ item.text }}</span>
+                        </v-chip>
+                      </template>
+                    </v-select>
                   </v-row>
                   <v-row>
                     <v-text-field

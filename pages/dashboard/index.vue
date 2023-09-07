@@ -7,227 +7,6 @@
     >
 
     <v-container fluid>
-      <!-- <v-row>
-      <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-        <v-card class="cart-deals">
-          <v-btn
-            class="d-flex flex-row ms-auto me-2 mt-2"
-            style="
-              background: black;
-              color: white;
-              border-radius: 30px;
-              text-transform: capitalize;
-            "
-            @click="redirect('/dashboard/recommendations')"
-            >View</v-btn
-          >
-
-          <v-col class="justify-space-between align-center h-100">
-            <p
-              class="text-center"
-              style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
-            >
-              {{ summaryRecommendedCompanies.count }}
-            </p>
-            <p
-              class="text-center"
-              style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-            >
-              Property deals found!
-            </p>
-            <div style="height: 2px; background: blue"></div>
-            <p
-              class="text-center mt-4"
-              style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-            >
-              Median score: {{ summaryRecommendedCompanies.median }}
-            </p>
-          </v-col>
-        </v-card>
-      </v-col>
-      <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-        <v-card class="cart-insights" style="">
-          <v-btn
-            class="d-flex flex-row ms-auto me-2 mt-2"
-            style="
-              background: black;
-              color: white;
-              border-radius: 30px;
-              text-transform: capitalize;
-            "
-            @click="redirect('/dashboard/deal_insights')"
-            >View</v-btn
-          >
-
-          <v-col class="justify-space-between align-center h-100">
-            <p
-              class="text-center"
-              style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
-            >
-              {{ summaryInsights.count }}
-            </p>
-            <p
-              class="text-center"
-              style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-            >
-              Company insights
-            </p>
-            <div style="height: 2px; background: red"></div>
-            <div class="candlestick">
-              <div class="wick"></div>
-              <div
-                class="body"
-                :style="{
-                  width: `${summaryInsights.max - summaryInsights.min}%`,
-                  left: `${summaryInsights.min}%`,
-                }"
-              ></div>
-              <div
-                class="shadow-left"
-                :style="{ width: `${summaryInsights.min}%` }"
-              ></div>
-              <div
-                class="shadow-right"
-                :style="{ width: `${summaryInsights.max}%` }"
-              ></div>
-            </div>
-            <v-row class="justify-space-between mt-1 px-2">
-              <p style="font-size: 10px">min: {{ summaryInsights.min }}%</p>
-              <p style="font-size: 10px">max: {{ summaryInsights.max }}%</p>
-            </v-row>
-          </v-col>
-        </v-card>
-      </v-col>
-      <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-        <v-card class="cart-track">
-          <v-btn
-            class="d-flex flex-row ms-auto me-2 mt-2"
-            style="
-              background: black;
-              color: white;
-              border-radius: 30px;
-              text-transform: capitalize;
-            "
-            @click="redirect('/dashboard/tracking')"
-            >View</v-btn
-          >
-          <v-col class="justify-space-between align-center h-100">
-            <p
-              class="text-center"
-              style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
-            >
-              {{ allTrackingSelectedCompanies.length }}
-            </p>
-            <p
-              class="text-center"
-              style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-            >
-              Assets tracked
-            </p>
-            <div style="height: 2px; background: blue"></div>
-            <p
-              class="text-center mt-4"
-              style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-            >
-              {{
-                allTrackingSelectedCompanies.filter((x) => x.readyToBuy).length
-              }}
-              Ready to buy
-            </p>
-          </v-col>
-        </v-card>
-      </v-col>
-      <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-        <v-card class="cart-models-trained">
-          <v-btn
-            class="d-flex flex-row ms-auto me-2 mt-2"
-            style="
-              background: black;
-              color: white;
-              border-radius: 30px;
-              text-transform: capitalize;
-            "
-            @click="redirect('/dashboard/modelsTrained')"
-            >View</v-btn
-          >
-          <v-col class="justify-space-between align-center h-100">
-            <p
-              class="text-center"
-              style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
-            >
-              {{ summaryCartModels.modelsTrainedCount }}
-            </p>
-            <p
-              class="text-center"
-              style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-            >
-              Models trained
-            </p>
-            <div style="height: 2px; background: red"></div>
-            <div class="candlestick" v-if="summaryCartModels.minProcess < 100">
-              <div class="wick"></div>
-              <div
-                class="body"
-                :style="{
-                  width: `${
-                    summaryCartModels.maxProcess - summaryCartModels.minProcess
-                  }%`,
-                  left: `${summaryCartModels.minProcess}%`,
-                }"
-              ></div>
-              <div
-                class="shadow-left"
-                :style="{ width: `${summaryCartModels.minProcess}%` }"
-              ></div>
-              <div
-                class="shadow-right"
-                :style="{ width: `${summaryCartModels.maxProcess}%` }"
-              ></div>
-            </div>
-            <v-row
-              class="justify-space-between mt-1 px-2"
-              v-if="summaryCartModels.minProcess < 100"
-            >
-              <p style="font-size: 10px; color: black">
-                min: {{ summaryCartModels.minProcess }}%
-              </p>
-              <p style="font-size: 10px; color: black">
-                max: {{ summaryCartModels.maxProcess }}%
-              </p>
-            </v-row>
-            <v-row class="justify-space-between mt-1 px-2">
-              <p style="font-size: 10px; color: black">
-                Mega Models: {{ trainedModelsTable.megaModelCount }}
-              </p>
-              <p style="font-size: 10px; color: black">
-                Forked Models: {{ trainedModelsTable.forkedModelCount }}
-              </p>
-            </v-row>
-          </v-col>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
-        <v-data-table
-          :headers="insightTable.headers"
-          :items="insightTable.items"
-          hide-default-footer
-          disable-sort
-          class="elevation-1"
-        ></v-data-table>
-      </v-col>
-      <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
-        <v-data-table
-          :headers="trainedModelsTable.headers"
-          :items="trainedModelsTable.items"
-          hide-default-footer
-          disable-sort
-          class="elevation-1"
-        ></v-data-table>
-      </v-col>
-    </v-row> -->
-      <!-- =========================================== -->
       <v-row>
         <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
           <v-card class="cart-deals">
@@ -335,40 +114,6 @@
               >
                 Company insights
               </p>
-              <div style="height: 2px; background: red"></div>
-              <div class="candlestick" v-if="summaryInsights.min < 100">
-                <div class="wick"></div>
-                <div
-                  class="body"
-                  :style="{
-                    width: `${summaryInsights.max - summaryInsights.min}%`,
-                    left: `${summaryInsights.min}%`,
-                  }"
-                ></div>
-                <div
-                  class="shadow-left"
-                  :style="{ width: `${summaryInsights.min}%` }"
-                ></div>
-                <div
-                  class="shadow-right"
-                  :style="{ width: `${summaryInsights.max}%` }"
-                ></div>
-              </div>
-              <v-row
-                class="justify-space-between mt-1 px-2"
-                v-if="summaryInsights.min < 100"
-              >
-                <p style="font-size: 10px">min: {{ summaryInsights.min }}%</p>
-                <p style="font-size: 10px">max: {{ summaryInsights.max }}%</p>
-              </v-row>
-              <v-row
-                class="justify-space-between mt-1 px-2"
-                v-if="summaryInsights.min >= 100"
-              >
-                <p style="font-size: 10px; width: 100%; text-align: center">
-                  All insights are completed!
-                </p>
-              </v-row>
             </v-col>
           </v-card>
         </v-col>
@@ -450,50 +195,6 @@
               >
                 Models Trained
               </p>
-              <div style="height: 2px; background: red"></div>
-              <div
-                class="candlestick"
-                v-if="summaryCartModels.minProcess < 100"
-              >
-                <div class="wick"></div>
-                <div
-                  class="body"
-                  :style="{
-                    width: `${
-                      summaryCartModels.maxProcess -
-                      summaryCartModels.minProcess
-                    }%`,
-                    left: `${summaryCartModels.minProcess}%`,
-                  }"
-                ></div>
-                <div
-                  class="shadow-left"
-                  :style="{ width: `${summaryCartModels.minProcess}%` }"
-                ></div>
-                <div
-                  class="shadow-right"
-                  :style="{ width: `${summaryCartModels.maxProcess}%` }"
-                ></div>
-              </div>
-              <v-row
-                class="justify-space-between mt-1 px-2"
-                v-if="summaryCartModels.minProcess < 100"
-              >
-                <p style="font-size: 10px; color: black">
-                  min: {{ summaryCartModels.minProcess }}%
-                </p>
-                <p style="font-size: 10px; color: black">
-                  max: {{ summaryCartModels.maxProcess }}%
-                </p>
-              </v-row>
-              <v-row class="justify-space-between mt-1 px-2">
-                <p style="font-size: 13px; font-weight: bolder; color: black">
-                  Mega Models: {{ trainedModelsTable.megaModelCount }}
-                </p>
-                <p style="font-size: 13px; font-weight: bolder; color: black">
-                  Forked Models: {{ trainedModelsTable.forkedModelCount }}
-                </p>
-              </v-row>
             </v-col>
           </v-card>
         </v-col>
@@ -692,12 +393,11 @@ export default {
       };
       let megaCount = 0;
       let forkedCount = 0;
+      this.trainedModelsTable.forkedModelCount = this.summaryInsights.count;
+      this.trainedModelsTable.megaModelCount =
+        this.summaryCartModels.modelsTrainedCount;
       for (let index = 0; index < this.allUserAiRobots.length; index++) {
         const robot = this.allUserAiRobots[index];
-        this.trainedModelsTable.forkedModelCount +=
-          robot.selectedForkedModels.length;
-        this.trainedModelsTable.megaModelCount +=
-          robot.selectedMegaModels.length;
 
         for (
           let iqMegaIndex = 0;
@@ -745,6 +445,11 @@ export default {
       ).toFixed(2)}%`;
 
       this.trainedModelsTable.items = [
+        {
+          forkedModel: this.trainedModelsTable.forkedModelCount,
+          megaModel: this.trainedModelsTable.megaModelCount,
+          name: "Number of Models",
+        },
         iqLevel,
         iqBenchMarkLevel,
         iqImprovementLevel,

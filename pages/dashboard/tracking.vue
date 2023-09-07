@@ -73,7 +73,7 @@
             <v-tab
               v-for="item in [
                 { tab: 'Search With AI' },
-                // { tab: 'Search Manually' },
+                { tab: 'Search Manually' },
               ]"
               :key="item.tab"
             >
@@ -85,7 +85,7 @@
             <v-tab-item
               v-for="item in [
                 { tab: 'Search With AI', id: 0 },
-                // { tab: 'Search Manually', id: 1 },
+                { tab: 'Search Manually', id: 1 },
               ]"
               :key="item.id"
             >
@@ -230,7 +230,7 @@
                       @change="filterByKPI"
                     ></v-slider> </v-col
                 ></v-row>
-                <v-row style="display: none">
+                <v-row>
                   <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
                     <v-combobox
                       v-model="allSelectedKpiItems"
@@ -333,6 +333,10 @@
                 >
                   {{ company.name }}
                 </p>
+                <v-spacer></v-spacer>
+                <v-chip v-if="company.readyToBuy" color="green"
+                  >Ready to Buy</v-chip
+                >
               </v-row>
               <v-row>
                 <div class="text--primary">
@@ -342,9 +346,7 @@
                       >Selected Tracking KPIs:
                       {{ company.userKPIs.length }}</v-chip
                     >
-                    <v-chip v-if="company.readyToBuy" color="green"
-                      >Ready to Buy</v-chip
-                    >
+
                     <v-chip>Score: {{ company.score }}</v-chip>
                     <v-chip>HQ Location: {{ company.hqLocation }}</v-chip>
                     <v-chip>Revenue Size: {{ company.revenueSize }}</v-chip>
@@ -669,10 +671,16 @@
       <!-- -------------------------    DELETE DIALOG   END------------------------- -->
 
       <!-- -------------------------    Add NEW KPI Key DIALOG   Start------------------------- -->
-      <v-dialog v-model="addNewKpiKeyDialog.isOpen" max-width="550">
+      <v-dialog v-model="addNewKpiKeyDialog.isOpen" max-width="800">
         <v-card>
           <v-card-title class="text-h5">
-            Adding new KPI key filters to the company.
+            Adding new
+            {{
+              addNewKpiKeyDialog.kpiType == "userKPIs"
+                ? "KPI"
+                : "Alternative KPI"
+            }}
+            key filters to the company.
           </v-card-title>
           <v-card-text>
             <v-tabs v-model="tab" dark grow center>
@@ -696,12 +704,49 @@
                 :key="item.id"
               >
                 <v-container v-if="item.id == 0" style="margin-top: 15px">
-                  <v-row>
+                  <v-row style="display: none">
                     <v-text-field
                       label="Enter KPI Name"
                       v-model="addNewKpiKeyDialog.name"
                       hide-details="auto"
                     ></v-text-field>
+                  </v-row>
+                  <v-row>
+                    <v-select
+                      v-model="addNewKpiKeyDialog.name"
+                      :items="[
+                        {
+                          text: 'A',
+                          isRecommended: true,
+                        },
+                        {
+                          text: 'B',
+                          isRecommended: true,
+                        },
+                        {
+                          text: 'C',
+                          isRecommended: false,
+                        },
+                      ]"
+                      label="Select KPI"
+                    >
+                      <template v-slot:item="{ item }">
+                        <v-chip v-if="item.isRecommended" color="green">
+                          <span>{{ item.text }}</span> (Recommended)
+                        </v-chip>
+                        <v-chip v-else>
+                          <span>{{ item.text }}</span>
+                        </v-chip>
+                      </template>
+                      <template v-slot:selection="{ item, index }">
+                        <v-chip v-if="item.isRecommended" color="green">
+                          <span>{{ item.text }}</span>
+                        </v-chip>
+                        <v-chip v-else>
+                          <span>{{ item.text }}</span>
+                        </v-chip>
+                      </template>
+                    </v-select>
                   </v-row>
                   <v-row>
                     <v-text-field
@@ -838,17 +883,22 @@
             <v-row style="margin-top: 15px"> </v-row>
             <v-row>KPI Keys:</v-row>
             <v-row v-for="key in addNewKpiKeyDialog.newSelectedKpiKeys">
-              <p>
-                {{ key.name }}:
-                {{ key.description ? key.description : "Default" }}
-              </p>
-              <v-spacer></v-spacer>
-              <v-btn v-if="hasKpiKey(key)" @click="addNewKpiToUserKpiList(key)"
-                >Add To KPI List</v-btn
-              >
-              <v-btn v-else @click="removeKpiToUserKpiList(key)"
-                >Remove From KPI list</v-btn
-              >
+              <v-col cols="8">
+                <p>
+                  {{ key.name }}:
+                  {{ key.description ? key.description : "Default" }}
+                </p>
+              </v-col>
+              <v-col cols="4">
+                <v-btn
+                  v-if="hasKpiKey(key)"
+                  @click="addNewKpiToUserKpiList(key)"
+                  >Add To KPI List</v-btn
+                >
+                <v-btn v-else @click="removeKpiToUserKpiList(key)"
+                  >Remove From KPI list</v-btn
+                >
+              </v-col>
             </v-row>
           </v-card-text>
           <v-card-actions>
@@ -906,10 +956,48 @@
                 <v-container v-if="item.id == 0" style="margin-top: 15px">
                   <v-row>
                     <v-text-field
+                      style="display: none"
                       label="Enter KPI Name"
                       v-model="addNewKpiKeyDialogForSearch.name"
                       hide-details="auto"
                     ></v-text-field>
+                  </v-row>
+                  <v-row>
+                    <v-select
+                      v-model="addNewKpiKeyDialogForSearch.name"
+                      :items="[
+                        {
+                          text: 'E',
+                          isRecommended: true,
+                        },
+                        {
+                          text: 'F',
+                          isRecommended: true,
+                        },
+                        {
+                          text: 'G',
+                          isRecommended: false,
+                        },
+                      ]"
+                      label="Select KPI"
+                    >
+                      <template v-slot:item="{ item }">
+                        <v-chip v-if="item.isRecommended" color="green">
+                          <span>{{ item.text }}</span> (Recommended)
+                        </v-chip>
+                        <v-chip v-else>
+                          <span>{{ item.text }}</span>
+                        </v-chip>
+                      </template>
+                      <template v-slot:selection="{ item, index }">
+                        <v-chip v-if="item.isRecommended" color="green">
+                          <span>{{ item.text }}</span>
+                        </v-chip>
+                        <v-chip v-else>
+                          <span>{{ item.text }}</span>
+                        </v-chip>
+                      </template>
+                    </v-select>
                   </v-row>
                   <v-row>
                     <v-text-field

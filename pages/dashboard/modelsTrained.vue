@@ -64,46 +64,6 @@
               >
                 Models Trained
               </p>
-              <div style="height: 2px; background: red"></div>
-              <div class="candlestick" v-if="summaryCart.minProcess < 100">
-                <div class="wick"></div>
-                <div
-                  class="body"
-                  :style="{
-                    width: `${
-                      summaryCart.maxProcess - summaryCart.minProcess
-                    }%`,
-                    left: `${summaryCart.minProcess}%`,
-                  }"
-                ></div>
-                <div
-                  class="shadow-left"
-                  :style="{ width: `${summaryCart.minProcess}%` }"
-                ></div>
-                <div
-                  class="shadow-right"
-                  :style="{ width: `${summaryCart.maxProcess}%` }"
-                ></div>
-              </div>
-              <v-row
-                class="justify-space-between mt-1 px-2"
-                v-if="summaryCart.minProcess < 100"
-              >
-                <p style="font-size: 10px; color: black">
-                  min: {{ summaryCart.minProcess }}%
-                </p>
-                <p style="font-size: 10px; color: black">
-                  max: {{ summaryCart.maxProcess }}%
-                </p>
-              </v-row>
-              <v-row class="justify-space-between mt-1 px-2">
-                <p style="font-size: 13px; font-weight: bolder; color: black">
-                  Mega Models: {{ trainedModelsTable.megaModelCount }}
-                </p>
-                <p style="font-size: 13px; font-weight: bolder; color: black">
-                  Forked Models: {{ trainedModelsTable.forkedModelCount }}
-                </p>
-              </v-row>
             </v-col>
           </v-card>
         </v-col>
@@ -603,12 +563,10 @@ export default {
       };
       let megaCount = 0;
       let forkedCount = 0;
+
       for (let index = 0; index < this.allUserAiRobots.length; index++) {
         const robot = this.allUserAiRobots[index];
-        this.trainedModelsTable.forkedModelCount +=
-          robot.selectedForkedModels.length;
-        this.trainedModelsTable.megaModelCount +=
-          robot.selectedMegaModels.length;
+
         robot["totalIQ"] = 0;
         robot["totalIqBenchmark"] = 0;
         robot["totalIqBenchmarkLast30"] = 0;
@@ -677,6 +635,11 @@ export default {
       ).toFixed(2)}%`;
 
       this.trainedModelsTable.items = [
+        {
+          forkedModel: this.trainedModelsTable.forkedModelCount,
+          megaModel: this.trainedModelsTable.megaModelCount,
+          name: "Number of Models",
+        },
         iqLevel,
         iqBenchMarkLevel,
         iqImprovementLevel,
@@ -731,8 +694,10 @@ export default {
             ? parseFloat(robot.totalCompleteness)
             : this.summaryCart.maxProcess;
       });
-      this.fillTrainedModelsTableItems();
       this.allSavedCompanies = api.getAllCompanies();
+      this.trainedModelsTable.forkedModelCount = this.allSavedCompanies.length;
+      this.trainedModelsTable.megaModelCount = this.allUserAiRobots.length;
+      this.fillTrainedModelsTableItems();
     },
     generateForkedModelsRelation(company) {
       return this.allUserAiRobots[

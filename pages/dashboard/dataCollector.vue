@@ -5,6 +5,22 @@
       style="font-weight: 600; font-size: 28px; background: black; color: white"
       >Data</v-row
     >
+    <!-- Snack -->
+    <v-snackbar v-model="snackbar.isOpen" top>
+      {{ snackbar.text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="pink"
+          text
+          v-bind="attrs"
+          @click="snackbar.isOpen = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+    <!-- Snack -->
     <!-- =================Uploader================== -->
     <v-dialog v-model="dialog" width="500">
       <v-card>
@@ -24,6 +40,7 @@
               <v-row>
                 <v-col cols="12">
                   <v-file-input
+                    v-if="dialogType == 0"
                     v-model="item.uploads"
                     color="deep-purple accent-4"
                     counter
@@ -32,7 +49,7 @@
                     placeholder="Select your files"
                     prepend-icon="mdi-paperclip"
                     outlined
-                    :show-size="1000"
+                    show-size="true"
                   >
                     <template v-slot:selection="{ index, text }">
                       <v-chip
@@ -72,12 +89,26 @@
                 class="w-100 px-3 pt-3 mt-8 justify-space-between"
                 style="background: lightgray; border-radius: 5px"
                 v-for="fileIndex in item.sourceCount"
+                :key="fileIndex"
+                ref="myUploadItems"
               >
-                <p>file-{{ fileIndex }}.pdf</p>
-                <p>
-                  Size:
-                  {{ parseFloat(item.size / item.sourceCount).toFixed(2) }}Tb
-                </p>
+                <v-col v-if="dialogType == 1">
+                  <p>Company:{{ getRandomCompanyName().name }}</p>
+                </v-col>
+                <v-col>
+                  <p>file-{{ fileIndex }}.pdf</p>
+                </v-col>
+                <v-col>
+                  <p>
+                    Size:
+                    {{ parseFloat(item.size / item.sourceCount).toFixed(2) }}Tb
+                  </p>
+                </v-col>
+                <v-col cols="2">
+                  <v-btn text color="red" @click="hideItem(fileIndex)">
+                    <v-icon color="red">mdi-delete</v-icon>
+                  </v-btn>
+                </v-col>
               </v-row>
             </v-tab-item>
           </v-tabs-items>
@@ -92,6 +123,59 @@
       </v-card>
     </v-dialog>
     <!-- =================Uploader================== -->
+    <!-- =================ViewData================== -->
+    <v-dialog v-model="viewDataModal.isOpen" width="500">
+      <v-card>
+        <v-card-title class="text-h5 grey lighten-2">
+          {{ viewDataModal.title }}
+        </v-card-title>
+
+        <v-card-text v-if="viewDataModal.type == 0">
+          <v-row
+            cols="12"
+            class="w-100 px-3 pt-3 mt-8 justify-space-between"
+            style="background: lightgray; border-radius: 5px"
+            v-for="company in viewDataModal.dataList"
+          >
+            <p>{{ company.name }}</p>
+          </v-row>
+        </v-card-text>
+        <v-card-text v-if="viewDataModal.type == 0">
+          <v-row
+            cols="12"
+            class="w-100 px-3 pt-3 mt-8 justify-space-between"
+            style="background: lightgray; border-radius: 5px"
+            v-for="company in viewDataModal.dataList"
+          >
+            <p>{{ company.name }}</p>
+          </v-row>
+        </v-card-text>
+        <v-card-text v-else>
+          <v-row
+            cols="12"
+            class="w-100 px-3 pt-3 mt-8 justify-space-between"
+            style="background: lightgray; border-radius: 5px"
+            v-for="fileIndex in viewDataModal.dataList"
+          >
+            <p>{{ fileIndex.name }}</p>
+            <p>
+              Size:
+              {{ fileIndex.volume }}
+            </p>
+          </v-row>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text @click="viewDataModal.isOpen = false">
+            close
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- =================ViewData================== -->
     <v-container fluid>
       <v-row class="cart-data">
         <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
@@ -123,44 +207,13 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" sm="12" md="6" lg="4" xl="4" xxl="4">
+        <v-col cols="12" sm="12" md="6" lg="6" xl="4" xxl="4">
           <v-card>
             <v-app-bar flat color="rgba(0, 0, 0, 0)">
               <v-toolbar-title class="text-h6 pl-0">
                 Public Data (75Tb)
               </v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-btn
-                color="black"
-                elevation="8"
-                outlined
-                plain
-                rounded
-                @click="
-                  () => {
-                    data = [];
-                    title = 'Upload Public Data';
-                    tabs.headers = [
-                      {
-                        tab: 'Standard Data',
-                        id: 1,
-                        sourceCount: 10,
-                        size: 50,
-                        uploads: [],
-                      },
-                      {
-                        tab: 'Alternative Data',
-                        id: 2,
-                        sourceCount: 30,
-                        size: 25,
-                        uploads: [],
-                      },
-                    ];
-                    dialog = true;
-                  }
-                "
-                ><v-icon color="black">mdi-plus</v-icon>Upload</v-btn
-              >
             </v-app-bar>
 
             <v-card-text>
@@ -210,6 +263,15 @@
                       <div>
                         <div class="font-weight-normal">
                           <strong>{{ message.title }}</strong>
+                          <v-btn
+                            text
+                            v-if="message.title == 'Number of Sources'"
+                            rounded
+                            small
+                            @click="getNumberOfSources(10, 50, 'Standard Data')"
+                          >
+                            <v-icon>mdi-eye</v-icon>
+                          </v-btn>
                         </div>
                         <div>{{ message.text }}</div>
                       </div>
@@ -262,6 +324,17 @@
                       <div>
                         <div class="font-weight-normal">
                           <strong>{{ message.title }}</strong>
+                          <v-btn
+                            text
+                            v-if="message.title == 'Number of Sources'"
+                            rounded
+                            small
+                            @click="
+                              getNumberOfSources(30, 25, 'Alternative Data')
+                            "
+                          >
+                            <v-icon>mdi-eye</v-icon>
+                          </v-btn>
                         </div>
                         <div>{{ message.text }}</div>
                       </div>
@@ -270,46 +343,81 @@
                 </v-col>
               </v-row>
             </v-card-text>
+            <v-card-actions>
+              <v-slide-group multiple show-arrows>
+                <v-slide-item style="margin: 7px">
+                  <v-btn
+                    color="green"
+                    text
+                    @click="
+                      () => {
+                        data = [];
+                        title = 'Public Data';
+                        tabs.headers = [
+                          {
+                            tab: 'Standard Data',
+                            id: 1,
+                            sourceCount: 10,
+                            size: 50,
+                            uploads: [],
+                          },
+                          {
+                            tab: 'Alternative Data',
+                            id: 2,
+                            sourceCount: 30,
+                            size: 25,
+                            uploads: [],
+                          },
+                        ];
+                        dialog = true;
+                        dialogType = 1;
+                      }
+                    "
+                    >View</v-btn
+                  >
+                </v-slide-item>
+                <v-slide-item style="margin: 7px">
+                  <v-btn
+                    color="primary"
+                    text
+                    @click="
+                      () => {
+                        data = [];
+                        title = 'Upload Public Data';
+                        tabs.headers = [
+                          {
+                            tab: 'Standard Data',
+                            id: 1,
+                            sourceCount: 10,
+                            size: 50,
+                            uploads: [],
+                          },
+                          {
+                            tab: 'Alternative Data',
+                            id: 2,
+                            sourceCount: 30,
+                            size: 25,
+                            uploads: [],
+                          },
+                        ];
+
+                        dialog = true;
+                        dialogType = 0;
+                      }
+                    "
+                    ><v-icon color="primary">mdi-plus</v-icon>Upload</v-btn
+                  >
+                </v-slide-item>
+              </v-slide-group>
+            </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="4" xl="4" xxl="4">
+        <v-col cols="12" sm="12" md="6" lg="6" xl="4" xxl="4">
           <v-card style="height: 100%">
             <v-app-bar flat color="rgba(0, 0, 0, 0)">
               <v-toolbar-title class="text-h6 pl-0">
                 Proprietary Data (20Tb)
               </v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="black"
-                elevation="8"
-                outlined
-                plain
-                rounded
-                @click="
-                  () => {
-                    data = [];
-                    title = 'Upload Proprietary Data';
-                    tabs.headers = [
-                      {
-                        tab: 'Internal Sources',
-                        id: 1,
-                        sourceCount: 15,
-                        size: 8,
-                        uploads: [],
-                      },
-                      {
-                        tab: 'PortCo Sources',
-                        id: 2,
-                        sourceCount: 30,
-                        size: 12,
-                        uploads: [],
-                      },
-                    ];
-                    dialog = true;
-                  }
-                "
-                ><v-icon color="black">mdi-plus</v-icon>Upload</v-btn
-              >
             </v-app-bar>
 
             <v-card-text>
@@ -358,6 +466,17 @@
                       <div>
                         <div class="font-weight-normal">
                           <strong>{{ message.title }}</strong>
+                          <v-btn
+                            text
+                            v-if="message.title == 'Number of Sources'"
+                            rounded
+                            small
+                            @click="
+                              getNumberOfSources(15, 8, 'Internal Sources')
+                            "
+                          >
+                            <v-icon>mdi-eye</v-icon>
+                          </v-btn>
                         </div>
                         <div>{{ message.text }}</div>
                       </div>
@@ -408,6 +527,17 @@
                       <div>
                         <div class="font-weight-normal">
                           <strong>{{ message.title }}</strong>
+                          <v-btn
+                            text
+                            v-if="message.title == 'Number of Sources'"
+                            rounded
+                            small
+                            @click="
+                              getNumberOfSources(30, 12, 'PortCo Sources')
+                            "
+                          >
+                            <v-icon>mdi-eye</v-icon>
+                          </v-btn>
                         </div>
                         <div>{{ message.text }}</div>
                       </div>
@@ -416,39 +546,82 @@
                 </v-col>
               </v-row>
             </v-card-text>
+
+            <v-card-actions>
+              <v-slide-group multiple show-arrows>
+                <v-slide-item style="margin: 7px">
+                  <v-btn
+                    color="green"
+                    text
+                    @click="
+                      () => {
+                        data = [];
+                        title = 'Proprietary Data';
+                        tabs.headers = [
+                          {
+                            tab: 'Internal Sources',
+                            id: 1,
+                            sourceCount: 15,
+                            size: 8,
+                            uploads: [],
+                          },
+                          {
+                            tab: 'PortCo Sources',
+                            id: 2,
+                            sourceCount: 30,
+                            size: 12,
+                            uploads: [],
+                          },
+                        ];
+
+                        dialog = true;
+                        dialogType = 1;
+                      }
+                    "
+                    >View</v-btn
+                  >
+                </v-slide-item>
+                <v-slide-item style="margin: 7px">
+                  <v-btn
+                    color="primary"
+                    text
+                    @click="
+                      () => {
+                        data = [];
+                        title = 'Upload Proprietary Data';
+                        tabs.headers = [
+                          {
+                            tab: 'Internal Sources',
+                            id: 1,
+                            sourceCount: 15,
+                            size: 8,
+                            uploads: [],
+                          },
+                          {
+                            tab: 'PortCo Sources',
+                            id: 2,
+                            sourceCount: 30,
+                            size: 12,
+                            uploads: [],
+                          },
+                        ];
+                        dialog = true;
+                        dialogType = 0;
+                      }
+                    "
+                    ><v-icon color="primary">mdi-plus</v-icon>Upload</v-btn
+                  >
+                </v-slide-item>
+              </v-slide-group>
+            </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="4" xl="4" xxl="4">
+        <v-col cols="12" sm="12" md="6" lg="6" xl="4" xxl="4">
           <v-card style="height: 100%">
             <v-app-bar flat color="rgba(0, 0, 0, 0)">
               <v-toolbar-title class="text-h6 pl-0">
                 Target Assets (5Tb)
               </v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="black"
-                elevation="8"
-                outlined
-                plain
-                rounded
-                @click="
-                  () => {
-                    data = [];
-                    title = 'Upload Target Assets Data';
-                    tabs.headers = [
-                      {
-                        tab: 'Target Assets',
-                        id: 1,
-                        sourceCount: 7,
-                        size: 5,
-                        uploads: [],
-                      },
-                    ];
-                    dialog = true;
-                  }
-                "
-                ><v-icon color="black">mdi-plus</v-icon>Upload</v-btn
-              >
             </v-app-bar>
             <v-card-text>
               <v-row>
@@ -467,7 +640,7 @@
                         {
                           id: 's1112',
                           color: 'deep-purple lighten-1',
-                          text: '7',
+                          text: `${allData.companies.length}`,
                           title: 'Number of Companies',
                         },
                         {
@@ -489,7 +662,18 @@
                     >
                       <div>
                         <div class="font-weight-normal">
-                          <strong>{{ message.title }}</strong>
+                          <strong
+                            >{{ message.title }}
+                            <v-btn
+                              v-if="message.title == 'Number of Companies'"
+                              text
+                              rounded
+                              small
+                              @click="getNumberOfCompanies"
+                            >
+                              <v-icon>mdi-eye</v-icon>
+                            </v-btn>
+                          </strong>
                         </div>
                         <div>{{ message.text }}</div>
                       </div>
@@ -498,6 +682,59 @@
                 </v-col>
               </v-row>
             </v-card-text>
+            <v-card-actions>
+              <v-slide-group multiple show-arrows>
+                <v-slide-item style="margin: 7px">
+                  <v-btn
+                    color="green"
+                    text
+                    @click="
+                      () => {
+                        data = [];
+                        title = 'Target Assets Data';
+                        tabs.headers = [
+                          {
+                            tab: 'Target Assets',
+                            id: 1,
+                            sourceCount: 7,
+                            size: 5,
+                            uploads: [],
+                          },
+                        ];
+
+                        dialog = true;
+                        dialogType = 1;
+                      }
+                    "
+                    >View</v-btn
+                  >
+                </v-slide-item>
+                <v-slide-item style="margin: 7px">
+                  <v-btn
+                    color="primary"
+                    text
+                    @click="
+                      () => {
+                        data = [];
+                        title = 'Upload Target Assets Data';
+                        tabs.headers = [
+                          {
+                            tab: 'Target Assets',
+                            id: 1,
+                            sourceCount: 7,
+                            size: 5,
+                            uploads: [],
+                          },
+                        ];
+                        dialog = true;
+                        dialogType = 0;
+                      }
+                    "
+                    ><v-icon color="primary">mdi-plus</v-icon>Upload</v-btn
+                  ></v-slide-item
+                >
+              </v-slide-group>
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
@@ -518,6 +755,7 @@ export default {
   data() {
     return {
       dialog: false,
+      dialogType: 0,
       tab: null,
       data: [],
       tabs: {
@@ -585,11 +823,57 @@ export default {
           },
         ],
       },
+      viewDataModal: {
+        type: 0,
+        title: "",
+        isOpen: "",
+        dataList: [],
+      },
+      allData: { companies: [] },
+      snackbar: {
+        isOpen: false,
+        text: "",
+      },
     };
   },
 
   methods: {
-    init() {},
+    init() {
+      this.allData = api.getFullUserData();
+    },
+    getRandomCompanyName() {
+      return this.allData.companies[
+        Math.floor(Math.random() * this.allData.companies.length)
+      ];
+    },
+    getNumberOfCompanies() {
+      this.allData = api.getFullUserData();
+      this.viewDataModal.type = 0;
+      this.viewDataModal.title = "Companies";
+      this.viewDataModal.dataList = this.allData.companies;
+      this.viewDataModal.isOpen = true;
+    },
+    getNumberOfSources(sourceCount, volume, title) {
+      this.allData = api.getFullUserData();
+      this.viewDataModal.type = 1;
+      this.viewDataModal.title = title;
+      this.viewDataModal.dataList = [];
+      for (let index = 0; index < sourceCount; index++) {
+        this.viewDataModal.dataList.push({
+          name: `${title}-${index}`,
+          volume: `${parseFloat(volume / sourceCount).toFixed(2)}Tb`,
+        });
+      }
+      this.viewDataModal.isOpen = true;
+    },
+    fireSnack(text) {
+      this.snackbar.text = text;
+      this.snackbar.isOpen = true;
+    },
+    hideItem(i) {
+      this.$refs.myUploadItems[i].style["display"] = "none";
+      this.fireSnack("item removed successfully");
+    },
   },
   mounted() {
     if (!api.getAuth()) window.location.href = "/login";

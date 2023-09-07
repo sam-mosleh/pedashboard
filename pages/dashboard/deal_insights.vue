@@ -53,40 +53,6 @@
               >
                 Company insights
               </p>
-              <div style="height: 2px; background: red"></div>
-              <div class="candlestick" v-if="summaryInsights.min < 100">
-                <div class="wick"></div>
-                <div
-                  class="body"
-                  :style="{
-                    width: `${summaryInsights.max - summaryInsights.min}%`,
-                    left: `${summaryInsights.min}%`,
-                  }"
-                ></div>
-                <div
-                  class="shadow-left"
-                  :style="{ width: `${summaryInsights.min}%` }"
-                ></div>
-                <div
-                  class="shadow-right"
-                  :style="{ width: `${summaryInsights.max}%` }"
-                ></div>
-              </div>
-              <v-row
-                class="justify-space-between mt-1 px-2"
-                v-if="summaryInsights.min < 100"
-              >
-                <p style="font-size: 10px">min: {{ summaryInsights.min }}%</p>
-                <p style="font-size: 10px">max: {{ summaryInsights.max }}%</p>
-              </v-row>
-              <v-row
-                class="justify-space-between mt-1 px-2"
-                v-if="summaryInsights.min >= 100"
-              >
-                <p style="font-size: 10px; width: 100%; text-align: center">
-                  All insights are completed!
-                </p>
-              </v-row>
             </v-col>
           </v-card>
         </v-col>
@@ -133,10 +99,10 @@
                     cols="12"
                     xs="12"
                     sm="6"
-                    md="4"
-                    lg="3"
-                    xl="3"
-                    xxl="3"
+                    md="6"
+                    lg="4"
+                    xl="4"
+                    xxl="4"
                     v-for="company in getAllAvailableCompaniesInItem(
                       allInsightCompanies,
                       item.id
@@ -173,10 +139,12 @@
                           <v-slide-item>
                             <v-btn
                               text
+                              large
                               color="green"
                               @click="
                                 () => {
                                   dialogViewAssetDetail.isOpen = true;
+                                  dialogViewAssetDetail.isEditPhase = false;
                                   dialogViewAssetDetail.company = company;
                                   dialogViewAssetDetail.selectedPhase =
                                     company.assetPhase;
@@ -189,6 +157,7 @@
                           <v-slide-item>
                             <v-btn
                               text
+                              large
                               color="green"
                               @click="
                                 () => {
@@ -213,6 +182,7 @@
                           <v-slide-item>
                             <v-btn
                               text
+                              large
                               color="red"
                               @click="
                                 () => {
@@ -227,7 +197,7 @@
                           >
                           <v-slide-item>
                             <v-btn
-                              small
+                              large
                               @click="
                                 () => {
                                   fireSnack(
@@ -244,7 +214,7 @@
                           </v-slide-item>
                           <v-slide-item>
                             <v-btn
-                              small
+                              large
                               @click="
                                 () => {
                                   fireSnack(
@@ -356,9 +326,11 @@
                       </v-col>
                     </v-card>
                     <v-row class="justify-space-between mt-3">
-                      <v-col cols="12">
+                      <v-col
+                        cols="12"
+                        v-if="!dialogViewAssetDetail.isEditPhase"
+                      >
                         <v-btn
-                          v-if="!dialogViewAssetDetail.isEditPhase"
                           @click="
                             () => (dialogViewAssetDetail.isEditPhase = true)
                           "
@@ -372,8 +344,9 @@
                           }}
                           (Edit Company Phase)</v-btn
                         >
+                      </v-col>
+                      <v-col cols="8" v-if="dialogViewAssetDetail.isEditPhase">
                         <v-combobox
-                          v-if="dialogViewAssetDetail.isEditPhase"
                           v-model="dialogViewAssetDetail.selectedPhase"
                           :items="[
                             { text: 'Phase Zero', value: 0 },
@@ -385,6 +358,14 @@
                           prepend-icon="mdi-filter-variant"
                           solo
                         ></v-combobox>
+                      </v-col>
+                      <v-col cols="4" v-if="dialogViewAssetDetail.isEditPhase">
+                        <v-btn
+                          text
+                          color="red"
+                          @click="dialogViewAssetDetail.isEditPhase = false"
+                          >Cancel</v-btn
+                        >
                       </v-col>
                     </v-row>
                   </v-col>
@@ -1226,6 +1207,7 @@ export default {
         selectedFileCat: "",
         uploadedFiles: "",
         allFilesCat: [
+          "General",
           "Legal due diligence",
           "Financial due diligence",
           "Operational due diligence",
