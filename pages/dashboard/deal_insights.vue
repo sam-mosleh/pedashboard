@@ -1,11 +1,11 @@
 <template>
   <div>
     <v-row
-      class="ps-3 pt-8 pb-6 mb-3"
-      style="font-weight: 600; font-size: 28px; background: black; color: white"
-      >Deal Insights</v-row
+      class="ps-6 pt-5 pb-6"
+      style="font-weight: 400; font-size: 28px; color: black; margin-left: 15px"
     >
-
+      Deal Insights
+    </v-row>
     <v-container fluid>
       <!-- Snack -->
       <v-snackbar v-model="snackbar.isOpen" top>
@@ -43,8 +43,8 @@
                   border-radius: 15px;
                   text-transform: capitalize;
                 "
-                @click="() => (addNewInsightCompanyDialog.isOpen = true)"
-                >+ Add</v-btn
+                @click="redirect('/dashboard/deal_insights')"
+                >View</v-btn
               >
             </div>
 
@@ -119,130 +119,307 @@
                     v-bind:key="company.companyId"
                   >
                     <v-card
-                      class="mx-auto"
                       v-if="checkIsCompanyAvailable(company)"
+                      class="mx-auto"
+                      style="padding: 20px"
                     >
                       <v-card-text>
-                        <p class="text-h4 text--primary">{{ company.name }}</p>
-                        <div class="text--primary">
-                          <v-chip-group active-class="primary--text" column>
-                            <v-chip>score: {{ company.score }}</v-chip>
-
-                            <v-chip
-                              >Sell Chance: {{ company.sellChance }}</v-chip
-                            >
-
-                            <v-chip
-                              >Documents:
-                              {{ company.uploadedFiles.length }}</v-chip
-                            >
-                            <v-chip
-                              >Insight Completeness:
-                              {{ company.completeness }}%</v-chip
-                            >
-                          </v-chip-group>
-                        </div>
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-slide-group multiple show-arrows>
-                          <v-slide-item>
-                            <v-btn
-                              text
-                              large
-                              color="green"
-                              @click="
-                                () => {
-                                  dialogViewAssetDetail.isOpen = true;
-                                  dialogViewAssetDetail.isEditPhase = false;
-                                  dialogViewAssetDetail.company = company;
-                                  dialogViewAssetDetail.selectedPhase =
-                                    company.assetPhase;
-                                }
-                              "
-                            >
-                              view
-                            </v-btn>
-                          </v-slide-item>
-                          <v-slide-item>
-                            <v-btn
-                              text
-                              large
-                              color="green"
-                              @click="
-                                () => {
-                                  chatModal.isOpen = true;
-                                  chatModal.situation = 0;
-                                  chatModal.userCommand = '';
-                                  chatModal.messages = [
-                                    {
-                                      time: new Date(),
-                                      from: 'robot',
-                                      message:
-                                        'Hello im your AI assistant, please describe me what kind of information do you want about this company',
-                                      hasBTN: false,
-                                    },
-                                  ];
-                                }
-                              "
-                            >
-                              <v-icon color="green">mdi-robot-excited</v-icon>
-                            </v-btn>
-                          </v-slide-item>
-                          <v-slide-item>
-                            <v-btn
-                              text
-                              large
-                              color="red"
-                              @click="
-                                () => {
-                                  deleteInsightDialog.isOpen = true;
-                                  deleteInsightDialog.companyId =
-                                    company.companyId;
-                                }
-                              "
-                            >
-                              delete
-                            </v-btn></v-slide-item
+                        <v-row
+                          class="d-flex"
+                          style="justify-content: space-between"
+                        >
+                          <v-row
+                            class="d-flex mt-0 mb-auto"
+                            style="justify-content: flex-end"
                           >
-                          <v-slide-item>
-                            <v-btn
-                              large
-                              @click="
-                                () => {
-                                  fireSnack(
-                                    'your review submitted successfully!'
-                                  );
-                                }
-                              "
-                              rounded
-                              color="green"
-                              style="margin: 0 auto; display: block"
+                            <v-menu
+                              v-model="company.showMenu"
+                              absolute
+                              offset-y
+                              style="max-width: 600px"
                             >
-                              <v-icon>mdi-thumb-up</v-icon>
-                            </v-btn>
-                          </v-slide-item>
-                          <v-slide-item>
-                            <v-btn
-                              large
-                              @click="
-                                () => {
-                                  fireSnack(
-                                    'your review submitted successfully!'
-                                  );
-                                }
-                              "
-                              rounded
-                              color="red"
-                              style="margin: 0 auto; display: block"
-                            >
-                              <v-icon>mdi-thumb-down</v-icon>
-                            </v-btn>
-                          </v-slide-item>
-                        </v-slide-group>
+                              <template v-slot:activator="{ on, attrs }">
+                                <div
+                                  v-bind="attrs"
+                                  v-on="on"
+                                  class="d-flex flex-row"
+                                  style="
+                                    width: 30px;
+                                    height: 30px;
+                                    border-radius: 50%;
+                                    font-size: 20px;
+                                    font-weight: 700;
+                                    padding-bottom: 10px;
+                                    border: 1px solid grey;
+                                    justify-content: center;
+                                    align-items: center;
+                                  "
+                                >
+                                  ...
+                                </div>
+                              </template>
+                              <v-list>
+                                <v-list-item-group>
+                                  <v-subheader>Actions</v-subheader>
 
-                        <!-- TODO: must be added -->
+                                  <v-list-item
+                                    @click="
+                                      () => {
+                                        chatModal.isOpen = true;
+                                        chatModal.situation = 0;
+                                        chatModal.userCommand = '';
+                                        chatModal.messages = [
+                                          {
+                                            time: new Date(),
+                                            from: 'robot',
+                                            message:
+                                              'Hello im your AI assistant, please describe me what kind of information do you want about this company',
+                                            hasBTN: false,
+                                          },
+                                        ];
+                                      }
+                                    "
+                                  >
+                                    <v-list-item-icon>
+                                      <v-icon>mdi-robot-outline</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                      <v-list-item-title
+                                        >Need to Talk?</v-list-item-title
+                                      >
+                                      <v-list-item-subtitle
+                                        >You can talk with AI about this
+                                        company</v-list-item-subtitle
+                                      >
+                                    </v-list-item-content>
+                                  </v-list-item>
+
+                                  <!-- ================== -->
+                                  <v-list-item
+                                    @click="
+                                      () => {
+                                        fireSnack(
+                                          `${company.name.replace(
+                                            ' ',
+                                            ''
+                                          )}-${+new Date()}.pdf Sent to your email!`
+                                        );
+                                      }
+                                    "
+                                  >
+                                    <v-list-item-icon>
+                                      <v-icon>mdi-cloud-print</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                      <v-list-item-title
+                                        >Download Summary</v-list-item-title
+                                      >
+                                      <v-list-item-subtitle
+                                        >You can get summary report about this
+                                        company</v-list-item-subtitle
+                                      >
+                                    </v-list-item-content>
+                                  </v-list-item>
+                                  <!-- ================== -->
+                                  <v-list-item
+                                    @click="
+                                      () => {
+                                        fireSnack(
+                                          'your review submitted successfully!'
+                                        );
+                                      }
+                                    "
+                                  >
+                                    <v-list-item-icon>
+                                      <v-icon>mdi-thumb-up</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                      <v-list-item-title
+                                        >Like</v-list-item-title
+                                      >
+                                      <v-list-item-subtitle
+                                        >If you are satisfied out of the AI
+                                        generated information about this
+                                        company</v-list-item-subtitle
+                                      >
+                                    </v-list-item-content>
+                                  </v-list-item>
+                                  <!-- ================== -->
+                                  <v-list-item
+                                    @click="
+                                      () => {
+                                        fireSnack(
+                                          'your review submitted successfully!'
+                                        );
+                                      }
+                                    "
+                                  >
+                                    <v-list-item-icon>
+                                      <v-icon>mdi-thumb-down</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                      <v-list-item-title
+                                        >Dislike</v-list-item-title
+                                      >
+                                      <v-list-item-subtitle
+                                        >If you are not satisfied out of the AI
+                                        generated information about this
+                                        company</v-list-item-subtitle
+                                      >
+                                    </v-list-item-content>
+                                  </v-list-item>
+                                  <v-list-item
+                                    @click="
+                                      () => {
+                                        deleteInsightDialog.isOpen = true;
+                                        deleteInsightDialog.companyId =
+                                          company.companyId;
+                                      }
+                                    "
+                                  >
+                                    <v-list-item-icon>
+                                      <v-icon>mdi-delete-outline</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                      <v-list-item-title
+                                        >Remove</v-list-item-title
+                                      >
+                                      <v-list-item-subtitle
+                                        >You can remove this company from your
+                                        tracking list</v-list-item-subtitle
+                                      >
+                                    </v-list-item-content>
+                                  </v-list-item>
+                                  <!-- ================== -->
+                                </v-list-item-group>
+                              </v-list>
+                            </v-menu>
+                          </v-row>
+                        </v-row>
+                        <v-row>
+                          <div class="text--primary">
+                            <div
+                              class="d-flex flex-row"
+                              style="
+                                justify-content: space-between;
+                                align-items: center;
+                              "
+                            >
+                              <v-row class="ms-2 my-3">
+                                <v-avatar
+                                  color="primary"
+                                  style="color: white"
+                                  class="my-auto"
+                                  size="40"
+                                >
+                                  <img
+                                    :src="company.companyLogoImg"
+                                    :alt="company.name"
+                                  />
+                                </v-avatar>
+                                <div class="d-flex flex-column ms-2">
+                                  <div
+                                    class=""
+                                    style="font-size: 15px; font-weight: 500"
+                                  >
+                                    {{ company.name }}
+                                  </div>
+                                  <div
+                                    class=""
+                                    style="
+                                      color: grey;
+                                      font-size: 13px;
+                                      font-weight: 400;
+                                    "
+                                  >
+                                    {{ company.industry }}
+                                  </div>
+                                </div>
+                                <v-row> </v-row>
+                              </v-row>
+                              <div
+                                class="d-flex flex-row me-7 ms-auto my-3"
+                                style="justify-content: flex-end"
+                              >
+                                <v-icon color="success"
+                                  >mdi-currency-usd</v-icon
+                                >
+                                <div
+                                  class="d-flex flex-column ms-1"
+                                  style="align-items: center"
+                                >
+                                  <div
+                                    style="font-size: 12px; font-weight: 400"
+                                  >
+                                    Revenue Size: {{ company.revenueSize }}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <v-chip-group active-class="primary--text" column>
+                              <v-chip
+                                class="ma-2"
+                                color="#666666"
+                                outlined
+                                label
+                              >
+                                Score: {{ company.score }}
+                              </v-chip>
+                              <v-chip
+                                class="ma-2"
+                                color="#666666"
+                                outlined
+                                label
+                              >
+                                Sell Chance: {{ company.sellChance }}
+                              </v-chip>
+
+                              <v-chip
+                                class="ma-2"
+                                color="#666666"
+                                outlined
+                                label
+                              >
+                                Documents:
+                                {{ company.uploadedFiles.length }}
+                              </v-chip>
+                              <v-chip
+                                class="ma-2"
+                                color="#666666"
+                                outlined
+                                label
+                              >
+                                Insight Completeness:
+                                {{ company.completeness }}%
+                              </v-chip>
+                            </v-chip-group>
+                          </div>
+                        </v-row>
+                      </v-card-text>
+                      <v-card-actions class="pt-10">
+                        <v-btn
+                          @click="
+                            () => {
+                              dialogViewAssetDetail.isOpen = true;
+                              dialogViewAssetDetail.isEditPhase = false;
+                              dialogViewAssetDetail.company = company;
+                              dialogViewAssetDetail.selectedPhase =
+                                company.assetPhase;
+                            }
+                          "
+                          class="mt-4"
+                          block
+                          elevation="8"
+                          outlined
+                          color="green"
+                        >
+                          <v-icon>mdi-eye-outline</v-icon>
+                          View
+                        </v-btn>
                       </v-card-actions>
                     </v-card>
+
+                    <!-- ======================================== -->
                   </v-col>
                   <v-card
                     v-if="
@@ -1098,28 +1275,88 @@
               <v-row>
                 <v-card
                   v-for="company in addNewInsightCompanyDialog.allCompanies"
+                  v-bind:key="company.companyId"
                   class="mx-auto mt-5"
-                  max-width="300"
+                  style="padding: 20px"
                 >
                   <v-card-text>
-                    <p class="text-h4 text--primary">{{ company.name }}</p>
-                    <div class="text--primary">
-                      <v-chip-group active-class="primary--text" column>
-                        <v-chip
-                          >totalDataGathered:
-                          {{ showDataSize(company.totalDataGathered) }}
-                        </v-chip>
-                        <v-chip
-                          >totalDataLearned:
-                          {{ showDataSize(company.totalDataLearned) }}
-                        </v-chip>
-                      </v-chip-group>
-                    </div>
+                    <v-row
+                      class="d-flex"
+                      style="justify-content: space-between"
+                    >
+                      <v-row>
+                        <div class="text--primary">
+                          <div
+                            class="d-flex flex-row"
+                            style="
+                              justify-content: space-between;
+                              align-items: center;
+                            "
+                          >
+                            <v-row class="ms-2 my-3">
+                              <v-avatar
+                                color="primary"
+                                style="color: white"
+                                class="my-auto"
+                                size="40"
+                              >
+                                <img
+                                  :src="company.companyLogoImg"
+                                  :alt="company.name"
+                                />
+                              </v-avatar>
+                              <div class="d-flex flex-column ms-2">
+                                <div
+                                  class=""
+                                  style="font-size: 15px; font-weight: 500"
+                                >
+                                  {{ company.name }}
+                                </div>
+                                <div
+                                  class=""
+                                  style="
+                                    color: grey;
+                                    font-size: 13px;
+                                    font-weight: 400;
+                                  "
+                                >
+                                  {{ company.industry }}
+                                </div>
+                              </div>
+                              <v-row> </v-row>
+                            </v-row>
+                            <div
+                              class="d-flex flex-row me-7 ms-auto my-3"
+                              style="justify-content: flex-end"
+                            >
+                              <v-icon color="success">mdi-currency-usd</v-icon>
+                              <div
+                                class="d-flex flex-column ms-1"
+                                style="align-items: center"
+                              >
+                                <div style="font-size: 12px; font-weight: 400">
+                                  Revenue Size: {{ company.revenueSize }}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <v-chip-group active-class="primary--text" column>
+                            <v-chip class="ma-2" color="#666666" outlined label>
+                              Score: {{ company.score }}
+                            </v-chip>
+                            <v-chip class="ma-2" color="#666666" outlined label>
+                              HQ Location: {{ company.hqLocation }}
+                            </v-chip>
+                          </v-chip-group>
+                        </div>
+                      </v-row>
+                    </v-row>
                   </v-card-text>
-                  <v-card-actions>
+                  <v-card-actions class="pt-10">
                     <v-btn
-                      v-if="!company.isSelectedAttr"
-                      text
+                      block
+                      elevation="8"
+                      outlined
                       color="green"
                       @click="
                         () => {
@@ -1128,19 +1365,8 @@
                         }
                       "
                     >
-                      Add to insights
-                    </v-btn>
-                    <v-btn
-                      v-else
-                      text
-                      color="red"
-                      @click="
-                        () => {
-                          company.isSelectedAttr = false;
-                        }
-                      "
-                    >
-                      De-Select this company
+                      <v-icon left> mdi-plus </v-icon>
+                      Add to tracking company list
                     </v-btn>
                   </v-card-actions>
                 </v-card>
@@ -1411,7 +1637,7 @@ export default {
     fillInsightTableItems() {
       const assetPhases = api.getAllAssetPhases();
       const totalAssets = {
-        name: "Assets under review",
+        name: "Assets Under Review",
         p0: this.allInsightCompanies.filter((x) => x.assetPhase == 0).length,
         p1: this.allInsightCompanies.filter((x) => x.assetPhase == 1).length,
         p2: this.allInsightCompanies.filter((x) => x.assetPhase == 2).length,
@@ -1460,14 +1686,17 @@ export default {
       options.xaxis.categories = [
         [
           "Phase Zero",
+          "Progress completeness",
           `(${parseFloat(companyInsightsData?.[1].p0).toFixed(2)}%)`,
         ],
         [
           "Phase One",
+          "Progress completeness",
           `(${parseFloat(companyInsightsData?.[1].p1).toFixed(2)}%)`,
         ],
         [
           "Phase Two",
+          "Progress completeness",
           `(${parseFloat(companyInsightsData?.[1].p2).toFixed(2)}%)`,
         ],
       ];
@@ -1484,8 +1713,10 @@ export default {
         {
           name: companyInsightsData?.[2].name,
           data: [
-            companyInsightsData?.[2].p1,
-            companyInsightsData?.[2].p2,
+            companyInsightsData?.[2].p0,
+            companyInsightsData?.[2].p1 == 0
+              ? companyInsightsData?.[0].p1
+              : companyInsightsData?.[2].p1,
             companyInsightsData?.[2].p2 == 0
               ? companyInsightsData?.[0].p2
               : companyInsightsData?.[2].p2,
@@ -1661,7 +1892,7 @@ export default {
   background: linear-gradient(
     135deg,
     rgba(251, 255, 252, 1) 0%,
-    rgba(222, 216, 254, 1) 100%
+    rgb(166, 252, 255) 100%
   );
   color: black !important;
   padding-left: 0px;

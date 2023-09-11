@@ -1,10 +1,11 @@
 <template>
   <div>
     <v-row
-      class="ps-3 pt-8 pb-6 mb-3"
-      style="font-weight: 600; font-size: 28px; background: black; color: white"
-      >Data</v-row
+      class="ps-6 pt-5 pb-6"
+      style="font-weight: 400; font-size: 28px; color: black; margin-left: 15px"
     >
+      Data
+    </v-row>
     <!-- Snack -->
     <v-snackbar v-model="snackbar.isOpen" top>
       {{ snackbar.text }}
@@ -199,38 +200,44 @@
                 >View</v-btn
               >
             </div>
-
+            <v-row style="text-align: center; margin-top: 5px"
+              ><p
+                style="
+                  font-size: 1.3rem;
+                  font-weight: 400;
+                  width: 100% !important;
+                "
+              >
+                Number of Sources
+              </p></v-row
+            >
             <div
-              class="d-flex flex-row justify-space-between h-100"
-              style="margin-top: 50px"
+              class="d-flex flex-row justify-space-between align-center h-100"
+              style="margin-top: 10px"
             >
               <div
                 class="d-flex flex-column"
-                style="font-size: 1.3rem; font-weight: 400"
-              >
-                Number of Sources
-              </div>
-              <div
                 style="
-                  width: 1px;
-                  height: 100px;
-                  background: rgba(211, 211, 211, 0.8);
+                  width: 100%;
+                  border-right-width: 1px;
+                  border-right-style: inset;
+                  border-right-color: rgba(211, 211, 211, 0.8);
                 "
-              ></div>
-              <div
-                class="d-flex flex-column"
-                style="padding-left: 2px; padding-right: 2px"
               >
                 <p
                   class="text-center"
-                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
                 >
                   Public Data
                 </p>
                 <p
                   class="text-center"
                   style="
-                    font-size: 1rem;
+                    font-size: 1.2rem;
                     line-height: 0.75rem;
                     font-weight: 400;
                   "
@@ -238,27 +245,30 @@
                   40
                 </p>
               </div>
-              <div
-                style="
-                  width: 1px;
-                  height: 100px;
-                  background: rgba(211, 211, 211, 0.8);
-                "
-              ></div>
+
               <div
                 class="d-flex flex-column"
-                style="padding-left: 2px; padding-right: 2px"
+                style="
+                  width: 100%;
+                  border-right-width: 1px;
+                  border-right-style: inset;
+                  border-right-color: rgba(211, 211, 211, 0.8);
+                "
               >
                 <p
                   class="text-center"
-                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
                 >
                   Proprietary Data
                 </p>
                 <p
                   class="text-center"
                   style="
-                    font-size: 1rem;
+                    font-size: 1.2rem;
                     line-height: 0.75rem;
                     font-weight: 400;
                   "
@@ -266,27 +276,22 @@
                   45
                 </p>
               </div>
-              <div
-                style="
-                  width: 1px;
-                  height: 100px;
-                  background: rgba(211, 211, 211, 0.8);
-                "
-              ></div>
-              <div
-                class="d-flex flex-column"
-                style="padding-left: 2px; padding-right: 2px"
-              >
+
+              <div class="d-flex flex-column" style="width: 100%">
                 <p
                   class="text-center"
-                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
                 >
                   Target Data
                 </p>
                 <p
                   class="text-center"
                   style="
-                    font-size: 1rem;
+                    font-size: 1.2rem;
                     line-height: 0.75rem;
                     font-weight: 400;
                   "
@@ -1130,7 +1135,7 @@ export default {
   background: linear-gradient(
     135deg,
     rgba(251, 255, 252, 1) 0%,
-    rgba(188, 231, 253, 1) 100%
+    rgb(255, 206, 143) 100%
   );
 }
 </style>

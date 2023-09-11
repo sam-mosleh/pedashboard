@@ -1,11 +1,11 @@
 <template>
   <div>
     <v-row
-      class="ps-3 pt-8 pb-6 mb-3"
-      style="font-weight: 600; font-size: 28px; background: black; color: white"
-      >Tracking Assets</v-row
+      class="ps-6 pt-5 pb-6"
+      style="font-weight: 400; font-size: 28px; color: black; margin-left: 15px"
     >
-
+      Tracking Assets
+    </v-row>
     <v-container fluid>
       <!-- Snack -->
       <v-snackbar v-model="snackbar.isOpen" top>
@@ -32,7 +32,7 @@
               style="justify-content: space-between; align-items: center"
             >
               <v-icon large>mdi-radar</v-icon>
-              <div class="ms-2 my-auto">TRACKING</div>
+              <div class="ms-2 my-auto">TRACKED ASSETS</div>
               <v-btn
                 class="d-flex flex-row ms-auto me-2 my-auto"
                 style="
@@ -42,8 +42,8 @@
                   border-radius: 15px;
                   text-transform: capitalize;
                 "
-                @click="() => (addNewTrackingCompanyDialog.isOpen = true)"
-                >+ Add</v-btn
+                @click="redirect('/dashboard/tracking')"
+                >View</v-btn
               >
             </div>
 
@@ -70,7 +70,7 @@
                     font-weight: 400;
                   "
                 >
-                  Assets tracked
+                  Assets Tracked
                 </p>
               </div>
               <div
@@ -102,7 +102,7 @@
                     font-weight: 400;
                   "
                 >
-                  Ready to buy
+                  Ready to Buy
                 </p>
               </div>
             </div>
@@ -305,9 +305,6 @@
                           <strong>{{ item.text }}</strong>
                         </v-chip>
                       </template>
-                      <v-btn slot="append" @click="openNewKpiDialogForSearch(0)"
-                        >+</v-btn
-                      >
                     </v-combobox>
                   </v-col>
                   <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
@@ -342,9 +339,6 @@
                           <strong>{{ item.text }}</strong>
                         </v-chip>
                       </template>
-                      <v-btn slot="append" @click="openNewKpiDialogForSearch(1)"
-                        >+</v-btn
-                      >
                     </v-combobox>
                   </v-col>
                 </v-row></v-container
@@ -357,25 +351,22 @@
       </v-row>
       <v-row>
         <v-col
-          cols="6"
-          sm="6"
+          cols="12"
+          xs="12"
+          sm="12"
           md="6"
           lg="4"
           xl="3"
           xxl="3"
-          id="newItem"
-          style="display: none"
+          v-for="company in allTrackingSelectedCompanies"
+          v-bind:key="company.companyId"
         >
-          <!-- ======================================START IN HERE================ -->
-          <v-card
-            class="mx-auto"
-            style="padding: 20px;display: none:  !important;"
-          >
+          <v-card class="mx-auto" style="padding: 20px">
             <v-card-text>
               <v-row class="d-flex" style="justify-content: space-between">
                 <v-row class="d-flex" style="justify-content: flex-start">
                   <v-chip
-                    v-if="true"
+                    v-if="company.readyToBuy"
                     class="ma-2"
                     color="success"
                     outlined
@@ -389,7 +380,7 @@
                   style="justify-content: flex-end"
                 >
                   <v-menu
-                    v-model="showMenu"
+                    v-model="company.showMenu"
                     absolute
                     offset-y
                     style="max-width: 600px"
@@ -414,20 +405,111 @@
                         ...
                       </div>
                     </template>
-
                     <v-list>
-                      <v-list-item
-                        v-for="(item, index) in [
-                          { title: 'Need to Talk?' },
-                          { title: 'Add to Tracking' },
-                          { title: 'Add to Insight' },
-                          { title: 'Like' },
-                          { title: 'Dislike' },
-                        ]"
-                        :key="index"
-                      >
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                      </v-list-item>
+                      <v-list-item-group>
+                        <v-subheader>Actions</v-subheader>
+
+                        <v-list-item @click="clickOnRobotChat">
+                          <v-list-item-icon>
+                            <v-icon>mdi-robot-outline</v-icon>
+                          </v-list-item-icon>
+                          <v-list-item-content>
+                            <v-list-item-title>Need to Talk?</v-list-item-title>
+                            <v-list-item-subtitle
+                              >You can talk with AI about this
+                              company</v-list-item-subtitle
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+
+                        <!-- ================== -->
+                        <v-list-item
+                          @click="
+                            () => {
+                              fireSnack(
+                                `${company.name.replace(
+                                  ' ',
+                                  ''
+                                )}-${+new Date()}.pdf Sent to your email!`
+                              );
+                            }
+                          "
+                        >
+                          <v-list-item-icon>
+                            <v-icon>mdi-cloud-print</v-icon>
+                          </v-list-item-icon>
+                          <v-list-item-content>
+                            <v-list-item-title
+                              >Download Report</v-list-item-title
+                            >
+                            <v-list-item-subtitle
+                              >You can get tracking report out of this
+                              company</v-list-item-subtitle
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                        <!-- ================== -->
+                        <v-list-item
+                          @click="
+                            () => {
+                              fireSnack('your review submitted successfully!');
+                            }
+                          "
+                        >
+                          <v-list-item-icon>
+                            <v-icon>mdi-thumb-up</v-icon>
+                          </v-list-item-icon>
+                          <v-list-item-content>
+                            <v-list-item-title>Like</v-list-item-title>
+                            <v-list-item-subtitle
+                              >If you are satisfied out of the AI generated
+                              information about this
+                              company</v-list-item-subtitle
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                        <!-- ================== -->
+                        <v-list-item
+                          @click="
+                            () => {
+                              fireSnack('your review submitted successfully!');
+                            }
+                          "
+                        >
+                          <v-list-item-icon>
+                            <v-icon>mdi-thumb-down</v-icon>
+                          </v-list-item-icon>
+                          <v-list-item-content>
+                            <v-list-item-title>Dislike</v-list-item-title>
+                            <v-list-item-subtitle
+                              >If you are not satisfied out of the AI generated
+                              information about this
+                              company</v-list-item-subtitle
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                        <!-- ================== -->
+                        <v-list-item
+                          @click="
+                            () => {
+                              deleteTrackingDialog.isOpen = true;
+                              deleteTrackingDialog.companyId =
+                                company.companyId;
+                            }
+                          "
+                        >
+                          <v-list-item-icon>
+                            <v-icon>mdi-delete-outline</v-icon>
+                          </v-list-item-icon>
+                          <v-list-item-content>
+                            <v-list-item-title>Remove</v-list-item-title>
+                            <v-list-item-subtitle
+                              >You can remove this company from your tracking
+                              list</v-list-item-subtitle
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                      </v-list-item-group>
                     </v-list>
                   </v-menu>
                 </v-row>
@@ -446,14 +528,18 @@
                           style="color: white"
                           class="my-auto"
                           size="40"
-                          >FB</v-avatar
                         >
+                          <img
+                            :src="company.companyLogoImg"
+                            :alt="company.name"
+                          />
+                        </v-avatar>
                         <div class="d-flex flex-column ms-2">
                           <div
                             class=""
                             style="font-size: 15px; font-weight: 500"
                           >
-                            company name
+                            {{ company.name }}
                           </div>
                           <div
                             class=""
@@ -463,7 +549,7 @@
                               font-weight: 400;
                             "
                           >
-                            company corporation
+                            {{ company.industry }}
                           </div>
                         </div>
                         <v-row> </v-row>
@@ -472,68 +558,33 @@
                         class="d-flex flex-row me-7 ms-auto my-3"
                         style="justify-content: flex-end"
                       >
-                        <v-icon color="success"
-                          >mdi-check-circle-outline</v-icon
-                        >
+                        <v-icon color="success">mdi-currency-usd</v-icon>
                         <div
                           class="d-flex flex-column ms-1"
                           style="align-items: center"
                         >
                           <div style="font-size: 12px; font-weight: 400">
-                            Revenue Size: $5,214.87
+                            Revenue Size: {{ company.revenueSize }}
                           </div>
                         </div>
                       </div>
                     </div>
                     <v-chip-group active-class="primary--text" column>
                       <v-chip
-                        v-if="true"
+                        :color="`${company.userKPIs.length == 0 ? 'red' : ''}`"
                         class="ma-2"
-                        :color="`${false ? 'red' : '#666666'}`"
                         outlined
                         label
                       >
-                        Selected Tracking KPIs: 1
+                        Selected Tracking KPIs: {{ company.userKPIs.length }}
                       </v-chip>
 
-                      <v-chip
-                        v-if="true"
-                        class="ma-2"
-                        color="#666666"
-                        outlined
-                        label
-                      >
-                        Score: company score
+                      <v-chip class="ma-2" color="#666666" outlined label>
+                        Score: {{ company.score }}
                       </v-chip>
 
-                      <v-chip
-                        v-if="true"
-                        class="ma-2"
-                        color="#666666"
-                        outlined
-                        label
-                      >
-                        HQ Location: company hqLocation
-                      </v-chip>
-
-                      <v-chip
-                        v-if="true"
-                        class="ma-2"
-                        color="#666666"
-                        outlined
-                        label
-                      >
-                        Revenue Size: company revenueSize
-                      </v-chip>
-
-                      <v-chip
-                        v-if="true"
-                        class="ma-2"
-                        color="#666666"
-                        outlined
-                        label
-                      >
-                        Industry: company industry
+                      <v-chip class="ma-2" color="#666666" outlined label>
+                        HQ Location: {{ company.hqLocation }}
                       </v-chip>
                     </v-chip-group>
                   </div>
@@ -543,136 +594,26 @@
                 </v-row>
               </v-row>
             </v-card-text>
-          </v-card>
-          <!-- ======================================END IN HERE================ -->
-        </v-col>
-        <v-col
-          cols="12"
-          xs="12"
-          sm="12"
-          md="6"
-          lg="4"
-          xl="3"
-          xxl="3"
-          v-for="company in allTrackingSelectedCompanies"
-          v-bind:key="company.companyId"
-        >
-          <v-card class="mx-auto">
-            <v-card-text>
-              <v-row>
-                <p
-                  class="text-h4 text--primary"
-                  style="font-size: 2rem !important"
-                >
-                  {{ company.name }}
-                </p>
-                <v-spacer></v-spacer>
-                <v-chip v-if="company.readyToBuy" color="green"
-                  >Ready to Buy</v-chip
-                >
-              </v-row>
-              <v-row>
-                <div class="text--primary">
-                  <v-chip-group active-class="primary--text" column>
-                    <v-chip
-                      :color="`${company.userKPIs.length == 0 ? 'red' : ''}`"
-                      >Selected Tracking KPIs:
-                      {{ company.userKPIs.length }}</v-chip
-                    >
-
-                    <v-chip>Score: {{ company.score }}</v-chip>
-                    <v-chip>HQ Location: {{ company.hqLocation }}</v-chip>
-                    <v-chip>Revenue Size: {{ company.revenueSize }}</v-chip>
-                    <v-chip>Industry: {{ company.industry }}</v-chip>
-                  </v-chip-group>
-                </div>
-                <div class="text--primary" v-if="company.userKPIs.length == 0">
-                  you need to add KPI to this company!
-                </div>
-              </v-row>
-            </v-card-text>
-            <v-card-actions>
-              <v-slide-group multiple show-arrows>
-                <v-slide-item>
-                  <v-btn
-                    text
-                    color="green"
-                    @click="
-                      () => {
-                        viewTrackingCompanyDialog.isOpen = true;
-                        viewTrackingCompanyDialog.company = company;
-                        changeKPIChart(0);
-                      }
-                    "
-                  >
-                    view
-                  </v-btn></v-slide-item
-                >
-                <v-slide-item>
-                  <v-btn
-                    text
-                    color="green"
-                    @click="
-                      () => {
-                        fireSnack(
-                          `${company.name.replace(
-                            ' ',
-                            ''
-                          )}-${+new Date()}.pdf Sent to your email!`
-                        );
-                      }
-                    "
-                  >
-                    Download Report
-                  </v-btn></v-slide-item
-                >
-                <v-slide-item>
-                  <v-btn
-                    text
-                    color="red"
-                    @click="
-                      () => {
-                        deleteTrackingDialog.isOpen = true;
-                        deleteTrackingDialog.companyId = company.companyId;
-                      }
-                    "
-                  >
-                    delete
-                  </v-btn></v-slide-item
-                >
-                <v-slide-item>
-                  <v-btn
-                    small
-                    @click="
-                      () => {
-                        fireSnack('your review submitted successfully!');
-                      }
-                    "
-                    rounded
-                    color="green"
-                    style="margin: 0 auto; display: block"
-                  >
-                    <v-icon>mdi-thumb-up</v-icon>
-                  </v-btn>
-                </v-slide-item>
-                <v-slide-item>
-                  <v-btn
-                    small
-                    @click="
-                      () => {
-                        fireSnack('your review submitted successfully!');
-                      }
-                    "
-                    rounded
-                    color="red"
-                    style="margin: 0 auto; display: block"
-                  >
-                    <v-icon>mdi-thumb-down</v-icon>
-                  </v-btn>
-                </v-slide-item></v-slide-group
+            <v-card-actions class="pt-10">
+              <v-btn
+                block
+                elevation="8"
+                outlined
+                color="green"
+                @click="
+                  () => {
+                    viewTrackingCompanyDialog.isOpen = true;
+                    viewTrackingCompanyDialog.company = company;
+                    changeKPIChart(0);
+                  }
+                "
               >
+                <v-icon left> mdi-eye-outline </v-icon>
+                view
+              </v-btn>
             </v-card-actions>
           </v-card>
+          <!-- =================================== -->
         </v-col>
       </v-row>
       <!-- -------------------------Tracking View DIALOG START------------------------- -->
@@ -792,63 +733,132 @@
                 ></v-text-field>
               </v-row>
               <v-row>
-                <v-card
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="12"
+                  md="6"
+                  lg="4"
+                  xl="3"
+                  xxl="3"
                   v-for="company in addNewTrackingCompanyDialog.allCompanies"
-                  v-bind:key="company.companyId"
-                  class="mx-auto mt-5"
-                  max-width="300"
                 >
-                  <v-card-text>
-                    <p class="text-h4 text--primary">{{ company.name }}</p>
-                    <div class="text--primary">
-                      <v-chip-group active-class="primary--text" column>
-                        <v-chip
-                          v-if="company.recommendation.recommended"
-                          color="green"
-                          >This Company is recommended!
-                        </v-chip>
-                        <v-chip
-                          >totalDataGathered:
-                          {{ showDataSize(company.totalDataGathered) }}
-                        </v-chip>
-                        <v-chip
-                          >totalDataLearned:
-                          {{ showDataSize(company.totalDataLearned) }}
-                        </v-chip>
-                      </v-chip-group>
-                    </div>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-btn
-                      v-if="!company.isSelectedAttr"
-                      text
-                      color="green"
-                      @click="
-                        () => {
-                          company.isSelectedAttr = true;
-                          viewTrackingCompanyDialog.company =
-                            addCompanyToTrackingSystem();
-                          viewTrackingCompanyDialog.isOpen = true;
-                          changeKPIChart(0);
-                        }
-                      "
-                    >
-                      Add for tracking company
-                    </v-btn>
-                    <v-btn
-                      v-else
-                      text
-                      color="red"
-                      @click="
-                        () => {
-                          company.isSelectedAttr = false;
-                        }
-                      "
-                    >
-                      De-Select this company
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
+                  <v-card
+                    v-bind:key="company.companyId"
+                    class="mx-auto mt-5"
+                    style="padding: 20px"
+                  >
+                    <v-card-text>
+                      <v-row
+                        class="d-flex"
+                        style="justify-content: space-between"
+                      >
+                        <v-row>
+                          <div class="text--primary">
+                            <div
+                              class="d-flex flex-row"
+                              style="
+                                justify-content: space-between;
+                                align-items: center;
+                              "
+                            >
+                              <v-row class="ms-2 my-3">
+                                <v-avatar
+                                  color="primary"
+                                  style="color: white"
+                                  class="my-auto"
+                                  size="40"
+                                >
+                                  <img
+                                    :src="company.companyLogoImg"
+                                    :alt="company.name"
+                                  />
+                                </v-avatar>
+                                <div class="d-flex flex-column ms-2">
+                                  <div
+                                    class=""
+                                    style="font-size: 15px; font-weight: 500"
+                                  >
+                                    {{ company.name }}
+                                  </div>
+                                  <div
+                                    class=""
+                                    style="
+                                      color: grey;
+                                      font-size: 13px;
+                                      font-weight: 400;
+                                    "
+                                  >
+                                    {{ company.industry }}
+                                  </div>
+                                </div>
+                                <v-row> </v-row>
+                              </v-row>
+                              <div
+                                class="d-flex flex-row me-7 ms-auto my-3"
+                                style="justify-content: flex-end"
+                              >
+                                <v-icon color="success"
+                                  >mdi-currency-usd</v-icon
+                                >
+                                <div
+                                  class="d-flex flex-column ms-1"
+                                  style="align-items: center"
+                                >
+                                  <div
+                                    style="font-size: 12px; font-weight: 400"
+                                  >
+                                    Revenue Size: {{ company.revenueSize }}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <v-chip-group active-class="primary--text" column>
+                              <v-chip
+                                class="ma-2"
+                                color="#666666"
+                                outlined
+                                label
+                              >
+                                Score: {{ company.score }}
+                              </v-chip>
+                              <v-chip
+                                class="ma-2"
+                                color="#666666"
+                                outlined
+                                label
+                              >
+                                HQ Location: {{ company.hqLocation }}
+                              </v-chip>
+                            </v-chip-group>
+                          </div>
+                        </v-row>
+                      </v-row>
+                    </v-card-text>
+                    <v-card-actions class="pt-10">
+                      <v-btn
+                        block
+                        elevation="8"
+                        outlined
+                        color="green"
+                        @click="
+                          () => {
+                            company.isSelectedAttr = true;
+                            viewTrackingCompanyDialog.company =
+                              addCompanyToTrackingSystem();
+                            viewTrackingCompanyDialog.isOpen = true;
+                            changeKPIChart(0);
+                          }
+                        "
+                      >
+                        <v-icon left> mdi-plus </v-icon>
+                        Add to tracking company list
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+
+                <!-- ================= -->
               </v-row></v-container
             >
           </v-card-text>
@@ -1116,19 +1126,20 @@
             <v-row style="margin-top: 15px"> </v-row>
             <v-row>KPI Keys:</v-row>
             <v-row v-for="key in addNewKpiKeyDialog.newSelectedKpiKeys">
-              <v-col cols="8">
+              <v-col cols="12" sm="12" md="12" lg="8" xl="8" xxl="8">
                 <p>
                   {{ key.name }}:
                   {{ key.description ? key.description : "Default" }}
                 </p>
               </v-col>
-              <v-col cols="4">
+              <v-col cols="12" sm="12" md="12" lg="4" xl="4" xxl="4">
                 <v-btn
+                  block
                   v-if="hasKpiKey(key)"
                   @click="addNewKpiToUserKpiList(key)"
                   >Add To KPI List</v-btn
                 >
-                <v-btn v-else @click="removeKpiToUserKpiList(key)"
+                <v-btn block v-else @click="removeKpiToUserKpiList(key)"
                   >Remove From KPI list</v-btn
                 >
               </v-col>
@@ -1558,6 +1569,7 @@ export default {
         userCommand: "",
         situation: 0,
         isCommandInputDisabled: false,
+        KKK: null,
       },
       //===============================
     };
@@ -1968,6 +1980,9 @@ export default {
         };
       }
     },
+    clickOnRobotChat() {
+      document.getElementById("btnStartConversation").click();
+    },
     addNewKpiKeyToUserKpiKeyList() {},
     addNewKpiToUserKpiList(kpiKey) {
       if (
@@ -2098,7 +2113,7 @@ export default {
   background: linear-gradient(
     135deg,
     rgba(251, 255, 252, 1) 0%,
-    rgba(203, 213, 254, 1) 100%
+    rgb(218, 178, 255) 100%
   );
 }
 </style>

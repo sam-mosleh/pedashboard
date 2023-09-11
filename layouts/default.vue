@@ -1,6 +1,7 @@
 <template>
   <v-app dark>
     <v-btn
+      id="btnStartConversation"
       style="
         position: fixed;
         z-index: 9;
@@ -263,7 +264,7 @@ export default {
           to: "/dashboard",
         },
         {
-          icon: "mdi-robot-confused",
+          icon: "mdi-shield-check",
           title: "Recommendations",
           to: "/dashboard/recommendations",
         },

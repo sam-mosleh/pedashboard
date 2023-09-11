@@ -1,10 +1,12 @@
 <template>
   <div>
+ 
     <v-row
-      class="ps-3 pt-8 pb-6 mb-3"
-      style="font-weight: 600; font-size: 28px; background: black; color: white"
-      >Models Trained</v-row
+      class="ps-6 pt-5 pb-6"
+      style="font-weight: 400; font-size: 28px; color: black; margin-left: 15px"
     >
+    Models Trained
+    </v-row>
     <v-container fluid>
       <!-- Snack -->
       <v-snackbar v-model="snackbar.isOpen" top>
@@ -40,50 +42,50 @@
                   border-radius: 15px;
                   text-transform: capitalize;
                 "
-                @click="
-                  () => {
-                    robotAddNewDialog = {
-                      isOpen: true,
-                      data: {
-                        id: '',
-                        nickName: '',
-                        selectedCompanies: [],
-                      },
-                    };
-                  }
-                "
-                >+ Add</v-btn
+                @click="redirect('/dashboard/modelsTrained')"
+                >View</v-btn
               >
             </div>
-
+            <v-row>
+              <p
+                style="
+                  font-size: 1.3rem;
+                  font-weight: 400;
+                  width: 100%;
+                  text-align: center;
+                  margin-top: 17px;
+                "
+              >
+                Number of Models
+              </p>
+            </v-row>
             <div
               class="d-flex flex-row justify-space-between align-center h-100"
-              style="margin-top: 50px"
+              style="margin-top: 10px"
             >
               <div
                 class="d-flex flex-column"
-                style="font-size: 1.3rem; font-weight: 400"
-              >
-                Number of Models
-              </div>
-              <div
                 style="
-                  width: 1px;
-                  height: 100px;
-                  background: rgba(211, 211, 211, 0.8);
+                  width: 100%;
+                  border-right-width: 1px;
+                  border-right-style: inset;
+                  border-right-color: rgba(211, 211, 211, 0.8);
                 "
-              ></div>
-              <div class="d-flex flex-column">
+              >
                 <p
                   class="text-center"
-                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
                 >
                   Mega Models
                 </p>
                 <p
                   class="text-center"
                   style="
-                    font-size: 1rem;
+                    font-size: 1.2rem;
                     line-height: 0.75rem;
                     font-weight: 400;
                   "
@@ -91,24 +93,22 @@
                   {{ trainedModelsTable.megaModelCount }}
                 </p>
               </div>
-              <div
-                style="
-                  width: 1px;
-                  height: 100px;
-                  background: rgba(211, 211, 211, 0.8);
-                "
-              ></div>
-              <div class="d-flex flex-column">
+
+              <div class="d-flex flex-column" style="width: 100%">
                 <p
                   class="text-center"
-                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
                 >
                   Forked Models
                 </p>
                 <p
                   class="text-center"
                   style="
-                    font-size: 1rem;
+                    font-size: 1.2rem;
                     line-height: 0.75rem;
                     font-weight: 400;
                   "
@@ -177,13 +177,13 @@
                           <v-chip
                             >Percentage Trained: {{ robot.totalCompleteness }}%
                           </v-chip>
-                          <v-chip>IQ Level: {{ robot.totalIQ }}% </v-chip>
+                          <v-chip>IQ Level: {{ robot.totalIQ }} </v-chip>
                           <v-chip
-                            >IQ Benchmark: {{ robot.totalIqBenchmark }}%
+                            >IQ Benchmark: {{ robot.totalIqBenchmark }}
                           </v-chip>
                           <v-chip
                             >IQ Improvement for last 30 Days:
-                            {{ robot.totalIqBenchmarkLast30 }}%
+                            {{ robot.totalIqBenchmarkLast30 }}
                           </v-chip>
                         </v-chip-group>
                       </div>
@@ -213,7 +213,7 @@
                   xs="12"
                   sm="12"
                   md="6"
-                  lg="4"
+                  lg="6"
                   xl="4"
                   xxl="4"
                   v-for="company in allSavedCompanies"
@@ -221,14 +221,39 @@
                 >
                   <v-card class="mx-auto">
                     <v-card-text>
-                      <v-row>
-                        <p
-                          class="text-h4 text--primary"
-                          style="font-size: 2rem !important"
-                        >
-                          {{ company.name }}
-                        </p>
-                        <v-spacer></v-spacer>
+                      <v-row style="margin-left: 5px">
+                        <v-row class="ms-2 my-3">
+                          <v-avatar
+                            color="primary"
+                            style="color: white"
+                            class="my-auto"
+                            size="40"
+                          >
+                            <img
+                              :src="company.companyLogoImg"
+                              :alt="company.name"
+                            />
+                          </v-avatar>
+                          <div class="d-flex flex-column ms-2">
+                            <div
+                              class=""
+                              style="font-size: 15px; font-weight: 500"
+                            >
+                              {{ company.name }}
+                            </div>
+                            <div
+                              class=""
+                              style="
+                                color: grey;
+                                font-size: 13px;
+                                font-weight: 400;
+                              "
+                            >
+                              {{ company.industry }}
+                            </div>
+                          </div>
+                          <v-row> </v-row>
+                        </v-row>
                       </v-row>
                       <v-row>
                         <v-col
@@ -692,19 +717,35 @@ export default {
       this.trainedModelsTable.megaModelCount = this.allUserAiRobots.length;
       for (let index = 0; index < this.allUserAiRobots.length; index++) {
         const robot = this.allUserAiRobots[index];
-
+        robot["totalIQ"] = 0;
+        robot["totalIqBenchmark"] = 0;
+        robot["totalIqBenchmarkLast30"] = 0;
+        const megaModelsCount = robot.selectedMegaModels.length;
         for (
           let iqMegaIndex = 0;
-          iqMegaIndex < robot.selectedMegaModels.length;
+          iqMegaIndex < megaModelsCount;
           iqMegaIndex++
         ) {
           megaCount++;
+          robot["totalIQ"] += robot.selectedMegaModels[iqMegaIndex].iqLevel;
+          robot["totalIqBenchmark"] +=
+            robot.selectedMegaModels[iqMegaIndex].benchMark;
+          robot["totalIqBenchmarkLast30"] +=
+            robot.selectedMegaModels[iqMegaIndex].lastMonthIqLevel;
           iqLevel.megaModel += robot.selectedMegaModels[iqMegaIndex].iqLevel;
           iqBenchMarkLevel.megaModel +=
             robot.selectedMegaModels[iqMegaIndex].benchMark;
           iqImprovementLevel.megaModel +=
             robot.selectedMegaModels[iqMegaIndex].lastMonthIqLevel;
         }
+        robot["totalIQ"] = (robot["totalIQ"] / megaModelsCount).toFixed(2);
+        robot["totalIqBenchmark"] = (
+          robot["totalIqBenchmark"] / megaModelsCount
+        ).toFixed(2);
+        robot["totalIqBenchmarkLast30"] = (
+          robot["totalIqBenchmarkLast30"] / megaModelsCount
+        ).toFixed(2);
+
         for (
           let iqMegaIndex = 0;
           iqMegaIndex < robot.selectedForkedModels.length;
@@ -718,6 +759,7 @@ export default {
           iqImprovementLevel.forkedModel +=
             robot.selectedForkedModels[iqMegaIndex].lastMonthIqLevel;
         }
+        this.allUserAiRobots[index] = robot;
       }
       iqLevel.megaModel = parseFloat(iqLevel.megaModel / megaCount).toFixed(2);
       iqLevel.forkedModel = parseFloat(
@@ -763,10 +805,12 @@ export default {
       allOptions.xaxis.categories = [
         [
           `Mega Models`,
+          "IQ Improvement (Last Month)",
           `(+${parseFloat(modelsTrainedData?.[3].megaModel).toFixed(2)}%)`,
         ],
         [
           `Forked Models`,
+          "IQ Improvement (Last Month)",
           `(+${parseFloat(modelsTrainedData?.[3].forkedModel).toFixed(2)}%)`,
         ],
       ];
@@ -877,9 +921,11 @@ export default {
         [allAvailableRobots[robotIndex]],
         userSavedCompanies
       );
+
       allAvailableRobots[robotIndex][0]["nickName"] =
         this.robotAddNewDialog.data.nickName;
       this.allUserAiRobots.push(allAvailableRobots[robotIndex][0]);
+      this.fillTrainedModelsTableItems();
       api.saveAiRobots(this.allUserAiRobots);
       this.fireSnack("New Model Added Successfully");
       this.init();
@@ -943,7 +989,7 @@ export default {
   background: linear-gradient(
     135deg,
     rgba(251, 255, 252, 1) 0%,
-    rgba(194, 221, 254, 1) 100%
+    rgb(191, 191, 191) 100%
   );
 }
 </style>

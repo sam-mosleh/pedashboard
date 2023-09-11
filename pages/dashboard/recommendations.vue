@@ -1,11 +1,12 @@
 <template>
   <div>
+  
     <v-row
-      class="ps-3 pt-8 pb-6 mb-3"
-      style="font-weight: 600; font-size: 28px; background: black; color: white"
-      >Recommendations</v-row
+      class="ps-6 pt-5 pb-6"
+      style="font-weight: 400; font-size: 28px; color: black; margin-left: 15px"
     >
-
+    Recommendations
+    </v-row>
     <v-container fluid>
       <!-- Snack -->
       <v-snackbar v-model="snackbar.isOpen" top>
@@ -25,13 +26,13 @@
       <!-- Snack -->
 
       <v-row style="justify-content: space-between">
-        <v-col cols="12" sm="12" md="4" lg="4" xl="4" xxl="4">
+        <v-col cols="12" sm="12" md="5" lg="5" xl="4" xxl="4">
           <v-card class="cart-deals">
             <div
               class="d-flex flex-row mx-auto"
               style="justify-content: space-between; align-items: center"
             >
-              <v-icon large>mdi-robot-confused</v-icon>
+              <v-icon large>mdi-shield-check</v-icon>
               <div class="my-auto ms-2">RECOMMENDATIONS</div>
               <v-btn
                 class="d-flex flex-row ms-auto me-2 my-auto"
@@ -70,7 +71,7 @@
                     font-weight: 400;
                   "
                 >
-                  Proprietary deals found
+                  Proprietary Deals Found
                 </p>
               </div>
               <div
@@ -99,7 +100,7 @@
                     font-weight: 400;
                   "
                 >
-                  Median score
+                  Median Score
                 </p>
               </div>
             </div>
@@ -353,135 +354,254 @@
               xs="12"
               sm="12"
               md="6"
-              lg="6"
-              xl="4"
-              xxl="4"
+              lg="4"
+              xl="3"
+              xxl="3"
               v-for="company in allRecommendedCompanies.filter(
                 (x) => x.recommendation.recommended == true
               )"
               v-bind:key="company.companyId"
+              :style="{
+                display:
+                  allInsightCompanies.filter(
+                    (x) => x.companyId == company.companyId
+                  ).length == 0 &&
+                  allTrackingCompanies.filter(
+                    (x) => x.companyId == company.companyId
+                  ).length == 0
+                    ? 'none!important'
+                    : 'block',
+              }"
             >
-              <v-card class="mx-auto" style="height: 100%">
-                <v-card-text style="padding: 25px 25px 25px 25px">
-                  <v-row>
-                    <p
-                      class="text-h4 text--primary"
-                      style="font-size: 2rem !important"
+              <v-card class="mx-auto" style="padding: 20px">
+                <v-card-text>
+                  <v-row class="d-flex" style="justify-content: space-between">
+                    <v-row
+                      class="d-flex mt-0 mb-auto"
+                      style="justify-content: flex-end"
                     >
-                      {{ company.name }}
-                    </p>
+                      <v-menu
+                        v-model="company.showMenu"
+                        absolute
+                        offset-y
+                        style="max-width: 600px"
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+                          <div
+                            v-bind="attrs"
+                            v-on="on"
+                            class="d-flex flex-row"
+                            style="
+                              width: 30px;
+                              height: 30px;
+                              border-radius: 50%;
+                              font-size: 20px;
+                              font-weight: 700;
+                              padding-bottom: 10px;
+                              border: 1px solid grey;
+                              justify-content: center;
+                              align-items: center;
+                            "
+                          >
+                            ...
+                          </div>
+                        </template>
+                        <v-list>
+                          <v-list-item-group>
+                            <v-subheader>Actions</v-subheader>
+
+                            <v-list-item @click="clickOnRobotChat">
+                              <v-list-item-icon>
+                                <v-icon>mdi-robot-outline</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title
+                                  >Need to Talk?</v-list-item-title
+                                >
+                                <v-list-item-subtitle
+                                  >You can talk with AI about this
+                                  company</v-list-item-subtitle
+                                >
+                              </v-list-item-content>
+                            </v-list-item>
+
+                            <!-- ================== -->
+                            <v-list-item
+                              @click="
+                                () => {
+                                  fireSnack(
+                                    `${company.name.replace(
+                                      ' ',
+                                      ''
+                                    )}-${+new Date()}.pdf Sent to your email!`
+                                  );
+                                }
+                              "
+                            >
+                              <v-list-item-icon>
+                                <v-icon>mdi-cloud-print</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title
+                                  >Download Summary</v-list-item-title
+                                >
+                                <v-list-item-subtitle
+                                  >You can get summary report about this
+                                  company</v-list-item-subtitle
+                                >
+                              </v-list-item-content>
+                            </v-list-item>
+                            <!-- ================== -->
+                            <v-list-item
+                              @click="
+                                () => {
+                                  fireSnack(
+                                    'your review submitted successfully!'
+                                  );
+                                }
+                              "
+                            >
+                              <v-list-item-icon>
+                                <v-icon>mdi-thumb-up</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title>Like</v-list-item-title>
+                                <v-list-item-subtitle
+                                  >If you are satisfied out of the AI generated
+                                  information about this
+                                  company</v-list-item-subtitle
+                                >
+                              </v-list-item-content>
+                            </v-list-item>
+                            <!-- ================== -->
+                            <v-list-item
+                              @click="
+                                () => {
+                                  fireSnack(
+                                    'your review submitted successfully!'
+                                  );
+                                }
+                              "
+                            >
+                              <v-list-item-icon>
+                                <v-icon>mdi-thumb-down</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title>Dislike</v-list-item-title>
+                                <v-list-item-subtitle
+                                  >If you are not satisfied out of the AI
+                                  generated information about this
+                                  company</v-list-item-subtitle
+                                >
+                              </v-list-item-content>
+                            </v-list-item>
+                            <!-- ================== -->
+                          </v-list-item-group>
+                        </v-list>
+                      </v-menu>
+                    </v-row>
                   </v-row>
                   <v-row>
                     <div class="text--primary">
+                      <div
+                        class="d-flex flex-row"
+                        style="
+                          justify-content: space-between;
+                          align-items: center;
+                        "
+                      >
+                        <v-row class="ms-2 my-3">
+                          <v-avatar
+                            color="primary"
+                            style="color: white"
+                            class="my-auto"
+                            size="40"
+                          >
+                            <img
+                              :src="company.companyLogoImg"
+                              :alt="company.name"
+                            />
+                          </v-avatar>
+                          <div class="d-flex flex-column ms-2">
+                            <div
+                              class=""
+                              style="font-size: 15px; font-weight: 500"
+                            >
+                              {{ company.name }}
+                            </div>
+                            <div
+                              class=""
+                              style="
+                                color: grey;
+                                font-size: 13px;
+                                font-weight: 400;
+                              "
+                            >
+                              {{ company.industry }}
+                            </div>
+                          </div>
+                          <v-row> </v-row>
+                        </v-row>
+                        <div
+                          class="d-flex flex-row me-7 ms-auto my-3"
+                          style="justify-content: flex-end"
+                        >
+                          <v-icon color="success">mdi-currency-usd</v-icon>
+                          <div
+                            class="d-flex flex-column ms-1"
+                            style="align-items: center"
+                          >
+                            <div style="font-size: 12px; font-weight: 400">
+                              Revenue Size: {{ company.revenueSize }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       <v-chip-group active-class="primary--text" column>
-                        <v-chip>Score: {{ company.score }}</v-chip>
-                        <v-chip>HQ Location: {{ company.hqLocation }}</v-chip>
-                        <v-chip>Revenue Size: {{ company.revenueSize }}</v-chip>
-                        <v-chip>Industry: {{ company.industry }}</v-chip>
+                        <v-chip class="ma-2" color="#666666" outlined label>
+                          Score: {{ company.score }}
+                        </v-chip>
+
+                        <v-chip class="ma-2" color="#666666" outlined label>
+                          HQ Location: {{ company.hqLocation }}
+                        </v-chip>
                       </v-chip-group>
                     </div>
                   </v-row>
                 </v-card-text>
-                <v-card-actions>
-                  <v-row>
-                    <v-col class="d-flex flex-wrap" cols="12">
-                      <v-slide-group
-                        multiple
-                        show-arrows
-                        class="d-flex flex-wrap"
-                      >
-                        <v-slide-item
-                          v-if="
-                            allInsightCompanies.filter(
-                              (x) => x.companyId == company.companyId
-                            ).length == 0
-                          "
-                        >
-                          <v-btn
-                            @click="setSelectForInsight(company)"
-                            rounded
-                            color="black"
-                            class="mt-4 mx-3"
-                            style="
-                              color: white;
-                              display: block;
-                              margin: 0px auto 0px auto !important;
-                            "
-                          >
-                            <v-icon>mdi-plus</v-icon>
-                            Add to insight
-                          </v-btn>
-                        </v-slide-item>
-                        <v-slide-item
-                          v-if="
-                            allTrackingCompanies.filter(
-                              (x) => x.companyId == company.companyId
-                            ).length == 0
-                          "
-                        >
-                          <v-btn
-                            @click="addCompanyToTracking(company)"
-                            rounded
-                            color="gray"
-                            class="mt-4 mx-3"
-                            style="
-                              color: black;
-                              padding: 0px 5px 0px 0px !important;
-                              display: block;
-                              margin: 0 auto;
-                              margin: 0px 0px 0px 0px !important;
-                            "
-                          >
-                            <v-icon>mdi-plus</v-icon>
-                            Add to tracking
-                          </v-btn>
-                        </v-slide-item>
-                        <v-slide-item>
-                          <v-btn
-                            @click="
-                              () => {
-                                fireSnack(
-                                  'your review submitted successfully!'
-                                );
-                              }
-                            "
-                            rounded
-                            color="green"
-                            style="margin: 0 auto; display: block"
-                          >
-                            <v-icon>mdi-thumb-up</v-icon>
-                          </v-btn>
-                        </v-slide-item>
-                        <v-slide-item>
-                          <v-btn
-                            @click="
-                              () => {
-                                fireSnack(
-                                  'your review submitted successfully!'
-                                );
-                              }
-                            "
-                            rounded
-                            color="red"
-                            style="margin: 0 auto; display: block"
-                          >
-                            <v-icon>mdi-thumb-down</v-icon>
-                          </v-btn>
-                        </v-slide-item>
-                      </v-slide-group>
-                    </v-col>
+                <v-card-actions class="pt-10">
+                  <v-btn
+                    @click="addCompanyToTracking(company)"
+                    class="mt-4"
+                    elevation="8"
+                    outlined
+                    v-if="
+                      allTrackingCompanies.filter(
+                        (x) => x.companyId == company.companyId
+                      ).length == 0
+                    "
+                  >
+                    <v-icon>mdi-plus</v-icon>
+                    Tracking list
+                  </v-btn>
 
-                    <!-- <v-col
-                      v-if="
-                        allTrackingCompanies.filter(
-                          (x) => x.companyId == company.companyId
-                        ).length != 0
-                      "
-                      style="height: 20px"
-                    ></v-col> -->
-                  </v-row>
+                  <v-btn
+                    v-if="
+                      allInsightCompanies.filter(
+                        (x) => x.companyId == company.companyId
+                      ).length == 0
+                    "
+                    @click="setSelectForInsight(company)"
+                    elevation="8"
+                    outlined
+                    class="mt-4 mx-3"
+                  >
+                    <v-icon>mdi-plus</v-icon>
+                    Insight list
+                  </v-btn>
                 </v-card-actions>
               </v-card>
+              <!-- =================================== -->
             </v-col>
             <v-col cols="12" v-if="allRecommendedCompanies.length == 0">
               <h2 style="text-align: center">
@@ -491,164 +611,6 @@
           </v-row>
         </v-container>
       </v-row>
-      <div class="mt-6" style="display: none">
-        <v-data-table
-          v-if="companies"
-          :headers="headers"
-          :items="allRecommendedCompanies"
-          :expanded.sync="expanded"
-          item-key="name"
-          class="elevation-1"
-          show-expand
-        >
-          <template v-slot:item.recommended="{ item }">
-            {{ `${item.recommendation.recommended ? "Yes" : "No"}` }}
-          </template>
-          <template v-slot:top>
-            <v-toolbar flat>
-              <v-toolbar-title>Recommendations</v-toolbar-title>
-              <v-spacer></v-spacer>
-            </v-toolbar>
-          </template>
-          <template v-slot:expanded-item="{ headers, item }">
-            <td :colspan="headers.length">
-              <v-col class="py-10">
-                <v-row class="px-3">
-                  <p style="font-size: 20px; font-weight: 600" class="my-3">
-                    Insight
-                  </p>
-                  <div class="d-flex flex-row ms-auto me-0 my-3">
-                    <v-row>
-                      <v-btn
-                        v-if="
-                          allInsightCompanies.filter(
-                            (x) => x.companyId == item.companyId
-                          ).length == 0
-                        "
-                        @click="setSelectForInsight(item)"
-                        rounded
-                        color="black"
-                        class="mt-4 mx-3"
-                        style="color: white"
-                      >
-                        <v-icon>mdi-plus</v-icon>
-                        Add to insight
-                      </v-btn>
-                      <v-btn
-                        v-if="
-                          allTrackingCompanies.filter(
-                            (x) => x.companyId == item.companyId
-                          ).length == 0
-                        "
-                        @click="addCompanyToTracking(item)"
-                        rounded
-                        color="white"
-                        class="mt-4"
-                        style="color: black"
-                      >
-                        <v-icon>mdi-plus</v-icon>
-                        Add to tracking
-                      </v-btn>
-                      <v-btn
-                        @click="
-                          () => {
-                            dialogAddReview.isOpen = true;
-                            dialogAddReview.review = '';
-                          }
-                        "
-                        rounded
-                        color="gray"
-                        class="mt-4 mx-3"
-                        style="color: black"
-                      >
-                        <v-icon>mdi-plus</v-icon>
-                        Add a review
-                      </v-btn>
-                    </v-row>
-                  </div>
-                </v-row>
-                <p style="font-size: 14px; font-weight: 400" class="mt-10">
-                  {{ item.insight.aiDescription }}
-                </p>
-                <v-row class="d-flex justify-space-between mt-10">
-                  <p
-                    style="font-size: 14px; font-weight: 400"
-                    class="mt-4 ps-3"
-                  >
-                    There is {{ showDataSize(item.totalDataGathered) }} of data
-                    gathered for this company
-                  </p>
-                </v-row>
-                <v-card
-                  v-for="gatheringChannels in item.recommendation
-                    .gatheringChannels"
-                  class="mt-10"
-                  style="background: #f0f0f0"
-                >
-                  <v-row style="justify-content: center; align-items: center">
-                    <v-img
-                      contain
-                      alt="logo"
-                      class="ps-4"
-                      max-width="100"
-                      :src="gatheringChannels.imgSRC"
-                    ></v-img>
-                    <v-col>
-                      <v-chip-group active-class="primary--text" column>
-                        <v-chip
-                          class="ma-2"
-                          color="green"
-                          text-color="white"
-                          style="justify-content: center; align-items: center"
-                        >
-                          {{
-                            `Status: ${
-                              gatheringChannels.isDataGatheringFinished
-                                ? gatheringChannels.isDataLearningFinished
-                                  ? "Finished"
-                                  : "Learning Data"
-                                : "Gathering Data"
-                            }`
-                          }}
-                        </v-chip>
-                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                          {{ `Last Update: ${gatheringChannels.lastUpdate}` }}
-                        </v-chip>
-                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                          {{
-                            `Gathered Data: ${showDataSize(
-                              gatheringChannels.getteredData
-                            )}`
-                          }}
-                        </v-chip>
-                        <v-chip class="ma-2" color="#87CEEB" text-color="white">
-                          {{
-                            `AI Model: ${showAIModelByAiId(
-                              gatheringChannels.aiModelsID
-                            )}`
-                          }}
-                        </v-chip>
-
-                        <v-chip class="ma-2" color="cyan" text-color="white">
-                          {{
-                            `Data Gathering Process: ${gatheringChannels.dataGatheringProcessingPercentage}%`
-                          }}
-                        </v-chip>
-
-                        <v-chip class="ma-2" color="orange" text-color="white">
-                          {{
-                            `AI Learning Process: ${gatheringChannels.dataLearningProcessingPercentage}%`
-                          }}
-                        </v-chip>
-                      </v-chip-group>
-                    </v-col>
-                  </v-row>
-                </v-card>
-              </v-col>
-            </td>
-          </template>
-        </v-data-table>
-      </div>
 
       <!-- Add a review Dialog START -->
       <v-dialog v-model="dialogAddReview.isOpen" max-width="500px">
@@ -1415,6 +1377,9 @@ export default {
     showDataSize(dataSize) {
       return api.dataSizeSerializer(dataSize);
     },
+    clickOnRobotChat() {
+      document.getElementById("btnStartConversation").click();
+    },
     openNewKpiDialog(kpiType) {
       this.addNewKpiKeyDialog.type = kpiType;
       this.addNewKpiKeyDialog.isOpen = true;
@@ -1713,7 +1678,7 @@ export default {
   background: linear-gradient(
     135deg,
     rgba(251, 255, 252, 1) 0%,
-    rgba(222, 216, 254, 1) 100%
+    rgb(166, 252, 255) 100%
   );
   color: black !important;
   padding-left: 0px;

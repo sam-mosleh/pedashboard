@@ -1,0 +1,91 @@
+{
+  "id": "falcon_3424fcw3f",
+  "name": "Falcon 40B",
+  "totalDataGatheredFromAllUsers": 200000,
+  "totalDataLearnedFromAllUsers": 120000,
+  "totalUsed": 25,
+  "totalTrainedAssetsFromAllUsers": 2000,
+  "megaModels": [
+    {
+      "id": "mega-model-1235",
+      "name": "mega model 1",
+      "iqLevel": 83,
+      "benchMark": 80,
+      "lastMonthIqLevel": 20
+    },
+    {
+      "id": "mega-model-12351",
+      "name": "mega model 2",
+      "iqLevel": 83,
+      "benchMark": 80,
+      "lastMonthIqLevel": 20
+    }
+  ],
+  "selectedMegaModels": [
+    {
+      "id": "mega-model-1235",
+      "name": "mega model 1",
+      "iqLevel": 83,
+      "benchMark": 80,
+      "lastMonthIqLevel": 20
+    }
+  ],
+  "forkedModels": [
+    {
+      "id": "forked-model-12353f1",
+      "name": "forked model 1",
+      "iqLevel": 83,
+      "benchMark": 82,
+      "lastMonthIqLevel": 20
+    },
+    {
+      "id": "forked-model-12354f2",
+      "name": "forked model 2",
+      "iqLevel": 33,
+      "benchMark": 20,
+      "lastMonthIqLevel": 30
+    },
+    {
+      "id": "forked-model-12355f3",
+      "name": "forked model 3",
+      "iqLevel": 73,
+      "benchMark": 53,
+      "lastMonthIqLevel": 20
+    },
+    {
+      "id": "forked-model-12355f4",
+      "name": "forked model 4",
+      "iqLevel": 44,
+      "benchMark": 43,
+      "lastMonthIqLevel": 40
+    }
+  ],
+  "selectedForkedModels": [
+    {
+      "id": "forked-model-12353f1",
+      "name": "forked model 1",
+      "iqLevel": 83,
+      "benchMark": 82,
+      "lastMonthIqLevel": 20
+    },
+    {
+      "id": "forked-model-12354f2",
+      "name": "forked model 2",
+      "iqLevel": 33,
+      "benchMark": 20,
+      "lastMonthIqLevel": 30
+    },
+    {
+      "id": "forked-model-12355f3",
+      "name": "forked model 3",
+      "iqLevel": 73,
+      "benchMark": 53,
+      "lastMonthIqLevel": 20
+    }
+  ],
+  "totalUploadedDocsFromUser": 87,
+  "totalDataLearnedFromUser": 0,
+  "totalDataGatheredFromUser": 11962.985999999997,
+  "totalCompleteness": "0.00",
+  "nickName": "jhg"
+}
