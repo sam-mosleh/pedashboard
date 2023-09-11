@@ -412,7 +412,95 @@
             class="mt-8 mb-12"
             style="height: 1px; background: rgba(211, 211, 211, 0.8)"
           ></div>
-          <v-row>
+          <v-row style="text-align: center"
+            ><p
+              style="
+                font-size: 1.3rem;
+                font-weight: 400;
+                width: 100% !important;
+              "
+            >
+              Progress completeness
+            </p></v-row
+          >
+          <div
+            class="d-flex flex-row justify-space-between align-center h-100"
+            style="margin-top: 10px"
+          >
+            <div
+              class="d-flex flex-column"
+              style="
+                width: 100%;
+                border-right-width: 1px;
+                border-right-style: inset;
+                border-right-color: rgba(211, 211, 211, 0.8);
+              "
+            >
+              <p
+                class="text-center"
+                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 400"
+              >
+                Phase Zero
+              </p>
+              <p
+                class="text-center"
+                style="
+                  font-size: 1.2rem;
+                  line-height: 0.75rem;
+                  font-weight: 400;
+                "
+              >
+                {{ `${parseFloat(insightTable.p0).toFixed(2)}%` }}
+              </p>
+            </div>
+
+            <div
+              class="d-flex flex-column"
+              style="
+                width: 100%;
+                border-right-width: 1px;
+                border-right-style: inset;
+                border-right-color: rgba(211, 211, 211, 0.8);
+              "
+            >
+              <p
+                class="text-center"
+                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 400"
+              >
+                Phase One
+              </p>
+              <p
+                class="text-center"
+                style="
+                  font-size: 1.2rem;
+                  line-height: 0.75rem;
+                  font-weight: 400;
+                "
+              >
+                {{ `${parseFloat(insightTable.p1).toFixed(2)}%` }}
+              </p>
+            </div>
+
+            <div class="d-flex flex-column" style="width: 100%">
+              <p
+                class="text-center"
+                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 400"
+              >
+                Phase Two
+              </p>
+              <p
+                class="text-center"
+                style="
+                  font-size: 1.2rem;
+                  line-height: 0.75rem;
+                  font-weight: 400;
+                "
+              >
+                {{ `${insightTable.p2}%` }}
+              </p>
+            </div>
+          </div>
+          <v-row style="margin-top: 5px">
             <apexchart
               :options="insightTable.dataChartOptions"
               :series="insightTable.dataSeries"
@@ -545,6 +633,7 @@
                 </p>
               </div>
             </div>
+
             <div
               class="mt-8 mb-12"
               style="height: 1px; background: rgba(211, 211, 211, 0.8)"
@@ -652,6 +741,58 @@
                 </p>
               </div>
             </div>
+            <v-row>
+              <p
+                style="
+                  font-size: 1.3rem;
+                  font-weight: 400;
+                  width: 100%;
+                  text-align: center;
+                  margin-top: 17px;
+                "
+              >
+                IQ Improvement (Last Month)
+              </p>
+            </v-row>
+            <div
+              class="d-flex flex-row justify-space-between align-center h-100"
+              style="margin-top: 10px"
+            >
+              <div
+                class="d-flex flex-column"
+                style="
+                  width: 100%;
+                  border-right-width: 1px;
+                  border-right-style: inset;
+                  border-right-color: rgba(211, 211, 211, 0.8);
+                "
+              >
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  +{{ trainedModelsTable.iqMegaModel }}%
+                </p>
+              </div>
+
+              <div class="d-flex flex-column" style="width: 100%">
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  +{{ trainedModelsTable.iqForkedModel }}%
+                </p>
+              </div>
+            </div>
+
             <div
               class="mt-8 mb-12"
               style="height: 1px; background: rgba(211, 211, 211, 0.8)"
@@ -734,8 +875,16 @@ export default {
         dataChartOptions: {},
         megaModelCount: 0,
         forkedModelCount: 0,
+        iqMegaModel: 0,
+        iqForkedModel: 0,
       },
-      insightTable: { dataSeries: [], dataChartOptions: {} },
+      insightTable: {
+        dataSeries: [],
+        dataChartOptions: {},
+        p0: "",
+        p1: "",
+        p2: "",
+      },
     };
   },
 
@@ -937,21 +1086,15 @@ export default {
         iqBenchMarkLevel,
         iqImprovementLevel,
       ];
-
+      this.trainedModelsTable.iqForkedModel = parseFloat(
+        modelsTrainedData?.[3].megaModel
+      ).toFixed(2);
+      this.trainedModelsTable.iqMegaModel = parseFloat(
+        modelsTrainedData?.[3].forkedModel
+      ).toFixed(2);
       const allOptions = this.getEmptyChartObject();
       allOptions.colors = [colors.success, colors.warning];
-      allOptions.xaxis.categories = [
-        [
-          `Mega Models`,
-          "IQ Improvement (Last Month)",
-          `(+${parseFloat(modelsTrainedData?.[3].megaModel).toFixed(2)}%)`,
-        ],
-        [
-          `Forked Models`,
-          "IQ Improvement (Last Month)",
-          `(+${parseFloat(modelsTrainedData?.[3].forkedModel).toFixed(2)}%)`,
-        ],
-      ];
+      allOptions.xaxis.categories = [[`Mega Models`], [`Forked Models`]];
       this.trainedModelsTable.dataChartOptions = { ...allOptions };
       this.trainedModelsTable.dataSeries = [
         {
@@ -978,7 +1121,7 @@ export default {
         chartItems: [
           ["Past Data Volume", "75", "55", "5"],
           ["Number of Sources", "40", "45", "7"],
-          ["Trained Percentage", "95", "75", "97"],
+          ["Trained Volume", "95", "75", "97"],
           ["Last Month Data Volume", "70", "30", "22"],
         ],
         chartHeaders: ["", "Public Data", "Proprietary Data", "Target Data"],
@@ -1018,7 +1161,7 @@ export default {
           ],
         },
         {
-          name: dataData.chartItems?.[1][0],
+          name: dataData.chartItems?.[2][0],
           group: "process",
           data: [
             (
@@ -1092,23 +1235,10 @@ export default {
       options.colors = ["#7c3aed", "#d97706", "#14b8a6"];
       options.chart.stacked = false;
       options.chart.toolbar.show = false;
-      options.xaxis.categories = [
-        [
-          "Phase Zero",
-          "Progress completeness",
-          `(${parseFloat(companyInsightsData?.[1].p0).toFixed(2)}%)`,
-        ],
-        [
-          "Phase One",
-          "Progress completeness",
-          `(${parseFloat(companyInsightsData?.[1].p1).toFixed(2)}%)`,
-        ],
-        [
-          "Phase Two",
-          "Progress completeness",
-          `(${parseFloat(companyInsightsData?.[1].p2).toFixed(2)}%)`,
-        ],
-      ];
+      options.xaxis.categories = [["Phase Zero"], ["Phase One"], ["Phase Two"]];
+      this.insightTable.p0 = parseFloat(companyInsightsData?.[1].p0).toFixed(2);
+      this.insightTable.p1 = parseFloat(companyInsightsData?.[1].p1).toFixed(2);
+      this.insightTable.p2 = parseFloat(companyInsightsData?.[1].p2).toFixed(2);
       this.insightTable.dataChartOptions = { ...options };
       this.insightTable.dataSeries = [
         {

@@ -910,7 +910,7 @@ export default {
         chartItems: [
           ["Past Data Volume", "75", "55", "5"],
           ["Number of Sources", "40", "45", "7"],
-          ["Trained Percentage", "95", "75", "97"],
+          ["Trained Volume", "95", "75", "97"],
           ["Last Month Data Volume", "70", "30", "22"],
         ],
         chartHeaders: ["", "Public Data", "Proprietary Data", "Target Data"],
@@ -950,7 +950,7 @@ export default {
           ],
         },
         {
-          name: dataData.chartItems?.[1][0],
+          name: dataData.chartItems?.[2][0],
           group: "process",
           data: [
             (

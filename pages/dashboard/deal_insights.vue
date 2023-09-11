@@ -35,17 +35,17 @@
               <v-icon large>mdi-head-lightbulb</v-icon>
               <div class="ms-2 my-auto">INSIGHTS</div>
               <v-btn
-                class="d-flex flex-row ms-auto me-2 my-auto"
+                class="d-flex flex-row ms-auto me-2 mt-2"
                 style="
-                  background: white;
-                  color: black;
-                  border: 1px solid #cccccc;
-                  border-radius: 15px;
+                  background: black;
+                  color: white;
+                  border-radius: 30px;
                   text-transform: capitalize;
                 "
                 @click="() => (addNewInsightCompanyDialog.isOpen = true)"
-                >+ Add</v-btn
               >
+                + Add
+              </v-btn>
             </div>
 
             <div
@@ -63,7 +63,107 @@
               class="mt-8 mb-12"
               style="height: 1px; background: rgba(211, 211, 211, 0.8)"
             ></div>
-            <v-row>
+            <v-row style="text-align: center"
+              ><p
+                style="
+                  font-size: 1.3rem;
+                  font-weight: 400;
+                  width: 100% !important;
+                "
+              >
+                Progress completeness
+              </p></v-row
+            >
+            <div
+              class="d-flex flex-row justify-space-between align-center h-100"
+              style="margin-top: 10px"
+            >
+              <div
+                class="d-flex flex-column"
+                style="
+                  width: 100%;
+                  border-right-width: 1px;
+                  border-right-style: inset;
+                  border-right-color: rgba(211, 211, 211, 0.8);
+                "
+              >
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
+                >
+                  Phase Zero
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  {{ `${parseFloat(insightTable.p0).toFixed(2)}%` }}
+                </p>
+              </div>
+
+              <div
+                class="d-flex flex-column"
+                style="
+                  width: 100%;
+                  border-right-width: 1px;
+                  border-right-style: inset;
+                  border-right-color: rgba(211, 211, 211, 0.8);
+                "
+              >
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
+                >
+                  Phase One
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  {{ `${parseFloat(insightTable.p1).toFixed(2)}%` }}
+                </p>
+              </div>
+
+              <div class="d-flex flex-column" style="width: 100%">
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
+                >
+                  Phase Two
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  {{ `${insightTable.p2}%` }}
+                </p>
+              </div>
+            </div>
+            <v-row style="margin-top: 5px">
               <apexchart
                 :options="insightTable.dataChartOptions"
                 :series="insightTable.dataSeries"
@@ -1431,7 +1531,7 @@
 import api from "@/components/API";
 
 export default {
-  name: "Deal Insights page",
+  name: "DealInsightsPage",
   components: {
     [process.browser && "apexchart"]: () => import("vue-apexcharts"),
   },
@@ -1452,7 +1552,13 @@ export default {
           "IT due diligence",
         ],
       },
-      insightTable: { dataSeries: [], dataChartOptions: {} },
+      insightTable: {
+        dataSeries: [],
+        dataChartOptions: {},
+        p0: "",
+        p1: "",
+        p2: "",
+      },
       allInsightCompanies: [],
       summaryInsights: {
         count: 0,
@@ -1683,23 +1789,10 @@ export default {
       options.colors = ["#7c3aed", "#d97706", "#14b8a6"];
       options.chart.stacked = false;
       options.chart.toolbar.show = false;
-      options.xaxis.categories = [
-        [
-          "Phase Zero",
-          "Progress completeness",
-          `(${parseFloat(companyInsightsData?.[1].p0).toFixed(2)}%)`,
-        ],
-        [
-          "Phase One",
-          "Progress completeness",
-          `(${parseFloat(companyInsightsData?.[1].p1).toFixed(2)}%)`,
-        ],
-        [
-          "Phase Two",
-          "Progress completeness",
-          `(${parseFloat(companyInsightsData?.[1].p2).toFixed(2)}%)`,
-        ],
-      ];
+      options.xaxis.categories = [["Phase Zero"], ["Phase One"], ["Phase Two"]];
+      this.insightTable.p0 = parseFloat(companyInsightsData?.[1].p0).toFixed(2);
+      this.insightTable.p1 = parseFloat(companyInsightsData?.[1].p1).toFixed(2);
+      this.insightTable.p2 = parseFloat(companyInsightsData?.[1].p2).toFixed(2);
       this.insightTable.dataChartOptions = { ...options };
       this.insightTable.dataSeries = [
         {

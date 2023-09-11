@@ -31,9 +31,7 @@
               style="justify-content: space-between; align-items: center"
             >
               <v-icon large>mdi-robot-outline</v-icon>
-              <div class="ms-2 my-auto" style="width: 100%; text-align: left">
-                MODELS TRAINED
-              </div>
+              <div class="ms-2 my-auto">MODELS TRAINED</div>
               <v-btn
                 v-if="
                   allAiRobotsIds
@@ -136,6 +134,58 @@
                 </p>
               </div>
             </div>
+            <v-row>
+              <p
+                style="
+                  font-size: 1.3rem;
+                  font-weight: 400;
+                  width: 100%;
+                  text-align: center;
+                  margin-top: 17px;
+                "
+              >
+                IQ Improvement (Last Month)
+              </p>
+            </v-row>
+            <div
+              class="d-flex flex-row justify-space-between align-center h-100"
+              style="margin-top: 10px"
+            >
+              <div
+                class="d-flex flex-column"
+                style="
+                  width: 100%;
+                  border-right-width: 1px;
+                  border-right-style: inset;
+                  border-right-color: rgba(211, 211, 211, 0.8);
+                "
+              >
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  +{{ trainedModelsTable.iqMegaModel }}%
+                </p>
+              </div>
+
+              <div class="d-flex flex-column" style="width: 100%">
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  +{{ trainedModelsTable.iqForkedModel }}%
+                </p>
+              </div>
+            </div>
+
             <div
               class="mt-8 mb-12"
               style="height: 1px; background: rgba(211, 211, 211, 0.8)"
@@ -611,6 +661,8 @@ export default {
         dataChartOptions: {},
         megaModelCount: 0,
         forkedModelCount: 0,
+        iqMegaModel: 0,
+        iqForkedModel: 0,
         items: [],
       },
       summaryCart: {
@@ -818,21 +870,15 @@ export default {
         iqBenchMarkLevel,
         iqImprovementLevel,
       ];
-
+      this.trainedModelsTable.iqForkedModel = parseFloat(
+        modelsTrainedData?.[3].megaModel
+      ).toFixed(2);
+      this.trainedModelsTable.iqMegaModel = parseFloat(
+        modelsTrainedData?.[3].forkedModel
+      ).toFixed(2);
       const allOptions = this.getEmptyChartObject();
       allOptions.colors = [colors.success, colors.warning];
-      allOptions.xaxis.categories = [
-        [
-          `Mega Models`,
-          "IQ Improvement (Last Month)",
-          `(+${parseFloat(modelsTrainedData?.[3].megaModel).toFixed(2)}%)`,
-        ],
-        [
-          `Forked Models`,
-          "IQ Improvement (Last Month)",
-          `(+${parseFloat(modelsTrainedData?.[3].forkedModel).toFixed(2)}%)`,
-        ],
-      ];
+      allOptions.xaxis.categories = [[`Mega Models`], [`Forked Models`]];
       this.trainedModelsTable.dataChartOptions = { ...allOptions };
       this.trainedModelsTable.dataSeries = [
         {
