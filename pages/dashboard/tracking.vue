@@ -321,6 +321,175 @@
           lg="4"
           xl="3"
           xxl="3"
+        >
+          <!-- ======================================START IN HERE================ -->
+          <v-card class="mx-auto" style="padding: 20px">
+            <v-card-text>
+              <v-row class="d-flex"
+                     style="justify-content: space-between">
+                <v-row class="d-flex"
+                       style="justify-content: flex-start">
+                  <v-chip
+                    v-if="true"
+                    class="ma-2"
+                    color="success"
+                    outlined
+                    label
+                  >
+                    Ready to Buy
+                  </v-chip>
+                </v-row>
+                <v-row
+                  class="d-flex mt-0 mb-auto"
+                  style="justify-content: flex-end"
+                >
+                  <v-menu
+                    v-model="showMenu"
+                    absolute
+                    offset-y
+                    style="max-width: 600px"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <div
+                        v-bind="attrs"
+                        v-on="on"
+                        class="d-flex flex-row"
+                        style="
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 50%;
+                        font-size: 20px;
+                        font-weight: 700;
+                        padding-bottom: 10px;
+                        border: 1px solid grey;
+                        justify-content: center;
+                        align-items: center">...</div>
+                    </template>
+
+                    <v-list>
+                      <v-list-item
+                        v-for="(item, index) in [
+                        { title: 'Need to Talk?' },
+                        { title: 'Add to Tracking' },
+                        { title: 'Add to Insight' },
+                        { title: 'Like' },
+                        { title: 'Dislike' },
+                      ]"
+                        :key="index"
+                      >
+                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+                </v-row>
+                <v-row>
+                  <div class="text--primary">
+                    <div class="d-flex flex-row" style="justify-content: space-between; align-items: center">
+                      <v-row class="ms-2 my-3">
+                        <v-avatar
+                          color="primary"
+                          style="color: white"
+                          class="my-auto"
+                          size="40"
+                        >FB</v-avatar>
+                        <div class="d-flex flex-column ms-2">
+                          <div
+                            class=""
+                            style="font-size: 15px; font-weight: 500"
+                          >
+                            company name
+                          </div>
+                          <div
+                            class=""
+                            style="color: grey; font-size: 13px; font-weight: 400"
+                          >
+                            company corporation
+                          </div>
+                        </div>
+                        <v-row>
+
+                        </v-row>
+                      </v-row>
+                      <div class="d-flex flex-row me-7 ms-auto my-3" style="justify-content: flex-end">
+                        <v-icon color="success">mdi-check-circle-outline</v-icon>
+                        <div class="d-flex flex-column ms-1" style="align-items: center">
+                          <div
+                            style="font-size: 12px; font-weight: 400"
+                          >
+                            Revenue Size: $5,214.87
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <v-chip-group active-class="primary--text" column>
+                      <v-chip
+                        v-if="true"
+                        class="ma-2"
+                        :color="`${false ? 'red' : '#666666'}`"
+                        outlined
+                        label
+                      >
+                        Selected Tracking KPIs: 1
+                      </v-chip>
+
+                      <v-chip
+                        v-if="true"
+                        class="ma-2"
+                        color="#666666"
+                        outlined
+                        label
+                      >
+                        Score: company score
+                      </v-chip>
+
+                      <v-chip
+                        v-if="true"
+                        class="ma-2"
+                        color="#666666"
+                        outlined
+                        label
+                      >
+                        HQ Location: company hqLocation
+                      </v-chip>
+
+                      <v-chip
+                        v-if="true"
+                        class="ma-2"
+                        color="#666666"
+                        outlined
+                        label
+                      >
+                        Revenue Size: company revenueSize
+                      </v-chip>
+
+                      <v-chip
+                        v-if="true"
+                        class="ma-2"
+                        color="#666666"
+                        outlined
+                        label
+                      >
+                        Industry: company industry
+                      </v-chip>
+
+                    </v-chip-group>
+                  </div>
+                  <div class="text--primary" v-if="false">
+                    you need to add KPI to this company!
+                  </div>
+                </v-row>
+              </v-row>
+            </v-card-text>
+          </v-card>
+          <!-- ======================================END IN HERE================ -->
+        </v-col>
+        <v-col
+          cols="6"
+          sm="6"
+          md="6"
+          lg="4"
+          xl="3"
+          xxl="3"
           v-for="company in allTrackingSelectedCompanies"
           v-bind:key="company.companyId"
         >
@@ -1231,6 +1400,7 @@ export default {
 
   data() {
     return {
+      showMenu: false,
       chatSearchModal: {
         isOpen: false,
         messages: [
