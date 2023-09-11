@@ -46,7 +46,7 @@
 <!--      AA-->
       <v-row>
         <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
-          <v-card class="cart-deals">
+          <v-card class="cart-deals" style="background: linear-gradient(135deg, rgba(251,255,252,1) 0%, rgba(136,239,173,1) 100%)">
             <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
               <v-icon large>mdi-robot-confused</v-icon>
               <div class="my-auto ms-2">RECOMMENDATIONS</div>
@@ -98,7 +98,7 @@
           </v-card>
         </v-col>
         <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
-          <v-card class="cart-deals">
+          <v-card class="cart-deals" style="background: linear-gradient(135deg, rgba(251,255,252,1) 0%, rgba(203,213,254,1) 100%)">
             <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
               <v-icon large>mdi-radar</v-icon>
               <div class="ms-2 my-auto">TRACKING</div>
@@ -155,7 +155,7 @@
       </v-row>
       <v-row>
         <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
-          <v-card class="cart-deals">
+          <v-card class="cart-deals" style="background: linear-gradient(135deg, rgba(251,255,252,1) 0%, rgba(188,231,253,1) 100%)">
             <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
               <v-icon large>mdi-database-outline</v-icon>
               <div class="ms-2 my-auto">DATA</div>
@@ -237,7 +237,7 @@
           </v-card>
         </v-col>
         <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
-          <v-card class="cart-deals">
+          <v-card class="cart-deals" style="background: linear-gradient(135deg, rgba(251,255,252,1) 0%, rgba(194,221,254,1) 100%)">
             <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
               <v-icon large>mdi-robot-outline</v-icon>
               <div class="ms-2 my-auto">MODELS TRAINED</div>
@@ -307,7 +307,7 @@
         <v-card style="
           margin-top: 15px;
           padding: 30px !important;
-          background: white;
+          background: linear-gradient(135deg, rgba(251,255,252,1) 0%, rgba(222,216,254,1) 100%);
           color: black !important;
         ">
           <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
@@ -771,7 +771,7 @@ export default {
   /*  rgb(85, 61, 239) 8.24%,*/
   /*  rgb(207, 95, 228) 91.76%*/
   /*) !important;*/
-  background: white;
+  /*background: white;*/
   color: black !important;
 }
 .cart-track {
