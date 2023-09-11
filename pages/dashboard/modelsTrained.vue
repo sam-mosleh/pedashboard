@@ -22,59 +22,115 @@
         </template>
       </v-snackbar>
       <!-- Snack -->
-      <v-row
-        class="cart-models-trained"
-        style="margin-top: 10px; margin-bottom: 20px"
-      >
-        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
+      <v-row>
+        <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
           <v-card class="cart-models-trained">
-            <v-btn
-              class="d-flex flex-row ms-auto me-2 mt-2"
-              style="
-                background: black;
-                color: white;
-                border-radius: 30px;
-                text-transform: capitalize;
-              "
-              @click="
-                () => {
-                  robotAddNewDialog = {
-                    isOpen: true,
-                    data: {
-                      id: '',
-                      nickName: '',
-                      selectedCompanies: [],
-                    },
-                  };
-                }
-              "
+            <div
+              class="d-flex flex-row mx-auto"
+              style="justify-content: space-between; align-items: center"
             >
-              + Add
-            </v-btn>
-            <v-col class="justify-space-between align-center h-100">
-              <p
-                class="text-center"
-                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
+              <v-icon large>mdi-robot-outline</v-icon>
+              <div class="ms-2 my-auto">MODELS TRAINED</div>
+              <v-btn
+                class="d-flex flex-row ms-auto me-2 my-auto"
+                style="
+                  background: white;
+                  color: black;
+                  border: 1px solid #cccccc;
+                  border-radius: 15px;
+                  text-transform: capitalize;
+                "
+                @click="
+                  () => {
+                    robotAddNewDialog = {
+                      isOpen: true,
+                      data: {
+                        id: '',
+                        nickName: '',
+                        selectedCompanies: [],
+                      },
+                    };
+                  }
+                "
+                >+ Add</v-btn
               >
-                {{ summaryCart.modelsTrainedCount }}
-              </p>
-              <p
-                class="text-center"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
+            </div>
+
+            <div
+              class="d-flex flex-row justify-space-between align-center h-100"
+              style="margin-top: 50px"
+            >
+              <div
+                class="d-flex flex-column"
+                style="font-size: 1.3rem; font-weight: 400"
               >
-                Models Trained
-              </p>
-            </v-col>
+                Number of Models
+              </div>
+              <div
+                style="
+                  width: 1px;
+                  height: 100px;
+                  background: rgba(211, 211, 211, 0.8);
+                "
+              ></div>
+              <div class="d-flex flex-column">
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Mega Models
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  {{ trainedModelsTable.megaModelCount }}
+                </p>
+              </div>
+              <div
+                style="
+                  width: 1px;
+                  height: 100px;
+                  background: rgba(211, 211, 211, 0.8);
+                "
+              ></div>
+              <div class="d-flex flex-column">
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Forked Models
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  {{ trainedModelsTable.forkedModelCount }}
+                </p>
+              </div>
+            </div>
+            <div
+              class="mt-8 mb-12"
+              style="height: 1px; background: rgba(211, 211, 211, 0.8)"
+            ></div>
+            <v-row>
+              <apexchart
+                :options="trainedModelsTable.dataChartOptions"
+                :series="trainedModelsTable.dataSeries"
+                type="bar"
+                style="width: 100% !important"
+                height="300"
+              ></apexchart>
+            </v-row>
           </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" md="9" lg="9" xl="9" xxl="9">
-          <v-data-table
-            :headers="trainedModelsTable.headers"
-            :items="trainedModelsTable.items"
-            hide-default-footer
-            disable-sort
-            class="elevation-1"
-          ></v-data-table>
         </v-col>
       </v-row>
 
@@ -98,7 +154,16 @@
           >
             <v-container v-if="item.id == 0" style="margin-top: 15px">
               <v-row>
-                <v-col v-for="robot in allUserAiRobots" cols="4">
+                <v-col
+                  v-for="robot in allUserAiRobots"
+                  cols="12"
+                  xs="12"
+                  sm="12"
+                  md="6"
+                  lg="4"
+                  xl="4"
+                  xxl="4"
+                >
                   <v-card class="mx-auto">
                     <v-card-text>
                       <div>{{ robot.nickName }}</div>
@@ -144,12 +209,13 @@
             <v-container v-if="item.id == 1" style="margin-top: 15px">
               <v-row>
                 <v-col
-                  cols="6"
-                  sm="6"
+                  cols="12"
+                  xs="12"
+                  sm="12"
                   md="6"
-                  lg="46"
-                  xl="6"
-                  xxl="6"
+                  lg="4"
+                  xl="4"
+                  xxl="4"
                   v-for="company in allSavedCompanies"
                   v-bind:key="company.companyId"
                 >
@@ -167,6 +233,7 @@
                       <v-row>
                         <v-col
                           cols="6"
+                          xs="12"
                           sm="12"
                           md="6"
                           lg="6"
@@ -473,6 +540,9 @@ import api from "@/components/API";
 
 export default {
   name: "ModelsTrained",
+  components: {
+    [process.browser && "apexchart"]: () => import("vue-apexcharts"),
+  },
   head() {
     return {
       title: "Models Trained",
@@ -491,19 +561,13 @@ export default {
   data() {
     return {
       tab: null,
+
       trainedModelsTable: {
-        headers: [
-          {
-            text: "",
-            align: "start",
-            value: "name",
-          },
-          { text: "Mega Model", value: "megaModel" },
-          { text: "Forked Model", value: "forkedModel" },
-        ],
-        items: [],
+        dataSeries: [],
+        dataChartOptions: {},
         megaModelCount: 0,
         forkedModelCount: 0,
+        items: [],
       },
       summaryCart: {
         modelsTrainedCount: 0,
@@ -545,7 +609,68 @@ export default {
     showDataSize(dataSize) {
       return api.dataSizeSerializer(dataSize);
     },
+    getColors() {
+      return {
+        primary: "#8b5cf6",
+        info: "#0ea5e9",
+        success: "#14b8a6",
+        warning: "#d97706",
+      };
+    },
+    getEmptyChartObject() {
+      return {
+        chart: {
+          type: "bar",
+          height: 350,
+          stacked: true,
+          toolbar: {
+            show: false,
+          },
+        },
+        colors: ["#80c7fd", "#008FFB", "#80f1cb", "#00E396"],
+        legend: {
+          position: "top",
+          horizontalAlign: "center",
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ["transparent"],
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            endingShape: "rounded",
+            columnWidth: "55%",
+          },
+        },
+        xaxis: {
+          categories: [],
+        },
+        yaxis: {
+          labels: {
+            formatter: function (val) {
+              return val;
+            },
+          },
+        },
+        fill: {
+          opacity: 1,
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val;
+            },
+          },
+        },
+      };
+    },
     fillTrainedModelsTableItems() {
+      const colors = this.getColors();
       const iqLevel = {
         forkedModel: 0,
         megaModel: 0,
@@ -559,35 +684,25 @@ export default {
       const iqImprovementLevel = {
         forkedModel: 0,
         megaModel: 0,
-        name: "IQ Improvement for last 30 Days",
+        name: "Last month Improvement",
       };
       let megaCount = 0;
       let forkedCount = 0;
-
+      this.trainedModelsTable.forkedModelCount = this.allSavedCompanies.length;
+      this.trainedModelsTable.megaModelCount = this.allUserAiRobots.length;
       for (let index = 0; index < this.allUserAiRobots.length; index++) {
         const robot = this.allUserAiRobots[index];
 
-        robot["totalIQ"] = 0;
-        robot["totalIqBenchmark"] = 0;
-        robot["totalIqBenchmarkLast30"] = 0;
-
-        let megaSpecificCount = 0;
         for (
           let iqMegaIndex = 0;
           iqMegaIndex < robot.selectedMegaModels.length;
           iqMegaIndex++
         ) {
           megaCount++;
-          megaSpecificCount++;
           iqLevel.megaModel += robot.selectedMegaModels[iqMegaIndex].iqLevel;
-          robot["totalIQ"] += robot.selectedMegaModels[iqMegaIndex].iqLevel;
           iqBenchMarkLevel.megaModel +=
             robot.selectedMegaModels[iqMegaIndex].benchMark;
-          robot["totalIqBenchmark"] +=
-            robot.selectedMegaModels[iqMegaIndex].benchMark;
           iqImprovementLevel.megaModel +=
-            robot.selectedMegaModels[iqMegaIndex].lastMonthIqLevel;
-          robot["totalIqBenchmarkLast30"] +=
             robot.selectedMegaModels[iqMegaIndex].lastMonthIqLevel;
         }
         for (
@@ -603,17 +718,6 @@ export default {
           iqImprovementLevel.forkedModel +=
             robot.selectedForkedModels[iqMegaIndex].lastMonthIqLevel;
         }
-
-        robot["totalIQ"] = parseFloat(
-          robot["totalIQ"] / megaSpecificCount
-        ).toFixed(2);
-        robot["totalIqBenchmark"] = parseFloat(
-          robot["totalIqBenchmark"] / megaSpecificCount
-        ).toFixed(2);
-        robot["totalIqBenchmarkLast30"] = parseFloat(
-          robot["totalIqBenchmarkLast30"] / megaSpecificCount
-        ).toFixed(2);
-        this.allUserAiRobots[index] = robot;
       }
       iqLevel.megaModel = parseFloat(iqLevel.megaModel / megaCount).toFixed(2);
       iqLevel.forkedModel = parseFloat(
@@ -627,13 +731,12 @@ export default {
         iqBenchMarkLevel.forkedModel / forkedCount
       ).toFixed(2);
 
-      iqImprovementLevel.megaModel = `+${parseFloat(
+      iqImprovementLevel.megaModel = parseFloat(
         iqImprovementLevel.megaModel / megaCount
-      ).toFixed(2)}%`;
-      iqImprovementLevel.forkedModel = `+${parseFloat(
+      );
+      iqImprovementLevel.forkedModel = parseFloat(
         iqImprovementLevel.forkedModel / forkedCount
-      ).toFixed(2)}%`;
-
+      );
       this.trainedModelsTable.items = [
         {
           forkedModel: this.trainedModelsTable.forkedModelCount,
@@ -643,6 +746,48 @@ export default {
         iqLevel,
         iqBenchMarkLevel,
         iqImprovementLevel,
+      ];
+      const modelsTrainedData = [
+        {
+          forkedModel: this.trainedModelsTable.forkedModelCount,
+          megaModel: this.trainedModelsTable.megaModelCount,
+          name: "Number of Models",
+        },
+        iqLevel,
+        iqBenchMarkLevel,
+        iqImprovementLevel,
+      ];
+
+      const allOptions = this.getEmptyChartObject();
+      allOptions.colors = [colors.success, colors.warning];
+      allOptions.xaxis.categories = [
+        [
+          `Mega Models`,
+          `(+${parseFloat(modelsTrainedData?.[3].megaModel).toFixed(2)}%)`,
+        ],
+        [
+          `Forked Models`,
+          `(+${parseFloat(modelsTrainedData?.[3].forkedModel).toFixed(2)}%)`,
+        ],
+      ];
+      this.trainedModelsTable.dataChartOptions = { ...allOptions };
+      this.trainedModelsTable.dataSeries = [
+        {
+          name: modelsTrainedData?.[1].name,
+
+          data: [
+            modelsTrainedData?.[1].megaModel,
+            modelsTrainedData?.[1].forkedModel,
+          ],
+        },
+        {
+          name: modelsTrainedData?.[2].name,
+
+          data: [
+            modelsTrainedData?.[2].megaModel,
+            modelsTrainedData?.[2].forkedModel,
+          ],
+        },
       ];
     },
     init() {
@@ -792,46 +937,13 @@ export default {
   right: 0;
   top: 8px;
 }
-.cart-insights {
-  padding-top: 10px !important;
-  padding-bottom: 2px !important;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-  background: linear-gradient(
-    82.99deg,
-    rgb(92, 105, 226) 5.47%,
-    rgb(8, 207, 234) 94.53%
-  ) !important;
-  color: white !important;
-}
-.cart-deals {
-  padding: 10px !important;
-  background: linear-gradient(
-    78.84deg,
-    rgb(85, 61, 239) 8.24%,
-    rgb(207, 95, 228) 91.76%
-  ) !important;
-  color: white !important;
-}
-.cart-track {
-  padding: 10px !important;
-  background: linear-gradient(
-    78.84deg,
-    rgb(241, 91, 91) 8.24%,
-    rgb(177, 36, 121) 91.76%
-  ) !important;
-  color: white !important;
-}
 .cart-models-trained {
-  padding-top: 10px !important;
-  padding-bottom: 2px !important;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
+  padding: 30px !important;
+  color: black !important;
   background: linear-gradient(
-    82.99deg,
-    rgb(255, 118, 3) 5.47%,
-    rgb(255, 197, 44) 94.53%
-  ) !important;
-  color: white !important;
+    135deg,
+    rgba(251, 255, 252, 1) 0%,
+    rgba(194, 221, 254, 1) 100%
+  );
 }
 </style>

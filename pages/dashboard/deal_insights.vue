@@ -25,45 +25,54 @@
       <!-- Snack -->
 
       <!-- ==================================NEW Header START================================== -->
-      <v-row class="cart-insights">
-        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-          <v-card class="cart-insights" style="">
-            <v-btn
-              class="d-flex flex-row ms-auto me-2 mt-2"
-              style="
-                background: black;
-                color: white;
-                border-radius: 30px;
-                text-transform: capitalize;
-              "
-              @click="() => (addNewInsightCompanyDialog.isOpen = true)"
+      <v-row>
+        <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+          <v-card class="cart-insights">
+            <div
+              class="d-flex flex-row mx-auto"
+              style="justify-content: space-between; align-items: center"
             >
-              + Add
-            </v-btn>
-            <v-col class="justify-space-between align-center h-100">
-              <p
-                class="text-center"
-                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
+              <v-icon large>mdi-head-lightbulb</v-icon>
+              <div class="ms-2 my-auto">INSIGHTS</div>
+              <v-btn
+                class="d-flex flex-row ms-auto me-2 my-auto"
+                style="
+                  background: white;
+                  color: black;
+                  border: 1px solid #cccccc;
+                  border-radius: 15px;
+                  text-transform: capitalize;
+                "
+                @click="() => (addNewInsightCompanyDialog.isOpen = true)"
+                >+ Add</v-btn
               >
-                {{ summaryInsights.count }}
-              </p>
-              <p
-                class="text-center"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
+            </div>
+
+            <div
+              class="d-flex flex-row justify-center align-center h-100"
+              style="margin-top: 50px"
+            >
+              <div
+                class="d-flex flex-column"
+                style="font-size: 1.3rem; font-weight: 400"
               >
-                Company insights
-              </p>
-            </v-col>
+                {{ `Total Assets: ${allInsightCompanies.length}` }}
+              </div>
+            </div>
+            <div
+              class="mt-8 mb-12"
+              style="height: 1px; background: rgba(211, 211, 211, 0.8)"
+            ></div>
+            <v-row>
+              <apexchart
+                :options="insightTable.dataChartOptions"
+                :series="insightTable.dataSeries"
+                type="bar"
+                style="width: 100% !important"
+                height="300"
+              ></apexchart>
+            </v-row>
           </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" md="9" lg="9" xl="9" xxl="9">
-          <v-data-table
-            :headers="insightTable.headers"
-            :items="insightTable.items"
-            hide-default-footer
-            disable-sort
-            class="elevation-1"
-          ></v-data-table>
         </v-col>
       </v-row>
       <!-- ==================================NEW Header End================================== -->
@@ -1197,6 +1206,9 @@ import api from "@/components/API";
 
 export default {
   name: "Deal Insights page",
+  components: {
+    [process.browser && "apexchart"]: () => import("vue-apexcharts"),
+  },
   data() {
     return {
       tab: null,
@@ -1214,19 +1226,7 @@ export default {
           "IT due diligence",
         ],
       },
-      insightTable: {
-        headers: [
-          {
-            text: "",
-            align: "start",
-            value: "name",
-          },
-          { text: "P0", value: "p0" },
-          { text: "P1", value: "p1" },
-          { text: "P2", value: "p2" },
-        ],
-        items: [],
-      },
+      insightTable: { dataSeries: [], dataChartOptions: {} },
       allInsightCompanies: [],
       summaryInsights: {
         count: 0,
@@ -1277,6 +1277,66 @@ export default {
     };
   },
   methods: {
+    getColors() {
+      return {
+        primary: "#8b5cf6",
+        info: "#0ea5e9",
+        success: "#14b8a6",
+        warning: "#d97706",
+      };
+    },
+    getEmptyChartObject() {
+      return {
+        chart: {
+          type: "bar",
+          height: 350,
+          stacked: true,
+          toolbar: {
+            show: false,
+          },
+        },
+        colors: ["#80c7fd", "#008FFB", "#80f1cb", "#00E396"],
+        legend: {
+          position: "top",
+          horizontalAlign: "center",
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ["transparent"],
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            endingShape: "rounded",
+            columnWidth: "55%",
+          },
+        },
+        xaxis: {
+          categories: [],
+        },
+        yaxis: {
+          labels: {
+            formatter: function (val) {
+              return val;
+            },
+          },
+        },
+        fill: {
+          opacity: 1,
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val;
+            },
+          },
+        },
+      };
+    },
     checkIsCompanyAvailable(company) {
       return true;
     },
@@ -1351,19 +1411,19 @@ export default {
     fillInsightTableItems() {
       const assetPhases = api.getAllAssetPhases();
       const totalAssets = {
-        name: "Total Assets",
+        name: "Assets under review",
         p0: this.allInsightCompanies.filter((x) => x.assetPhase == 0).length,
         p1: this.allInsightCompanies.filter((x) => x.assetPhase == 1).length,
         p2: this.allInsightCompanies.filter((x) => x.assetPhase == 2).length,
       };
       const avgCompleteness = {
-        name: "Avg Insight Completeness",
+        name: "Assets Insight Completeness",
         p0: 0,
         p1: 0,
         p2: 0,
       };
       const avgPast = {
-        name: "Avg Assets Completed in last 30 days",
+        name: "Last Month Completed Assets",
         p0: assetPhases[0],
         p1: assetPhases[1],
         p2: assetPhases[2],
@@ -1392,7 +1452,46 @@ export default {
           avgCompleteness.p2 / totalAssets.p2
         ).toFixed(2)}%`;
       else avgCompleteness.p2 = "0%";
-      this.insightTable.items = [totalAssets, avgCompleteness, avgPast];
+      const companyInsightsData = [totalAssets, avgCompleteness, avgPast];
+      const options = this.getEmptyChartObject();
+      options.colors = ["#7c3aed", "#d97706", "#14b8a6"];
+      options.chart.stacked = false;
+      options.chart.toolbar.show = false;
+      options.xaxis.categories = [
+        [
+          "Phase Zero",
+          `(${parseFloat(companyInsightsData?.[1].p0).toFixed(2)}%)`,
+        ],
+        [
+          "Phase One",
+          `(${parseFloat(companyInsightsData?.[1].p1).toFixed(2)}%)`,
+        ],
+        [
+          "Phase Two",
+          `(${parseFloat(companyInsightsData?.[1].p2).toFixed(2)}%)`,
+        ],
+      ];
+      this.insightTable.dataChartOptions = { ...options };
+      this.insightTable.dataSeries = [
+        {
+          name: companyInsightsData?.[0].name,
+          data: [
+            companyInsightsData?.[0].p0,
+            companyInsightsData?.[0].p1,
+            companyInsightsData?.[0].p2,
+          ],
+        },
+        {
+          name: companyInsightsData?.[2].name,
+          data: [
+            companyInsightsData?.[2].p1,
+            companyInsightsData?.[2].p2,
+            companyInsightsData?.[2].p2 == 0
+              ? companyInsightsData?.[0].p2
+              : companyInsightsData?.[2].p2,
+          ],
+        },
+      ];
     },
     showAIModelByAiId(aiId) {
       return this.allAiModels.filter((x) => x.id == aiId)[0].name;
@@ -1557,15 +1656,15 @@ export default {
   top: 8px;
 }
 .cart-insights {
-  padding-top: 10px !important;
-  padding-bottom: 2px !important;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
+  margin-top: 15px;
+  padding: 30px !important;
   background: linear-gradient(
-    82.99deg,
-    rgb(92, 105, 226) 5.47%,
-    rgb(8, 207, 234) 94.53%
-  ) !important;
-  color: white !important;
+    135deg,
+    rgba(251, 255, 252, 1) 0%,
+    rgba(222, 216, 254, 1) 100%
+  );
+  color: black !important;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 </style>

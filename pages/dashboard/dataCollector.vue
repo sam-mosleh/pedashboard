@@ -177,33 +177,138 @@
     </v-dialog>
     <!-- =================ViewData================== -->
     <v-container fluid>
-      <v-row class="cart-data">
-        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-          <v-card class="cart-data" style="">
-            <v-col class="justify-space-between align-center h-100">
-              <p
-                class="text-center"
-                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
+      <v-row>
+        <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+          <v-card class="cart-data">
+            <div
+              class="d-flex flex-row mx-auto"
+              style="justify-content: space-between; align-items: center"
+            >
+              <v-icon large>mdi-database-outline</v-icon>
+              <div class="ms-2 my-auto">DATA</div>
+              <v-btn
+                class="d-flex flex-row ms-auto me-2 my-auto"
+                style="
+                  background: white;
+                  color: black;
+                  border: 1px solid #cccccc;
+                  border-radius: 15px;
+                  text-transform: capitalize;
+                "
+                @click="redirect('/dashboard/dataCollector')"
+                >View</v-btn
               >
-                100Tb
-              </p>
-              <p
-                class="text-center"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
+            </div>
+
+            <div
+              class="d-flex flex-row justify-space-between h-100"
+              style="margin-top: 50px"
+            >
+              <div
+                class="d-flex flex-column"
+                style="font-size: 1.3rem; font-weight: 400"
               >
-                Gathered Data
-              </p>
-            </v-col>
+                Number of Sources
+              </div>
+              <div
+                style="
+                  width: 1px;
+                  height: 100px;
+                  background: rgba(211, 211, 211, 0.8);
+                "
+              ></div>
+              <div
+                class="d-flex flex-column"
+                style="padding-left: 2px; padding-right: 2px"
+              >
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Public Data
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  40
+                </p>
+              </div>
+              <div
+                style="
+                  width: 1px;
+                  height: 100px;
+                  background: rgba(211, 211, 211, 0.8);
+                "
+              ></div>
+              <div
+                class="d-flex flex-column"
+                style="padding-left: 2px; padding-right: 2px"
+              >
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Proprietary Data
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  45
+                </p>
+              </div>
+              <div
+                style="
+                  width: 1px;
+                  height: 100px;
+                  background: rgba(211, 211, 211, 0.8);
+                "
+              ></div>
+              <div
+                class="d-flex flex-column"
+                style="padding-left: 2px; padding-right: 2px"
+              >
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Target Data
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  7
+                </p>
+              </div>
+            </div>
+            <div
+              class="mt-8 mb-12"
+              style="height: 1px; background: rgba(211, 211, 211, 0.8)"
+            ></div>
+            <v-row>
+              <apexchart
+                :options="dataPageTable.dataChartOptions"
+                :series="dataPageTable.dataSeries"
+                type="bar"
+                style="width: 100% !important"
+                height="300"
+              ></apexchart>
+            </v-row>
           </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" md="9" lg="9" xl="9" xxl="9">
-          <v-data-table
-            :headers="dataPageTable.headers"
-            :items="dataPageTable.items"
-            hide-default-footer
-            disable-sort
-            class="elevation-1"
-          ></v-data-table>
         </v-col>
       </v-row>
       <v-row>
@@ -747,6 +852,9 @@ import api from "@/components/API";
 
 export default {
   name: "dataCollector",
+  components: {
+    [process.browser && "apexchart"]: () => import("vue-apexcharts"),
+  },
   head() {
     return {
       title: "Data",
@@ -778,51 +886,10 @@ export default {
       files: [],
       title: "",
       dataPageTable: {
-        headers: [
-          {
-            text: "",
-            align: "start",
-            value: "name",
-          },
-          {
-            text: "Public Data",
-            align: "start",
-            value: "numberOfSources",
-          },
-          {
-            text: "Proprietary Data",
-            align: "start",
-            value: "dataVolume",
-          },
-          { text: "Target Data", value: "trainedPercentage" },
-        ],
-        items: [
-          {
-            name: "Data Volume",
-            numberOfSources: "75Tb",
-            dataVolume: "25Tb",
-            trainedPercentage: "5Tb",
-          },
-          {
-            name: "Number Of Sources",
-            numberOfSources: 40,
-            dataVolume: 45,
-            trainedPercentage: 7,
-          },
-          {
-            name: "Trained Percentage",
-            numberOfSources: "95%",
-            dataVolume: "75%",
-            trainedPercentage: "97%",
-          },
-          {
-            name: "Volume of new data in past 30 days",
-            numberOfSources: "70Tb",
-            dataVolume: "30Tb",
-            trainedPercentage: "22Tb",
-          },
-        ],
+        dataSeries: [],
+        dataChartOptions: {},
       },
+
       viewDataModal: {
         type: 0,
         title: "",
@@ -840,6 +907,78 @@ export default {
   methods: {
     init() {
       this.allData = api.getFullUserData();
+      this.fillDataPageTable();
+    },
+    fillDataPageTable() {
+      const dataData = {
+        count: 5,
+        chartItems: [
+          ["Past Data Volume", "75", "55", "5"],
+          ["Number of Sources", "40", "45", "7"],
+          ["Trained Percentage", "95", "75", "97"],
+          ["Last Month Data Volume", "70", "30", "22"],
+        ],
+        chartHeaders: ["", "Public Data", "Proprietary Data", "Target Data"],
+      };
+      const options = this.getEmptyChartObject();
+      options.xaxis.categories = [
+        dataData.chartHeaders?.[1],
+        dataData.chartHeaders?.[2],
+        dataData.chartHeaders?.[3],
+      ];
+      options.yaxis.labels.formatter = function (val) {
+        return val + "Tb";
+      };
+      options.tooltip.y.formatter = function (val) {
+        return val + "Tb";
+      };
+      const colors = this.getColors();
+      options.colors = [colors.primary, colors.info, colors.success];
+      this.dataPageTable.dataChartOptions = { ...options };
+      this.dataPageTable.dataSeries = [
+        {
+          name: dataData.chartItems?.[0][0],
+          group: "data",
+          data: [
+            dataData.chartItems?.[0][1],
+            dataData.chartItems?.[0][2],
+            dataData.chartItems?.[0][3],
+          ],
+        },
+        {
+          name: dataData.chartItems?.[3][0],
+          group: "data",
+          data: [
+            dataData.chartItems?.[3][1],
+            dataData.chartItems?.[3][2],
+            dataData.chartItems?.[3][3],
+          ],
+        },
+        {
+          name: dataData.chartItems?.[1][0],
+          group: "process",
+          data: [
+            (
+              (parseFloat(dataData.chartItems?.[2][1] || "0") *
+                (parseFloat(dataData.chartItems?.[0][1] || "0") +
+                  parseFloat(dataData.chartItems?.[3][1] || "0"))) /
+              100
+            ).toFixed(2),
+            (
+              (parseFloat(dataData.chartItems?.[2][2] || "0") *
+                (parseFloat(dataData.chartItems?.[0][2] || "0") +
+                  parseFloat(dataData.chartItems?.[3][2] || "0"))) /
+              100
+            ).toFixed(2),
+            (
+              (parseFloat(dataData.chartItems?.[2][3] || "0") *
+                (parseFloat(dataData.chartItems?.[0][3] || "0") +
+                  parseFloat(dataData.chartItems?.[3][3] || "0"))) /
+              100
+            ).toFixed(2),
+          ],
+        },
+      ];
     },
     getRandomCompanyName() {
       return this.allData.companies[
@@ -873,6 +1012,66 @@ export default {
     hideItem(i) {
       this.$refs.myUploadItems[i].style["display"] = "none";
       this.fireSnack("item removed successfully");
+    },
+    getColors() {
+      return {
+        primary: "#8b5cf6",
+        info: "#0ea5e9",
+        success: "#14b8a6",
+        warning: "#d97706",
+      };
+    },
+    getEmptyChartObject() {
+      return {
+        chart: {
+          type: "bar",
+          height: 350,
+          stacked: true,
+          toolbar: {
+            show: false,
+          },
+        },
+        colors: ["#80c7fd", "#008FFB", "#80f1cb", "#00E396"],
+        legend: {
+          position: "top",
+          horizontalAlign: "center",
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ["transparent"],
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            endingShape: "rounded",
+            columnWidth: "55%",
+          },
+        },
+        xaxis: {
+          categories: [],
+        },
+        yaxis: {
+          labels: {
+            formatter: function (val) {
+              return val;
+            },
+          },
+        },
+        fill: {
+          opacity: 1,
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val;
+            },
+          },
+        },
+      };
     },
   },
   mounted() {
@@ -925,85 +1124,13 @@ export default {
   right: 0;
   top: 8px;
 }
-.cart-track {
-  padding-top: 10px !important;
-  padding-bottom: 2px !important;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-  background: linear-gradient(
-    82.99deg,
-    rgb(92, 105, 226) 5.47%,
-    rgb(8, 207, 234) 94.53%
-  ) !important;
-  color: white !important;
-}
-.cart-deals {
-  padding: 10px !important;
-  background: linear-gradient(
-    78.84deg,
-    rgb(85, 61, 239) 8.24%,
-    rgb(207, 95, 228) 91.76%
-  ) !important;
-  color: white !important;
-}
-.cart-track {
-  padding: 10px !important;
-  background: linear-gradient(
-    78.84deg,
-    rgb(241, 91, 91) 8.24%,
-    rgb(177, 36, 121) 91.76%
-  ) !important;
-  color: white !important;
-}
-.cart-models-trained {
-  padding-top: 10px !important;
-  padding-bottom: 2px !important;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-  background: linear-gradient(
-    82.99deg,
-    rgb(255, 118, 3) 5.47%,
-    rgb(255, 197, 44) 94.53%
-  );
-  color: white !important;
-}
 .cart-data {
+  padding: 30px !important;
+  color: black !important;
   background: linear-gradient(
-    78.84deg,
-    rgb(60, 192, 0) 8.24%,
-    rgb(35, 131, 141) 91.76%
-  ) !important;
-  padding-top: 10px !important;
-  padding-bottom: 2px !important;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-  color: white !important;
-}
-.item-text-show-position {
-  font-size: 1.9rem;
-  line-height: 1.85rem;
-  font-weight: 300;
-  color: white;
-  text-align: center;
-  display: block;
-  width: 100%;
-}
-.item-text-show-position {
-  font-size: 1.9rem;
-  line-height: 1.85rem;
-  font-weight: 300;
-  color: white;
-  text-align: left;
-  display: block;
-  width: 100%;
-}
-.item-text-show-position-2 {
-  font-size: 1.9rem;
-  line-height: 1.85rem;
-  font-weight: 300;
-  color: white;
-  text-align: right;
-  display: block;
-  width: 100%;
+    135deg,
+    rgba(251, 255, 252, 1) 0%,
+    rgba(188, 231, 253, 1) 100%
+  );
 }
 </style>

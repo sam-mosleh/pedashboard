@@ -25,29 +25,84 @@
       <!-- Snack -->
 
       <v-row style="justify-content: space-between">
-        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
+        <v-col cols="12" sm="12" md="4" lg="4" xl="4" xxl="4">
           <v-card class="cart-deals">
-            <v-col class="justify-space-between align-center h-100">
-              <p
-                class="text-center"
-                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
+            <div
+              class="d-flex flex-row mx-auto"
+              style="justify-content: space-between; align-items: center"
+            >
+              <v-icon large>mdi-robot-confused</v-icon>
+              <div class="my-auto ms-2">RECOMMENDATIONS</div>
+              <v-btn
+                class="d-flex flex-row ms-auto me-2 my-auto"
+                style="
+                  background: white;
+                  color: black;
+                  border: 1px solid #cccccc;
+                  border-radius: 15px;
+                  text-transform: capitalize;
+                "
+                @click="redirect('/dashboard/recommendations')"
+                >View</v-btn
               >
-                {{ summaryRecommendedCompanies.count }}
-              </p>
-              <p
-                class="text-center"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-              >
-                Proprietary deals found!
-              </p>
-              <div style="height: 2px; background: blue"></div>
-              <p
-                class="text-center mt-4"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-              >
-                Median score: {{ summaryRecommendedCompanies.median }}
-              </p>
-            </v-col>
+            </div>
+
+            <div
+              class="d-flex flex-row justify-space-between align-center h-100"
+              style="margin-top: 50px"
+            >
+              <div class="d-flex flex-column mx-auto">
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.8rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  {{ summaryRecommendedCompanies.count }}
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
+                >
+                  Proprietary deals found
+                </p>
+              </div>
+              <div
+                style="
+                  width: 1px;
+                  height: 100px;
+                  background: rgba(211, 211, 211, 0.8);
+                "
+              ></div>
+              <div class="d-flex flex-column mx-auto">
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.8rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  {{ summaryRecommendedCompanies.median }}
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
+                >
+                  Median score
+                </p>
+              </div>
+            </div>
           </v-card>
         </v-col>
         <v-col class="mt-7" style="margin-top: 0px !important; height: 390px">
@@ -246,9 +301,6 @@
                           <strong>{{ item.text }}</strong>
                         </v-chip>
                       </template>
-                      <v-btn slot="append" @click="openNewKpiDialog(0)"
-                        >+</v-btn
-                      >
                     </v-combobox>
                   </v-col>
                   <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
@@ -283,9 +335,6 @@
                           <strong>{{ item.text }}</strong>
                         </v-chip>
                       </template>
-                      <v-btn slot="append" @click="openNewKpiDialog(1)"
-                        >+</v-btn
-                      >
                     </v-combobox>
                   </v-col>
                 </v-row>
@@ -300,8 +349,9 @@
         <v-container>
           <v-row>
             <v-col
-              cols="6"
-              sm="6"
+              cols="12"
+              xs="12"
+              sm="12"
               md="6"
               lg="6"
               xl="4"
@@ -334,8 +384,12 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-row>
-                    <v-col cols="12">
-                      <v-slide-group multiple show-arrows>
+                    <v-col class="d-flex flex-wrap" cols="12">
+                      <v-slide-group
+                        multiple
+                        show-arrows
+                        class="d-flex flex-wrap"
+                      >
                         <v-slide-item
                           v-if="
                             allInsightCompanies.filter(
@@ -1653,13 +1707,25 @@ export default {
   color: white;
   font-size: 12px;
 }
-.cart-deals {
-  padding: 10px !important;
+.cart-insights {
+  margin-top: 15px;
+  padding: 30px !important;
   background: linear-gradient(
-    78.84deg,
-    rgb(85, 61, 239) 8.24%,
-    rgb(207, 95, 228) 91.76%
-  ) !important;
-  color: white !important;
+    135deg,
+    rgba(251, 255, 252, 1) 0%,
+    rgba(222, 216, 254, 1) 100%
+  );
+  color: black !important;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.cart-deals {
+  padding: 30px !important;
+  color: black !important;
+  background: linear-gradient(
+    135deg,
+    rgba(251, 255, 252, 1) 0%,
+    rgba(136, 239, 173, 1) 100%
+  );
 }
 </style>

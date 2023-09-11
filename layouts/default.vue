@@ -4,8 +4,8 @@
       style="
         position: fixed;
         z-index: 9;
-        right: 8px;
-        bottom: 8px;
+        right: 1vw;
+        bottom: 1vh;
         background-color: white;
       "
       color="primary"

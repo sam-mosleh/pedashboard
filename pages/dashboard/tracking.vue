@@ -25,45 +25,87 @@
       <!-- Snack -->
 
       <v-row style="justify-content: space-between">
-        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-          <v-card class="cart-track" max-width="400">
-            <v-btn
-              class="d-flex flex-row ms-auto me-2 mt-2"
-              style="
-                background: black;
-                color: white;
-                border-radius: 30px;
-                text-transform: capitalize;
-              "
-              @click="() => (addNewTrackingCompanyDialog.isOpen = true)"
+        <v-col cols="12" sm="12" md="4" lg="4" xl="4" xxl="4">
+          <v-card class="cart-track">
+            <div
+              class="d-flex flex-row mx-auto"
+              style="justify-content: space-between; align-items: center"
             >
-              + Add</v-btn
+              <v-icon large>mdi-radar</v-icon>
+              <div class="ms-2 my-auto">TRACKING</div>
+              <v-btn
+                class="d-flex flex-row ms-auto me-2 my-auto"
+                style="
+                  background: white;
+                  color: black;
+                  border: 1px solid #cccccc;
+                  border-radius: 15px;
+                  text-transform: capitalize;
+                "
+                @click="() => (addNewTrackingCompanyDialog.isOpen = true)"
+                >+ Add</v-btn
+              >
+            </div>
+
+            <div
+              class="d-flex flex-row justify-space-between align-center h-100"
+              style="margin-top: 50px"
             >
-            <v-col class="justify-space-between align-center h-100">
-              <p
-                class="text-center"
-                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
-              >
-                {{ allTrackingSelectedCompanies.length }}
-              </p>
-              <p
-                class="text-center"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-              >
-                Assets tracked
-              </p>
-              <div style="height: 2px; background: blue"></div>
-              <p
-                class="text-center mt-4"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-              >
-                {{
-                  allTrackingSelectedCompanies.filter((x) => x.readyToBuy)
-                    .length
-                }}
-                Ready to buy
-              </p>
-            </v-col>
+              <div class="d-flex flex-column mx-auto">
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.8rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  {{ allTrackingSelectedCompanies.length }}
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
+                >
+                  Assets tracked
+                </p>
+              </div>
+              <div
+                style="
+                  width: 1px;
+                  height: 100px;
+                  background: rgba(211, 211, 211, 0.8);
+                "
+              ></div>
+              <div class="d-flex flex-column mx-auto">
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.8rem;
+                    line-height: 0.75rem;
+                    font-weight: 400;
+                  "
+                >
+                  {{
+                    allTrackingSelectedCompanies.filter((x) => x.readyToBuy)
+                      .length
+                  }}
+                </p>
+                <p
+                  class="text-center"
+                  style="
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                  "
+                >
+                  Ready to buy
+                </p>
+              </div>
+            </div>
           </v-card>
         </v-col>
         <!-- ======================================11111111111================ -->
@@ -321,14 +363,17 @@
           lg="4"
           xl="3"
           xxl="3"
+          id="newItem"
+          style="display: none"
         >
           <!-- ======================================START IN HERE================ -->
-          <v-card class="mx-auto" style="padding: 20px">
+          <v-card
+            class="mx-auto"
+            style="padding: 20px;display: none:  !important;"
+          >
             <v-card-text>
-              <v-row class="d-flex"
-                     style="justify-content: space-between">
-                <v-row class="d-flex"
-                       style="justify-content: flex-start">
+              <v-row class="d-flex" style="justify-content: space-between">
+                <v-row class="d-flex" style="justify-content: flex-start">
                   <v-chip
                     v-if="true"
                     class="ma-2"
@@ -355,26 +400,30 @@
                         v-on="on"
                         class="d-flex flex-row"
                         style="
-                        width: 30px;
-                        height: 30px;
-                        border-radius: 50%;
-                        font-size: 20px;
-                        font-weight: 700;
-                        padding-bottom: 10px;
-                        border: 1px solid grey;
-                        justify-content: center;
-                        align-items: center">...</div>
+                          width: 30px;
+                          height: 30px;
+                          border-radius: 50%;
+                          font-size: 20px;
+                          font-weight: 700;
+                          padding-bottom: 10px;
+                          border: 1px solid grey;
+                          justify-content: center;
+                          align-items: center;
+                        "
+                      >
+                        ...
+                      </div>
                     </template>
 
                     <v-list>
                       <v-list-item
                         v-for="(item, index) in [
-                        { title: 'Need to Talk?' },
-                        { title: 'Add to Tracking' },
-                        { title: 'Add to Insight' },
-                        { title: 'Like' },
-                        { title: 'Dislike' },
-                      ]"
+                          { title: 'Need to Talk?' },
+                          { title: 'Add to Tracking' },
+                          { title: 'Add to Insight' },
+                          { title: 'Like' },
+                          { title: 'Dislike' },
+                        ]"
                         :key="index"
                       >
                         <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -384,14 +433,21 @@
                 </v-row>
                 <v-row>
                   <div class="text--primary">
-                    <div class="d-flex flex-row" style="justify-content: space-between; align-items: center">
+                    <div
+                      class="d-flex flex-row"
+                      style="
+                        justify-content: space-between;
+                        align-items: center;
+                      "
+                    >
                       <v-row class="ms-2 my-3">
                         <v-avatar
                           color="primary"
                           style="color: white"
                           class="my-auto"
                           size="40"
-                        >FB</v-avatar>
+                          >FB</v-avatar
+                        >
                         <div class="d-flex flex-column ms-2">
                           <div
                             class=""
@@ -401,21 +457,29 @@
                           </div>
                           <div
                             class=""
-                            style="color: grey; font-size: 13px; font-weight: 400"
+                            style="
+                              color: grey;
+                              font-size: 13px;
+                              font-weight: 400;
+                            "
                           >
                             company corporation
                           </div>
                         </div>
-                        <v-row>
-
-                        </v-row>
+                        <v-row> </v-row>
                       </v-row>
-                      <div class="d-flex flex-row me-7 ms-auto my-3" style="justify-content: flex-end">
-                        <v-icon color="success">mdi-check-circle-outline</v-icon>
-                        <div class="d-flex flex-column ms-1" style="align-items: center">
-                          <div
-                            style="font-size: 12px; font-weight: 400"
-                          >
+                      <div
+                        class="d-flex flex-row me-7 ms-auto my-3"
+                        style="justify-content: flex-end"
+                      >
+                        <v-icon color="success"
+                          >mdi-check-circle-outline</v-icon
+                        >
+                        <div
+                          class="d-flex flex-column ms-1"
+                          style="align-items: center"
+                        >
+                          <div style="font-size: 12px; font-weight: 400">
                             Revenue Size: $5,214.87
                           </div>
                         </div>
@@ -471,7 +535,6 @@
                       >
                         Industry: company industry
                       </v-chip>
-
                     </v-chip-group>
                   </div>
                   <div class="text--primary" v-if="false">
@@ -484,8 +547,9 @@
           <!-- ======================================END IN HERE================ -->
         </v-col>
         <v-col
-          cols="6"
-          sm="6"
+          cols="12"
+          xs="12"
+          sm="12"
           md="6"
           lg="4"
           xl="3"
@@ -2028,46 +2092,13 @@ export default {
   right: 0;
   top: 8px;
 }
-.cart-insights {
-  padding-top: 10px !important;
-  padding-bottom: 2px !important;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-  background: linear-gradient(
-    82.99deg,
-    rgb(92, 105, 226) 5.47%,
-    rgb(8, 207, 234) 94.53%
-  ) !important;
-  color: white !important;
-}
-.cart-deals {
-  padding: 10px !important;
-  background: linear-gradient(
-    78.84deg,
-    rgb(85, 61, 239) 8.24%,
-    rgb(207, 95, 228) 91.76%
-  ) !important;
-  color: white !important;
-}
 .cart-track {
-  padding: 10px !important;
+  padding: 30px !important;
+  color: black !important;
   background: linear-gradient(
-    78.84deg,
-    rgb(241, 91, 91) 8.24%,
-    rgb(177, 36, 121) 91.76%
-  ) !important;
-  color: white !important;
-}
-.cart-models-trained {
-  padding-top: 10px !important;
-  padding-bottom: 2px !important;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-  background: linear-gradient(
-    82.99deg,
-    rgb(255, 118, 3) 5.47%,
-    rgb(255, 197, 44) 94.53%
-  ) !important;
-  color: white !important;
+    135deg,
+    rgba(251, 255, 252, 1) 0%,
+    rgba(203, 213, 254, 1) 100%
+  );
 }
 </style>
