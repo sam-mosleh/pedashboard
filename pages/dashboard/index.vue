@@ -305,15 +305,10 @@
       </v-row>
       <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
         <v-card style="
-        margin-left: 0px; margin-right: 0px; margin-top: 15px;
-        padding: 30px !important;
-        /*background: linear-gradient(*/
-        /*  78.84deg,*/
-        /*  rgb(85, 61, 239) 8.24%,*/
-        /*  rgb(207, 95, 228) 91.76%*/
-        /*) !important;*/
-        background: white;
-        color: black !important;
+          margin-top: 15px;
+          padding: 30px !important;
+          background: white;
+          color: black !important;
         ">
           <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
             <v-icon large>mdi-robot-outline</v-icon>
