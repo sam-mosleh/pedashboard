@@ -186,19 +186,9 @@
               style="justify-content: space-between; align-items: center"
             >
               <v-icon large>mdi-database-outline</v-icon>
-              <div class="ms-2 my-auto">DATA</div>
-              <v-btn
-                class="d-flex flex-row ms-auto me-2 my-auto"
-                style="
-                  background: white;
-                  color: black;
-                  border: 1px solid #cccccc;
-                  border-radius: 15px;
-                  text-transform: capitalize;
-                "
-                @click="redirect('/dashboard/dataCollector')"
-                >View</v-btn
-              >
+              <div class="ms-2 my-auto" style="width: 100%; text-align: left">
+                DATA
+              </div>
             </div>
             <v-row style="text-align: center; margin-top: 5px"
               ><p

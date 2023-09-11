@@ -1,11 +1,10 @@
 <template>
   <div>
- 
     <v-row
       class="ps-6 pt-5 pb-6"
       style="font-weight: 400; font-size: 28px; color: black; margin-left: 15px"
     >
-    Models Trained
+      Models Trained
     </v-row>
     <v-container fluid>
       <!-- Snack -->
@@ -32,8 +31,17 @@
               style="justify-content: space-between; align-items: center"
             >
               <v-icon large>mdi-robot-outline</v-icon>
-              <div class="ms-2 my-auto">MODELS TRAINED</div>
+              <div class="ms-2 my-auto" style="width: 100%; text-align: left">
+                MODELS TRAINED
+              </div>
               <v-btn
+                v-if="
+                  allAiRobotsIds
+                    .filter((x) => !allUserAiRobotsIds.includes(x))
+                    .map((z) => {
+                      return { text: getRobotModelFromId(z), value: z };
+                    }).length != 0
+                "
                 class="d-flex flex-row ms-auto me-2 my-auto"
                 style="
                   background: white;
@@ -42,8 +50,19 @@
                   border-radius: 15px;
                   text-transform: capitalize;
                 "
-                @click="redirect('/dashboard/modelsTrained')"
-                >View</v-btn
+                @click="
+                  () => {
+                    robotAddNewDialog = {
+                      isOpen: true,
+                      data: {
+                        id: '',
+                        nickName: '',
+                        selectedCompanies: [],
+                      },
+                    };
+                  }
+                "
+                >+ Add</v-btn
               >
             </div>
             <v-row>

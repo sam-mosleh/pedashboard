@@ -42,8 +42,9 @@
                   border-radius: 15px;
                   text-transform: capitalize;
                 "
-                @click="redirect('/dashboard/tracking')"
-                >View</v-btn
+                @click="() => (addNewTrackingCompanyDialog.isOpen = true)"
+              >
+                + Add</v-btn
               >
             </div>
 

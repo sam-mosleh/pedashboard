@@ -1,11 +1,10 @@
 <template>
   <div>
-  
     <v-row
       class="ps-6 pt-5 pb-6"
       style="font-weight: 400; font-size: 28px; color: black; margin-left: 15px"
     >
-    Recommendations
+      Recommendations
     </v-row>
     <v-container fluid>
       <!-- Snack -->
@@ -33,19 +32,9 @@
               style="justify-content: space-between; align-items: center"
             >
               <v-icon large>mdi-shield-check</v-icon>
-              <div class="my-auto ms-2">RECOMMENDATIONS</div>
-              <v-btn
-                class="d-flex flex-row ms-auto me-2 my-auto"
-                style="
-                  background: white;
-                  color: black;
-                  border: 1px solid #cccccc;
-                  border-radius: 15px;
-                  text-transform: capitalize;
-                "
-                @click="redirect('/dashboard/recommendations')"
-                >View</v-btn
-              >
+              <div class="my-auto ms-2" style="text-align: left; width: 100%">
+                RECOMMENDATIONS
+              </div>
             </div>
 
             <div

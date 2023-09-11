@@ -43,8 +43,8 @@
                   border-radius: 15px;
                   text-transform: capitalize;
                 "
-                @click="redirect('/dashboard/deal_insights')"
-                >View</v-btn
+                @click="() => (addNewInsightCompanyDialog.isOpen = true)"
+                >+ Add</v-btn
               >
             </div>
 
