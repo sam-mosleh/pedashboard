@@ -31,7 +31,9 @@
               style="justify-content: space-between; align-items: center"
             >
               <v-icon large>mdi-robot-outline</v-icon>
-              <div class="ms-2 my-auto">MODELS TRAINED</div>
+              <div class="ms-2 my-auto" style="width: 100%; text-align: left">
+                MODELS TRAINED
+              </div>
               <v-btn
                 v-if="
                   allAiRobotsIds
