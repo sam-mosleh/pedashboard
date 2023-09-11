@@ -1,215 +1,356 @@
 <template>
-  <div>
+  <v-row style="background: rgba(199, 184, 255, 0.1); padding: 0px">
     <v-row
-      class="ps-3 pt-8 pb-6 mb-3"
-      style="font-weight: 600; font-size: 28px; background: black; color: white"
+      class="ps-6 pt-5 pb-6"
+      style="font-weight: 400; font-size: 28px; color: black"
       >Dashboard</v-row
     >
 
     <v-container fluid>
       <v-row>
         <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
-          <v-card class="cart-deals">
+          <div class="pt-1 mb-3 d-flex flex-row" style="align-items: center">
+            <v-avatar>
+              <img
+                src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                alt="John"
+              >
+            </v-avatar>
+            <v-col>
+              <div>Welcome Back Jack!</div>
+              <div style="color: #808080">Happy to see you again on your dashboard.</div>
+            </v-col>
+          </div>
+        </v-col>
+        <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
+          <div class="d-flex flex-row pe-2" style="justify-content: flex-end">
             <v-btn
-              class="d-flex flex-row ms-auto me-2 mt-2"
-              style="
-                background: black;
-                color: white;
-                border-radius: 30px;
+              color="white"
+              class="primary--text"
+              @click="() =>console.log()"
+              style="text-transform: capitalize; height: 40px; border-radius: 12px; margin-top: 10px"
+            >
+              <v-icon
+                right
+                dark
+                class="me-4"
+              >
+                mdi-robot-outline
+              </v-icon>
+              Talk with AI
+            </v-btn>
+          </div>
+        </v-col>
+      </v-row>
+      <v-row style="font-size: 18px; font-weight: 500; color: #808080; padding-left: 1rem">Short Summary</v-row>
+<!--      AA-->
+      <v-row>
+        <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
+          <v-card class="cart-deals">
+            <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
+              <v-icon large>mdi-robot-confused</v-icon>
+              <div class="my-auto ms-2">RECOMMENDATIONS</div>
+              <v-btn
+                class="d-flex flex-row ms-auto me-2 my-auto"
+                style="
+                background: white;
+                color: black;
+                border: 1px solid #CCCCCC;
+                border-radius: 15px;
                 text-transform: capitalize;
               "
-              @click="redirect('/dashboard/recommendations')"
+                @click="redirect('/dashboard/recommendations')"
               >View</v-btn
-            >
+              >
+            </div>
 
-            <v-col class="justify-space-between align-center h-100">
-              <p
-                class="text-center"
-                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
-              >
-                {{ summaryRecommendedCompanies.count }}
-              </p>
-              <p
-                class="text-center"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-              >
-                Proprietary deals found
-              </p>
-              <div style="height: 2px; background: blue"></div>
-              <p
-                class="text-center mt-4"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-              >
-                Median score: {{ summaryRecommendedCompanies.median }}
-              </p>
-            </v-col>
+            <div class="d-flex flex-row justify-space-between align-center h-100" style="margin-top: 50px">
+              <div class="d-flex flex-column mx-auto">
+                <p
+                  class="text-center"
+                  style="font-size: 1.8rem; line-height: 0.75rem; font-weight: 400"
+                >
+                  {{ summaryRecommendedCompanies.count }}
+                </p>
+                <p
+                  class="text-center"
+                  style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Proprietary deals found
+                </p>
+              </div>
+              <div style="width: 1px; height: 100px; background: rgba(211, 211, 211, 0.8)"></div>
+              <div class="d-flex flex-column mx-auto">
+                <p
+                  class="text-center"
+                  style="font-size: 1.8rem; line-height: 0.75rem; font-weight: 400"
+                >
+                  {{ summaryRecommendedCompanies.median }}
+                </p>
+                <p
+                  class="text-center"
+                  style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Median score
+                </p>
+              </div>
+            </div>
           </v-card>
         </v-col>
         <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
-          <v-card class="cart-track">
-            <v-btn
-              class="d-flex flex-row ms-auto me-2 mt-2"
-              style="
-                background: black;
-                color: white;
-                border-radius: 30px;
+          <v-card class="cart-deals">
+            <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
+              <v-icon large>mdi-radar</v-icon>
+              <div class="ms-2 my-auto">TRACKING</div>
+              <v-btn
+                class="d-flex flex-row ms-auto me-2 my-auto"
+                style="
+                background: white;
+                color: black;
+                border: 1px solid #CCCCCC;
+                border-radius: 15px;
                 text-transform: capitalize;
               "
-              @click="redirect('/dashboard/tracking')"
+                @click="redirect('/dashboard/tracking')"
               >View</v-btn
-            >
-            <v-col class="justify-space-between align-center h-100">
-              <p
-                class="text-center"
-                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
               >
-                {{ allTrackingSelectedCompanies.length }}
-              </p>
-              <p
-                class="text-center"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-              >
-                Assets tracked
-              </p>
-              <div style="height: 2px; background: blue"></div>
-              <p
-                class="text-center mt-4"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-              >
-                {{
-                  allTrackingSelectedCompanies.filter((x) => x.readyToBuy)
-                    .length
-                }}
-                Ready to buy
-              </p>
-            </v-col>
+            </div>
+
+            <div class="d-flex flex-row justify-space-between align-center h-100" style="margin-top: 50px">
+              <div class="d-flex flex-column mx-auto">
+                <p
+                  class="text-center"
+                  style="font-size: 1.8rem; line-height: 0.75rem; font-weight: 400"
+                >
+                  {{ allTrackingSelectedCompanies.length }}
+                </p>
+                <p
+                  class="text-center"
+                  style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Assets tracked
+                </p>
+              </div>
+              <div style="width: 1px; height: 100px; background: rgba(211, 211, 211, 0.8)"></div>
+              <div class="d-flex flex-column mx-auto">
+                <p
+                  class="text-center"
+                  style="font-size: 1.8rem; line-height: 0.75rem; font-weight: 400"
+                >
+                  {{
+                    allTrackingSelectedCompanies.filter((x) => x.readyToBuy)
+                      .length
+                  }}
+                </p>
+                <p
+                  class="text-center"
+                  style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Ready to buy
+                </p>
+              </div>
+            </div>
           </v-card>
         </v-col>
       </v-row>
-      <v-row class="cart-insights">
-        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-          <v-card class="cart-insights" style="">
+      <v-row>
+        <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
+          <v-card class="cart-deals">
+            <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
+              <v-icon large>mdi-database-outline</v-icon>
+              <div class="ms-2 my-auto">DATA</div>
+              <v-btn
+                class="d-flex flex-row ms-auto me-2 my-auto"
+                style="
+                background: white;
+                color: black;
+                border: 1px solid #CCCCCC;
+                border-radius: 15px;
+                text-transform: capitalize;
+              "
+                @click="redirect('/dashboard/dataCollector')"
+              >View</v-btn
+              >
+            </div>
+
+            <div class="d-flex flex-row justify-space-between align-center h-100" style="margin-top: 50px">
+              <div class="d-flex flex-column" style="font-size: 1.3rem; font-weight: 400">
+                Number of Sources
+              </div>
+              <div style="width: 1px; height: 100px; background: rgba(211, 211, 211, 0.8)"></div>
+              <div class="d-flex flex-column">
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Public Data
+                </p>
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 0.75rem; font-weight: 400"
+                >
+                  40
+                </p>
+              </div>
+              <div style="width: 1px; height: 100px; background: rgba(211, 211, 211, 0.8)"></div>
+              <div class="d-flex flex-column">
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Proprietary Data
+                </p>
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 0.75rem; font-weight: 400"
+                >
+                  45
+                </p>
+              </div>
+              <div style="width: 1px; height: 100px; background: rgba(211, 211, 211, 0.8)"></div>
+              <div class="d-flex flex-column">
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Target Data
+                </p>
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 0.75rem; font-weight: 400"
+                >
+                  7
+                </p>
+              </div>
+
+            </div>
+            <div class="mt-8 mb-12" style="height: 1px; background: rgba(211, 211, 211, 0.8)"></div>
+            <v-row>
+              <apexchart
+                :options="dataChartOptions"
+                :series="dataSeries"
+                type="bar"
+                style="width: 100% !important"
+                height="300"
+              ></apexchart>
+            </v-row>
+          </v-card>
+        </v-col>
+        <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
+          <v-card class="cart-deals">
+            <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
+              <v-icon large>mdi-robot-outline</v-icon>
+              <div class="ms-2 my-auto">MODELS TRAINED</div>
+              <v-btn
+                class="d-flex flex-row ms-auto me-2 my-auto"
+                style="
+                background: white;
+                color: black;
+                border: 1px solid #CCCCCC;
+                border-radius: 15px;
+                text-transform: capitalize;
+              "
+                @click="redirect('/dashboard/modelsTrained')"
+              >View</v-btn
+              >
+            </div>
+
+            <div class="d-flex flex-row justify-space-between align-center h-100" style="margin-top: 50px">
+              <div class="d-flex flex-column" style="font-size: 1.3rem; font-weight: 400">
+                Number of Models
+              </div>
+              <div style="width: 1px; height: 100px; background: rgba(211, 211, 211, 0.8)"></div>
+              <div class="d-flex flex-column">
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Mega Models
+                </p>
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 0.75rem; font-weight: 400"
+                >
+                  2
+                </p>
+              </div>
+              <div style="width: 1px; height: 100px; background: rgba(211, 211, 211, 0.8)"></div>
+              <div class="d-flex flex-column">
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 1.5rem; font-weight: 400"
+                >
+                  Forked Models
+                </p>
+                <p
+                  class="text-center"
+                  style="font-size: 1rem; line-height: 0.75rem; font-weight: 400"
+                >
+                  5
+                </p>
+              </div>
+            </div>
+            <div class="mt-8 mb-12" style="height: 1px; background: rgba(211, 211, 211, 0.8)"></div>
+            <v-row>
+              <apexchart
+                :options="dataChartOptions"
+                :series="dataSeries"
+                type="bar"
+                style="width: 100% !important"
+                height="300"
+              ></apexchart>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-col cols="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+        <v-card style="
+        margin-left: 0px; margin-right: 0px; margin-top: 15px;
+        padding: 30px !important;
+        /*background: linear-gradient(*/
+        /*  78.84deg,*/
+        /*  rgb(85, 61, 239) 8.24%,*/
+        /*  rgb(207, 95, 228) 91.76%*/
+        /*) !important;*/
+        background: white;
+        color: black !important;
+        ">
+          <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
+            <v-icon large>mdi-robot-outline</v-icon>
+            <div class="ms-2 my-auto">INSIGHTS</div>
             <v-btn
-              class="d-flex flex-row ms-auto me-2 mt-2"
+              class="d-flex flex-row ms-auto me-2 my-auto"
               style="
-                background: black;
-                color: white;
-                border-radius: 30px;
+                background: white;
+                color: black;
+                border: 1px solid #CCCCCC;
+                border-radius: 15px;
                 text-transform: capitalize;
               "
               @click="redirect('/dashboard/deal_insights')"
-              >View</v-btn
+            >View</v-btn
             >
+          </div>
 
-            <v-col class="justify-space-between align-center h-100">
-              <p
-                class="text-center"
-                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
-              >
-                {{ summaryInsights.count }}
-              </p>
-              <p
-                class="text-center"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-              >
-                Company insights
-              </p>
-            </v-col>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" md="9" lg="9" xl="9" xxl="9">
-          <v-data-table
-            :headers="insightTable.headers"
-            :items="insightTable.items"
-            hide-default-footer
-            disable-sort
-            class="elevation-1"
-          ></v-data-table>
-        </v-col>
-      </v-row>
-      <v-row class="cart-data">
-        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-          <v-card class="cart-data" style="">
-            <v-btn
-              class="d-flex flex-row ms-auto me-2 mt-2"
-              style="
-                background: black;
-                color: white;
-                border-radius: 30px;
-                text-transform: capitalize;
-              "
-              @click="redirect('/dashboard/dataCollector')"
-              >View</v-btn
-            >
-
-            <v-col class="justify-space-between align-center h-100">
-              <p
-                class="text-center"
-                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
-              >
-                100Tb
-              </p>
-              <p
-                class="text-center"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-              >
-                Gathered Data
-              </p>
-            </v-col>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" md="9" lg="9" xl="9" xxl="9">
-          <v-data-table
-            :headers="dataPageTable.headers"
-            :items="dataPageTable.items"
-            hide-default-footer
-            disable-sort
-            class="elevation-1"
-          ></v-data-table>
-        </v-col>
-      </v-row>
-      <v-row class="cart-models-trained" style="margin-top: 10px">
-        <v-col cols="12" sm="6" md="3" lg="3" xl="3" xxl="3">
-          <v-card class="cart-models-trained">
-            <v-btn
-              class="d-flex flex-row ms-auto me-2 mt-2"
-              style="
-                background: black;
-                color: white;
-                border-radius: 30px;
-                text-transform: capitalize;
-              "
-              @click="redirect('/dashboard/modelsTrained')"
-              >View</v-btn
-            >
-            <v-col class="justify-space-between align-center h-100">
-              <p
-                class="text-center"
-                style="font-size: 2rem; line-height: 2.75rem; font-weight: 700"
-              >
-                {{ summaryCartModels.modelsTrainedCount }}
-              </p>
-              <p
-                class="text-center"
-                style="font-size: 1.2rem; line-height: 1.5rem; font-weight: 700"
-              >
-                Models Trained
-              </p>
-            </v-col>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" md="9" lg="9" xl="9" xxl="9">
-          <v-data-table
-            :headers="trainedModelsTable.headers"
-            :items="trainedModelsTable.items"
-            hide-default-footer
-            disable-sort
-            class="elevation-1"
-          ></v-data-table>
-        </v-col>
-      </v-row>
+          <div class="d-flex flex-row justify-center align-center h-100" style="margin-top: 50px">
+            <div class="d-flex flex-column" style="font-size: 1.3rem; font-weight: 400">
+              {{`Total Assets: ${`5`}`}}
+            </div>
+          </div>
+          <div class="mt-8 mb-12" style="height: 1px; background: rgba(211, 211, 211, 0.8)"></div>
+          <v-row>
+            <apexchart
+              :options="dataChartOptions"
+              :series="dataSeries"
+              type="bar"
+              style="width: 100% !important"
+              height="300"
+            ></apexchart>
+          </v-row>
+        </v-card>
+      </v-col>
     </v-container>
-  </div>
+  </v-row>
 </template>
 
 <script>
@@ -217,6 +358,9 @@ import api from "@/components/API";
 
 export default {
   name: "Dashboard",
+  components: {
+    [process.browser && "apexchart"]: () => import("vue-apexcharts"),
+  },
   head() {
     return {
       title: "Dashboard",
@@ -224,6 +368,71 @@ export default {
   },
   data() {
     return {
+      dataSeries: [
+        {
+          name: 'Q1 Budget',
+          group: 'budget',
+          data: [44000, 55000, 41000, 67000, 22000]
+        },
+        {
+          name: 'Q1 Actual',
+          group: 'actual',
+          data: [48000, 50000, 40000, 65000, 25000]
+        },
+        {
+          name: 'Q2 Budget',
+          group: 'budget',
+          data: [13000, 36000, 20000, 8000, 13000]
+        },
+        {
+          name: 'Q2 Actual',
+          group: 'actual',
+          data: [20000, 40000, 25000, 10000, 12000]
+        }
+      ],
+      dataChartOptions: {
+        chart: {
+          type: 'bar',
+          height: 350,
+          stacked: true,
+        },
+        stroke: {
+          width: 1,
+          colors: ['#fff']
+        },
+        dataLabels: {
+          formatter: (val) => {
+            return val / 1000 + 'K'
+          }
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false
+          }
+        },
+        xaxis: {
+          categories: [
+            'Online advertising',
+            'Sales Training',
+            'Print advertising',
+            'Catalogs',
+            'Meetings'
+          ],
+          labels: {
+            formatter: (val) => {
+              return val / 1000 + 'K'
+            }
+          }
+        },
+        fill: {
+          opacity: 1,
+        },
+        colors: ['#80c7fd', '#008FFB', '#80f1cb', '#00E396'],
+        legend: {
+          position: 'top',
+          horizontalAlign: 'center'
+        }
+      },
       allTrackingSelectedCompanies: [],
       summaryCartModels: {
         modelsTrainedCount: 0,
@@ -561,13 +770,14 @@ export default {
   color: white !important;
 }
 .cart-deals {
-  padding: 10px !important;
-  background: linear-gradient(
-    78.84deg,
-    rgb(85, 61, 239) 8.24%,
-    rgb(207, 95, 228) 91.76%
-  ) !important;
-  color: white !important;
+  padding: 30px !important;
+  /*background: linear-gradient(*/
+  /*  78.84deg,*/
+  /*  rgb(85, 61, 239) 8.24%,*/
+  /*  rgb(207, 95, 228) 91.76%*/
+  /*) !important;*/
+  background: white;
+  color: black !important;
 }
 .cart-track {
   padding: 10px !important;
