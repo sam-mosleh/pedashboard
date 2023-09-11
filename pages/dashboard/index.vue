@@ -311,7 +311,7 @@
           color: black !important;
         ">
           <div class="d-flex flex-row mx-auto" style="justify-content: space-between; align-items: center">
-            <v-icon large>mdi-robot-outline</v-icon>
+            <v-icon large>mdi-head-lightbulb</v-icon>
             <div class="ms-2 my-auto">INSIGHTS</div>
             <v-btn
               class="d-flex flex-row ms-auto me-2 my-auto"
