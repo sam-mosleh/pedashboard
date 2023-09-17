@@ -17,8 +17,6 @@
     </v-snackbar>
     <!-- Snack -->
 
-    <!--    <div class="text-h6 text-center mt-4">{{ $t("login.title") }}</div>-->
-
     <v-col
       justify="space-between"
       style="margin-top: 20px; max-width: 320px"
@@ -96,8 +94,6 @@ export default {
   },
   methods: {
     login() {
-      // const allTrackingKPIs = api.getAllTrackingKPIs();
-
       console.log(
         this.email.toLowerCase() == "userTest@gmail.com".toLowerCase(),
         this.password == "1234",
